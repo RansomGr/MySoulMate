@@ -21,21 +21,18 @@ public class GestionnaireReclamation_compte extends GestionnaireReclamation impl
 
     @Override
     public int create(Object o) throws SQLException {
-        super.create(o);
+        
+        super.create(o);// inserting half of the entity in the reclamation table
        Reclamation_compte r = (Reclamation_compte)o;// down Cast
-       /*
-          this.categorie=categorie;
-        this.client=client;
-        this.Date_heure=Date_heure;
-       */
+   
         String query=" insert into reclamation_compte (reclamation,categorie,client,Date_heure) values (?,?,?,?) "; // preparation du query
 
          PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
          
-         pst.setString(1, r.getSujet());// Binding du premier valeur mentionner dans le query "?" 
-         pst.setString(2, r.getDescription());//Binding du deuxieme valeur mentionner dans le query "?" 
-           pst.setString(3, r.getSujet());// Binding du premier valeur mentionner dans le query "?" 
-         pst.setString(2, r.getDescription());//Binding du deuxieme valeur mentionner dans le query "?" 
+         pst.setInt(1, r.getID());// Binding du premier valeur mentionner dans le query "?" 
+         pst.setString(2, r.getCategorie());//Binding du deuxieme valeur mentionner dans le query "?" 
+          pst.setInt(3, r.getClient().getID());// Binding du troisieme valeur mentionner dans le query "?" 
+         pst.setDate(2, r.getDate_heure());//Binding du quatrieme valeur mentionner dans le query "?" 
        
          return pst.executeUpdate(); // Execution et retour du resultat du query 
     }
