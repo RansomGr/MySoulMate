@@ -83,7 +83,7 @@
                   <Insets />
                </GridPane.margin>
                <image>
-                  <Image url="@../../images/default.png" />
+                  <Image url="@../images/default.png" />
                </image>
             </ImageView>
             <Hyperlink fx:id="forgot_hl" text="Mot de passe oublier ?" GridPane.halignment="CENTER" GridPane.rowIndex="3" />

@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -10,8 +11,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <top>
@@ -26,7 +25,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" text="+" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+            <Button mnemonicParsing="false" text="X" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
@@ -37,7 +36,11 @@
                </GridPane.margin>
             </Button>
             <Label prefHeight="17.0" prefWidth="104.0" text="Pas de Compte ?" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <Button fx:id="create_account_scene_pb" mnemonicParsing="false" text="crée nouveau Compte" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Hyperlink fx:id="create_new_account_hl" text="Crée nouveau compte" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Hyperlink>
          </children>
       </GridPane>
    </top>
@@ -48,8 +51,9 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="369.0" minHeight="10.0" prefHeight="270.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="422.0" minHeight="10.0" prefHeight="82.0" vgrow="SOMETIMES" />
-          <RowConstraints fillHeight="false" maxHeight="212.0" minHeight="10.0" prefHeight="188.0" valignment="TOP" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="422.0" minHeight="10.0" prefHeight="106.0" vgrow="SOMETIMES" />
+          <RowConstraints fillHeight="false" maxHeight="212.0" minHeight="10.0" prefHeight="65.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints fillHeight="false" maxHeight="214.0" minHeight="10.0" prefHeight="152.0" valignment="TOP" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <GridPane GridPane.rowIndex="1">
@@ -82,7 +86,7 @@
                   <Image url="@../../images/default.png" />
                </image>
             </ImageView>
-            <VBox prefHeight="200.0" prefWidth="100.0" />
+            <Hyperlink fx:id="forgot_hl" text="Mot de passe oublier ?" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </center>
@@ -97,11 +101,7 @@
         </rowConstraints>
          <children>
             <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="119.0" text="Membre du staff ?" GridPane.halignment="RIGHT" />
-            <Button fx:id="dash_board_scene_pb" mnemonicParsing="false" prefHeight="27.0" prefWidth="163.0" text="Allez au dashboard !" GridPane.columnIndex="1">
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </Button>
+            <Hyperlink fx:id="dashboard_scene_hl" text="Allez au dashboard !" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </bottom>

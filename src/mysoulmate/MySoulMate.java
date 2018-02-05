@@ -19,7 +19,7 @@ public class MySoulMate extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/ui_MainFrame.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/ui_Login.fxml"));
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
