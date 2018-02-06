@@ -28,7 +28,7 @@ public class Client extends AbstractEntite {
     public String toString() {
         return "Client{ ID "+ID+" nom "+nom+ "prenom=" + prenom + ", motdepasse=" + motdepasse + ", email=" + email + ", date_naissance=" + date_naissance + ", pseudo=" + pseudo + '}';
     }
-
+//
     @Override
     public int hashCode() {
         int hash = 5;
@@ -77,6 +77,46 @@ public class Client extends AbstractEntite {
             return false;
         }
         return true;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getMotdepasse() {
+        return motdepasse;
+    }
+
+    public void setMotdepasse(String motdepasse) {
+        this.motdepasse = motdepasse;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getDate_naissance() {
+        return date_naissance;
+    }
+
+    public void setDate_naissance(Date date_naissance) {
+        this.date_naissance = date_naissance;
+    }
+
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
     }
  
     

@@ -80,7 +80,7 @@
                   <Insets />
                </GridPane.margin>
                <image>
-                  <Image url="@../../images/forgot.png" />
+                  <Image url="@../images/forgot.png" />
                </image>
             </ImageView>
             <Hyperlink fx:id="forgot_hl" text="Se Connecter ?" GridPane.halignment="CENTER" GridPane.rowIndex="3" />

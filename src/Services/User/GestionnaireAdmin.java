@@ -6,8 +6,12 @@
 
 package Services.User;
 
+import Entites.User.Admin;
 import Services.Gestionnaire;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,22 +22,54 @@ public class GestionnaireAdmin implements Gestionnaire {
 
     @Override
     public int create(Object o) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          Admin a = (Admin)o;// down Cast
+        String query=" insert into Admin (nom,prenom,motdepasse) values (?,?,?) "; // preparation du query
+
+         PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
+         
+         pst.setString(1, a.getNom());// Binding du premier valeur mentionner dans le query "?" 
+         pst.setString(2, a.getPrenom());//Binding du deuxieme valeur mentionner dans le query "?" 
+         pst.setString(3, a.getMotdepasse());//Binding du deuxieme valeur mentionner dans le query "?" 
+       
+         return pst.executeUpdate(); // Execution et retour du resultat du query 
     }
 
     @Override
     public int update(Object o) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     Admin a = (Admin)o;// down Cast du Object => Admin 
+        String query=" update  Admin set nom=?,prenom=?,motdepasse=? where id=?  "; // preparation du query
+
+         PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
+         
+         pst.setString(1,a.getNom() );// Binding du premier valeur mentionner dans le query "?" 
+         pst.setString(2,a.getPrenom());//Binding du deuxieme valeur mentionner dans le query "?" 
+         pst.setString(3,a.getMotdepasse());
+         pst.setInt(4, a.getID());//Binding du valeur de l'id mentionné dans le query "?" 
+         return pst.executeUpdate(); // Execution et retour du resultat du query 
     }
 
     @Override
     public int remove(Object o) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         Admin a = (Admin)o;// down Cast du Object => Admin 
+        String query=" delete from  Admin  where id=?  "; // preparation du query
+
+         PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
+         pst.setInt(1, a.getID());//Binding du valeur de l'id mentionné dans le query "?" 
+         return pst.executeUpdate(); // Execution et retour du resultat du query 
     }
 
     @Override
     public List<? extends Object> fetchAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+          String query=" select id,sujet,description from Reclamation "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          List<Admin>Admins = new ArrayList<>();//  Creation du List Reclamation
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          while(res.next())// parcour du result set
+          {
+             Admins.add(new Admin(res.getInt(1),res.getString(2),res.getString(3),res.getString(4)) );
+           }
+          return Admins;
     }
 
     @Override
