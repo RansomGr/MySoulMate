@@ -5,6 +5,7 @@
  */
 package Services.User;
 
+import Entites.AbstractEntite;
 import Entites.User.Client;
 import Entites.User.Reclamation;
 import Services.Gestionnaire;
@@ -27,9 +28,12 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
       super.create(o);
     
       Client c=(Client)o;
-      String query="insert into Client(Entite,prenom,motdepasse,email,date_naissance,pseudo) values(?,?,?,?,?,?)";
+      String query="insert into Client(Entite,prenom,motdepasse,email,date_naissane,pseudo) values(?,?,?,?,?,?)";
       PreparedStatement pst= DB.prepareStatement(query);
-      pst.setInt(1, c.getID());
+      GestionnaireAbstractEntite g= new GestionnaireAbstractEntite() {};
+      List<AbstractEntite>Entities =(List<AbstractEntite>) g.fetchAll();
+      int last_Added_ID=Entities.stream().mapToInt(x->x.getID()).max().getAsInt();
+      pst.setInt(1,last_Added_ID);
       pst.setString(2,c.getPrenom());
       pst.setString(3,c.getMotdepasse());
       pst.setString(4,c.getEmail());

@@ -23,6 +23,20 @@ public class Client extends AbstractEntite {
        public Client(int ID,String nom,String prenom,String motdepasse,String email,Date date_naissance,String pseudo)
     {
         super(ID,nom);
+        this.date_naissance=date_naissance;
+        this.prenom=prenom;
+        this.motdepasse=motdepasse;
+        this.pseudo=pseudo;
+        this.email=email;
+    }
+          public Client(String nom,String prenom,String motdepasse,String email,Date date_naissance,String pseudo)
+    {
+          super(-1,nom);
+          this.date_naissance=date_naissance;
+          this.prenom=prenom;
+          this.motdepasse=motdepasse;
+          this.pseudo=pseudo;
+          this.email=email;
     }
     @Override
     public String toString() {
