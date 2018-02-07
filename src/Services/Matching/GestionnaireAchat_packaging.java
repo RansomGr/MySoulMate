@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package Services.Matching;
-
-import Services.Evenement.*;
+import Entites.Matching.Achat_packaging;
 import Services.Gestionnaire;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
  *
  * @author Nadia
  */
-public class GestionnaireMatching implements Gestionnaire{
+public class GestionnaireAchat_packaging implements Gestionnaire{
 
     @Override
     public int create(Object o) throws SQLException {
