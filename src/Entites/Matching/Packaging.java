@@ -5,6 +5,8 @@
  */
 package Entites.Matching;
 
+import java.util.Objects;
+
 /**
  *
  * @author Nadia
@@ -65,6 +67,52 @@ public class Packaging {
 
     public void setPrix(float prix) {
         this.prix = prix;
+    }
+
+    @Override
+    public String toString() {
+        return "Packaging{" + "ID=" + ID + ", nom=" + nom + ", contenu=" + contenu + ", duree=" + duree + ", prix=" + prix + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 59 * hash + this.ID;
+        hash = 59 * hash + Objects.hashCode(this.nom);
+        hash = 59 * hash + Objects.hashCode(this.contenu);
+        hash = 59 * hash + this.duree;
+        hash = 59 * hash + Float.floatToIntBits(this.prix);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Packaging other = (Packaging) obj;
+        if (this.ID != other.ID) {
+            return false;
+        }
+        if (this.duree != other.duree) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.prix) != Float.floatToIntBits(other.prix)) {
+            return false;
+        }
+        if (!Objects.equals(this.nom, other.nom)) {
+            return false;
+        }
+        if (!Objects.equals(this.contenu, other.contenu)) {
+            return false;
+        }
+        return true;
     }
     
     
