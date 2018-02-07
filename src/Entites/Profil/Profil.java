@@ -12,18 +12,18 @@ import java.util.Objects;
  *
  * @author Sofiene
  */
-public class Profil {
+public class Profil  {
     private int id;
-    Client Client;	
-    Caracteristique     Caracteristique	;
+  
+    Caracteristique Caracteristique	;
 	
    private String photo;
    private String description;	
    Caracteristique preference;
 
-    public Profil(int id, Client Client, Caracteristique Caracteristique, String photo, String description, Caracteristique preference) {
+    public Profil(int id,Caracteristique Caracteristique, String photo, String description, Caracteristique preference) {
         this.id = id;
-        this.Client = Client;
+       
         this.Caracteristique = Caracteristique;
         this.photo = photo;
         this.description = description;
@@ -38,13 +38,7 @@ public class Profil {
         this.id = id;
     }
 
-    public Client getClient() {
-        return Client;
-    }
-
-    public void setClient(Client Client) {
-        this.Client = Client;
-    }
+    
 
     public Caracteristique getCaracteristique() {
         return Caracteristique;
@@ -82,7 +76,6 @@ public class Profil {
     public int hashCode() {
         int hash = 3;
         hash = 67 * hash + this.id;
-        hash = 67 * hash + Objects.hashCode(this.Client);
         hash = 67 * hash + Objects.hashCode(this.Caracteristique);
         hash = 67 * hash + Objects.hashCode(this.photo);
         hash = 67 * hash + Objects.hashCode(this.description);
@@ -111,9 +104,7 @@ public class Profil {
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        if (!Objects.equals(this.Client, other.Client)) {
-            return false;
-        }
+       
         if (!Objects.equals(this.Caracteristique, other.Caracteristique)) {
             return false;
         }
@@ -125,7 +116,7 @@ public class Profil {
 
     @Override
     public String toString() {
-        return "Profil{" + "id=" + id + ", Client=" + Client + ", Caracteristique=" + Caracteristique + ", photo=" + photo + ", description=" + description + ", preference=" + preference + '}';
+        return "Profil{" + "id=" + id + ", Caracteristique=" + Caracteristique + ", photo=" + photo + ", description=" + description + ", preference=" + preference + '}';
     }
    
     
