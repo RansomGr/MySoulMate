@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author Sofiene
  */
 public class Caracteristique {
-    private String ID ;
+    private int ID ;
 private String corpulence ;
 private String pilosite;
  private String origine;
@@ -104,11 +104,11 @@ private String cuisine ;
         return "Caracteristique{" + "ID=" + ID + ", corpulence=" + corpulence + ", pilosite=" + pilosite + ", origine=" + origine + ", profession=" + profession + ", alcool=" + alcool + ", tabac=" + tabac + ", taille=" + taille + ", cheveux=" + cheveux + ", yeux=" + yeux + ", caractere=" + caractere + ", statut=" + statut + ", cuisine=" + cuisine + '}';
     }
 
-    public String getID() {
+    public int getID() {
         return ID;
     }
 
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 
@@ -208,7 +208,7 @@ private String cuisine ;
         this.cuisine = cuisine;
     }
 
-    public Caracteristique(String ID, String corpulence, String pilosite, String origine, String profession, String alcool, String tabac, float taille, String cheveux, String yeux, String caractere, String statut, String cuisine) {
+    public Caracteristique(int ID, String corpulence, String pilosite, String origine, String profession, String alcool, String tabac, float taille, String cheveux, String yeux, String caractere, String statut, String cuisine) {
         this.ID = ID;
         this.corpulence = corpulence;
         this.pilosite = pilosite;

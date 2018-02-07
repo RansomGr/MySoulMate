@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 public class Actualite {
     private int ID;
-AbstractEntite entite ; 
+private AbstractEntite entite ; 
 private String contenu ; 
 private String photo;
 
