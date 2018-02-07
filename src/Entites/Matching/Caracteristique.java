@@ -5,6 +5,8 @@
  */
 package Entites.Matching;
 
+import java.util.Objects;
+
 /**
  *
  * @author Nadia
@@ -132,6 +134,80 @@ public class Caracteristique {
 
     public void setCuisine(String cuisine) {
         this.cuisine = cuisine;
+    }
+
+    @Override
+    public String toString() {
+        return "Caracteristique{" + "ID=" + ID + ", corpulence=" + corpulence + ", pilosite=" + pilosite + ", profession=" + profession + ", alcool=" + alcool + ", tabac=" + tabac + ", taille=" + taille + ", cheveux=" + cheveux + ", yeux=" + yeux + ", caractere=" + caractere + ", statut=" + statut + ", cuisine=" + cuisine + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + this.ID;
+        hash = 37 * hash + Objects.hashCode(this.corpulence);
+        hash = 37 * hash + Objects.hashCode(this.pilosite);
+        hash = 37 * hash + Objects.hashCode(this.profession);
+        hash = 37 * hash + Objects.hashCode(this.alcool);
+        hash = 37 * hash + Objects.hashCode(this.tabac);
+        hash = 37 * hash + Objects.hashCode(this.taille);
+        hash = 37 * hash + Objects.hashCode(this.cheveux);
+        hash = 37 * hash + Objects.hashCode(this.yeux);
+        hash = 37 * hash + Objects.hashCode(this.caractere);
+        hash = 37 * hash + Objects.hashCode(this.statut);
+        hash = 37 * hash + Objects.hashCode(this.cuisine);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Caracteristique other = (Caracteristique) obj;
+        if (this.ID != other.ID) {
+            return false;
+        }
+        if (!Objects.equals(this.corpulence, other.corpulence)) {
+            return false;
+        }
+        if (!Objects.equals(this.pilosite, other.pilosite)) {
+            return false;
+        }
+        if (!Objects.equals(this.profession, other.profession)) {
+            return false;
+        }
+        if (!Objects.equals(this.alcool, other.alcool)) {
+            return false;
+        }
+        if (!Objects.equals(this.tabac, other.tabac)) {
+            return false;
+        }
+        if (!Objects.equals(this.taille, other.taille)) {
+            return false;
+        }
+        if (!Objects.equals(this.cheveux, other.cheveux)) {
+            return false;
+        }
+        if (!Objects.equals(this.yeux, other.yeux)) {
+            return false;
+        }
+        if (!Objects.equals(this.caractere, other.caractere)) {
+            return false;
+        }
+        if (!Objects.equals(this.statut, other.statut)) {
+            return false;
+        }
+        if (!Objects.equals(this.cuisine, other.cuisine)) {
+            return false;
+        }
+        return true;
     }
             
            
