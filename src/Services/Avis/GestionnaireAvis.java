@@ -48,7 +48,7 @@ public class GestionnaireAvis implements Gestionnaire {
       
       Avis a=(Avis)o;
       String query ="update Avis"
-              + " set Entite=?,type=?,email=?,siteweb=?,telephone=?,description=?,photo=?  where Entite=?";
+              + " set Plan=?,Client=?,commentaire=?,note=?,dateh=?  where Client=?";
       
       PreparedStatement pst=DB.prepareStatement(query);
        pst.setInt(1,a.getID());
