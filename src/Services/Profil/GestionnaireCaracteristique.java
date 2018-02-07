@@ -70,7 +70,7 @@ Caracteristique a = (Caracteristique)o;// down Cast du Object => Admin
     public int remove(Object o) throws SQLException {
 Caracteristique a=(Caracteristique)o;
         
-        String query="delete  from Caracteristique where ID=? ";
+        String query="delete  from caracteristique where ID=? ";
         
         PreparedStatement pst=DB.prepareStatement(query);
         

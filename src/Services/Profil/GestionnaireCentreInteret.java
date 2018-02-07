@@ -5,7 +5,7 @@
  */
 package Services.Profil;
 
-import Entites.Profil.Adresse;
+import Entites.Profil.Centre_interet;
 import Services.Gestionnaire;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,50 +15,44 @@ import java.util.List;
  *
  * @author Sofiene
  */
-public class GestionnaireAdresse implements Gestionnaire {
+public class GestionnaireCentreInteret implements Gestionnaire  {
 
     @Override
     public int create(Object o) throws SQLException {
-Adresse a=(Adresse)o;// down Cast
+Centre_interet a=(Centre_interet)o;// down Cast
    
-        String query=" insert into Adresse (numero,gouvernorat,ville,code_postal) values (?,?,?,?) "; // preparation du query
+        String query=" insert into centre_interet (nom) values (?) "; // preparation du query
 
          PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
          
-         pst.setInt(1,a.getNumero());// Binding du premier valeur mentionner dans le query "?" 
-         pst.setString(2,a.getGouvernorat());//Binding du deuxieme valeur mentionner dans le query "?" 
-            pst.setString(3,a.getVille());
-             pst.setInt(4,a.getCode_postal());
+         pst.setString(1,a.getNom());// Binding du premier valeur mentionner dans le query "?" 
+       
 
        
-         return pst.executeUpdate(); }// Execution et retour du resultat du query     
+         return pst.executeUpdate(); } // Execution et retour du resultat du query     }
 
     @Override
     public int update(Object o) throws SQLException {
-Adresse a = (Adresse)o;// down Cast du Object => Admin 
-        String query=" update Adresse set numero=? gouvernorat=?,ville=?,code_postal=? where id=?  "; // preparation du query
-
-           PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
+Centre_interet a = (Centre_interet )o;// down Cast du Object => Admin 
+        String query=" update centre_interet set nom=? where id=?  ";    
+    PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
          
-         pst.setInt(1,a.getNumero());// Binding du premier valeur mentionner dans le query "?" 
-         pst.setString(2,a.getGouvernorat());//Binding du deuxieme valeur mentionner dans le query "?" 
-            pst.setString(3,a.getVille());
-             pst.setInt(4,a.getCode_postal());
+         pst.setString(1,a.getNom());// Binding du premier valeur mentionner dans le query "?" 
+       
 
        
-         return pst.executeUpdate();     }
+         return pst.executeUpdate();}
 
     @Override
     public int remove(Object o) throws SQLException {
-Adresse a=(Adresse)o;
+Centre_interet a=(Centre_interet)o;
         
-        String query="delete  from adresse where ID=? ";
-        
-        PreparedStatement pst=DB.prepareStatement(query);
-        
-        pst.setInt(1,a.getID());
-        
-        return pst.executeUpdate();     }
+        String query="delete  from centre_interet where ID=? ";
+        PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
+         
+         pst.setString(1,a.getNom());// Binding du premier valeur mentionner dans le query "?" 
+       
+                    return pst.executeUpdate();    }
 
     @Override
     public List<? extends Object> fetchAll() throws SQLException {

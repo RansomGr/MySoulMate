@@ -21,27 +21,41 @@ public class GestionnaireInteret implements Gestionnaire{
     public int create(Object o) throws SQLException {
 Interet a=(Interet)o;// down Cast
    
-        String query=" insert into Profil (caracteristique,photo,description,preference) values (?,?,?,?) "; // preparation du query
+        String query=" insert into Profil (client,centre_interet) values (?,?) "; // preparation du query
 
          PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
          
-         pst.setInt(1,a.getCaracteristique().getID());// Binding du premier valeur mentionner dans le query "?" 
-         pst.setString(2,a.getPhoto());//Binding du deuxieme valeur mentionner dans le query "?" 
-            pst.setString(3,a.getDescription());
-             pst.setInt(4,a.getPreference().getID());
+         pst.setInt(1,a.getClient().getID());// Binding du premier valeur mentionner dans le query "?" 
+         pst.setInt(2,a.getCentre_interet().getID());
 
        
-         return pst.executeUpdate(); /    }
+         return pst.executeUpdate();    }
 
     @Override
     public int update(Object o) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+Interet a = (Interet)o;// down Cast du Object => Admin 
+        String query=" update  Interet set client=?,centre_interet=? where id=?  "; // preparation du query 
+    PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
+         
+         pst.setInt(1,a.getClient().getID());// Binding du premier valeur mentionner dans le query "?" 
+         pst.setInt(2,a.getCentre_interet().getID());
+
+       
+         return pst.executeUpdate();}
 
     @Override
     public int remove(Object o) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+Interet a=(Interet)o;
+        
+        String query="delete  from interet where client=? and centre_interet=?";
+        
+        PreparedStatement pst=DB.prepareStatement(query);
+        
+        pst.setInt(1,a.getClient().getID());
+                pst.setInt(1,a.getCentre_interet().getID());
+
+        
+        return pst.executeUpdate()  ;  }
 
     @Override
     public List<? extends Object> fetchAll() throws SQLException {
