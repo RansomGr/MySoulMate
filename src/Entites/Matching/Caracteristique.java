@@ -209,6 +209,10 @@ public class Caracteristique {
         }
         return true;
     }
+
+    public String getOrigine() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
             
            
 }
