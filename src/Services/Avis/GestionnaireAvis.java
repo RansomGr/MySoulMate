@@ -31,8 +31,8 @@ public class GestionnaireAvis implements Gestionnaire {
       Avis a=(Avis)o;
       String query="insert into Avis(Plan,Client,commentaire,note,dateh) values(?,?,?,?,?)";
       PreparedStatement pst= DB.prepareStatement(query);
-      pst.setInt(1,a.getID());
-      pst.setInt(2,a.getID);
+      pst.setInt(1,a.getPlan().getID());
+      pst.setInt(2,a.getClient().getID());
       pst.setString(3,a.getCommentaire());
       pst.setString(4,a.getNote());
       pst.setDate(5,a.getDateh());
@@ -48,11 +48,11 @@ public class GestionnaireAvis implements Gestionnaire {
       
       Avis a=(Avis)o;
       String query ="update Avis"
-              + " set Plan=?,Client=?,commentaire=?,note=?,dateh=?  where Client=?";
+              + " set Plan=?,Client=?,commentaire=?,note=?,dateh=?  where Client=? and Plan=?";
       
       PreparedStatement pst=DB.prepareStatement(query);
-       pst.setInt(1,a.getID());
-      pst.setInt(2,a.getID);
+       pst.setInt(1,a.getPlan().getID());
+      pst.setInt(2,a.getClient().getID());
       pst.setString(3,a.getCommentaire());
       pst.setString(4,a.getNote());
       pst.setDate(5,a.getDateh());
