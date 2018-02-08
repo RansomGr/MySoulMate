@@ -30,7 +30,6 @@ public class TestRelation1 {
         new Client ("manel","naily","maily","maily@esprit.tn",new Date(1957,5,10),"maily"), 
                 5,"niveau1",new Date(2018,02,05),new Date(2018,02,07)
         );
-         
         
         GestionnaireRelation g= new GestionnaireRelation();
         try {
