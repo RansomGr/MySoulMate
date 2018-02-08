@@ -22,7 +22,7 @@ public class GestionnaireInteret implements Gestionnaire{
     public int create(Object o) throws SQLException {
 Interet a=(Interet)o;// down Cast
    
-        String query=" insert into Profil (client,centre_interet) values (?,?) "; // preparation du query
+        String query=" insert into interet (client,centre_interet) values (?,?) "; // preparation du query
 
          PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
          

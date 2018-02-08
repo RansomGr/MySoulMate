@@ -21,7 +21,7 @@ public class GestionnaireCaracteristique implements Gestionnaire {
     public int create(Object o) throws SQLException {
 Caracteristique a=(Caracteristique)o;// down Cast
    
-        String query=" insert into Profil (corpulence,pilosite,origine,profession,alcool,tabac,taille,cheveux,yeux ,caractere, statut ,cuisine) values (?,?,?,?,?,?,?,?,?,?,?,?) "; // preparation du query
+        String query=" insert into caracteristique (corpulence,pilosite,origine,profession,alcool,tabac,taille,cheveux,yeux ,caractere, statut ,cuisine) values (?,?,?,?,?,?,?,?,?,?,?,?) "; // preparation du query
 
          PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
          
@@ -45,7 +45,7 @@ Caracteristique a=(Caracteristique)o;// down Cast
     @Override
     public int update(Object o) throws SQLException {
 Caracteristique a = (Caracteristique)o;// down Cast du Object => Admin 
-        String query=" update  Caracteristique set corpulence=?,pilosite=?,origine=?,profession=?,alcool=?,tabac=?,taille=?,cheveux=?,yeux=? ,caractere=?, statut=? ,cuisine=? where id=?  "; // preparation du query
+        String query=" update  caracteristique set corpulence=?,pilosite=?,origine=?,profession=?,alcool=?,tabac=?,taille=?,cheveux=?,yeux=? ,caractere=?, statut=? ,cuisine=? where id=?  "; // preparation du query
     PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
          
          pst.setString(1,a.getCorpulence());// Binding du premier valeur mentionner dans le query "?" 
@@ -70,7 +70,7 @@ Caracteristique a = (Caracteristique)o;// down Cast du Object => Admin
     public int remove(Object o) throws SQLException {
 Caracteristique a=(Caracteristique)o;
         
-        String query="delete  from Caracteristique where ID=? ";
+        String query="delete  from caracteristique where ID=? ";
         
         PreparedStatement pst=DB.prepareStatement(query);
         
