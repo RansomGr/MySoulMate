@@ -25,14 +25,16 @@ public class GestionnaireRelation implements Gestionnaire {
     public int create(Object o) throws SQLException {
        
       Relation r=(Relation)o;
-      String query="insert into Relation(ID,points_relation,niveau,date_debut,date_fin) values(?,?,?,?,?,?)";
+      String query="insert into Relation(ID,Client1,Client2,points_relation,niveau,date_debut,date_fin) values(?,?,?,?,?,?,?)";
       PreparedStatement pst= DB.prepareStatement(query);
       
       pst.setInt(1, r.getID());
-      pst.setInt(2,r.getPoints_relation());
-      pst.setString(3,r.getNiveau());
-      pst.setDate(4,r.getDate_debut());
-      pst.setDate(5,r.getDate_fin());
+      pst.setInt(2,r.getClient1().getID() );// Binding du premier valeur mentionner dans le query "?" 
+      pst.setInt(3,r.getClient2().getID());
+      pst.setInt(4,r.getPoints_relation());
+      pst.setString(5,r.getNiveau());
+      pst.setDate(6,r.getDate_debut());
+      pst.setDate(7,r.getDate_fin());
       
       return pst.executeUpdate();
 
@@ -46,10 +48,12 @@ public class GestionnaireRelation implements Gestionnaire {
         PreparedStatement pst=DB.prepareStatement(query);
         
         pst.setInt(1, r.getID());
-        pst.setInt(2,r.getPoints_relation());
-        pst.setString(3,r.getNiveau());
-        pst.setDate(4,r.getDate_debut());
-        pst.setDate(5,r.getDate_fin());
+        pst.setInt(2,r.getClient1().getID());// Binding du premier valeur mentionner dans le query "?" 
+        pst.setInt(3,r.getClient2().getID());
+        pst.setInt(4,r.getPoints_relation());
+        pst.setString(5,r.getNiveau());
+        pst.setDate(6,r.getDate_debut());
+        pst.setDate(7,r.getDate_fin());
         
 
         return pst.executeUpdate();
