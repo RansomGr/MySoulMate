@@ -5,6 +5,8 @@
  */
 package Entites.Matching;
 
+import java.util.Objects;
+
 /**
  *
  * @author Nadia
@@ -32,6 +34,40 @@ public class Centre_interet {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    @Override
+    public String toString() {
+        return "Centre_interet{" + "ID=" + ID + ", nom=" + nom + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 11 * hash + this.ID;
+        hash = 11 * hash + Objects.hashCode(this.nom);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Centre_interet other = (Centre_interet) obj;
+        if (this.ID != other.ID) {
+            return false;
+        }
+        if (!Objects.equals(this.nom, other.nom)) {
+            return false;
+        }
+        return true;
     }
     
     

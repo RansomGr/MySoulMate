@@ -6,6 +6,7 @@
 package Entites.Matching;
 import java.sql.Date;
 import Entites.User.Client;
+import java.util.Objects;
 /**
  *
  * @author Nadia
@@ -43,6 +44,44 @@ public class Achat_packaging {
 
     public void setDate_fin(Date date_fin) {
         this.date_fin = date_fin;
+    }
+
+    @Override
+    public String toString() {
+        return "Achat_packaging{" + "c=" + c + ", p=" + p + ", date_fin=" + date_fin + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.c);
+        hash = 37 * hash + Objects.hashCode(this.p);
+        hash = 37 * hash + Objects.hashCode(this.date_fin);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Achat_packaging other = (Achat_packaging) obj;
+        if (!Objects.equals(this.c, other.c)) {
+            return false;
+        }
+        if (!Objects.equals(this.p, other.p)) {
+            return false;
+        }
+        if (!Objects.equals(this.date_fin, other.date_fin)) {
+            return false;
+        }
+        return true;
     }
     
     

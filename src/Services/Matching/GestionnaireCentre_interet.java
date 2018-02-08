@@ -3,33 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Services;
-
-import Entites.AbstractEntite;
-
-import static Services.Gestionnaire.DB;
+package Services.Matching;
+import Entites.Matching.Centre_interet;
+import Services.Gestionnaire;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  *
- * @author Ransom
+ * @author Nadia
  */
-public abstract class GestionnaireAbstractEntite implements Gestionnaire {
-
-    @Override
+public class GestionnaireCentre_interet implements Gestionnaire {
+ @Override
     public int create(Object o) throws SQLException {
-        AbstractEntite e = (AbstractEntite)o;// down Cast
-        String query=" insert into Entite (nom) values (?) "; // preparation du query
+        Centre_interet e = (Centre_interet)o;// down Cast
+        String query=" insert into centre_interet (ID,nom) values (?,?) "; // preparation du query
 
          PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
          
-      
-         pst.setString(1, e.getNom());//Binding du deuxieme valeur mentionner dans le query "?" 
+         pst.setInt(1, e.getID());// Binding du premier valeur mentionner dans le query "?" 
+         pst.setString(2, e.getNom());//Binding du deuxieme valeur mentionner dans le query "?" 
    
          return pst.executeUpdate(); // Execution et retour du resultat du query 
     }
@@ -37,7 +31,7 @@ public abstract class GestionnaireAbstractEntite implements Gestionnaire {
     @Override
     public int update(Object o) throws SQLException {
       
-        AbstractEntite e = (AbstractEntite)o;// down Cast du Object => Reclamation 
+        Centre_interet e = (Centre_interet)o;// down Cast du Object => Reclamation 
         String query=" update  Entite set ID=?,nom=? where ID=? "; // preparation du query
 
          PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
@@ -51,7 +45,7 @@ public abstract class GestionnaireAbstractEntite implements Gestionnaire {
 
     @Override
     public int remove(Object o) throws SQLException {
-         AbstractEntite e = (AbstractEntite)o;// down Cast du Object => Reclamation 
+         Centre_interet e = (Centre_interet)o;// down Cast du Object => Reclamation 
         String query=" delete from  Entite  where ID=? "; // preparation du query delete 
 
          PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
@@ -59,17 +53,10 @@ public abstract class GestionnaireAbstractEntite implements Gestionnaire {
          pst.setInt(1, e.getID());//Binding du valeur de l'id mentionné dans le query "?" 
          return pst.executeUpdate(); // Execution et retour du resultat du query 
     }
-        @Override
+
+    @Override
     public List<? extends Object> fetchAll() throws SQLException {
-          String query=" select * from entite "    ; // preparation du requete sql
-          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
-          List<AbstractEntite>AbstractEntites = new ArrayList<>();//  Creation du List Reclamation
-          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
-          while(res.next())// parcour du result set
-          {
-             AbstractEntites.add(new AbstractEntite(res.getInt(1),res.getString(2)) {});
-           }
-          return AbstractEntites;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -82,6 +69,5 @@ public abstract class GestionnaireAbstractEntite implements Gestionnaire {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-   
     
 }
