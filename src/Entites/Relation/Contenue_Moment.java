@@ -6,7 +6,7 @@
 package Entites.Relation;
 
 import Entites.AbstractEntite;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 /**
