@@ -6,6 +6,7 @@
 package Entites.Matching;
 import java.sql.Date;
 import Entites.User.Client;
+import java.util.Objects;
 
 /**
  *
@@ -54,6 +55,52 @@ public class Invitation {
 
     public void setDate_amitie(Date date_amitie) {
         this.date_amitie = date_amitie;
+    }
+
+    @Override
+    public String toString() {
+        return "Invitation{" + "client1=" + client1 + ", client2=" + client2 + ", statut=" + statut + ", date_amitie=" + date_amitie + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 59 * hash + Objects.hashCode(this.client1);
+        hash = 59 * hash + Objects.hashCode(this.client2);
+        hash = 59 * hash + Objects.hashCode(this.statut);
+        hash = 59 * hash + Objects.hashCode(this.date_amitie);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Invitation other = (Invitation) obj;
+        if (!Objects.equals(this.statut, other.statut)) {
+            return false;
+        }
+        if (!Objects.equals(this.client1, other.client1)) {
+            return false;
+        }
+        if (!Objects.equals(this.client2, other.client2)) {
+            return false;
+        }
+        if (!Objects.equals(this.date_amitie, other.date_amitie)) {
+            return false;
+        }
+        return true;
+    }
+
+    public Object getClient() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
