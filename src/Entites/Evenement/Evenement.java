@@ -56,7 +56,12 @@ public class Evenement extends AbstractEntite{
         this.type_evenement = type_evenement;
     }
 
-    
+     public Evenement( Date date_evenement, Date heure, String type_evenement, String nom) {
+        super(-1, nom);
+        this.date_evenement = date_evenement;
+        this.heure = heure;
+        this.type_evenement = type_evenement;
+    }
 
     @Override
     public int hashCode() {
@@ -86,5 +91,10 @@ public class Evenement extends AbstractEntite{
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Evenement{"+" ID "+ ID +", nom "+ nom+ " ,date_evenement=" + date_evenement + ", heure=" + heure + ", type_evenement=" + type_evenement + '}';
     }
 }

@@ -5,6 +5,7 @@
  */
 package Services.Evenement;
 
+import Entites.AbstractEntite;
 import Entites.Evenement.Evenement;
 import Services.Gestionnaire;
 import Services.GestionnaireAbstractEntite;
@@ -22,9 +23,13 @@ public class GestionnaireEvenement extends GestionnaireAbstractEntite implements
 
     @Override
     public int create(Object o) throws SQLException {
-        super.create(o);
+         super.create(o);
          Evenement evt=(Evenement)o;
-      String query="insert into evenement(Entite,date_evenement,heure,type_e) values(?,?,?,?)";
+         GestionnaireAbstractEntite ge = new GestionnaireAbstractEntite() {};
+         List<AbstractEntite>entities =(List<AbstractEntite>) ge.fetchAll();
+         int last_id_inserted=entities.stream().mapToInt(x->x.getID()).max().getAsInt();
+         evt.setID(last_id_inserted);
+      String query="insert into evenement(Entite,date_evennement,heure,type_e) values(?,?,?,?)";
       PreparedStatement pst= DB.prepareStatement(query);
       pst.setInt(1, evt.getID());
       pst.setDate(2,evt.getDate_evenement());
@@ -71,7 +76,7 @@ public class GestionnaireEvenement extends GestionnaireAbstractEntite implements
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           while(res.next())// parcour du result set
           {
-             Evenements.add(new Evenement(res.getDate("date_evenement"),res.getDate(3),res.getString(4),res.getInt("entite"),res.getString("nom")));
+             Evenements.add(new Evenement(res.getDate("date_evennement"),res.getDate(3),res.getString(5),res.getInt("entite"),res.getString("nom")));
            }
           return Evenements;
     }

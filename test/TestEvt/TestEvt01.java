@@ -23,7 +23,7 @@ public class TestEvt01 {
     public Date heure;
     public String type_evenement;*/
     
-    Evenement e = new Evenement(Date.valueOf("1987-12-03"),Date.valueOf("1987-12-03"),"event",3,"course");
+    Evenement e = new Evenement(Date.valueOf("1987-12-03"),Date.valueOf("1987-12-03"),"event","course");
     GestionnaireEvenement g= new  GestionnaireEvenement();
         try {
             g.create(e);
@@ -35,7 +35,7 @@ public class TestEvt01 {
          evts =  (List<Evenement>) g.fetchAll();
          evts.forEach(System.out::println);
         } catch (SQLException ex) {
-            Logger.getLogger(TestEvt01.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(TestEvt01.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

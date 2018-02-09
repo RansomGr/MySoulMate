@@ -34,6 +34,14 @@ public class EvenementGroup extends Evenement{
         this.plan = plan;
     }
 
+    public EvenementGroup( Client organisation, Date heure, String description, Plan plan, String nom) {
+        super(-1, nom);
+     
+        this.organisation = organisation;
+        this.heure = heure;
+        this.description = description;
+        this.plan = plan;
+    }
     
 
   
