@@ -16,12 +16,17 @@ import javafx.stage.Stage;
  * @author Ransom
  */
 public class MySoulMate extends Application {
-    
+     private static Stage MainStage;
+
+    public static Stage getMainStage() {
+        return MainStage;
+    }
+     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/ui_Login.fxml"));
+        MySoulMate.MainStage=stage;
+        Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/User/ui_Login.fxml"));
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
         stage.show();
     }
