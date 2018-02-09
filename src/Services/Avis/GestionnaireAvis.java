@@ -7,9 +7,12 @@ package Services.Avis;
 
 import Entites.Plan.Avis;
 import Entites.Plan.Plan;
+import Entites.User.Client;
 import Services.Gestionnaire;
 import static Services.Gestionnaire.DB;
 import Services.GestionnaireAbstractEntite;
+import Services.Plan.GestionnairePlan;
+import Services.User.GestionnaireClient;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -87,9 +90,39 @@ public class GestionnaireAvis implements Gestionnaire {
     
 
     @Override
-    public List<? extends Object> fetchAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public List<? extends Object> fetchAll() throws SQLException {//To change body of generated methods, choose Tools | Templates.
+        String query=" select *  from  Avis "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          List<Avis>Avises = new ArrayList<>();//  Creation du List Reclamation
+          List<Plan>Plans = new ArrayList<>();
+          
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          GestionnaireAvis a =new GestionnaireAvis();
+          GestionnaireClient g=new GestionnaireClient();
+          GestionnairePlan p=new GestionnairePlan();
+           List<Client> Clients=(List<Client>) g.fetchAll();
+           List<Avis> avises=(List<Avis>) a.fetchAll();
+          while(res.next())// parcour du result set
+          {
+             int Client1_ID=res.getInt("client1");
+             int Plan1_ID=res.getInt("Plan1");
+    
+             Client client1=Clients.stream().filter(c->c.getID()==Client1_ID).findFirst().get();
+      Plan Plan1= Plans.stream().filter(c->c.getID()==Plan1_ID).findFirst().get();
+
+           Avises.add(new Avis(
+                   
+                Plan1,
+                client1,
+               res.getString("commentaire"),
+            res.getString("Note"),
+                    res.getDate("dateh")
+                                     )
+           );
+           }
+          return Avises;    
+    } 
+    
 
     @Override
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
