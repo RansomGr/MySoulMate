@@ -80,14 +80,6 @@ public class GestionnaireAvis implements Gestionnaire {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
 
     @Override
     public List<? extends Object> fetchAll() throws SQLException {//To change body of generated methods, choose Tools | Templates.
