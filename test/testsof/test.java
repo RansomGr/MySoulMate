@@ -22,8 +22,15 @@ public class test {
     public static void main(String[] args) throws SQLException {
         // TODO code application logic here
         Adresse a= new Adresse(2,12,"kol",222,"jandouba");
+        Adresse b= new Adresse(4,17,"azerr",888855,"tataouine");
+
         GestionnaireAdresse ga= new GestionnaireAdresse();
-        ga.create(a);
+        //ga.create(a);
+           //    ga.create(b);
+          // ga.remove(b);
+           ga.remove(b);//
+                
+        
         
     }
     

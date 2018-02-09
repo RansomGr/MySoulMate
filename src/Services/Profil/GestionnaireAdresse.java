@@ -52,7 +52,7 @@ Adresse a = (Adresse)o;// down Cast du Object => Admin
     public int remove(Object o) throws SQLException {
 Adresse a=(Adresse)o;
         
-        String query="delete  from Adresse where ID=? ";
+        String query="delete from adresse where ID=? ";
         
         PreparedStatement pst=DB.prepareStatement(query);
         
