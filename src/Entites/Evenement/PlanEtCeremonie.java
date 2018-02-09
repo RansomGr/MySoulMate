@@ -5,6 +5,7 @@
  */
 package Entites.Evenement;
 
+import Entites.Plan.Plan;
 import java.util.Objects;
 
 /**
@@ -12,20 +13,20 @@ import java.util.Objects;
  * @author dellpro
  */
 public class PlanEtCeremonie {
-     private PlanCeremonie plancer;
-    private EvenementGroup evtgroup;
+     private Plan plan;
+     private EvenementGroup evtgroup;
 
-    public PlanEtCeremonie(PlanCeremonie plancer, EvenementGroup evtgroup) {
-        this.plancer = plancer;
+    public PlanEtCeremonie(Plan plan, EvenementGroup evtgroup) {
+        this.plan = plan;
         this.evtgroup = evtgroup;
     }
 
-    public PlanCeremonie getPlancer() {
-        return plancer;
+    public Plan getPlan() {
+        return plan;
     }
 
-    public void setPlancer(PlanCeremonie plancer) {
-        this.plancer = plancer;
+    public void setPlan(Plan plan) {
+        this.plan = plan;
     }
 
     public EvenementGroup getEvtgroup() {
@@ -54,7 +55,7 @@ public class PlanEtCeremonie {
             return false;
         }
         final PlanEtCeremonie other = (PlanEtCeremonie) obj;
-        if (!Objects.equals(this.plancer, other.plancer)) {
+        if (!Objects.equals(this.plan, other.plan)) {
             return false;
         }
         if (!Objects.equals(this.evtgroup, other.evtgroup)) {
@@ -65,7 +66,7 @@ public class PlanEtCeremonie {
 
     @Override
     public String toString() {
-        return "Ceremonie{" + "plancer=" + plancer + ", evtgroup=" + evtgroup + '}';
+        return "PlanEtCeremonie{" + "plan=" + plan + ", evtgroup=" + evtgroup + '}';
     }
-    
+
 }

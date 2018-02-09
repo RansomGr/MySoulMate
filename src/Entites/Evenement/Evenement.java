@@ -14,18 +14,12 @@ import Entites.AbstractEntite;
  * @author dellpro
  */
 public class Evenement extends AbstractEntite{
-    public int entite;
+    
     public Date date_evenement;
     public Date heure;
     public String type_evenement;
     
-     public int getEntite() {
-        return entite;
-    }
-
-    public void setEntite(int entite) {
-        this.entite = entite;
-    }
+    
 
     public Date getDate_evenement() {
         return date_evenement;
@@ -55,9 +49,8 @@ public class Evenement extends AbstractEntite{
         super(ID, nom);
     }
 
-    public Evenement(int entite, Date date_evenement, Date heure, String type_evenement, int ID, String nom) {
+    public Evenement( Date date_evenement, Date heure, String type_evenement, int ID, String nom) {
         super(ID, nom);
-        this.entite = entite;
         this.date_evenement = date_evenement;
         this.heure = heure;
         this.type_evenement = type_evenement;
@@ -83,9 +76,6 @@ public class Evenement extends AbstractEntite{
             return false;
         }
         final Evenement other = (Evenement) obj;
-        if (this.entite != other.entite) {
-            return false;
-        }
         if (!Objects.equals(this.type_evenement, other.type_evenement)) {
             return false;
         }
@@ -97,5 +87,4 @@ public class Evenement extends AbstractEntite{
         }
         return true;
     }
-
 }
