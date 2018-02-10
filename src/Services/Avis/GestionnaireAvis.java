@@ -86,14 +86,14 @@ public class GestionnaireAvis implements Gestionnaire {
         String query=" select *  from  Avis "    ; // preparation du requete sql
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Avis>Avises = new ArrayList<>();//  Creation du List Reclamation
-          List<Plan>Plans = new ArrayList<>();
+          //List<Plan>Plans = new ArrayList<>();
           
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           GestionnaireAvis a =new GestionnaireAvis();
           GestionnaireClient g=new GestionnaireClient();
           GestionnairePlan p=new GestionnairePlan();
            List<Client> Clients=(List<Client>) g.fetchAll();
-           List<Avis> avises=(List<Avis>) a.fetchAll();
+         List<Plan> Plans=(List<Plan>) a.fetchAll();
           while(res.next())// parcour du result set
           {
              int Client1_ID=res.getInt("client1");
