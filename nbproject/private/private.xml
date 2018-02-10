@@ -3,14 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/2017_2018/Semestre%202/PIDEV/MySoulMate/src/Entites/User/Reclamation.java</file>
-            <file>file:/G:/2017_2018/Semestre%202/PIDEV/MySoulMate/src/Entites/User/Logger.java</file>
-            <file>file:/G:/2017_2018/Semestre%202/PIDEV/MySoulMate/src/Entites/User/Reclamation_compte.java</file>
-            <file>file:/G:/2017_2018/Semestre%202/PIDEV/MySoulMate/src/Entites/User/Client.java</file>
-            <file>file:/G:/2017_2018/Semestre%202/PIDEV/MySoulMate/src/Entites/User/Traitement.java</file>
-            <file>file:/G:/2017_2018/Semestre%202/PIDEV/MySoulMate/src/Services/User/GestionnaireLogger.java</file>
-            <file>file:/G:/2017_2018/Semestre%202/PIDEV/MySoulMate/src/Services/User/GestionnaireTraitement.java</file>
-            <file>file:/G:/2017_2018/Semestre%202/PIDEV/MySoulMate/src/Entites/User/Admin.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Entites/Plan/Avis.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Services/Avis/GestionnaireAvis.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Services/User/GestionnaireClient.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Entites/Evenement/PlanEtCeremonie.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Entites/Relations/Relation.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Services/Evenement/GestionnairePlanEtCeremonie.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/test/TestPlan/TestPlan1.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Services/Evenement/GestionnaireEvenementGroup.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Entites/Plan/Plan.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Entites/Relations/Moment.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Services/Plan/GestionnairePlan.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Entites/Plan/Reservation.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Services/Relation/GestionnaireMoment.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Services/Relation/GestionnaireRelation.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Entites/User/Client.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Services/Reservation/GestionnaireReservation.java</file>
+            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Entites/Evenement/EvenementGroup.java</file>
         </group>
     </open-files>
 </project-private>
