@@ -26,7 +26,7 @@ public class TestGrEvt {
         Client clt;
         List<Client>lstcl;
         GestionnaireClient gcl = new GestionnaireClient();
-        Plan pl = new Plan(Plan.Type.culturel, "ami@es.tn", "www.et.tn", 21368452, "cafe", "la1",2 ,"plan");
+       /* Plan pl = new Plan(Plan.Type.culturel, "ami@es.tn", "www.et.tn", 21368452, "cafe", "la1",2 ,"plan");
         GestionnairePlan GP = new GestionnairePlan();
         try {
             GP.create(pl);
@@ -44,7 +44,7 @@ public class TestGrEvt {
             Logger.getLogger(TestGrEvt.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-      
+      */
         
     }
 }
