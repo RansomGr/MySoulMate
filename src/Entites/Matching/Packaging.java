@@ -19,6 +19,16 @@ public class Packaging {
     private int duree ;
     private float prix ;
 
+    
+    public Packaging( String nom, String contenu, int duree, float prix) {
+        this.ID = -1;
+        this.nom = nom;
+        this.contenu = contenu;
+        this.duree = duree;
+        this.prix = prix;
+    }
+    
+    
     public Packaging(int ID, String nom, String contenu, int duree, float prix) {
         this.ID = ID;
         this.nom = nom;
