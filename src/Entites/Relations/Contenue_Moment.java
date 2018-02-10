@@ -6,7 +6,7 @@
 package Entites.relations;
 
 import Entites.AbstractEntite;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 /**
@@ -15,15 +15,19 @@ import java.util.Objects;
  * 
  */
 //done
-
-public class Contenue_Moment extends AbstractEntite{
+//done2
+public class Contenue_Moment {
     
+    private int ID;
+    private String nom;
     private String contenue ; 
     private String photo ;
     private String description ;
     private Date date_moment; 
+    public Contenue_Moment(){}
     public Contenue_Moment(int ID, String nom,String contenue,String photo,String description, Date date_moment) {
-        super(ID, nom);
+        this.ID=ID;
+        this.nom=nom;
         this.contenue=contenue;
         this.photo=photo;
         this.date_moment=date_moment;

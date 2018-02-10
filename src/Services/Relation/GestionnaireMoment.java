@@ -61,7 +61,7 @@ public class GestionnaireMoment implements Gestionnaire
     @Override
     public List<? extends Object> fetchAll() throws SQLException {
         
-        /*  String query=" select  *  from Moment"
+          String query=" select  *  from Moment"
                   + " inner join Relation"
                   + " on Moment.Relation=Relation.id "
                   + "inner join Contenue_Moment "
@@ -75,14 +75,13 @@ public class GestionnaireMoment implements Gestionnaire
              int Contenue_Moment_ID=res.getInt("c_moment");
              Moments.add(
                      new Moment(
-                                    /* new Relation(res.getInt(1),res.getInt(2),res.getInt(3),),
-                                     new Contenue_Moment(res.getInt(4),res.getString(5),res.getString(6),res.getString(7)),
-                                      res.
+                               new Relation(),
+                               new Contenue_Moment()
+                                      
                                       )
                               );
            }
-          return Moments;*/
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          return Moments;
 
     }
 
