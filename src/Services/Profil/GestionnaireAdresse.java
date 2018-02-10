@@ -36,7 +36,7 @@ Adresse a=(Adresse)o;// down Cast
     @Override
     public int update(Object o) throws SQLException {
 Adresse a = (Adresse)o;// down Cast du Object => Admin 
-        String query=" update Adresse set numero=? gouvernorat=?,ville=?,code_postal=? where id=?  "; // preparation du query
+        String query=" update Adresse set numero=?,gouvernorat=?,ville=?,code_postal=? where id=?  "; // preparation du query
 
            PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
          
@@ -44,6 +44,7 @@ Adresse a = (Adresse)o;// down Cast du Object => Admin
          pst.setString(2,a.getGouvernorat());//Binding du deuxieme valeur mentionner dans le query "?" 
             pst.setString(3,a.getVille());
              pst.setInt(4,a.getCode_postal());
+             pst.setInt(5,a.getID());
 
        
          return pst.executeUpdate();     }

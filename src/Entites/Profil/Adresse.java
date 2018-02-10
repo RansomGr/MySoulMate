@@ -111,5 +111,14 @@ private String ville;
         this.code_postal = code_postal;
         this.ville = ville;
     }
+
+    public Adresse(int numero, String gouvernorat, int code_postal, String ville) {
+        this.ID = -1;
+        this.numero = numero;
+        this.gouvernorat = gouvernorat;
+        this.code_postal = code_postal;
+        this.ville = ville;
+    }
+    
     
 }
