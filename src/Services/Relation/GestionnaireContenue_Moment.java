@@ -8,7 +8,6 @@ package Services.Relation;
 import Entites.Relation.Contenue_Moment;
 import Services.Gestionnaire;
 import static Services.Gestionnaire.DB;
-import Services.GestionnaireAbstractEntite;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,14 +18,14 @@ import java.util.List;
  *
  * @author zhanimm
  */
-public class GestionnaireContenue_Moment extends GestionnaireAbstractEntite implements Gestionnaire {
+public class GestionnaireContenue_Moment implements Gestionnaire {
 
     @Override
     public int create(Object o) throws SQLException {
-         super.create(o);
+         
     
       Contenue_Moment c=(Contenue_Moment)o;
-      String query="insert into Contenue_Moment(Entite,contenue,photo,description,date_moment) values(?,?,?,?,?)";
+      String query="insert into Contenu_Moment(ID,nom,contenue,photo,description,date_moment) values(?,?,?,?,?,?)";
       PreparedStatement pst= DB.prepareStatement(query);
       pst.setInt(1, c.getID());
       pst.setString(2,c.getContenue());
@@ -39,9 +38,9 @@ public class GestionnaireContenue_Moment extends GestionnaireAbstractEntite impl
 
     @Override
     public int update(Object o) throws SQLException {
-         super.update(o);
+         
       Contenue_Moment c=(Contenue_Moment)o;
-      String query ="update Contenue_Moment set Entite=?,contenue=?,photo=?,description=?,date_moment=? where Entite=?";
+      String query ="update Contenue_Moment set ID=?,nom=?,contenue=?,photo=?,description=?,date_moment=? where ID=?";
       
       PreparedStatement pst=DB.prepareStatement(query);
       pst.setInt(1, c.getID());
@@ -56,9 +55,8 @@ public class GestionnaireContenue_Moment extends GestionnaireAbstractEntite impl
 
     @Override
     public int remove(Object o) throws SQLException {
-         super.remove(o);
     Contenue_Moment c=(Contenue_Moment)o;
-    String query=" delete from Contenue_Moment where Entite=? ";
+    String query=" delete from Contenu_Moment where ID=? ";
     
     PreparedStatement pst=DB.prepareStatement(query);
     
@@ -69,7 +67,7 @@ public class GestionnaireContenue_Moment extends GestionnaireAbstractEntite impl
 
     @Override
     public List<? extends Object> fetchAll() throws SQLException {
-          String query=" select Entite.nom as nom,Contenue_Moment.*  from  Contenue_Moment inner join Entite on Contneue_Moment.Entite=Entite.ID "    ; // preparation du requete sql
+          String query=" select *  from  Contenu_Moment "    ; // preparation du requete sql
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Contenue_Moment>Contenues = new ArrayList<>();//  Creation du List Reclamation
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set

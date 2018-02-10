@@ -16,18 +16,37 @@ import java.util.Objects;
  */
 //done
 
-public class Contenue_Moment extends AbstractEntite{
-    
+public class Contenue_Moment {
+    private int ID;
+    private String nom;
     private String contenue ; 
     private String photo ;
     private String description ;
     private Date date_moment; 
+    public Contenue_Moment(){}
     public Contenue_Moment(int ID, String nom,String contenue,String photo,String description, Date date_moment) {
-        super(ID, nom);
+        this.ID=ID;
+        this.nom=nom;
         this.contenue=contenue;
         this.photo=photo;
         this.date_moment=date_moment;
         this.description=description;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public String getContenue() {
@@ -64,11 +83,13 @@ public class Contenue_Moment extends AbstractEntite{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 13 * hash + Objects.hashCode(this.contenue);
-        hash = 13 * hash + Objects.hashCode(this.photo);
-        hash = 13 * hash + Objects.hashCode(this.description);
-        hash = 13 * hash + Objects.hashCode(this.date_moment);
+        int hash = 7;
+        hash = 71 * hash + this.ID;
+        hash = 71 * hash + Objects.hashCode(this.nom);
+        hash = 71 * hash + Objects.hashCode(this.contenue);
+        hash = 71 * hash + Objects.hashCode(this.photo);
+        hash = 71 * hash + Objects.hashCode(this.description);
+        hash = 71 * hash + Objects.hashCode(this.date_moment);
         return hash;
     }
 
@@ -84,6 +105,12 @@ public class Contenue_Moment extends AbstractEntite{
             return false;
         }
         final Contenue_Moment other = (Contenue_Moment) obj;
+        if (this.ID != other.ID) {
+            return false;
+        }
+        if (!Objects.equals(this.nom, other.nom)) {
+            return false;
+        }
         if (!Objects.equals(this.contenue, other.contenue)) {
             return false;
         }
@@ -101,7 +128,8 @@ public class Contenue_Moment extends AbstractEntite{
 
     @Override
     public String toString() {
-        return "Contenue_Moment{" + "contenue=" + contenue + ", photo=" + photo + ", description=" + description + ", date_moment=" + date_moment + '}';
+        return "Contenue_Moment{" + "ID=" + ID + ", nom=" + nom + ", contenue=" + contenue + ", photo=" + photo + ", description=" + description + ", date_moment=" + date_moment + '}';
     }
-    
+
+   
 }
