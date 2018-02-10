@@ -19,7 +19,7 @@ public class Test_Matching_0 {
     
     public static void main (String args[])
     {
-        
+        /*
         Packaging p = new Packaging("lol", "contenu",3,200.00f);
         GestionnairePackaging g= new GestionnairePackaging();
         try {
@@ -27,7 +27,7 @@ public class Test_Matching_0 {
         } catch (SQLException ex) {
             Logger.getLogger(Test_Matching_0.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+    */
     }
     
 }
