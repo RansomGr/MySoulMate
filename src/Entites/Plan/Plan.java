@@ -6,7 +6,7 @@
 package Entites.Plan;
 
 import Entites.AbstractEntite;
-import java.sql.Date;
+
 import java.util.Objects;
 
 /**
@@ -50,10 +50,19 @@ public class Plan extends AbstractEntite {
     private int telephone ;
     private String description ;
     private String photo;
-    private Date date;
+ 
 
-    public Plan(Type type, String email, String siteweb, int telephone, String description, String photo, int ID, String nom) {
+    public Plan(int ID, String nom,Type type, String email, String siteweb, int telephone, String description, String photo ) {
         super(ID, nom);
+        this.type = type;
+        this.email = email;
+        this.siteweb = siteweb;
+        this.telephone = telephone;
+        this.description = description;
+        this.photo = photo;
+    }
+    public Plan( String nom,Type type, String email, String siteweb, int telephone, String description, String photo ) {
+        super(-1,nom);
         this.type = type;
         this.email = email;
         this.siteweb = siteweb;
@@ -119,7 +128,7 @@ public class Plan extends AbstractEntite {
         hash = 41 * hash + this.telephone;
         hash = 41 * hash + Objects.hashCode(this.description);
         hash = 41 * hash + Objects.hashCode(this.photo);
-        hash = 41 * hash + Objects.hashCode(this.date);
+       
         return hash;
     }
 
@@ -153,15 +162,14 @@ public class Plan extends AbstractEntite {
         if (this.type != other.type) {
             return false;
         }
-        if (!Objects.equals(this.date, other.date)) {
-            return false;
-        }
+        
+       
         return true;
     }
 
     @Override
     public String toString() {
-        return super.toString()+"Plan{" + "type=" + type + ", email=" + email + ", siteweb=" + siteweb + ", telephone=" + telephone + ", description=" + description + ", photo=" + photo + ", date=" + date + '}';
+        return super.toString()+"Plan{" + "type=" + type + ", email=" + email + ", siteweb=" + siteweb + ", telephone=" + telephone + ", description=" + description + ", photo=" + photo + '}';
     }
 
    
