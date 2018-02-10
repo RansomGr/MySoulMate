@@ -5,6 +5,7 @@
  */
 package Entites.Evenement;
 
+import Entites.Plan.Plan;
 import java.sql.Date;
 import java.util.Objects;
 import Entites.User.Client;
@@ -14,34 +15,36 @@ import Entites.User.Client;
  * @author dellpro
  */
 public class EvenementGroup extends Evenement{
-    public int evenement;
+  
     private Client organisation;
     public Date heure;
     public String description;
-    public int plan;
+    public Plan plan;
 
     public EvenementGroup(int ID, String nom) {
         super(ID, nom);
     }
 
-    public EvenementGroup(int evenement, Client organisation, Date heure, String description, int plan, int ID, String nom) {
+    public EvenementGroup( Client organisation, Date heure, String description, Plan plan, int ID, String nom) {
         super(ID, nom);
-        this.evenement = evenement;
+     
         this.organisation = organisation;
         this.heure = heure;
         this.description = description;
         this.plan = plan;
     }
 
+    public EvenementGroup( Client organisation, Date heure, String description, Plan plan, String nom) {
+        super(-1, nom);
+     
+        this.organisation = organisation;
+        this.heure = heure;
+        this.description = description;
+        this.plan = plan;
+    }
     
 
-    public int getEvenement() {
-        return evenement;
-    }
-
-    public void setEvenement(int evenement) {
-        this.evenement = evenement;
-    }
+  
 
     public Client getOrganisation() {
         return organisation;
@@ -67,11 +70,11 @@ public class EvenementGroup extends Evenement{
         this.description = description;
     }
 
-    public int getPlan() {
+    public Plan getPlan() {
         return plan;
     }
 
-    public void setPlan(int plan) {
+    public void setPlan(Plan plan) {
         this.plan = plan;
     }
 
@@ -93,9 +96,7 @@ public class EvenementGroup extends Evenement{
             return false;
         }
         final EvenementGroup other = (EvenementGroup) obj;
-        if (this.evenement != other.evenement) {
-            return false;
-        }
+       
         if (this.organisation != other.organisation) {
             return false;
         }
@@ -113,7 +114,7 @@ public class EvenementGroup extends Evenement{
 
     @Override
     public String toString() {
-        return "EvenementGroup{" + "evenement=" + evenement + ", organisation=" + organisation + ", heure=" + heure + ", description=" + description + ", plan=" + plan + '}';
+        return "EvenementGroup{  organisateur=" + organisation + ", heure=" + heure + ", description=" + description + ", plan=" + plan + '}';
     }
 
      

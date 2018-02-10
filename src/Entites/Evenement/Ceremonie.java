@@ -5,24 +5,21 @@
  */
 package Entites.Evenement;
 
+import Entites.Plan.Plan;
+import Entites.User.Client;
+import java.sql.Date;
 import java.util.Objects;
 
 /**
  *
  * @author dellpro
  */
-public class Ceremonie {
-   EvenementGroup evtgrp;
+public class Ceremonie extends EvenementGroup{
+  
    public String type;
    public int nb_max;
 
-    public EvenementGroup getEvtgrp() {
-        return evtgrp;
-    }
-
-    public void setEvtgrp(EvenementGroup evtgrp) {
-        this.evtgrp = evtgrp;
-    }
+    
 
     public String getType() {
         return type;
@@ -61,25 +58,24 @@ public class Ceremonie {
         if (this.nb_max != other.nb_max) {
             return false;
         }
-        if (!Objects.equals(this.evtgrp, other.evtgrp)) {
+        if (!Objects.equals(this.type, other.type)) {
             return false;
         }
         return true;
     }
 
-    public Ceremonie() {
-    }
-
-    public Ceremonie(EvenementGroup evtgrp, String type, int nb_max) {
-        this.evtgrp = evtgrp;
+    public Ceremonie(String type, int nb_max, Client organisation, Date heure, String description, Plan plan, int ID, String nom) {
+        super(organisation, heure, description, plan, ID, nom);
         this.type = type;
         this.nb_max = nb_max;
     }
 
+  
+
     @Override
     public String toString() {
-        return "Ceremonie{" + "evtgrp=" + evtgrp + ", type=" + type + ", nb_max=" + nb_max + '}';
+        return "Ceremonie{" + "type=" + type + ", nb_max=" + nb_max + '}';
     }
-     
+    
     
 }

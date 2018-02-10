@@ -27,17 +27,17 @@ import java.util.List;
       super.create(o);
     
       Plan p=(Plan)o;
-      String query="insert into Plan(Entite,type,email,siteweb,telephone,description,photo,date) values(?,?,?,?,?,?,?,?)";
+      String query="insert into Plan(Entite,type,email,siteweb,telephone,description,photo) values(?,?,?,?,?,?,?)";
       PreparedStatement pst= DB.prepareStatement(query);
-     
-      pst.setString(1,Plan.Type.getAsString(p.getType()));
+     pst.setInt(1, p.getID());
+      pst.setString(2,Plan.Type.getAsString(p.getType()));
 
-      pst.setString(2,p.getEmail());
-      pst.setString(3,p.getSiteweb());
-      pst.setInt(4,p.getTelephone());
-      pst.setString(5,p.getDescription());
-      pst.setString(6,p.getPhoto());
-      pst.setInt(7, p.getID());
+      pst.setString(3,p.getEmail());
+      pst.setString(4,p.getSiteweb());
+      pst.setInt(5,p.getTelephone());
+      pst.setString(6,p.getDescription());
+      pst.setString(7,p.getPhoto());
+      
 
      
       
@@ -54,15 +54,15 @@ import java.util.List;
       
       PreparedStatement pst=DB.prepareStatement(query);
       
+      pst.setInt(1, p.getID());
+      pst.setString(2,Plan.Type.getAsString(p.getType()));
       
-      pst.setString(1,Plan.Type.getAsString(p.getType()));
+      pst.setString(3,p.getEmail());
+      pst.setString(4,p.getSiteweb());
+      pst.setInt(5,p.getTelephone());
+      pst.setString(6,p.getDescription());
+      pst.setString(7,p.getPhoto());
       
-      pst.setString(2,p.getEmail());
-      pst.setString(3,p.getSiteweb());
-      pst.setInt(4,p.getTelephone());
-      pst.setString(5,p.getDescription());
-      pst.setString(6,p.getPhoto());
-      pst.setInt(7, p.getID());
       pst.setInt(8, p.getID());
       
       return pst.executeUpdate();
@@ -90,7 +90,7 @@ import java.util.List;
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           while(res.next())// parcour du result set
           {
-              Plans.add(new Plan(Plan.Type.getAsType(res.getString(1)),res.getString(2),res.getString(3),res.getInt(4),res.getString(5),res.getString(6),res.getInt("entite"),res.getString("nom")));
+              Plans.add(new Plan(res.getInt("entite"),res.getString("nom"),Plan.Type.getAsType(res.getString(1)),res.getString(2),res.getString(3),res.getInt(4),res.getString(5),res.getString(6)));
              //Type type, String email, String siteweb, int telephone, String description, String photo, int ID, String nom
            }
           return Plans;
