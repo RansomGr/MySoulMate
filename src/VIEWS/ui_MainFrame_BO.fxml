@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.Ui_MainFrame_BOController">
@@ -18,7 +19,7 @@
       <GridPane fx:id="Side_bar" prefHeight="700.0" prefWidth="190.0" style="-fx-background-color: #2A3F54;" BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="66.0" minWidth="10.0" prefWidth="12.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="175.0" />
+          <ColumnConstraints hgrow="NEVER" maxWidth="175.0" minWidth="10.0" prefWidth="175.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="271.0" minHeight="10.0" prefHeight="138.0" vgrow="SOMETIMES" />
@@ -159,14 +160,21 @@
    <center>
       <GridPane fx:id="Content_grid" BorderPane.alignment="CENTER">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="412.0" minWidth="10.0" prefWidth="37.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="807.0" minWidth="10.0" prefWidth="800.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="35.0" minWidth="10.0" prefWidth="35.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1000000.0" minWidth="10.0" prefWidth="800.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="339.0" minHeight="10.0" prefHeight="29.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="100000.0" minHeight="10.0" prefHeight="659.0" valignment="CENTER" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
-            <Button fx:id="Hide_Show_pb" mnemonicParsing="false" onAction="#hide_show_menu_pb" text="|||||" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
+            <Button fx:id="Hide_Show_pb" mnemonicParsing="false" onAction="#hide_show_menu_pb" text="&lt;-" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
+            <Label fx:id="Label_Module_name" text="Nom Module" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+               <GridPane.margin>
+                  <Insets left="25.0" />
+               </GridPane.margin>
+            </Label>
+            <StackPane fx:id="Page_Viewer" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
          </children>
       </GridPane>
    </center>

@@ -16,7 +16,7 @@ import javafx.stage.Stage;
  * @author Ransom
  */
 public class MySoulMate extends Application {
-     private static Stage MainStage;
+    private static Stage MainStage;
 
     public static Stage getMainStage() {
         return MainStage;
@@ -25,7 +25,7 @@ public class MySoulMate extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         MySoulMate.MainStage=stage;
-        Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/User/ui_Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/ui_MainFrame_BO.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

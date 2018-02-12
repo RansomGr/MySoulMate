@@ -90,13 +90,13 @@ public class GestionnaireTraitement implements Gestionnaire {
 
              Traitements.add(
                                     new Traitement(
-                                                             new Admin(res.getInt(1),res.getString(6),res.getString(7),res.getString(8)),
+                                                             new Admin(res.getInt(1),res.getString(6),res.getString(7),res.getString(8),res.getString(9)),
                                                              new Reclamation_compte(
-                                                                                                     res.getInt(14),res.getString(15),res.getString(16),res.getString(11),
-                                                                                                     new Client(res.getInt(24),res.getString(26),res.getString(18),res.getString(19),res.getString(20),res.getDate(21),res.getString(22)),
+                                                                                                     res.getInt(15),res.getString(16),res.getString(17),res.getString(18),
+                                                                                                     new Client(res.getInt(25),res.getString(27),res.getString(19),res.getString(20),res.getString(21),res.getDate(22),res.getString(23)),
                                                                                                      res.getDate(3)
                                                                                                       ),
-                                                             res.getDate(2),res.getString(12)
+                                                             res.getDate(2),res.getString(13)
                                                             )
                                        );
            }

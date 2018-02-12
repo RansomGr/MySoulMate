@@ -23,13 +23,14 @@ public class GestionnaireAdmin implements Gestionnaire {
     @Override
     public int create(Object o) throws SQLException {
           Admin a = (Admin)o;// down Cast
-        String query=" insert into Admin (nom,prenom,motdepasse) values (?,?,?) "; // preparation du query
+        String query=" insert into Admin (nom,prenom,motdepasse,login) values (?,?,?,?) "; // preparation du query
 
          PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
          
          pst.setString(1, a.getNom());// Binding du premier valeur mentionner dans le query "?" 
          pst.setString(2, a.getPrenom());//Binding du deuxieme valeur mentionner dans le query "?" 
          pst.setString(3, a.getMotdepasse());//Binding du deuxieme valeur mentionner dans le query "?" 
+         pst.setString(4, a.getLogin());
        
          return pst.executeUpdate(); // Execution et retour du resultat du query 
     }
@@ -37,14 +38,15 @@ public class GestionnaireAdmin implements Gestionnaire {
     @Override
     public int update(Object o) throws SQLException {
      Admin a = (Admin)o;// down Cast du Object => Admin 
-        String query=" update  Admin set nom=?,prenom=?,motdepasse=? where id=?  "; // preparation du query
+        String query=" update  Admin set nom=?,prenom=?,motdepasse=?,login=? where id=?  "; // preparation du query
 
          PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
          
          pst.setString(1,a.getNom() );// Binding du premier valeur mentionner dans le query "?" 
          pst.setString(2,a.getPrenom());//Binding du deuxieme valeur mentionner dans le query "?" 
          pst.setString(3,a.getMotdepasse());
-         pst.setInt(4, a.getID());//Binding du valeur de l'id mentionné dans le query "?" 
+         pst.setString(4,a.getLogin());
+         pst.setInt(5, a.getID());//Binding du valeur de l'id mentionné dans le query "?" 
          return pst.executeUpdate(); // Execution et retour du resultat du query 
     }
 
@@ -61,13 +63,13 @@ public class GestionnaireAdmin implements Gestionnaire {
     @Override
     public List<? extends Object> fetchAll() throws SQLException {
         
-          String query=" select id,sujet,description from Reclamation "    ; // preparation du requete sql
+          String query=" select * from Admin "    ; // preparation du requete sql
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Admin>Admins = new ArrayList<>();//  Creation du List Reclamation
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           while(res.next())// parcour du result set
           {
-             Admins.add(new Admin(res.getInt(1),res.getString(2),res.getString(3),res.getString(4)) );
+             Admins.add(new Admin(res.getInt(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5)) );
            }
           return Admins;
     }

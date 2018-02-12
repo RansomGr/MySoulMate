@@ -79,8 +79,8 @@ public class GestionnaireLogger implements Gestionnaire {
           {
              Loggers.add(
                      new Logger(
-                                     new Action(res.getInt(8),res.getInt(9),res.getString(10)),
-                                     new Admin(res.getInt(4),res.getString(5),res.getString(6),res.getString(7)),
+                                     new Action(res.getInt(9),res.getInt(10),res.getString(11)),
+                                     new Admin(res.getInt(4),res.getString(5),res.getString(6),res.getString(7),res.getString(8)),
                                       res.getDate(3)
                                       )
                               );

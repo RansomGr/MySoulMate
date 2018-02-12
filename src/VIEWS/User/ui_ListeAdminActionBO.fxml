@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.User.Ui_ListeAdmin_BOController">
+   <top>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <GridPane maxWidth="10000.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="155.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="455.0" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="153.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="recherche_dyn_tf" prefHeight="25.0" prefWidth="313.0" promptText="Recherche par ... ,... ,... " GridPane.columnIndex="1" />
+                  <Label text="Recherche Dynamique" textAlignment="RIGHT" GridPane.halignment="RIGHT">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <CheckBox fx:id="operations_plus" mnemonicParsing="false" text="Operations Avancé" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin></CheckBox>
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+   </top>
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="table_view" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                  <TableColumn fx:id="id_comlun" prefWidth="182.0" text="Identifiant" />
+                <TableColumn fx:id="nom_column" prefWidth="193.0" text="Nom " />
+                <TableColumn fx:id="prenom_column" prefWidth="236.0" text="Prenom" />
+                  <TableColumn fx:id="mdp_column" prefWidth="239.0" text="Mot de Passe" />
+              </columns>
+            </TableView>
+         </children>
+      </StackPane>
+   </center>
+   <left>
+      <StackPane maxWidth="50.0" minHeight="50.0" minWidth="50.0" prefHeight="150.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <StackPane maxWidth="50.0" minWidth="50.0" prefHeight="150.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <StackPane maxHeight="60.0" minHeight="60.0" prefHeight="60.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>
