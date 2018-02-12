@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Ransom
  */
-public interface Gestionnaire 
+public  interface Gestionnaire 
 {
     // Call of Singleton 
     final Connection DB=Singleton.getInstence();
@@ -35,8 +35,7 @@ public interface Gestionnaire
     list of your table with a limiter that starts from an index to the limit index ;
     example the first 20 rows of your table ordered by date the startPoint = 0 the breakPoint will be 20
     */
-    
-    
+
       /*#End --- SpecialFunctions----- */
     
     

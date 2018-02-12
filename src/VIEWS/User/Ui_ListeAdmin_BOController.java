@@ -15,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,6 +25,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
 
 /**
@@ -34,7 +34,7 @@ import javafx.scene.control.TextField;
  * @author Ransom
  */
 public class Ui_ListeAdmin_BOController implements Initializable {
-
+    GestionnaireAdmin ga ;
     @FXML
     private TextField recherche_dyn_tf;
     @FXML
@@ -69,14 +69,21 @@ public class Ui_ListeAdmin_BOController implements Initializable {
         prenom_column.setCellValueFactory((CellDataFeatures<Admin,String>Admin)-> new SimpleStringProperty(Admin.getValue().getPrenom()) );
         mdp_column.setCellValueFactory((CellDataFeatures<Admin,String>Admin)->new SimpleStringProperty(Admin.getValue().getMotdepasse()));
         Login_column.setCellValueFactory((CellDataFeatures<Admin,String>Admin)->new SimpleStringProperty(Admin.getValue().getLogin()));
-        GestionnaireAdmin ga = new GestionnaireAdmin();
+         ga = new GestionnaireAdmin();
         try {
             ObservableList<Admin> Admins = FXCollections.observableArrayList((ArrayList<Admin>) ga.fetchAll());
-            System.out.println(Admins.size());
+           
              table_view.setItems(Admins);
          }catch (SQLException ex) {
             Logger.getLogger(Ui_ListeAdmin_BOController.class.getName()).log(Level.SEVERE, null, ex);
          }
     }    
+
+    @FXML
+    private void recherche_dyn_textchanged(KeyEvent event) throws SQLException {
+        System.out.println(recherche_dyn_tf.getText());
+             ObservableList<Admin> Admins = FXCollections.observableArrayList((ArrayList<Admin>)ga.fetchAll(recherche_dyn_tf.getText(),-1,"DESC"));
+             table_view.setItems(Admins);
+    }
     
 }

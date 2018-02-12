@@ -76,7 +76,21 @@ public class GestionnaireAdmin implements Gestionnaire {
 
     @Override
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          String query=" select * from Admin where ( nom like ? or prenom like ? or login like ? or motdepasse like ? or ID like ? ) "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          List<Admin>Admins = new ArrayList<>();//  Creation du List Reclamation
+           pst.setString(1, "%"+aux+"%");
+           pst.setString(2, "%"+aux+"%");
+           pst.setString(3, "%"+aux+"%");
+           pst.setString(4, "%"+aux+"%");
+            pst.setString(5, "%"+aux+"%");
+     
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          while(res.next())// parcour du result set
+          {
+             Admins.add(new Admin(res.getInt(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5)) );
+           }
+          return Admins;
     }
 
     @Override

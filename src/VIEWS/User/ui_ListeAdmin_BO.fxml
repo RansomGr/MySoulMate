@@ -35,7 +35,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="recherche_dyn_tf" prefHeight="25.0" prefWidth="313.0" promptText="Recherche par ... ,... ,... " GridPane.columnIndex="1" />
+                  <TextField fx:id="recherche_dyn_tf" onKeyPressed="#recherche_dyn_textchanged" prefHeight="25.0" prefWidth="313.0" promptText="Recherche par ... ,... ,... " GridPane.columnIndex="1" />
                   <Label text="Recherche Dynamique" textAlignment="RIGHT" GridPane.halignment="RIGHT">
                      <GridPane.margin>
                         <Insets right="10.0" />
