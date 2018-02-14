@@ -9,6 +9,8 @@ import Entites.User.Admin;
 import Entites.User.Client;
 import Services.User.GestionnaireAdmin;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,20 +22,23 @@ import java.util.logging.Logger;
 public class Test_Admin_002 {
     public static void main(String agrs[])
     {
-        Admin a= new Admin(4,"fakroun","faloun","password");
-        GestionnaireAdmin g= new GestionnaireAdmin();
-        try {
-            g.remove(a);
-        } catch (SQLException ex) {
-            Logger.getLogger(Test_Admin_002.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        List<Admin>Admins ;
-        try {
-            Admins= (List<Admin>) g.fetchAll();
-            Admins.forEach(System.out::println);
-        } catch (SQLException ex) {
-            Logger.getLogger(Test_Admin_002.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        Admin a= new Admin(4,"fakroun","faloun","password");
+//        GestionnaireAdmin g= new GestionnaireAdmin();
+//        try {
+//            g.remove(a);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Test_Admin_002.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        List<Admin>Admins ;
+//        try {
+//            Admins= (List<Admin>) g.fetchAll();
+//            Admins.forEach(System.out::println);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Test_Admin_002.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+          Calendar calendar= new GregorianCalendar();
+          calendar.add(Calendar.YEAR,-25);
+          System.out.println(calendar.getTime());
     }
     
 }

@@ -66,7 +66,7 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
 
     @Override
     public int remove(Object o) throws SQLException {
-    super.remove(o);
+  
     Client c=(Client)o;
     String query=" delete from Client where Entite=? ";
     
@@ -74,7 +74,7 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
     
     pst.setInt(1,c.getID());
     
-    return pst.executeUpdate();
+    return  pst.executeUpdate()+super.remove(o);
     
     }
 
@@ -90,10 +90,59 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
            }
           return Clients;
     }
-
+      public List<? extends Object> fetchAll(String aux, String target_column ,int StartPoint,int BreakPoint) throws SQLException {
+          String query=" select Entite.nom as nom,Client.*  from  Client inner join Entite on Client.Entite=Entite.ID  "
+                  + " where ( "+target_column+" like ?  )  "
+                  + " limit  "+StartPoint+","+BreakPoint+" "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          List<Client>Clients = new ArrayList<>();//  Creation du List Reclamation
+           pst.setString(1, "%"+aux+"%");
+         
+     
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          while(res.next())// parcour du result set
+          {
+                Clients.add(new Client(res.getInt("entite"),res.getString("nom"),res.getString(3),res.getString(4),res.getString(5),res.getDate(6),res.getString(7)));
+           }
+          return Clients;
+    }
+           public List<? extends Object> fetchAll(String aux,int StartPoint,int BreakPoint) throws SQLException {
+          String query="  select Entite.nom as nom,Client.*  from  Client inner join Entite on Client.Entite=Entite.ID "
+                  + "where ( nom like ? or prenom like ? or pseudo like ?  or ID like ?  or email like ? )"
+                  + " limit  "+StartPoint+","+BreakPoint+" "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          List<Client>Clients = new ArrayList<>();//  Creation du List Reclamation
+           pst.setString(1, "%"+aux+"%");
+           pst.setString(2, "%"+aux+"%");
+           pst.setString(3, "%"+aux+"%");
+           pst.setString(4, "%"+aux+"%");
+            pst.setString(5, "%"+aux+"%");
+     
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          while(res.next())// parcour du result set
+          {
+           Clients.add(new Client(res.getInt("entite"),res.getString("nom"),res.getString(3),res.getString(4),res.getString(5),res.getDate(6),res.getString(7)));
+           }
+          return Clients;
+    }
     @Override
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      String query="  select Entite.nom as nom,Client.*  from  Client inner join Entite on Client.Entite=Entite.ID "
+                  + "where ( nom like ? or prenom like ? or pseudo like ?  or ID like ?  or email like ? )"  ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          List<Client>Clients = new ArrayList<>();//  Creation du List Reclamation
+           pst.setString(1, "%"+aux+"%");
+           pst.setString(2, "%"+aux+"%");
+           pst.setString(3, "%"+aux+"%");
+           pst.setString(4, "%"+aux+"%");
+            pst.setString(5, "%"+aux+"%");
+     
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          while(res.next())// parcour du result set
+          {
+           Clients.add(new Client(res.getInt("entite"),res.getString("nom"),res.getString(3),res.getString(4),res.getString(5),res.getDate(6),res.getString(7)));
+           }
+          return Clients;
     }
 
     @Override

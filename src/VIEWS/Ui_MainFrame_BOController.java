@@ -80,8 +80,16 @@ public class Ui_MainFrame_BOController implements Initializable {
 
                 Stat.setOnAction(
                        (a)->{
-                                  System.out.println("Stat clicked");
-                               }
+                                   try { 
+                                   Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/User/ui_Stat_Clients_BO.fxml"));// Getting the View
+                  Page_Viewer.getChildren().clear();
+                  Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  Label_Module_name.setText("Statisitiques General"); // Changing the header text
+                                   } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                                   }
                 );
              
                 this.Home_dl.getItems().addAll(Dash,Stat);
@@ -128,13 +136,19 @@ public class Ui_MainFrame_BOController implements Initializable {
         );
         ListClient.setOnAction(
         (a)->{
-            System.out.println("List Client Clicked");
+                 try { 
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/User/ui_ListeClient_BO.fxml"));// Getting the View
+                 Page_Viewer.getChildren().clear();
+                 Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  
+                  Label_Module_name.setText(ListClient.getText()); // Changing the header text
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         );
-        
-                
-                
-        
+
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {

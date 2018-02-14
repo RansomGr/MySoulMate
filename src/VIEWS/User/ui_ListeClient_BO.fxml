@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.User.Ui_ListeAdmin_BOController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.User.Ui_ListeClient_BOController">
    <top>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -100,10 +100,11 @@
             <TableView fx:id="table_view" prefHeight="200.0" prefWidth="200.0">
               <columns>
                   <TableColumn fx:id="id_comlun" prefWidth="102.0" text="Identifiant" />
-                <TableColumn fx:id="nom_column" prefWidth="206.0" text="Nom " />
-                <TableColumn fx:id="prenom_column" prefWidth="222.0" text="Prenom" />
-                  <TableColumn fx:id="Login_column" prefWidth="137.0" text="Login" />
-                  <TableColumn fx:id="mdp_column" prefWidth="184.0" text="Mot de Passe" />
+                <TableColumn fx:id="nom_column" prefWidth="127.0" text="Nom " />
+                <TableColumn fx:id="prenom_column" prefWidth="137.0" text="Prenom" />
+                  <TableColumn fx:id="pseudo_column" prefWidth="178.0" text="pseudo" />
+                  <TableColumn fx:id="email_column" prefWidth="170.0" text="email" />
+                  <TableColumn fx:id="date_naissance_column" prefWidth="135.0" text="Date naissance" />
               </columns>
             </TableView>
          </children>

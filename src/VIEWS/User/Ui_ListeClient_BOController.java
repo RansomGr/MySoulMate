@@ -5,10 +5,15 @@
  */
 package VIEWS.User;
 
-import Entites.User.Admin;
+
+import Entites.User.Client;
 import Services.User.GestionnaireAdmin;
+import Services.User.GestionnaireClient;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -39,8 +44,8 @@ import javafx.scene.layout.RowConstraints;
  *
  * @author Ransom
  */
-public class Ui_ListeAdmin_BOController implements Initializable {
-    private GestionnaireAdmin ga ;
+public class Ui_ListeClient_BOController implements Initializable {
+    private GestionnaireClient gc ;
     private ScaleTransition Hide;
     private  ScaleTransition Show;
     private int StartPoint;
@@ -48,28 +53,30 @@ public class Ui_ListeAdmin_BOController implements Initializable {
     private int pages;
     private  int current_page;
     private String selected_column;
-    private  ObservableList<Admin> Admins;
+    private  ObservableList<Client> Clients;
     @FXML
     private TextField recherche_dyn_tf;
     @FXML
     private CheckBox operations_plus;
     @FXML
-    private TableView<Admin> table_view;
+    private TableView<Client> table_view;
     @FXML
-    private TableColumn<Admin, Integer> id_comlun;
+    private TableColumn<Client, Integer> id_comlun;
     @FXML
-    private TableColumn<Admin, String> nom_column;
+    private TableColumn<Client, String> nom_column;
     @FXML
-    private TableColumn<Admin, String> prenom_column;
+    private TableColumn<Client, String> prenom_column;
     @FXML
-    private TableColumn<Admin, String> mdp_column;
+    private TableColumn<Client, String> pseudo_column;
     @FXML
-    private TableColumn<Admin , String> Login_column;
+    private TableColumn<Client, String> email_column;
+    @FXML
+    private TableColumn<Client, String> date_naissance_column;
     @FXML
     private Button precedent_pb;
     @FXML
     private TextField current_page_te;
-    @FXML
+    @FXML  
     private Button suivant_pb;
     @FXML
     private GridPane operation_grid;
@@ -81,6 +88,7 @@ public class Ui_ListeAdmin_BOController implements Initializable {
     private ComboBox<Integer> lignes_page_cb;
     @FXML
     private ColumnConstraints header_grid;
+
 
     /**
      * Initializes the controller class.
@@ -109,18 +117,19 @@ public class Ui_ListeAdmin_BOController implements Initializable {
     }
     private void init_tableView()
     {
-            id_comlun.setCellValueFactory((CellDataFeatures<Admin, Integer> Admin) -> new  SimpleIntegerProperty((Admin.getValue().getID())).asObject());
-            nom_column.setCellValueFactory((CellDataFeatures<Admin, String> Admin) -> new SimpleStringProperty(Admin.getValue().getNom())   );
-            prenom_column.setCellValueFactory((CellDataFeatures<Admin,String>Admin)-> new SimpleStringProperty(Admin.getValue().getPrenom()) );
-            mdp_column.setCellValueFactory((CellDataFeatures<Admin,String>Admin)->new SimpleStringProperty(Admin.getValue().getMotdepasse()));
-            Login_column.setCellValueFactory((CellDataFeatures<Admin,String>Admin)->new SimpleStringProperty(Admin.getValue().getLogin()));
+            id_comlun.setCellValueFactory((CellDataFeatures<Client, Integer> Client) -> new  SimpleIntegerProperty((Client.getValue().getID())).asObject());
+            nom_column.setCellValueFactory((CellDataFeatures<Client, String> Client) -> new SimpleStringProperty(Client.getValue().getNom())   );
+            prenom_column.setCellValueFactory((CellDataFeatures<Client,String>Client)-> new SimpleStringProperty(Client.getValue().getPrenom()) );
+            pseudo_column.setCellValueFactory((CellDataFeatures<Client,String>Client)->new SimpleStringProperty(Client.getValue().getPseudo()));
+            email_column.setCellValueFactory((CellDataFeatures<Client,String>Client)->new SimpleStringProperty(Client.getValue().getEmail()));
+            date_naissance_column.setCellValueFactory((CellDataFeatures<Client,String>Client)-> new SimpleStringProperty(Client.getValue().getDate_naissance().toString()));
     }
     private void reload_data() 
     {  int All_row_size;
          try {
     if(operations_plus.isSelected())
     { 
-            All_row_size=ga.fetchAll().size();
+            All_row_size=gc.fetchAll().size();
           
                pages=(All_row_size/BreakPoint);
             if((All_row_size%BreakPoint!=0))
@@ -134,15 +143,15 @@ public class Ui_ListeAdmin_BOController implements Initializable {
            }
           current_page_te.setText(Integer.toString(current_page)+" / " +Integer.toString(pages));
             if(selected_column.equals("All"))
-                 Admins= FXCollections.observableArrayList((ArrayList<Admin>)ga.fetchAll(recherche_dyn_tf.getText(),(current_page-1)*BreakPoint,BreakPoint));
+                 Clients= FXCollections.observableArrayList((ArrayList<Client>)gc.fetchAll(recherche_dyn_tf.getText(),(current_page-1)*BreakPoint,BreakPoint));
             else 
             {
-                 Admins= FXCollections.observableArrayList((ArrayList<Admin>)ga.fetchAll(recherche_dyn_tf.getText(),selected_column,(current_page-1)*BreakPoint,BreakPoint));
+                 Clients= FXCollections.observableArrayList((ArrayList<Client>)gc.fetchAll(recherche_dyn_tf.getText(),selected_column,(current_page-1)*BreakPoint,BreakPoint));
             }
     }
     else
     {
-             Admins= FXCollections.observableArrayList((ArrayList<Admin>)ga.fetchAll(recherche_dyn_tf.getText(),-1,"DESC"));
+             Clients= FXCollections.observableArrayList((ArrayList<Client>)gc.fetchAll(recherche_dyn_tf.getText(),-1,"DESC"));
            
     }
       
@@ -150,7 +159,7 @@ public class Ui_ListeAdmin_BOController implements Initializable {
                 Logger.getLogger(Ui_ListeAdmin_BOController.class.getName()).log(Level.SEVERE, null, ex);
             } 
           
-           table_view.setItems(Admins);
+           table_view.setItems(Clients);
     }
     private void color_column(String target)
     {
@@ -160,24 +169,24 @@ public class Ui_ListeAdmin_BOController implements Initializable {
                    id_comlun.setStyle("-fx-background-color:#B5C689 ");
                     nom_column.getStyleClass().clear();
                    prenom_column.getStyleClass().clear();
-                   Login_column.getStyleClass().clear();
-                   mdp_column.getStyleClass().clear();
+                //   Login_column.getStyleClass().clear();
+                 //  mdp_column.getStyleClass().clear();
             }
                 break ;
             case "nom" :{
                      id_comlun.getStyleClass().clear();
                    nom_column.setStyle("-fx-background-color:#B5C689 ");
                    prenom_column.getStyleClass().clear();
-                   Login_column.getStyleClass().clear();
-                   mdp_column.getStyleClass().clear();
+             //      Login_column.getStyleClass().clear();
+               //    mdp_column.getStyleClass().clear();
             }
                 break ;
             case "prenom" :{
                      id_comlun.getStyleClass().clear();
                     nom_column.getStyleClass().clear();
                    prenom_column.setStyle("-fx-background-color:#B5C689 ");
-                   Login_column.getStyleClass().clear();
-                   mdp_column.getStyleClass().clear();
+                //   Login_column.getStyleClass().clear();
+                 //  mdp_column.getStyleClass().clear();
               
             }
                 break ;
@@ -185,8 +194,8 @@ public class Ui_ListeAdmin_BOController implements Initializable {
                       id_comlun.getStyleClass().clear();
                     nom_column.getStyleClass().clear();
                     prenom_column.getStyleClass().clear();
-                   Login_column.setStyle("-fx-background-color:#B5C689 ");
-                      mdp_column.getStyleClass().clear();
+               //    Login_column.setStyle("-fx-background-color:#B5C689 ");
+                 //     mdp_column.getStyleClass().clear();
                
             }
                 break ;
@@ -194,8 +203,8 @@ public class Ui_ListeAdmin_BOController implements Initializable {
                    id_comlun.getStyleClass().clear();
                    nom_column.getStyleClass().clear();
                    prenom_column.getStyleClass().clear();
-                   Login_column.getStyleClass().clear();
-                   mdp_column.setStyle("-fx-background-color:#B5C689 ");
+                //   Login_column.getStyleClass().clear();
+                //   mdp_column.setStyle("-fx-background-color:#B5C689 ");
                 
             }
             break ;
@@ -203,9 +212,9 @@ public class Ui_ListeAdmin_BOController implements Initializable {
                    id_comlun.getStyleClass().clear();
                    nom_column.getStyleClass().clear();
                    prenom_column.getStyleClass().clear();
-                   Login_column.getStyleClass().clear();
-                    mdp_column.getStyleClass().clear();
-                    mdp_column.getStyleClass().addAll("table-column");
+               //    Login_column.getStyleClass().clear();
+                  //  mdp_column.getStyleClass().clear();
+                   // mdp_column.getStyleClass().addAll("table-column");
             } 
             break ;
                 
@@ -218,7 +227,7 @@ public class Ui_ListeAdmin_BOController implements Initializable {
     {
             Hide= new ScaleTransition();
             Show= new ScaleTransition();
-            ga= new GestionnaireAdmin();
+            gc= new GestionnaireClient();
             Hide.setNode(operation_grid );
             Show.setNode(operation_grid );            
             Show.setFromY(0);

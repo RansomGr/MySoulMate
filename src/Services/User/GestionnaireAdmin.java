@@ -92,6 +92,42 @@ public class GestionnaireAdmin implements Gestionnaire {
            }
           return Admins;
     }
+      public List<? extends Object> fetchAll(String aux, String target_column ,int StartPoint,int BreakPoint) throws SQLException {
+          String query=" select * from Admin "
+                  + " where ( "+target_column+" like ?  )  "
+                  + " limit  "+StartPoint+","+BreakPoint+" "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          List<Admin>Admins = new ArrayList<>();//  Creation du List Reclamation
+           pst.setString(1, "%"+aux+"%");
+         
+     
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          while(res.next())// parcour du result set
+          {
+             Admins.add(new Admin(res.getInt(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5)) );
+           }
+          return Admins;
+    }
+            public List<? extends Object> fetchAll(String aux,int StartPoint,int BreakPoint) throws SQLException {
+          String query=" select * from Admin "
+                  + "where ( nom like ? or prenom like ? or login like ? or motdepasse like ? or ID like ? )"
+                  + " limit  "+StartPoint+","+BreakPoint+" "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          List<Admin>Admins = new ArrayList<>();//  Creation du List Reclamation
+           pst.setString(1, "%"+aux+"%");
+          pst.setString(2, "%"+aux+"%");
+           pst.setString(3, "%"+aux+"%");
+           pst.setString(4, "%"+aux+"%");
+            pst.setString(5, "%"+aux+"%");
+     
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          while(res.next())// parcour du result set
+          {
+             Admins.add(new Admin(res.getInt(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5)) );
+           }
+          return Admins;
+    }
+      
 
     @Override
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
