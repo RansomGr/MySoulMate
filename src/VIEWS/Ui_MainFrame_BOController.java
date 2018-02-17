@@ -192,12 +192,62 @@ public class Ui_MainFrame_BOController implements Initializable {
         );
 
     }
+    
+     private void init_Plan_Actions()
+    {
+        MenuItem ListPlan  = new MenuItem("Liste Plans");
+        MenuItem NewPlan  = new MenuItem("Ajouter Nouveau Plan");
+   
+        
+        this.Plan_dl.getItems().remove(0, 2);        
+        this.Plan_dl.getItems().addAll(ListPlan,NewPlan);
+        
+        ListPlan.setOnAction(
+                (a)->{
+                     try { 
+                         //Ui_Create_new_Plan_BOController.setPlan_to_be_modified(null);
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Plan/ui_ListePlan_BO.fxml"));// Getting the View
+                  Page_Viewer.getChildren().clear();
+                  Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  Label_Module_name.setText(ListPlan.getText()); // Changing the header text
+                  
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
+        );
+        
+        NewPlan.setOnAction(
+        (a)->{
+           
+            try { 
+                  //Ui_Create_new_Admin_BOController.setAdmin_to_be_modified(null);
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Plan/ui_Create_new_Plan_BO.fxml"));// Getting the View
+                 Page_Viewer.getChildren().clear();
+                 Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  
+                  Label_Module_name.setText(NewPlan.getText()); // Changing the header text
+              
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        );
+
+    }
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        Shown=true; // if side bar is shown init it because naturally it's shown
        init_DashBoard_Actions();
        init_User_Actions();
+       init_Plan_Actions();
        init_workspaes_variables();
+       
+      
     }    
     @FXML
     private void hide_show_menu_pb(ActionEvent event) {
