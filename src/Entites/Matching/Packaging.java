@@ -17,10 +17,10 @@ public class Packaging {
     private String nom;
     private String contenu;
     private int duree ;
-    private float prix ;
+    private String prix ;
 
     
-    public Packaging( String nom, String contenu, int duree, float prix) {
+    public Packaging( String nom, String contenu, int duree, String prix) {
         this.ID = -1;
         this.nom = nom;
         this.contenu = contenu;
@@ -29,7 +29,7 @@ public class Packaging {
     }
     
     
-    public Packaging(int ID, String nom, String contenu, int duree, float prix) {
+    public Packaging(int ID, String nom, String contenu, int duree, String prix) {
         this.ID = ID;
         this.nom = nom;
         this.contenu = contenu;
@@ -71,11 +71,11 @@ public class Packaging {
         this.duree = duree;
     }
 
-    public float getPrix() {
+    public String getPrix() {
         return prix;
     }
 
-    public void setPrix(float prix) {
+    public void setPrix(String prix) {
         this.prix = prix;
     }
 
@@ -91,7 +91,7 @@ public class Packaging {
         hash = 59 * hash + Objects.hashCode(this.nom);
         hash = 59 * hash + Objects.hashCode(this.contenu);
         hash = 59 * hash + this.duree;
-        hash = 59 * hash + Float.floatToIntBits(this.prix);
+        hash = 59 * hash + Objects.hashCode(this.nom);
         return hash;
     }
 
@@ -113,7 +113,7 @@ public class Packaging {
         if (this.duree != other.duree) {
             return false;
         }
-        if (Float.floatToIntBits(this.prix) != Float.floatToIntBits(other.prix)) {
+        if (!Objects.equals(this.prix, other.prix)) {
             return false;
         }
         if (!Objects.equals(this.nom, other.nom)) {
