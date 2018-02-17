@@ -99,7 +99,7 @@
          <children>
             <TableView fx:id="table_view" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                  <TableColumn fx:id="ID_comlun" prefWidth="102.0" text="Identifiant" />
+                  <TableColumn fx:id="ID_column" prefWidth="102.0" text="Identifiant" />
                 <TableColumn fx:id="nom_column" prefWidth="206.0" text="Nom " />
                 <TableColumn fx:id="contenu_column" prefWidth="222.0" text="Contenu" />
                   <TableColumn fx:id="duree_column" prefWidth="137.0" text="Durée" />

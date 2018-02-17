@@ -43,6 +43,8 @@ public class Ui_BO_AjoutPackagingController implements Initializable {
     private Button ajouter_btn;
     @FXML
     private Button reset_btn;
+    
+     private static Packaging Packaging_a_modifier ;
 
     
    String Action;
@@ -110,7 +112,7 @@ public class Ui_BO_AjoutPackagingController implements Initializable {
         GestionnairePackaging gp = new GestionnairePackaging();
         int duree = (Integer) duree_s.getValue();
         float prix =  Float.parseFloat(prix_tf.getText());
-       if( gp.create(new Packaging(nom_tf.getText(),contenu_ta.getText(),duree ,prix))==1)
+       if( gp.create(new Packaging(nom_tf.getText(),contenu_ta.getText(),duree ,prix_tf.getText()))==1)
        
        {
            InformationWindow.show();
@@ -176,6 +178,11 @@ public class Ui_BO_AjoutPackagingController implements Initializable {
     private void reset(ActionEvent event) {
     clear_tf();
     //this.duree_s.setValue(7);
+    }
+    
+     public static void set_Packaging_modif(Packaging set_Packaging_modif) {
+        Ui_BO_AjoutPackagingController.Packaging_a_modifier = Packaging_a_modifier;
+        
     }
     
 }
