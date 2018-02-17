@@ -29,7 +29,7 @@ public class GestionnairePackaging implements Gestionnaire {
          pst.setString(1,p.getNom() );// Binding de la première valeur mentionnée dans le query "?" 
          pst.setString(2, p.getContenu() );//Binding de la deuxieme valeur mentionnée dans le query "?" 
          pst.setInt(3, p.getDuree() );
-         pst.setFloat(4, p.getPrix() );
+         pst.setString(4, p.getPrix() );
          
          return pst.executeUpdate(); // Execution et retour du resultat du query 
     }
@@ -42,7 +42,7 @@ public class GestionnairePackaging implements Gestionnaire {
        pst.setString(1, p.getNom());
        pst.setString(2,p.getContenu());
        pst.setInt(3, p.getDuree());
-       pst.setFloat(4, p.getPrix());
+       pst.setString(4, p.getPrix());
        
         return pst.executeUpdate();    }
 
@@ -62,18 +62,70 @@ public class GestionnairePackaging implements Gestionnaire {
         List<Packaging>Packagings= new ArrayList<>();
         while(res.next()) 
         {
-          Packagings.add(new Packaging(res.getInt(1),res.getString(2),res.getString(3),res.getInt(4),res.getFloat(5)));
+          Packagings.add(new Packaging(res.getInt(1),res.getString(2),res.getString(3),res.getInt(4),res.getString(5)));
         }
         return Packagings;
     }
 
+    
     @Override
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          String query=" select * from Packaging where ( nom like ? or contenu like ? or duree like ? or prix like ? or ID like ? ) "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          List<Packaging>Packagings = new ArrayList<>();//  Creation du List Reclamation
+           pst.setString(1, "%"+aux+"%");
+           pst.setString(2, "%"+aux+"%");
+           pst.setString(3, "%"+aux+"%");
+           pst.setString(4, "%"+aux+"%");
+            pst.setString(5, "%"+aux+"%");
+     
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          while(res.next())// parcour du result set
+          {
+             Packagings.add( new Packaging(res.getInt(1),res.getString(2),res.getString(3),res.getInt(4),res.getString(5)) );
+           }
+          return Packagings;
+    }
+      public List<? extends Object> fetchAll(String aux, String target_column ,int StartPoint,int BreakPoint) throws SQLException {
+          String query=" select * from Packaging "
+                  + " where ( "+target_column+" like ?  )  "
+                  + " limit  "+StartPoint+","+BreakPoint+" "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          List<Packaging>Packagings = new ArrayList<>();//  Creation du List Reclamation
+           pst.setString(1, "%"+aux+"%");
+         
+     
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          while(res.next())// parcour du result set
+          {
+             Packagings.add( new Packaging(res.getInt(1),res.getString(2),res.getString(3),res.getInt(4),res.getString(5)) );
+           }
+          return Packagings;
+    }
+            public List<? extends Object> fetchAll(String aux,int StartPoint,int BreakPoint) throws SQLException {
+          String query=" select * from Packaging "
+                  + "where ( nom like ? or contenu like ? or duree like ? or prix like ? or ID like ? )"
+                  + " limit  "+StartPoint+","+BreakPoint+" "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          List<Packaging>Packagings = new ArrayList<>();//  Creation du List Reclamation
+           pst.setString(1, "%"+aux+"%");
+          pst.setString(2, "%"+aux+"%");
+           pst.setString(3, "%"+aux+"%");
+           pst.setString(4, "%"+aux+"%");
+            pst.setString(5, "%"+aux+"%");
+     
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          while(res.next())// parcour du result set
+          {
+             Packagings.add( new Packaging(res.getInt(1),res.getString(2),res.getString(3),res.getInt(4),res.getString(5))  );
+           }
+          return Packagings;
     }
 
     @Override
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+      
+
 }
