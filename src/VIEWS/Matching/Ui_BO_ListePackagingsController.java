@@ -6,7 +6,6 @@
 package VIEWS.Matching;
 
 import Entites.Matching.Packaging;
-import Entites.User.Admin;
 import Services.Matching.GestionnairePackaging;
 import VIEWS.Ui_MainFrame_BOController;
 import java.io.IOException;
