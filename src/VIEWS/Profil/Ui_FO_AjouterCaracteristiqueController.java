@@ -24,8 +24,6 @@ import javafx.scene.control.TextField;
 public class Ui_FO_AjouterCaracteristiqueController implements Initializable {
 
     @FXML
-    private ComboBox<?> silouhette_cb;
-    @FXML
     private ComboBox<?> pilosite_cb;
     @FXML
     private ComboBox<?> origine_cb;
@@ -48,10 +46,6 @@ public class Ui_FO_AjouterCaracteristiqueController implements Initializable {
     @FXML
     private Button reset_btn;
     @FXML
-    private Spinner<?> taille_max_sb;
-    @FXML
-    private ComboBox<?> ville_cb;
-    @FXML
     private RadioButton tabac_oui_rb;
     @FXML
     private RadioButton tabac_non_rb;
@@ -63,6 +57,10 @@ public class Ui_FO_AjouterCaracteristiqueController implements Initializable {
     private RadioButton alcool_non_rb;
     @FXML
     private RadioButton alcool_indifferent_rb;
+    @FXML
+    private ComboBox<?> corpulence_cb;
+    @FXML
+    private ComboBox<?> adresse_cb;
 
     /**
      * Initializes the controller class.
