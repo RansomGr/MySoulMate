@@ -5,6 +5,7 @@
  */
 package VIEWS;
 
+import VIEWS.Profil.Ui_Profil_FOController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import mysoulmate.MySoulMate;
 
 /**
  * FXML Controller class
@@ -41,6 +43,7 @@ public class Ui_MainFrame_FOController implements Initializable {
 
     @FXML
     private void load_my_profil(ActionEvent event) throws IOException {
+         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
          Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_Profil_FO.fxml"));
          Content_pane.getChildren().clear();
          Content_pane.getChildren().add(root);    
