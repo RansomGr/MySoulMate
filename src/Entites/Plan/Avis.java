@@ -14,13 +14,14 @@ import java.util.Objects;
  * @author irou
  */
 public class Avis {
+    
     private Plan plan;
     private Client client;
     private String commentaire;
-    private String note;
+    private Float note;
     private Date dateh;
 
-    public Avis(Plan plan, Client client, String commentaire, String note, Date dateh) {
+    public Avis(Plan plan, Client client, String commentaire, Float note, Date dateh) {
         this.plan = plan;
         this.client = client;
         this.commentaire = commentaire;
@@ -52,11 +53,11 @@ public class Avis {
         this.commentaire = commentaire;
     }
 
-    public String getNote() {
+    public Float getNote() {
         return note;
     }
 
-    public void setNote(String note) {
+    public void setNote(Float note) {
         this.note = note;
     }
 

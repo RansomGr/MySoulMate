@@ -2,18 +2,16 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.User.Ui_Create_new_FOController">
    <top>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -23,21 +21,10 @@
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" text="X" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </Button>
-            <Button mnemonicParsing="false" text="-" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
-               <GridPane.margin>
-                  <Insets right="28.0" />
-               </GridPane.margin>
-            </Button>
-            <Label prefHeight="17.0" prefWidth="104.0" text="Pas de Compte ?" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <Hyperlink fx:id="create_new_account_hl" text="Crée nouveau compte" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <Label prefHeight="17.0" prefWidth="159.0" text="Vous evz déjà un compte ?" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+            <Hyperlink fx:id="login_hl" onAction="#client_connection_page" text="Se Connecter" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                <padding>
                   <Insets right="10.0" />
                </padding>
@@ -51,44 +38,52 @@
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="624.0" minWidth="10.0" prefWidth="269.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="369.0" minHeight="10.0" prefHeight="270.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="422.0" minHeight="10.0" prefHeight="106.0" vgrow="SOMETIMES" />
-          <RowConstraints fillHeight="false" maxHeight="212.0" minHeight="10.0" prefHeight="65.0" valignment="TOP" vgrow="SOMETIMES" />
-            <RowConstraints fillHeight="false" maxHeight="214.0" minHeight="10.0" prefHeight="152.0" valignment="TOP" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="369.0" minHeight="10.0" prefHeight="42.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="444.0" minHeight="10.0" prefHeight="434.0" vgrow="SOMETIMES" />
+          <RowConstraints fillHeight="false" maxHeight="212.0" minHeight="10.0" prefHeight="57.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints fillHeight="false" maxHeight="214.0" minHeight="10.0" prefHeight="51.0" valignment="TOP" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <GridPane GridPane.rowIndex="1">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="307.0" minWidth="10.0" prefWidth="209.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="480.0" minWidth="10.0" prefWidth="214.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="480.0" minWidth="10.0" prefWidth="202.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="307.0" minWidth="10.0" prefWidth="99.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="480.0" minWidth="10.0" prefWidth="159.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="480.0" minWidth="10.0" prefWidth="190.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="480.0" minWidth="10.0" prefWidth="188.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="86.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="113.0" minHeight="2.0" prefHeight="68.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="236.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="232.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="232.0" minHeight="10.0" prefHeight="134.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="179.0" text="Login" />
-                  <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="180.0" text="Password" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="149.0" text="Prenom" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="149.0" text="Date Naissance" GridPane.rowIndex="2" />
+                  <TextField fx:id="prenom_tf" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="149.0" text="Nom" />
+                  <TextField fx:id="nom_tf" GridPane.columnIndex="1" />
+                  <TextField fx:id="email_tf" GridPane.columnIndex="3" />
+                  <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="149.0" text="Adresse email" GridPane.columnIndex="2" />
+                  <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="149.0" text="Pseudo" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="149.0" text="mot de passe" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="149.0" text="confirmation mot de passe" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <TextField fx:id="pseudo_tf" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <TextField fx:id="password_tf" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <TextField fx:id="conf_password_tf" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <DatePicker fx:id="date_naissance_dp" prefHeight="25.0" prefWidth="213.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-            <Button fx:id="login_pb" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="169.0" text="Se Connecter" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <Button fx:id="sincrire_pb" alignment="CENTER" mnemonicParsing="false" onAction="#create_new_account" prefHeight="25.0" prefWidth="169.0" text="S'inscrire" textAlignment="CENTER" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
-                  <Insets top="20.0" />
+                  <Insets right="50.0" top="20.0" />
                </GridPane.margin>
             </Button>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <Hyperlink fx:id="forgot_hl" onAction="#forgot_page" text="Mot de passe oublier ?" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-               <image>
-                  <Image url="@../../images/default.png" />
-               </image>
-            </ImageView>
-            <VBox prefHeight="200.0" prefWidth="100.0" />
-            <Hyperlink fx:id="forgot_hl" text="Mot de passe oublier ?" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <Insets right="65.0" />
+               </GridPane.margin></Hyperlink>
          </children>
       </GridPane>
    </center>
@@ -101,10 +96,6 @@
         <rowConstraints>
           <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
         </rowConstraints>
-         <children>
-            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="119.0" text="Membre du staff ?" GridPane.halignment="RIGHT" />
-            <Hyperlink fx:id="dashboard_scene_hl" text="Allez au dashboard !" GridPane.columnIndex="1" />
-         </children>
       </GridPane>
    </bottom>
    <right>

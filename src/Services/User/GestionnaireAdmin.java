@@ -52,6 +52,7 @@ public class GestionnaireAdmin implements Gestionnaire {
 
     @Override
     public int remove(Object o) throws SQLException {
+        System.out.println(o);
          Admin a = (Admin)o;// down Cast du Object => Admin 
         String query=" delete from  Admin  where id=?  "; // preparation du query
 

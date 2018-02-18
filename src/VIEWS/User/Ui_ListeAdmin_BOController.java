@@ -7,9 +7,12 @@ package VIEWS.User;
 
 import Entites.User.Admin;
 import Services.User.GestionnaireAdmin;
+import VIEWS.Ui_MainFrame_BOController;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,18 +24,27 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
+import mysoulmate.MySoulMate;
 
 /**
  * FXML Controller class
@@ -49,6 +61,13 @@ public class Ui_ListeAdmin_BOController implements Initializable {
     private  int current_page;
     private String selected_column;
     private  ObservableList<Admin> Admins;
+    private Alert NextActionWindow;
+    private Alert ConfirmDelete;
+    private ButtonType  Modifier ;
+    private ButtonType  Supprimer;
+    private ButtonType Annuler;
+    private ButtonType Oui;
+    private ButtonType Non;
     @FXML
     private TextField recherche_dyn_tf;
     @FXML
@@ -114,6 +133,31 @@ public class Ui_ListeAdmin_BOController implements Initializable {
             prenom_column.setCellValueFactory((CellDataFeatures<Admin,String>Admin)-> new SimpleStringProperty(Admin.getValue().getPrenom()) );
             mdp_column.setCellValueFactory((CellDataFeatures<Admin,String>Admin)->new SimpleStringProperty(Admin.getValue().getMotdepasse()));
             Login_column.setCellValueFactory((CellDataFeatures<Admin,String>Admin)->new SimpleStringProperty(Admin.getValue().getLogin()));
+            table_view.setRowFactory( tv -> {
+            TableRow<Admin> row = new TableRow<>();
+            row.setOnMouseClicked(e -> {
+             if (e.getClickCount() == 2 && (!row.isEmpty()) ) {
+                 Ui_Create_new_Admin_BOController.setAdmin_to_be_modified(row.getItem());
+                 try {
+                      Optional<ButtonType> result = NextActionWindow.showAndWait();
+                     if(result.isPresent()&&result.get()==Modifier)
+                           this.take_me_to_Update_page();
+                     else if(result.isPresent()&&result.get()==Supprimer)
+                     {
+                            Optional<ButtonType> result_del = ConfirmDelete.showAndWait();
+                            if(result_del.isPresent()&&result_del.get()==Oui)
+                            {
+                                ga.remove(row.getItem());
+                                reload_data();
+                            }
+                     }
+                 } catch (IOException | SQLException ex) {
+                     Logger.getLogger(Ui_ListeAdmin_BOController.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                 }
+                 });
+                return row;
+               });
     }
     private void reload_data() 
     {  int All_row_size;
@@ -236,7 +280,26 @@ public class Ui_ListeAdmin_BOController implements Initializable {
             BreakPoint=5;
             current_page=1;
            
-            selected_column="All";
+        selected_column="All";
+        Modifier= new ButtonType("Modifier",ButtonBar.ButtonData.OK_DONE);
+        Supprimer=new ButtonType("Supprimer",ButtonBar.ButtonData.OK_DONE);
+        Annuler=new ButtonType("Annuler",ButtonBar.ButtonData.CANCEL_CLOSE);
+        Oui = new ButtonType("Oui",ButtonBar.ButtonData.OK_DONE);
+        Non= new ButtonType("Non",ButtonBar.ButtonData.CANCEL_CLOSE);
+        NextActionWindow= new Alert(Alert.AlertType.CONFIRMATION);
+        ConfirmDelete=new Alert(Alert.AlertType.CONFIRMATION);
+        
+        NextActionWindow.getButtonTypes().clear();
+        NextActionWindow.getButtonTypes().addAll(Modifier,Supprimer,Annuler);
+        NextActionWindow.setTitle("MySoulMate");
+        NextActionWindow.setHeaderText("Gestion Administrateur");
+        NextActionWindow.setContentText("Que Voulez vous faire avec cet Administrateur ?");
+        ConfirmDelete.getButtonTypes().clear();
+        ConfirmDelete.getButtonTypes().addAll(Oui,Non);
+        ConfirmDelete.setTitle("MySoulMate");
+        ConfirmDelete.setHeaderText("Gestion Administrateur");
+        ConfirmDelete.setContentText("Voulez Vous Vraiment Supprimer cet Administrateur ?");
+        
     }
         private void init_Actions()
         {
@@ -262,6 +325,9 @@ public class Ui_ListeAdmin_BOController implements Initializable {
            }
     }
 
-    
+    private void take_me_to_Update_page() throws IOException
+    {
+     Ui_MainFrame_BOController.Update_Admin_request();
+    }
 }
 

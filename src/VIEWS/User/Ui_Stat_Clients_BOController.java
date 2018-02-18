@@ -45,7 +45,7 @@ public class Ui_Stat_Clients_BOController implements Initializable {
         try {
             get_allClients();
             
-            //ObArrL_Clients=FXCollections.observableArrayList((ArrayList<Client>)gc.fetchAll();
+      
         } catch (SQLException ex) {
             Logger.getLogger(Ui_Stat_Clients_BOController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -29,6 +29,14 @@ public class Reservation
         this.nb_place = nb_place;
     }
 
+    public Reservation(Plan plan, Client client, Date date_res, int nb_place) {
+        this.plan = plan;
+        this.client = client;
+        this.date_res = date_res;
+        this.nb_place = nb_place;
+    }
+    
+
     public int getID() {
         return ID;
     }
