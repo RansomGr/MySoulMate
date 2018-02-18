@@ -22,7 +22,7 @@ public class GestionnaireCaracteristique implements Gestionnaire{
     public int create(Object o) throws SQLException {
         
         Caracteristique c =(Caracteristique)o;// down Cast
-        String query=" insert into Profil (corpulence,pilosite,origine,profession,alcool,tabac,taille,cheveux,yeux ,caractere, statut ,cuisine) values (?,?,?,?,?,?,?,?,?,?,?,?) "; // preparation du query
+        String query=" insert into Caracteristique (corpulence,pilosite,origine,profession,alcool,tabac,taille,cheveux,yeux ,caractere, statut ,cuisine) values (?,?,?,?,?,?,?,?,?,?,?,?) "; // preparation du query
 
          PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
          
