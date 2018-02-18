@@ -64,11 +64,11 @@
                      <padding>
                         <Insets right="10.0" />
                      </padding></Label>
-                  <TextField fx:id="login_te" maxHeight="25.0" maxWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                  <TextField fx:id="password_te" maxHeight="25.0" maxWidth="230.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <TextField fx:id="login_te" maxHeight="25.0" maxWidth="230.0" text="sofien97" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <TextField fx:id="password_te" maxHeight="25.0" maxWidth="230.0" text="sofien" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Button fx:id="login_pb" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="169.0" text="Se Connecter" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+            <Button fx:id="login_pb" alignment="CENTER" mnemonicParsing="false" onAction="#log_me_in" prefHeight="25.0" prefWidth="169.0" text="Se Connecter" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>

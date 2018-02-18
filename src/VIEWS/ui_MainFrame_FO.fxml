@@ -12,8 +12,9 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.Ui_MainFrame_FOController">
    <top>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -53,6 +54,9 @@
         <rowConstraints>
           <RowConstraints maxHeight="900.0" minHeight="10.0" prefHeight="270.0" valignment="BOTTOM" vgrow="ALWAYS" />
         </rowConstraints>
+         <children>
+            <StackPane fx:id="Content_pane" prefHeight="150.0" prefWidth="200.0" />
+         </children>
       </GridPane>
    </center>
    <bottom>
@@ -80,8 +84,8 @@
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="10.0" prefWidth="62.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="59.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="49.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="62.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="58.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="53.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -90,44 +94,40 @@
                <children>
                   <ImageView fitHeight="132.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" translateY="5.0">
                      <image>
-                        <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/Icônes%20Menu/1.png" />
+                        <Image url="@../images/1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="139.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                      <image>
-                        <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/Icônes%20Menu/2.png" />
+                        <Image url="@../images/2.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="136.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
-                        <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/Icônes%20Menu/3.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="138.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" translateY="-6.0" GridPane.columnIndex="3">
-                     <image>
-                        <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/Icônes%20Menu/4.png" />
+                        <Image url="@../images/3.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="138.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/Icônes%20Menu/5.png" />
+                        <Image url="@../images/5.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="139.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" translateY="-5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/Icônes%20Menu/6.png" />
+                        <Image url="@../images/6.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="128.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/Icônes%20Menu/8.png" />
+                        <Image url="@../images/8.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="134.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" translateX="-6.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/Icônes%20Menu/7.png" />
+                        <Image url="@../images/7.png" />
                      </image>
                   </ImageView>
+                  <Button mnemonicParsing="false" onAction="#load_my_profil" prefHeight="88.0" prefWidth="51.0" style="-fx-background-image: url(&quot;..\images\4.png&quot;);" text="Profil" GridPane.columnIndex="3" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
             <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
