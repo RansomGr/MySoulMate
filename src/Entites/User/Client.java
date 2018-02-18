@@ -6,6 +6,7 @@
 package Entites.User;
 
 import Entites.AbstractEntite;
+import Entites.Profil.Profil;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -19,6 +20,7 @@ public class Client extends AbstractEntite {
     protected String email;
     protected Date date_naissance;
     protected String pseudo ;
+    protected Profil profil;
     
        public Client(int ID,String nom,String prenom,String motdepasse,String email,Date date_naissance,String pseudo)
     {
@@ -29,6 +31,17 @@ public class Client extends AbstractEntite {
         this.pseudo=pseudo;
         this.email=email;
     }
+
+    public Client(int ID, String nom,String prenom, String motdepasse, String email, Date date_naissance, String pseudo, Profil profil) {
+        super(ID, nom);
+        this.prenom = prenom;
+        this.motdepasse = motdepasse;
+        this.email = email;
+        this.date_naissance = date_naissance;
+        this.pseudo = pseudo;
+        this.profil = profil;
+    }
+       
           public Client(String nom,String prenom,String motdepasse,String email,Date date_naissance,String pseudo)
     {
           super(-1,nom);
