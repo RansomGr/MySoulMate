@@ -224,5 +224,20 @@ private String cuisine ;
         this.cuisine = cuisine;
     }
 
+    public Caracteristique(String corpulence, String pilosite, String origine, String profession, String alcool, String tabac, float taille, String cheveux, String yeux, String caractere, String statut, String cuisine) {
+        this.corpulence = corpulence;
+        this.pilosite = pilosite;
+        this.origine = origine;
+        this.profession = profession;
+        this.alcool = alcool;
+        this.tabac = tabac;
+        this.taille = taille;
+        this.cheveux = cheveux;
+        this.yeux = yeux;
+        this.caractere = caractere;
+        this.statut = statut;
+        this.cuisine = cuisine;
+    }
+
     
 }
