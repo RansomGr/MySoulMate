@@ -6,11 +6,13 @@
 package Services.User;
 
 import Entites.AbstractEntite;
+import Entites.Profil.Profil;
 import Entites.User.Client;
 import Entites.User.Reclamation;
 import Services.Gestionnaire;
 import static Services.Gestionnaire.DB;
 import Services.GestionnaireAbstractEntite;
+import Services.Profil.GestionnaireProfil;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -80,13 +82,16 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
 
     @Override
     public List<? extends Object> fetchAll() throws SQLException {
-           String query=" select Entite.nom as nom,Client.*  from  Client inner join Entite on Client.Entite=Entite.ID "    ; // preparation du requete sql
+           String query=" select Entite.nom as nom,Client.*  from  Client inner join Entite on Client.Entite=Entite.ID  "    ; // preparation du requete sql
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Client>Clients = new ArrayList<>();//  Creation du List Reclamation
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           while(res.next())// parcour du result set
           {
-             Clients.add(new Client(res.getInt("entite"),res.getString("nom"),res.getString(3),res.getString(4),res.getString(5),res.getDate(6),res.getString(7)));
+              GestionnaireProfil gp = new GestionnaireProfil();
+             int Id_profil=res.getInt(8);
+             Profil profil= ((List<Profil>)gp.fetchAll()).stream().filter(x->x.getId()==Id_profil).findFirst().get();
+             Clients.add(new Client(res.getInt("entite"),res.getString("nom"),res.getString(3),res.getString(4),res.getString(5),res.getDate(6),res.getString(7),profil));
            }
           return Clients;
     }
