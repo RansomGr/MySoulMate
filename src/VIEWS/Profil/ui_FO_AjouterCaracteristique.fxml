@@ -65,8 +65,8 @@
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Statut" GridPane.columnIndex="1" GridPane.rowIndex="14" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cuisine" GridPane.columnIndex="1" GridPane.rowIndex="6" />
       <ComboBox fx:id="caractere_cb" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-      <Spinner fx:id="taille_min_sp" prefHeight="25.0" prefWidth="46.0" translateX="45.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1," translateX="30.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+      <Spinner fx:id="taille_min_sp" prefHeight="25.0" prefWidth="46.0" translateX="15.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1," GridPane.columnIndex="3" GridPane.rowIndex="7" />
       <ComboBox fx:id="cheveux_cb" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="12" />
       <ComboBox fx:id="yeux_cb" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="13" />
       <ComboBox fx:id="statut_cb" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="14" />
@@ -74,9 +74,6 @@
       <Button fx:id="valider_btn" mnemonicParsing="false" onAction="#Valider" text="Valider" GridPane.columnIndex="5" GridPane.rowIndex="17" />
       <Button fx:id="reset_btn" mnemonicParsing="false" onAction="#Reset" text="Reset" GridPane.columnIndex="3" GridPane.rowIndex="17" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="15" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="à" translateX="100.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1," translateX="1.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
-      <Spinner fx:id="taille_max_sb" prefHeight="25.0" prefWidth="46.0" translateX="12.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <ComboBox fx:id="adresse_cb" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
       <RadioButton fx:id="tabac_oui_rb" mnemonicParsing="false" text="Oui" GridPane.columnIndex="3" GridPane.rowIndex="4" />
@@ -85,7 +82,6 @@
       <RadioButton fx:id="alcool_oui_rb" mnemonicParsing="false" text="Oui" GridPane.columnIndex="3" GridPane.rowIndex="5" />
       <RadioButton fx:id="alcool_non_rb" mnemonicParsing="false" text="Non" translateX="58.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
       <RadioButton fx:id="alcool_indifferent_rb" mnemonicParsing="false" text="Indifférent" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="de" GridPane.columnIndex="3" GridPane.rowIndex="7" />
       <Label text="Caractéristique" GridPane.columnIndex="3" GridPane.rowIndex="1">
          <font>
             <Font size="15.0" />
