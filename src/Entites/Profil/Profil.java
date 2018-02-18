@@ -15,8 +15,7 @@ import java.util.Objects;
 public class Profil  {
     private int id;
   
-    Caracteristique Caracteristique	;
-	
+    Caracteristique Caracteristique;
    private String photo;
    private String description;	
    Caracteristique preference;
