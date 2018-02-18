@@ -85,10 +85,20 @@ public class Ui_Login_FOController implements Initializable {
         Client Logged_in_Client= ((List<Client>)gc.fetchAll()).stream().filter(Client->Client.getPseudo().equals(login_te.getText())&&Client.getMotdepasse().equals(password_te.getText())).findFirst().get();
         if(Logged_in_Client!=null)
         {
-        MySoulMate.setLogged_in_Client(Logged_in_Client);
-        Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/ui_MainFrame_FO.fxml"));
-        Scene scene = new Scene(root);
-        MySoulMate.getMainStage().setScene(scene);
+            if(Logged_in_Client.getActivation()==0)
+            {
+              MySoulMate.setLogged_in_Client(Logged_in_Client);
+              Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_FO_AjouterCaracteristique.fxml"));
+              Scene scene = new Scene(root);
+              MySoulMate.getMainStage().setScene(scene); 
+            }
+            else
+            {
+              MySoulMate.setLogged_in_Client(Logged_in_Client);
+              Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/ui_MainFrame_FO.fxml"));
+              Scene scene = new Scene(root);
+              MySoulMate.getMainStage().setScene(scene);
+            }
         }
         else
         {
