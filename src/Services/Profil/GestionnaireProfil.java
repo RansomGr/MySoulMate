@@ -5,10 +5,13 @@
  */
 package Services.Profil;
 
+import Entites.Profil.Caracteristique;
 import Entites.Profil.Profil;
 import Services.Gestionnaire;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,9 +64,26 @@ public class GestionnaireProfil implements Gestionnaire {
         return pst.executeUpdate();    }
 
     @Override
-    public List<? extends Object> fetchAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   
+     public List<? extends Object> fetchAll() throws SQLException {
+        
+          String query=" select id,caracteristique,photo,description,preference from profil "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          List<Profil>Profils = new ArrayList<>();//  Creation du List Reclamation
+          //Caracteristique c = new Caracteristique(0, query, query, query, query, query, query, 0, query, query, query, query, query)
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          GestionnaireCaracteristique G= new GestionnaireCaracteristique();
+          while(res.next())// parcour du result set
+          { int id_char=res.getInt(2);
+          int id_pref=res.getInt(5);
+          Caracteristique carac =((List<Caracteristique>)G.fetchAll()).stream().filter(x->x.getID()==id_char).findFirst().get();
+          Caracteristique pref =((List<Caracteristique>)G.fetchAll()).stream().filter(x->x.getID()==id_pref).findFirst().get();
+
+             Profils.add(new Profil(res.getInt(1),carac,res.getString(3),res.getString(4),pref) );
+           }
+          return Profils;
     }
+
 
     @Override
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
