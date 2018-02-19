@@ -80,25 +80,23 @@ public class Ui_FO_AjouterCaracteristiqueController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-                
+    public void initialize(URL url, ResourceBundle rb) {           
         init_node();
         init_actions();
-      
     }    
     
 
     @FXML
-    private void Valider(ActionEvent event) throws SQLException {
+    private void Valider(ActionEvent event) throws SQLException, IOException {
       
       RadioButton choix_alchool ;
       RadioButton choix_tabac ;
       
       choix_alchool=(RadioButton)Alcools.getSelectedToggle();
       choix_tabac=(RadioButton)tabas.getSelectedToggle();
-    //  System.out.println(taille_min_sp.getValue().toString());
-        System.out.println("taille:"+taille_min_sp.getValue().toString());
-      Caracteristique Caracteristique =
+      System.out.println(taille_min_sp.getValue().toString());
+      System.out.println("taille:"+taille_min_sp.getValue().toString());
+        Caracteristique Caracteristique =
               new Caracteristique(
                       corpulence_cb.getValue(),
                       pilosite_cb.getValue(),
@@ -113,8 +111,8 @@ public class Ui_FO_AjouterCaracteristiqueController implements Initializable {
                       statut_cb.getValue(),
                       cuisine_cb.getValue()
               );
-        GestionnaireCaracteristique gc= new GestionnaireCaracteristique();
-        gc.create(Caracteristique);
+        Ui_Profile_CreationController.setCarac(Caracteristique);
+        Ui_Profile_CreationController.next_step();
     }
 
     @FXML

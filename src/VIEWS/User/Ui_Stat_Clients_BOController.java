@@ -105,7 +105,8 @@ public class Ui_Stat_Clients_BOController implements Initializable {
                         (client)->{
                                       Calendar calendar= new GregorianCalendar();
                                       calendar.add(Calendar.YEAR,-56);
-                                      return client.getDate_naissance().before(new Date(calendar.getTime().getTime()));
+                                  
+                                    return client.getDate_naissance().before(new Date(calendar.getTime().getTime()));
                                      }
                        ).count())
         );
@@ -123,6 +124,7 @@ public class Ui_Stat_Clients_BOController implements Initializable {
     void get_allClients() throws SQLException
     {
         gc=new GestionnaireClient();
-        Clients =(List<Client>)gc.fetchAll();
+        Clients =(List<Client>)gc.fetchAll();   
     }
+   
 }

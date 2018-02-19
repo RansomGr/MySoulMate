@@ -51,7 +51,7 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
         
       super.update(o);
       Client c=(Client)o;
-      String query ="update Client set Entite=?,prenom=?,motdepasse=?,email=?,date_naissance=?,pseudo=? where Entite=?";
+      String query ="update Client set Entite=?,prenom=?,motdepasse=?,email=?,date_naissane=?,pseudo=? ,activation=?, ban=?,profil=? where Entite=?";
       
       PreparedStatement pst=DB.prepareStatement(query);
       
@@ -61,7 +61,11 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
       pst.setString(4,c.getEmail());
       pst.setDate(5,c.getDate_naissance());
       pst.setString(6,c.getPseudo());
-      pst.setInt(7, c.getID());
+      pst.setInt(7,c.getActivation());
+      pst.setInt(8,c.getBan());    
+      pst.setInt(9, c.getProfil().getId());
+        pst.setInt(10, c.getID());
+      
       
       return pst.executeUpdate();
     }
@@ -89,21 +93,25 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
           while(res.next())// parcour du result set
           {
               GestionnaireProfil gp = new GestionnaireProfil();
-              Profil profil=null;
+           
              int Id_profil=res.getInt(8);
+             Profil profil= new Profil();
+             
+             if(Id_profil!=0)
+              profil=((List<Profil>)gp.fetchAll()).stream().filter(x->x.getId()==Id_profil).findAny().get();
              int is_activated=res.getInt(9);
              if(is_activated==1)
-              profil= ((List<Profil>)gp.fetchAll()).stream().filter(x->x.getId()==Id_profil).findFirst().get();
-             Clients.add(new Client(res.getInt("entite"),res.getString("nom"),res.getString(3),res.getString(4),res.getString(5),res.getDate(6),res.getString(7),profil,is_activated));
+             profil= ((List<Profil>)gp.fetchAll()).stream().filter(x->x.getId()==Id_profil).findFirst().get();
+             Clients.add(new Client(res.getInt("entite"),res.getString("nom"),res.getString(3),res.getString(4),res.getString(5),res.getDate(6),res.getString(7),profil,is_activated,res.getInt(9)));
            }
           return Clients;
     }
       public List<? extends Object> fetchAll(String aux, String target_column ,int StartPoint,int BreakPoint) throws SQLException {
-          String query=" select Entite.nom as nom,Client.*  from  Client inner join Entite on Client.Entite=Entite.ID  "
-                  + " where ( "+target_column+" like ?  )  "
-                  + "  limit  "+StartPoint+","+BreakPoint+" "    ; // preparation du requete sql
-          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
-          List<Client>Clients = new ArrayList<>();//  Creation du List Reclamation
+          String query="  select * from (select Entite.nom as nom,Client.*  from  Client inner join Entite on Client.Entite=Entite.ID  limit  "+StartPoint+","+BreakPoint+"  ) Client_l   "
+                  + " where ( "+target_column+" like ?  )  "  ; // preparation du requete sql
+                  
+           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+           List<Client>Clients = new ArrayList<>();//  Creation du List Reclamation
            pst.setString(1, "%"+aux+"%");
          
      
@@ -115,9 +123,9 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
           return Clients;
     }
            public List<? extends Object> fetchAll(String aux,int StartPoint,int BreakPoint) throws SQLException {
-          String query="  select Entite.nom as nom,Client.*  from  Client inner join Entite on Client.Entite=Entite.ID "
-                  + "where ( nom like ? or prenom like ? or pseudo like ?  or ID like ?  or email like ? )"
-                  + " limit  "+StartPoint+","+BreakPoint+" "    ; // preparation du requete sql
+          String query="  select * from (select Entite.nom as nom,Client.*  from  Client inner join Entite on Client.Entite=Entite.ID  limit  "+StartPoint+","+BreakPoint+"  ) Client_l "
+                  + " where ( nom like ? or prenom like ? or pseudo like ?  or Entite like ?  or email like ? )";
+
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Client>Clients = new ArrayList<>();//  Creation du List Reclamation
            pst.setString(1, "%"+aux+"%");
