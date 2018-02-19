@@ -6,6 +6,7 @@
 package Controllers.User;
 
 import Entites.User.Client;
+import Services.Profil.GestionnaireProfil;
 import Services.User.GestionnaireClient;
 import java.io.IOException;
 import java.net.URL;
@@ -85,10 +86,12 @@ public class Ui_Login_FOController implements Initializable {
         Client Logged_in_Client= ((List<Client>)gc.fetchAll()).stream().filter(Client->Client.getPseudo().equals(login_te.getText())&&Client.getMotdepasse().equals(password_te.getText())).findFirst().get();
         if(Logged_in_Client!=null)
         {
-            if(Logged_in_Client.getActivation()==0)
+            GestionnaireClient p = new GestionnaireClient();
+            
+            if(Logged_in_Client.getProfil().getPhoto().equals("no_PROF"))
             {
               MySoulMate.setLogged_in_Client(Logged_in_Client);
-              Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_FO_AjouterCaracteristique.fxml"));
+              Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_Profile_Creation.fxml"));
               Scene scene = new Scene(root);
               MySoulMate.getMainStage().setScene(scene); 
             }

@@ -94,9 +94,9 @@ public class GestionnaireAdmin implements Gestionnaire {
           return Admins;
     }
       public List<? extends Object> fetchAll(String aux, String target_column ,int StartPoint,int BreakPoint) throws SQLException {
-          String query=" select * from Admin "
-                  + " where ( "+target_column+" like ?  )  "
-                  + " limit  "+StartPoint+","+BreakPoint+" "    ; // preparation du requete sql
+          String query=" select * from (select * from Admin limit  "+StartPoint+","+BreakPoint+" ) Admin_l "
+                  + " where ( "+target_column+" like ?  )  " ;
+                 // preparation du requete sql
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Admin>Admins = new ArrayList<>();//  Creation du List Reclamation
            pst.setString(1, "%"+aux+"%");
@@ -110,9 +110,9 @@ public class GestionnaireAdmin implements Gestionnaire {
           return Admins;
     }
             public List<? extends Object> fetchAll(String aux,int StartPoint,int BreakPoint) throws SQLException {
-          String query=" select * from Admin "
-                  + "where ( nom like ? or prenom like ? or login like ? or motdepasse like ? or ID like ? )"
-                  + " limit  "+StartPoint+","+BreakPoint+" "    ; // preparation du requete sql
+          String query=" select * from (select * from Admin limit  "+StartPoint+","+BreakPoint+" ) Admin_l "
+                  + "where ( nom like ? or prenom like ? or login like ? or motdepasse like ? or ID like ? )"   ; // preparation du requete sql
+              
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Admin>Admins = new ArrayList<>();//  Creation du List Reclamation
            pst.setString(1, "%"+aux+"%");

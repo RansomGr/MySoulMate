@@ -7,14 +7,11 @@ package VIEWS.User;
 
 
 import Entites.User.Client;
-import Services.User.GestionnaireAdmin;
 import Services.User.GestionnaireClient;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,11 +24,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -52,6 +53,14 @@ public class Ui_ListeClient_BOController implements Initializable {
     private  int BreakPoint;
     private int pages;
     private  int current_page;
+     private ButtonType  Bannir ;
+    private ButtonType  Supprimer;
+    private ButtonType Annuler;
+    private ButtonType Oui;
+    private ButtonType Non;
+    private Alert NextActionWindow;
+    private Alert ConfirmDelete;
+    private Alert ConfirmBan;
     private String selected_column;
     private  ObservableList<Client> Clients;
     @FXML
@@ -88,6 +97,7 @@ public class Ui_ListeClient_BOController implements Initializable {
     private ComboBox<Integer> lignes_page_cb;
     @FXML
     private ColumnConstraints header_grid;
+    
 
 
     /**
@@ -123,7 +133,50 @@ public class Ui_ListeClient_BOController implements Initializable {
             pseudo_column.setCellValueFactory((CellDataFeatures<Client,String>Client)->new SimpleStringProperty(Client.getValue().getPseudo()));
             email_column.setCellValueFactory((CellDataFeatures<Client,String>Client)->new SimpleStringProperty(Client.getValue().getEmail()));
             date_naissance_column.setCellValueFactory((CellDataFeatures<Client,String>Client)-> new SimpleStringProperty(Client.getValue().getDate_naissance().toString()));
+            table_view.setRowFactory( tv -> {
+            TableRow<Client> row = new TableRow<>();
+               row.setOnMouseClicked(e ->
+               {
+             if (e.getClickCount() == 2 && (!row.isEmpty()) ) {
+
+                      Optional<ButtonType> result = NextActionWindow.showAndWait();
+                     if(result.isPresent()&&result.get()==Bannir)
+                     {
+                         Optional<ButtonType> result_ban=ConfirmBan.showAndWait();
+                            if(result_ban.isPresent()&&result_ban.get()==Oui)
+                            {
+                         Client c= row.getItem();
+                         c.setBan(1);
+                          try {
+                              gc.update(c);
+                                 } catch (SQLException ex) {
+                              Logger.getLogger(Ui_ListeClient_BOController.class.getName()).log(Level.SEVERE, null, ex);
+                               }
+                            }
+                                 }
+                     else if(result.isPresent()&&result.get()==Supprimer)
+                     {
+                            Optional<ButtonType> result_del = ConfirmDelete.showAndWait();
+                            if(result_del.isPresent()&&result_del.get()==Oui)
+                            {
+                                try {
+                                    gc.remove(row.getItem());
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(Ui_ListeClient_BOController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                reload_data();
+                            }
+                     }
+                    
+              }}  );
+               return row;
+                 }); 
+          
     }
+               
+           
+              
+    
     private void reload_data() 
     {  int All_row_size;
          try {
@@ -246,6 +299,30 @@ public class Ui_ListeClient_BOController implements Initializable {
             current_page=1;
            
             selected_column="All";
+        Bannir= new ButtonType("Bannir",ButtonBar.ButtonData.OK_DONE);
+        Supprimer=new ButtonType("Supprimer",ButtonBar.ButtonData.OK_DONE);
+        Annuler=new ButtonType("Annuler",ButtonBar.ButtonData.CANCEL_CLOSE);
+        Oui = new ButtonType("Oui",ButtonBar.ButtonData.OK_DONE);
+        Non= new ButtonType("Non",ButtonBar.ButtonData.CANCEL_CLOSE);
+        NextActionWindow= new Alert(Alert.AlertType.CONFIRMATION);
+        ConfirmDelete=new Alert(Alert.AlertType.CONFIRMATION);
+        ConfirmBan=new Alert(Alert.AlertType.CONFIRMATION);
+        NextActionWindow.getButtonTypes().clear();
+        NextActionWindow.getButtonTypes().addAll(Bannir,Supprimer,Annuler);
+        NextActionWindow.setTitle("MySoulMate");
+        NextActionWindow.setHeaderText("Gestion Client");
+        NextActionWindow.setContentText("Que Voulez vous faire avec ce client ?");
+        
+        ConfirmBan.getButtonTypes().clear();
+        ConfirmBan.getButtonTypes().addAll(Oui,Non);
+        ConfirmBan.setTitle("MySoulMate");
+        ConfirmBan.setHeaderText("Gestion Administrateur");
+        ConfirmBan.setContentText("Voulez Vous Vraiment Bannir ce client ?");
+        ConfirmDelete.getButtonTypes().clear();
+        ConfirmDelete.getButtonTypes().addAll(Oui,Non);
+        ConfirmDelete.setTitle("MySoulMate");
+        ConfirmDelete.setHeaderText("Gestion Administrateur");
+        ConfirmDelete.setContentText("Voulez Vous Vraiment Supprimer ce client ?");
     }
         private void init_Actions()
         {

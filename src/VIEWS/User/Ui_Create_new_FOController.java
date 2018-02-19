@@ -5,8 +5,12 @@
  */
 package VIEWS.User;
 
+import APIS.Uer.MySoulMateMail;
 import Entites.User.Client;
 import Services.User.GestionnaireClient;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
@@ -28,6 +32,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
+import javax.mail.MessagingException;
 import mysoulmate.MySoulMate;
 
 /**
@@ -91,7 +96,7 @@ public class Ui_Create_new_FOController implements Initializable {
     }
 
     @FXML
-    private void create_new_account(ActionEvent event) throws SQLException {
+    private void create_new_account(ActionEvent event) throws SQLException, FileNotFoundException, IOException, MessagingException {
         validate_form();
         if(Message_Warning.equals("Les champs suivants posent des problèmes \n"))
         {
@@ -101,13 +106,28 @@ public class Ui_Create_new_FOController implements Initializable {
        if( gc.create(new Client(nom_tf.getText(),prenom_tf.getText(),password_tf.getText(),email_tf.getText(),Date.valueOf(date_naissance_dp.getValue()),pseudo_tf.getText()))==1)
        {
            InformationWindow.show();
+            String Content;
+          
+             BufferedReader br = new BufferedReader(new FileReader("src/Files/welcomeMail.txt"));
+                     
+             StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+            while (line != null) {
+            sb.append(line);
+            sb.append(System.lineSeparator());
+            line = br.readLine();
+            }
+           Content = sb.toString();
+           Content=Content.replace("[[Name]]", "Amine Benmimoun");
+           MySoulMateMail mail= new MySoulMateMail (email_tf.getText(),Content,"Test mail 01");
+           mail.sendMail();
            clear_tf();
-       }
-       else
+          }
+          else
           ErrorWindow.show();
      
-       }
-    else
+         }
+       else
     {
         WarningWindow.show();
         if(Message_Warning.contains("18"))

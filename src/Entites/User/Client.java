@@ -22,6 +22,7 @@ public class Client extends AbstractEntite {
     protected String pseudo ;
     protected Profil profil;
     protected int Activation ;
+    protected int ban;
     
        public Client(int ID,String nom,String prenom,String motdepasse,String email,Date date_naissance,String pseudo)
     {
@@ -33,7 +34,7 @@ public class Client extends AbstractEntite {
         this.email=email;
     }
 
-    public Client(int ID, String nom,String prenom, String motdepasse, String email, Date date_naissance, String pseudo, Profil profil ,int Activation) {
+    public Client(int ID, String nom,String prenom, String motdepasse, String email, Date date_naissance, String pseudo, Profil profil ,int Activation,int ban) {
         super(ID, nom);
         this.prenom = prenom;
         this.motdepasse = motdepasse;
@@ -42,6 +43,7 @@ public class Client extends AbstractEntite {
         this.pseudo = pseudo;
         this.profil = profil;
         this.Activation=Activation;
+        this.ban=ban;
     }
        
           public Client(String nom,String prenom,String motdepasse,String email,Date date_naissance,String pseudo)
@@ -161,6 +163,14 @@ public class Client extends AbstractEntite {
 
     public void setActivation(int Activation) {
         this.Activation = Activation;
+    }
+
+    public int getBan() {
+        return ban;
+    }
+
+    public void setBan(int ban) {
+        this.ban = ban;
     }
     
     
