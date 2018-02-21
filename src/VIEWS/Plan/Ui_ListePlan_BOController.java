@@ -6,13 +6,18 @@
 package VIEWS.Plan;
 
 import Entites.Plan.Plan;
-import Entites.User.Client;
+
+
 import Services.Plan.GestionnairePlan;
+import VIEWS.Ui_MainFrame_BOController;
+
+import java.io.IOException;
 
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,10 +30,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -51,6 +60,13 @@ public class Ui_ListePlan_BOController implements Initializable {
     private  int current_page;
     private String selected_column;
     private  ObservableList<Plan> Plans;
+       private Alert NextActionWindow;
+    private Alert ConfirmDelete;
+    private ButtonType  Modifier ;
+    private ButtonType  Supprimer;
+    private ButtonType Annuler;
+    private ButtonType Oui;
+    private ButtonType Non;
 
     @FXML
     private TextField recherche_dyn_tf;
@@ -75,9 +91,11 @@ public class Ui_ListePlan_BOController implements Initializable {
     @FXML
     private TableColumn<Plan, Integer> Telephone_column;
     @FXML
-    private TableColumn<Plan, String> Desciption_column;
+    private TableColumn<Plan, String> Description_column;
     @FXML
     private TableColumn<Plan, String> Photos_column;
+     @FXML
+    private TableColumn<Plan, String> Email_column;
     @FXML
    
     private GridPane operation_grid;
@@ -85,10 +103,13 @@ public class Ui_ListePlan_BOController implements Initializable {
     private RowConstraints operation_row;
     @FXML
     private ComboBox<String> target_column;
-    @FXML
+      @FXML
     private ComboBox<Integer> lignes_page_cb;
+   
     @FXML
     private ColumnConstraints header_grid;
+   
+    
 
 
     /**
@@ -96,7 +117,7 @@ public class Ui_ListePlan_BOController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      init_node();
+        init_node();
         init_Actions();
         init_tableView();
         reload_data();
@@ -122,9 +143,42 @@ public class Ui_ListePlan_BOController implements Initializable {
             Type_column.setCellValueFactory((TableColumn.CellDataFeatures<Plan,String>plan)-> new SimpleStringProperty(Plan.Type.getAsString(plan.getValue().getType())) );
             SiteWeb_column.setCellValueFactory((TableColumn.CellDataFeatures<Plan,String>plan)->new SimpleStringProperty(plan.getValue().getSiteweb()));
             Telephone_column.setCellValueFactory((TableColumn.CellDataFeatures<Plan,Integer>plan)->new SimpleIntegerProperty((plan.getValue().getTelephone())).asObject());
-            Desciption_column.setCellValueFactory((TableColumn.CellDataFeatures<Plan,String>plan)-> new SimpleStringProperty(plan.getValue().getDescription().toString()));
-            Photos_column.setCellValueFactory((TableColumn.CellDataFeatures<Plan,String>plan)-> new SimpleStringProperty(plan.getValue().getPhoto().toString()));
-    }   
+            Description_column.setCellValueFactory((TableColumn.CellDataFeatures<Plan,String>plan)-> new SimpleStringProperty(plan.getValue().getDescription()));
+            Photos_column.setCellValueFactory((TableColumn.CellDataFeatures<Plan,String>plan)-> new SimpleStringProperty(plan.getValue().getPhoto()));
+            Email_column.setCellValueFactory((TableColumn.CellDataFeatures<Plan,String>plan)-> new SimpleStringProperty(plan.getValue().getEmail()));
+            table_view.setRowFactory( tv -> {
+            TableRow<Plan> row = new TableRow<>();
+            row.setOnMouseClicked(e -> {
+             if (e.getClickCount() == 2 && (!row.isEmpty()) ) {
+                 Ui_Create_new_Plan_BOController.setPlan_to_be_modified(row.getItem());
+                 try {
+                      Optional<ButtonType> result = NextActionWindow.showAndWait();
+                     if(result.isPresent()&&result.get()==Modifier)
+                           this.take_me_to_Update_page();
+                     else if(result.isPresent()&&result.get()==Supprimer)
+                     {
+                            Optional<ButtonType> result_del = ConfirmDelete.showAndWait();
+                            if(result_del.isPresent()&&result_del.get()==Oui)
+                            {
+                                Gp.remove(row.getItem());
+                                reload_data();
+                            }
+                     }
+                 } catch (IOException | SQLException ex) {
+                     Logger.getLogger(Ui_ListePlan_BOController.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                 }
+                 });
+                return row;
+                });
+    
+                
+  
+    }
+    
+    
+   
+       
     
     private void reload_data() 
     {  int All_row_size;
@@ -176,30 +230,22 @@ public class Ui_ListePlan_BOController implements Initializable {
             case "nom" :{
                      id_comlun.getStyleClass().clear();
                    nom_column.setStyle("-fx-background-color:#B5C689 ");
-                 
+                 Type_column.getStyleClass().clear();
             }
                 break ;
-            case "prenom" :{
+            case "Type" :{
                      id_comlun.getStyleClass().clear();
                     nom_column.getStyleClass().clear();
+                    Type_column.setStyle("-fx-background-color:#B5C689 ");
+                    
                 
               
             }
-                break ;
-            case "login" :{
-                      id_comlun.getStyleClass().clear();
-                    nom_column.getStyleClass().clear();
-                    
-                
-               
-            }
-                break ;
-            case "motdepasse":{
-                   id_comlun.getStyleClass().clear();
-                   nom_column.getStyleClass().clear();
+             
+             
                    
                 
-            }
+            
             break ;
             case "All" :{
                    id_comlun.getStyleClass().clear();
@@ -226,21 +272,40 @@ public class Ui_ListePlan_BOController implements Initializable {
             Hide.setToY(0);
             Hide.play();
             
-            target_column.getItems().addAll("All","id","nom","type","email","siteweb","telephone","description","photo");
+            target_column.getItems().addAll("All","id","nom","type"); //,"email","siteweb","telephone","description","photo"
             target_column.getSelectionModel().select(0);
            
-          //  lignes_page_cb.getItems().addAll(5,10,20,50,100);
-          //  lignes_page_cb.getSelectionModel().select(0);
+            lignes_page_cb.getItems().addAll(5,10,20,50,100);
+            lignes_page_cb.getSelectionModel().select(0);
             StartPoint=0;
             BreakPoint=5;
             current_page=1;
            
             selected_column="All";
+        Modifier= new ButtonType("Modifier",ButtonBar.ButtonData.OK_DONE);
+        Supprimer=new ButtonType("Supprimer",ButtonBar.ButtonData.OK_DONE);
+        Annuler=new ButtonType("Annuler",ButtonBar.ButtonData.CANCEL_CLOSE);
+        Oui = new ButtonType("Oui",ButtonBar.ButtonData.OK_DONE);
+        Non= new ButtonType("Non",ButtonBar.ButtonData.CANCEL_CLOSE);
+        NextActionWindow= new Alert(Alert.AlertType.CONFIRMATION);
+        ConfirmDelete=new Alert(Alert.AlertType.CONFIRMATION);
+        
+        NextActionWindow.getButtonTypes().clear();
+        NextActionWindow.getButtonTypes().addAll(Modifier,Supprimer,Annuler);
+        NextActionWindow.setTitle("MySoulMate");
+        NextActionWindow.setHeaderText("Gestion Plan");
+        NextActionWindow.setContentText("Que Voulez vous faire avec cet Plan ?");
+        ConfirmDelete.getButtonTypes().clear();
+        ConfirmDelete.getButtonTypes().addAll(Oui,Non);
+        ConfirmDelete.setTitle("MySoulMate");
+        ConfirmDelete.setHeaderText("Gestion Plan");
+        ConfirmDelete.setContentText("Voulez Vous Vraiment Supprimer cet Plan ?");
+        
     }
         private void init_Actions()
         {
            target_column.valueProperty().addListener(( SelectedValue) -> {   selected_column=((ObservableValue<String>)SelectedValue).getValue();reload_data(); color_column(selected_column);});
-        // lignes_page_cb.valueProperty().addListener(( SelectedValue) -> {   BreakPoint=(((ObservableValue<Integer>)SelectedValue).getValue());reload_data(); });
+       lignes_page_cb.valueProperty().addListener(( SelectedValue) -> {   BreakPoint=(((ObservableValue<Integer>)SelectedValue).getValue());reload_data(); });
         }
 
     @FXML
@@ -260,7 +325,12 @@ public class Ui_ListePlan_BOController implements Initializable {
             reload_data();
            }
     }
+private void take_me_to_Update_page() throws IOException
+    {
+     Ui_MainFrame_BOController.Update_Plan_request();
+    }
 
     
     
 }
+

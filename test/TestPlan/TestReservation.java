@@ -28,7 +28,7 @@ public class TestReservation {
         GestionnairePlan Gp= new GestionnairePlan();
         g.create(c1);
         Gp.create(p1);
-        Reservation R1= new Reservation(3,p1,c1,new Date(2018,06,27),20);
+        Reservation R1= new Reservation(3,p1,c1,new Date(2018,06,27),20,54);
         GestionnaireReservation Gr= new GestionnaireReservation();
        Gr.create(R1);
        // Gr.remove(R1);
