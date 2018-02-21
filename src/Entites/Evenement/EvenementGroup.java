@@ -16,7 +16,7 @@ import Entites.User.Client;
  */
 public class EvenementGroup extends Evenement{
   
-    private Client organisation;
+    private Client organisateur;
     public Date heure;
     public String description;
     public Plan plan;
@@ -25,19 +25,19 @@ public class EvenementGroup extends Evenement{
         super(ID, nom);
     }
 
-    public EvenementGroup( Client organisation, Date heure, String description, Plan plan, int ID, String nom) {
+    public EvenementGroup( Client organisateur, Date heure, String description, Plan plan, int ID, String nom) {
         super(ID, nom);
      
-        this.organisation = organisation;
+        this.organisateur = organisateur;
         this.heure = heure;
         this.description = description;
         this.plan = plan;
     }
 
-    public EvenementGroup( Client organisation, Date heure, String description, Plan plan, String nom) {
+    public EvenementGroup( Client organisateur, Date heure, String description, Plan plan, String nom) {
         super(-1, nom);
      
-        this.organisation = organisation;
+        this.organisateur = organisateur;
         this.heure = heure;
         this.description = description;
         this.plan = plan;
@@ -46,12 +46,12 @@ public class EvenementGroup extends Evenement{
 
   
 
-    public Client getOrganisation() {
-        return organisation;
+    public Client getOrganisateur() {
+        return organisateur;
     }
 
-    public void setOrganisation(Client organisation) {
-        this.organisation = organisation;
+    public void setOrganisateur(Client organisateur) {
+        this.organisateur = organisateur;
     }
 
     public Date getHeure() {
@@ -97,7 +97,7 @@ public class EvenementGroup extends Evenement{
         }
         final EvenementGroup other = (EvenementGroup) obj;
        
-        if (this.organisation != other.organisation) {
+        if (this.organisateur != other.organisateur) {
             return false;
         }
         if (this.plan != other.plan) {
@@ -114,7 +114,7 @@ public class EvenementGroup extends Evenement{
 
     @Override
     public String toString() {
-        return "EvenementGroup{  organisateur=" + organisation + ", heure=" + heure + ", description=" + description + ", plan=" + plan + '}';
+        return "EvenementGroup{  organisateur=" + organisateur + ", heure=" + heure + ", description=" + description + ", plan=" + plan + '}';
     }
 
      

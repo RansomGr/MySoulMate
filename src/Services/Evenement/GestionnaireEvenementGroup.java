@@ -27,10 +27,10 @@ public class GestionnaireEvenementGroup implements Gestionnaire{
     public int create(Object o) throws SQLException {
         
     EvenementGroup evtgrp=(EvenementGroup)o;
-      String query="insert into evenement_group(Entite,organisation,heure,description,plan) values(?,?,?,?,?)";
+      String query="insert into evenement_group(Entite,organisateur,heure,description,plan) values(?,?,?,?,?)";
       PreparedStatement pst= DB.prepareStatement(query);
       pst.setInt(1, evtgrp.getID());
-      pst.setInt(2,evtgrp.getOrganisation().getID());
+      pst.setInt(2,evtgrp.getOrganisateur().getID());
       pst.setDate(3,evtgrp.getHeure());
       pst.setString(4,evtgrp.getDescription());
       pst.setInt(5,evtgrp.getPlan().getID());
@@ -40,12 +40,12 @@ public class GestionnaireEvenementGroup implements Gestionnaire{
     @Override
     public int update(Object o) throws SQLException {
     EvenementGroup evtgrp=(EvenementGroup)o;
-      String query ="update evenement_group set Entite=?,organisation=?,heure=?,description=?,plan=? where Entite=?";
+      String query ="update evenement_group set Entite=?,organisateur=?,heure=?,description=?,plan=? where Entite=?";
       
       PreparedStatement pst=DB.prepareStatement(query);
       
        pst.setInt(1, evtgrp.getID());
-      pst.setInt(2,evtgrp.getOrganisation().getID());
+      pst.setInt(2,evtgrp.getOrganisateur().getID());
       pst.setDate(3,evtgrp.getHeure());
       pst.setString(4,evtgrp.getDescription());
       pst.setInt(5,evtgrp.getPlan().getID());
@@ -80,7 +80,7 @@ public class GestionnaireEvenementGroup implements Gestionnaire{
                int Plan_ID_in_question = res.getInt("plan");
                Plan p= Plans.stream().filter(p1->p1.getID()==Plan_ID_in_question).findFirst().get();
 //( Client organisation, Date heure, String description, int plan, int ID, String nom) 
-             int Client_ID_in_question =res.getInt("organisation");
+             int Client_ID_in_question =res.getInt("organisateur");
              EvenementGroups.add(new EvenementGroup(
                      clients.stream().filter(x->x.getID()==Client_ID_in_question).findFirst().get(),// fetching client
                      res.getDate("heure"),
