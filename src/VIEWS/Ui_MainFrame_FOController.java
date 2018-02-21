@@ -14,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -32,6 +34,8 @@ public class Ui_MainFrame_FOController implements Initializable {
     private AnchorPane connected_friends_scroll_pane;
     @FXML
     private StackPane Content_pane;
+    @FXML
+    private AnchorPane bonplans_and_evennements;
 
     /**
      * Initializes the controller class.
@@ -47,6 +51,14 @@ public class Ui_MainFrame_FOController implements Initializable {
          Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_Profil_FO.fxml"));
          Content_pane.getChildren().clear();
          Content_pane.getChildren().add(root);    
+    }
+
+    @FXML
+    private void logout(ActionEvent event) throws IOException {
+         MySoulMate.setLogged_in_Client(null);
+         Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/User/ui_Login_FO.fxml"));
+         Scene sene = new Scene(root);
+         MySoulMate.getMainStage().setScene(sene);
     }
     
 }
