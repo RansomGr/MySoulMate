@@ -31,13 +31,14 @@ public class GestionnaireReservation implements Gestionnaire{
      
     
       Reservation R1=(Reservation)o;
-      String query="insert into reservation(ID,Plan,Client,date_res,nb_place) values(?,?,?,?,?)";
+      String query="insert into reservation(ID,Plan,Client,date_res,nb_place,numero) values(?,?,?,?,?,?)";
       PreparedStatement pst= DB.prepareStatement(query);
        pst.setInt(1,R1.getID());
       pst.setInt(2,R1.getPlan().getID());
       pst.setInt(3,R1.getClient().getID());
       pst.setDate(4,R1.getDate_res());
       pst.setInt(5,R1.getNb_place());
+      pst.setInt(6,R1.getNumero());
       
     
       
@@ -51,7 +52,7 @@ public class GestionnaireReservation implements Gestionnaire{
         
      //public Reservation(int ID,Plan plan, Client client, Date date_res, int nb_place)
       Reservation R1=(Reservation)o;
-      String query ="update reservation" + " set ID=?,Plan=?,Client=?,date_res=?,nb_place=?  where ID=?";
+      String query ="update reservation" + " set ID=?,Plan=?,Client=?,date_res=?,nb_place=?,numero=?  where ID=?";
       
       PreparedStatement pst= DB.prepareStatement(query);
       pst.setInt(1, R1.getID());
@@ -60,8 +61,9 @@ public class GestionnaireReservation implements Gestionnaire{
       pst.setInt(3,R1.getClient().getID());
       pst.setDate(4,R1.getDate_res());
       pst.setInt(5,R1.getNb_place());
+      pst.setInt(6,R1.getNumero());
       
-      pst.setInt(6, R1.getID());
+      pst.setInt(7, R1.getID());
       
       return pst.executeUpdate();
     } //To change body of generated methods, choose Tools | Templates.
@@ -105,7 +107,8 @@ public class GestionnaireReservation implements Gestionnaire{
                 Plan1,
                    client1,
                   res.getDate("date_res"),
-                   res.getInt("nb_place")
+                   res.getInt("nb_place"),
+                   res.getInt("numero")
                                      )
            );
            }

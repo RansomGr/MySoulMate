@@ -20,20 +20,31 @@ public class Reservation
     private Client client;
     private Date date_res;
     private int nb_place;
+    private int numero;
 
-    public Reservation(int ID,Plan plan, Client client, Date date_res, int nb_place) {
+    public Reservation(int ID,Plan plan, Client client, Date date_res, int nb_place,int numero) {
         this.ID=ID;
         this.plan = plan;
         this.client = client;
         this.date_res = date_res;
         this.nb_place = nb_place;
+        this.numero=numero;
     }
 
-    public Reservation(Plan plan, Client client, Date date_res, int nb_place) {
+    public Reservation(Plan plan, Client client, Date date_res, int nb_place,int numero) {
         this.plan = plan;
         this.client = client;
         this.date_res = date_res;
         this.nb_place = nb_place;
+        this.numero=numero;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
     
 
@@ -79,12 +90,13 @@ public class Reservation
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 31 * hash + this.ID;
-        hash = 31 * hash + Objects.hashCode(this.plan);
-        hash = 31 * hash + Objects.hashCode(this.client);
-        hash = 31 * hash + Objects.hashCode(this.date_res);
-        hash = 31 * hash + this.nb_place;
+        int hash = 5;
+        hash = 89 * hash + this.ID;
+        hash = 89 * hash + Objects.hashCode(this.plan);
+        hash = 89 * hash + Objects.hashCode(this.client);
+        hash = 89 * hash + Objects.hashCode(this.date_res);
+        hash = 89 * hash + this.nb_place;
+        hash = 89 * hash + this.numero;
         return hash;
     }
 
@@ -106,6 +118,9 @@ public class Reservation
         if (this.nb_place != other.nb_place) {
             return false;
         }
+        if (this.numero != other.numero) {
+            return false;
+        }
         if (!Objects.equals(this.plan, other.plan)) {
             return false;
         }
@@ -120,8 +135,11 @@ public class Reservation
 
     @Override
     public String toString() {
-        return "Reservation{" + "ID=" + ID + ", plan=" + plan + ", client=" + client + ", date_res=" + date_res + ", nb_place=" + nb_place + '}';
+        return "Reservation{" + "ID=" + ID + ", plan=" + plan + ", client=" + client + ", date_res=" + date_res + ", nb_place=" + nb_place + ", numero=" + numero + '}';
     }
+
+    
+    
 
     
     
@@ -131,5 +149,5 @@ public class Reservation
     
     
     
-    
+            
 }

@@ -91,6 +91,15 @@ public class Ui_MainFrame_BOController implements Initializable {
                  Page_Viewer_ref.getChildren().add(root);// inserting the Node in the GridPane
                  Label_Module_name_ref.setText("Modifier un Admin existent "); // Changing the header text
     }
+      public static void Update_Plan_request() throws IOException
+    {
+                 
+                 Node root;// Making a node
+                 root = FXMLLoader.load(Ui_MainFrame_BOController.class.getResource("/VIEWS/Plan/ui_Create_new_Plan_BO.fxml"));// Getting the View
+                 Page_Viewer_ref.getChildren().clear();
+                 Page_Viewer_ref.getChildren().add(root);// inserting the Node in the GridPane
+                 Label_Module_name_ref.setText("Modifier un Plan existent "); // Changing the header text
+    }
     private void init_workspaes_variables()
     {
         Label_Module_name_ref=Label_Module_name;

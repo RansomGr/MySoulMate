@@ -103,14 +103,11 @@
          <children>
             <TableView fx:id="table_view" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                  <TableColumn fx:id="id_comlun" prefWidth="102.0" text="Identifiant" />
-                <TableColumn fx:id="nom_column" prefWidth="89.0" text="Nom " />
-                <TableColumn fx:id="Type_column" prefWidth="115.0" text="Type" />
-                  <TableColumn fx:id="Email_column" prefWidth="114.0" text="Email" />
-                  <TableColumn fx:id="SiteWeb_column" prefWidth="106.0" text="Site Web" />
-                  <TableColumn fx:id="Description_column" prefWidth="111.0" text="Description" />
-                  <TableColumn fx:id="Photos_column" prefWidth="93.0" text="Photos" />
-                  <TableColumn fx:id="Telephone_column" prefWidth="123.0" text="telephone" />
+                  <TableColumn fx:id="id_comlun" prefWidth="147.00001525878906" text="ID reservation" />
+                <TableColumn fx:id="DateReservation_column" prefWidth="169.0" text="Date reservation" />
+                <TableColumn fx:id="nb_Place_column" prefWidth="164.0" text="Nombre de Places" />
+                  <TableColumn fx:id="Numero_Client_column" prefWidth="182.0" text="Numero Client" />
+                  <TableColumn fx:id="Nom_Client_column1" prefWidth="190.0" text="Nom Client" />
               </columns>
             </TableView>
          </children>

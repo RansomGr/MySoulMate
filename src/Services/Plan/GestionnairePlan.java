@@ -95,16 +95,16 @@ import java.util.List;
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           while(res.next())// parcour du result set
           {
-              Plans.add(new Plan(res.getInt("entite"),res.getString("nom"),Plan.Type.getAsType(res.getString(1)),res.getString(2),res.getString(3),res.getInt(4),res.getString(5),res.getString(6)));
+              Plans.add(new Plan(res.getInt("entite"),res.getString("nom"),Plan.Type.getAsType(res.getString(1)),res.getString(2),res.getString(3),res.getInt(7),res.getString(5),res.getString(6)));
              //Type type, String email, String siteweb, int telephone, String description, String photo, int ID, String nom
            }
           return Plans;
     }
 
     public List<? extends Object> fetchAll(String aux, String target_column ,int StartPoint,int BreakPoint) throws SQLException {
-       String query=" select Entite.nom as nom,Plan.*  from  Plan inner join Entite on Plan.Entite=Entite.ID  "
-                  + " where ( "+target_column+" like ?  )  "
-                  + " limit  "+StartPoint+","+BreakPoint+" "    ; // preparation du requete sql
+       String query=" select * from (select Entite.nom as nom,Plan.*  from  Plan inner join Entite on Plan.Entite=Entite.ID   limit  "+StartPoint+", "+BreakPoint+" )planAl"    
+                  + " where ( "+target_column+" like ?  )  ";
+                   // preparation du requete sql
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Plan>Plans = new ArrayList<>();//  Creation du List Reclamation
            pst.setString(1, "%"+aux+"%");
@@ -113,7 +113,7 @@ import java.util.List;
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           while(res.next())// parcour du result set
           {
-                Plans.add(new Plan(res.getInt("entite"),res.getString("nom"),Plan.Type.getAsType(res.getString(1)),res.getString(2),res.getString(3),res.getInt(4),res.getString(5),res.getString(6)));
+                Plans.add(new Plan(res.getInt("entite"),res.getString("nom"),Plan.Type.getAsType(res.getString(1)),res.getString(2),res.getString(3),res.getInt(7),res.getString(5),res.getString(6)));
            }
           return Plans; //To change body of generated methods, choose Tools | Templates.
     }
@@ -135,7 +135,7 @@ import java.util.List;
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           while(res.next())// parcour du result set
           {
-          Plans.add(new Plan(res.getInt("entite"),res.getString("nom"),Plan.Type.getAsType(res.getString(1)),res.getString(2),res.getString(3),res.getInt(4),res.getString(5),res.getString(6)));
+          Plans.add(new Plan(res.getInt("entite"),res.getString("nom"),Plan.Type.getAsType(res.getString(1)),res.getString(2),res.getString(3),res.getInt(7),res.getString(5),res.getString(6)));
            }
           return Plans;
 
