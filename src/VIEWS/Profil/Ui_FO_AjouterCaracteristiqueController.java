@@ -6,8 +6,6 @@
 package VIEWS.Profil;
 
 import Entites.Profil.Caracteristique;
-import Services.Gestionnaire;
-import Services.Profil.GestionnaireCaracteristique;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -26,7 +24,6 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
-import org.omg.CORBA.portable.ValueFactory;
 
 /**
  * FXML Controller class
