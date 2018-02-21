@@ -237,6 +237,66 @@ public class Ui_MainFrame_BOController implements Initializable {
         );
 
     }
+     
+       private void init_Event_Actions()
+    {
+        MenuItem ListEvent  = new MenuItem("Liste des évènement");
+        MenuItem NewEvent  = new MenuItem("Ajouter un nouvel évènement");
+        MenuItem Statistiques  = new MenuItem("Statistiques des évènements");
+        
+        this.Event_dl.getItems().remove(0, 2);        
+        this.Event_dl.getItems().addAll(ListEvent,NewEvent,Statistiques);
+        
+        ListEvent.setOnAction(
+                (a)->{
+                     try { 
+                  Ui_Create_new_Admin_BOController.setAdmin_to_be_modified(null);
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Evenement/ui_ListeEvenement.fxml"));// Getting the View
+                  Page_Viewer.getChildren().clear();
+                  Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  Label_Module_name.setText(ListEvent.getText()); // Changing the header text
+                  
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
+        );
+        
+        NewEvent.setOnAction(
+        (a)->{
+           
+            try { 
+                  Ui_Create_new_Admin_BOController.setAdmin_to_be_modified(null);
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Evenement/ui_evenement_BO.fxml"));// Getting the View
+                 Page_Viewer.getChildren().clear();
+                 Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  
+                  Label_Module_name.setText(NewEvent.getText()); // Changing the header text
+              
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+      
+        }         
+        );
+        Statistiques.setOnAction(
+        (a)->{
+                 try { 
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Evenement/ui_statistiques_BO.fxml"));// Getting the View
+                 Page_Viewer.getChildren().clear();
+                 Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  
+                  Label_Module_name.setText(Statistiques.getText()); // Changing the header text
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        );
+
+    }
     
     
     @Override
@@ -245,6 +305,7 @@ public class Ui_MainFrame_BOController implements Initializable {
        init_DashBoard_Actions();
        init_User_Actions();
        init_Plan_Actions();
+       init_Event_Actions();
        init_workspaes_variables();
        
       

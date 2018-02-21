@@ -26,6 +26,10 @@ private String caractere ;
 private String statut ;
 private String cuisine ;
 
+    public Caracteristique() {
+    
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;

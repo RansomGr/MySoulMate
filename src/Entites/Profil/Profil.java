@@ -15,10 +15,14 @@ import java.util.Objects;
 public class Profil  {
     private int id;
   
-    Caracteristique Caracteristique;
+   private  Caracteristique Caracteristique;
    private String photo;
    private String description;	
-   Caracteristique preference;
+   private Caracteristique preference;
+
+   
+
+
 
     public Profil(int id,Caracteristique Caracteristique, String photo, String description, Caracteristique preference) {
         this.id = id;
@@ -27,6 +31,16 @@ public class Profil  {
         this.photo = photo;
         this.description = description;
         this.preference = preference;
+    }
+
+    public Profil(Caracteristique Caracteristique, String photo, String description) {
+       this.Caracteristique = Caracteristique;
+        this.photo = photo;
+        this.description = description;
+    }
+
+    public Profil() {
+       photo="no_PROF";
     }
 
     public int getId() {
