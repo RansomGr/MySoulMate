@@ -192,7 +192,65 @@ public class Ui_MainFrame_BOController implements Initializable {
         );
 
     }
-    
+       private void init_Profil_Actions()
+    {
+        MenuItem ListProfil  = new MenuItem("Liste Profil");
+        MenuItem NewProfil  = new MenuItem("Ajouter nouveau Profil");
+        MenuItem statistique  = new MenuItem("Statistique");
+        
+        this.Profile_dl.getItems().remove(0, 2);        
+        this.Profile_dl.getItems().addAll(ListProfil,NewProfil,statistique);
+        
+        ListProfil.setOnAction(
+                (a)->{
+                     try { 
+                         Ui_Create_new_Admin_BOController.setAdmin_to_be_modified(null);
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_ListeProfil.fxml"));// Getting the View
+                  Page_Viewer.getChildren().clear();
+                  Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  Label_Module_name.setText(ListProfil.getText()); // Changing the header text
+                  
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
+        );
+        
+        NewProfil.setOnAction(
+        (a)->{
+           
+            try { 
+                  Ui_Create_new_Admin_BOController.setAdmin_to_be_modified(null);
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_Ajoute_new_Profil_FO.fxml"));// Getting the View
+                 Page_Viewer.getChildren().clear();
+                 Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  
+                  Label_Module_name.setText(NewProfil.getText()); // Changing the header text
+              
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+      
+        }         
+        );
+        ListProfil.setOnAction(
+        (a)->{
+                 try { 
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_ListeProfil.fxml"));// Getting the View
+                 Page_Viewer.getChildren().clear();
+                 Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  
+                  Label_Module_name.setText(ListProfil.getText()); // Changing the header text
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        );
+
+    }
      private void init_Plan_Actions()
     {
         MenuItem ListPlan  = new MenuItem("Liste Plans");
@@ -306,6 +364,7 @@ public class Ui_MainFrame_BOController implements Initializable {
        init_User_Actions();
        init_Plan_Actions();
        init_Event_Actions();
+       init_Profil_Actions();
        init_workspaes_variables();
        
       
