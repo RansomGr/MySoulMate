@@ -56,8 +56,7 @@ public class Ui_Ajoute_new_Profil_FOController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-     
-        
+
     }    
 
 

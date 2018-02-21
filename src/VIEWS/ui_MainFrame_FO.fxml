@@ -40,7 +40,7 @@
             </Button>
             <ImageView fitHeight="31.0" fitWidth="337.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/logo.png" />
+                  <Image url="@../images/logo.png" />
                </image>
             </ImageView>
          </children>
@@ -132,10 +132,17 @@
             </GridPane>
             <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
               <content>
-                <AnchorPane fx:id="connected_friends_scroll_pane" minHeight="0.0" minWidth="0.0" prefHeight="422.0" prefWidth="215.0" />
+                <AnchorPane fx:id="connected_friends_scroll_pane" minHeight="0.0" minWidth="0.0" prefHeight="422.0" prefWidth="215.0" translateX="1.0" />
               </content>
             </ScrollPane>
          </children>
       </GridPane>
    </right>
+   <left>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <AnchorPane fx:id="bonplans_and_evennements" prefHeight="627.0" prefWidth="180.0" translateX="4.0" />
+         </content>
+      </ScrollPane>
+   </left>
 </BorderPane>
