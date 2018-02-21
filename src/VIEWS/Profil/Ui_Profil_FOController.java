@@ -14,6 +14,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -52,6 +54,8 @@ public class Ui_Profil_FOController implements Initializable {
         Ui_Profil_FOController.profile_owner = profile_owner;
     }
     private GestionnaireProfil Gp;
+    @FXML
+    private ImageView photo;
 
     /**
      * Initializes the controller class.
@@ -59,12 +63,29 @@ public class Ui_Profil_FOController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Gp= new GestionnaireProfil();
+        init_data();
         // TODO 
     }    
-    public void init_data()
+    private void init_data()
     {
         int ID_Client=profile_owner.getID();
-        //((List<Profil>)Gp.fetchAll()).stream().filter(x->x.get)
+        corpulence_lb.setText(profile_owner.getProfil().getCaracteristique().getCorpulence());
+        caractere_lb.setText(profile_owner.getProfil().getCaracteristique().getCaractere());
+        yeux_lb.setText(profile_owner.getProfil().getCaracteristique().getYeux());
+        cheveux_lb.setText(profile_owner.getProfil().getCaracteristique().getCheveux());
+                alcool_lb.setText(profile_owner.getProfil().getCaracteristique().getAlcool());
+                        tabac_lb.setText(profile_owner.getProfil().getCaracteristique().getTabac());
+            taille_lb.setText(Float.toString(profile_owner.getProfil().getCaracteristique().getTaille()));
+        statut_lb.setText(profile_owner.getProfil().getCaracteristique().getStatut());
+                cuisine_lb.setText(profile_owner.getProfil().getCaracteristique().getCuisine());
+                        profession_lb.setText(profile_owner.getProfil().getCaracteristique().getProfession());
+
+       origine_lb.setText(profile_owner.getProfil().getCaracteristique().getOrigine());
+pilosite_lb.setText(profile_owner.getProfil().getCaracteristique().getPilosite());
+photo.setImage(new Image("/images/"+profile_owner.getProfil().getPhoto()));
+
+
+
         
     }
     
