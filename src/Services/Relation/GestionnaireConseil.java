@@ -5,9 +5,8 @@
  */
 package Services.Relation;
 
-import Entites.Relation.Contenue_Moment;
+import Entites.Relation.Conseil;
 import Services.Gestionnaire;
-import static Services.Gestionnaire.DB;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,57 +17,41 @@ import java.util.List;
  *
  * @author zhanimm
  */
-public class GestionnaireContenue_Moment implements Gestionnaire {
+public class GestionnaireConseil implements Gestionnaire {
 
     @Override
     public int create(Object o) throws SQLException {
-         
-    
-      Contenue_Moment c=(Contenue_Moment)o;
-      //String query="insert into Contenu_Moment(ID,nom,contenu,photo,description,date_moment) values(?,?,?,?,?,?)";
-      String query="insert into Contenu_Moment(nom,description,date_moment,photo) values(?,?,?,?)";
+        Conseil c=(Conseil)o;
+      String query="insert into Conseil(contenu,niveau) values(?,?)";
       PreparedStatement pst= DB.prepareStatement(query);
-     // pst.setInt(1, c.getID());
-      
-     // pst.setString(2,c.getContenue());
-      pst.setString(1,c.getNom());
-      pst.setString(2,c.getDescription());
-      pst.setDate(3,c.getDate_moment());
-      pst.setString(4,c.getPhoto());
+      //pst.setInt(1,c.getID());
+      pst.setString(1,c.getContenue());
+      //pst.setBoolean(2,c.getEtat());
+      pst.setInt(2,c.getNiveau());
 
-      
       return pst.executeUpdate();
     }
 
+  
+
     @Override
     public int update(Object o) throws SQLException {
-         
-      Contenue_Moment c=(Contenue_Moment)o;
-      String query ="update Contenu_Moment set ID=?,nom=?,contenu=?,photo=?,description=?,date_moment=? where ID=?";
+        Conseil c=(Conseil)o;
+      String query ="update Conseil set ID=?,contenue=?,etat=?,niveau=? where ID=?";
       
       PreparedStatement pst=DB.prepareStatement(query);
-      /*pst.setInt(1, c.getID());
-      pst.setString(2,c.getNom());
-      pst.setString(3,c.getContenue());
-      pst.setString(4,c.getPhoto());
-      pst.setString(5,c.getDescription());
-      pst.setDate(6,c.getDate_moment());*/
-      pst.setString(1,c.getNom());
+      pst.setInt(1, c.getID());
       pst.setString(2,c.getContenue());
-      pst.setString(4,c.getDescription());
-      pst.setDate(5,c.getDate_moment());
-      pst.setString(3,c.getPhoto());
-      
-      pst.setInt(6, c.getID());
-      
+      pst.setBoolean(3,c.getEtat());
+      pst.setInt(4,c.getNiveau());
+   
       return pst.executeUpdate();
-
     }
 
     @Override
     public int remove(Object o) throws SQLException {
-    Contenue_Moment c=(Contenue_Moment)o;
-    String query=" delete from Contenu_Moment where ID=? ";
+        Conseil c=(Conseil)o;
+    String query=" delete from Conseil where ID=? ";
     
     PreparedStatement pst=DB.prepareStatement(query);
     
@@ -79,15 +62,15 @@ public class GestionnaireContenue_Moment implements Gestionnaire {
 
     @Override
     public List<? extends Object> fetchAll() throws SQLException {
-          String query=" select *  from  Contenu_Moment "    ; // preparation du requete sql
+         String query=" select *  from  Conseil "    ; // preparation du requete sql
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
-          List<Contenue_Moment>Contenues = new ArrayList<>();//  Creation du List Reclamation
+          List<Conseil>Conseils = new ArrayList<>();//  Creation du List Reclamation
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           while(res.next())// parcour du result set
           {
-             Contenues.add(new Contenue_Moment(res.getInt("ID"),res.getString("nom"),res.getString("contenu"),res.getString("photo"),res.getString("description"),res.getDate("date_moment")));
+             Conseils.add(new Conseil(res.getInt("ID"),res.getString("contenue"),res.getBoolean("etat"),res.getInt("niveau")));
            }
-          return Contenues;
+          return Conseils;
     }
 
     @Override

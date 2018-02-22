@@ -15,14 +15,19 @@ public class Conseil {
     private int ID;
     private String contenue;
     private boolean etat;
-    private String niveau;
+    private int niveau;
     
     public Conseil(){}
     
-    public Conseil(int ID,String contenue,boolean etat,String niveau){
+    public Conseil(int ID,String contenue,boolean etat,int niveau){
         this.ID=ID;
         this.contenue=contenue;
         this.etat=etat;
+        this.niveau=niveau;
+    }
+
+    public Conseil(String contenu,int niveau) {
+        this.contenue=contenu;
         this.niveau=niveau;
     }
 
@@ -54,11 +59,11 @@ public class Conseil {
         return etat;
     }
 
-    public String getNiveau() {
+    public int getNiveau() {
         return niveau;
     }
 
-    public void setNiveau(String niveau) {
+    public void setNiveau(int niveau) {
         this.niveau = niveau;
     }
 
