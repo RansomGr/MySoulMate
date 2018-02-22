@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package VIEWS.User;
-
 import APIS.Uer.MySoulMateMail;
 import Entites.User.Client;
 import Services.User.GestionnaireClient;
@@ -16,7 +15,6 @@ import java.net.URL;
 import java.util.Calendar;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -103,11 +101,11 @@ public class Ui_Create_new_FOController implements Initializable {
            
       
         GestionnaireClient gc= new GestionnaireClient();
-       if( gc.create(new Client(nom_tf.getText(),prenom_tf.getText(),password_tf.getText(),email_tf.getText(),Date.valueOf(date_naissance_dp.getValue()),pseudo_tf.getText()))==1)
+        Client C= new Client(nom_tf.getText(),prenom_tf.getText(),password_tf.getText(),email_tf.getText(),Date.valueOf(date_naissance_dp.getValue()),pseudo_tf.getText());
+       if( gc.create(C)==1)
        {
-           InformationWindow.show();
-            String Content;
-          
+             InformationWindow.show();
+             String Content;
              BufferedReader br = new BufferedReader(new FileReader("src/Files/welcomeMail.txt"));
                      
              StringBuilder sb = new StringBuilder();
@@ -118,7 +116,7 @@ public class Ui_Create_new_FOController implements Initializable {
             line = br.readLine();
             }
            Content = sb.toString();
-           Content=Content.replace("[[Name]]", "Amine Benmimoun");
+           Content=Content.replace("[[Name]]",C.getNom()+" "+C.getPrenom());
            MySoulMateMail mail= new MySoulMateMail (email_tf.getText(),Content,"Test mail 01");
            mail.sendMail();
            clear_tf();

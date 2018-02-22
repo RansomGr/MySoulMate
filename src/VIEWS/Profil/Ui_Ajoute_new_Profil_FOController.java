@@ -75,7 +75,6 @@ public class Ui_Ajoute_new_Profil_FOController implements Initializable {
        File img=fileChooser.showOpenDialog(MySoulMate.getMainStage());
        photo_tf.setText(img.getName());
        image.setImage(new Image("/images/"+photo_tf.getText()));
-       
     }
     
 }
