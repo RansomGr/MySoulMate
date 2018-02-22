@@ -364,6 +364,57 @@ public class Ui_MainFrame_BOController implements Initializable {
         );
 
     }
+        private void init_Relation_Actions()
+    {
+        MenuItem ListeRelation  = new MenuItem("Liste Relations");
+        MenuItem AjoutMoment  = new MenuItem("Ajout Conseil");
+        MenuItem StatR =new MenuItem("Statistiques Relations");
+        
+        this.Relations_dl.getItems().remove(0, 2);        
+        this.Relations_dl.getItems().addAll(ListeRelation,AjoutMoment,StatR);
+        
+    
+     ListeRelation.setOnAction(
+                (a)->{
+                     try { 
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Relation/ui_ListeRelation_BO.fxml"));// Getting the View
+                  Page_Viewer.getChildren().clear();
+                  Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  Label_Module_name.setText(ListeRelation.getText()); // Changing the header text
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
+             
+        );
+        AjoutMoment.setOnAction(    
+                (a)->{
+                     try { 
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Relation/AjoutMoment.fxml"));// Getting the View
+                  Page_Viewer.getChildren().clear();
+                  Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  Label_Module_name.setText(AjoutMoment.getText()); // Changing the header text
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                });
+        StatR.setOnAction(
+                       (a)->{
+                                   try { 
+                                   Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Relation/charts.fxml"));// Getting the View
+                  Page_Viewer.getChildren().clear();
+                  Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  Label_Module_name.setText("Statisitiques General"); // Changing the header text
+                                   } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                                   }
+                );
+    
+    }
     
     
     @Override
@@ -374,6 +425,7 @@ public class Ui_MainFrame_BOController implements Initializable {
        init_Plan_Actions();
        init_Event_Actions();
        init_Profil_Actions();
+       init_Relation_Actions();
        init_workspaes_variables();
        
       
