@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Ui_MainFrame_FOController.java</file>
-            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/User/Ui_ListeAdmin_BOController.java</file>
-            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Evenement/Ui_evenement_BOController.java</file>
-            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Profil/Ui_FO_AjouterCaracteristiqueController.java</file>
+            <file>file:/C:/Users/zhanimm/Documents/GitHub/MySoulMate/src/VIEWS/Relation/AjoutConseilController.java</file>
+            <file>file:/C:/Users/zhanimm/Documents/GitHub/MySoulMate/src/VIEWS/Profil/Ui_Ajoute_new_Profil_FOController.java</file>
+            <file>file:/C:/Users/zhanimm/Documents/GitHub/MySoulMate/src/APIS/Uer/Mail.java</file>
+            <file>file:/C:/Users/zhanimm/Documents/GitHub/MySoulMate/src/VIEWS/Ui_MainFrame_BOController.java</file>
+            <file>file:/C:/Users/zhanimm/Documents/GitHub/MySoulMate/src/VIEWS/Relation/ChartsController.java</file>
         </group>
     </open-files>
 </project-private>

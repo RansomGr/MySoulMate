@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package Entites.Profil;
-
-import Entites.User.Client;
 import java.util.Objects;
 
 /**

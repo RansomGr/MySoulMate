@@ -90,7 +90,7 @@
                                                                         <p> Vous venez de vous s'inscrire a notre Application MySoulMate</p>
                                                                         <p>
                                                                            Utiliser sur ce lien pour Activé votre compte a fin de terminer la procedure d'inscription 
-                                                                            <a href="">Lien </a>
+                                                                            <a href="localhost/MysoulMate/Activation.php">Lien </a>
                                                                         </p>
                                                                         <p>
                                                                            La Famille MySoulMate vous Attend !
@@ -112,7 +112,7 @@
                                                                 <td class="w580"  width="580
 
                                                                     <div align="left" class="article-content">
-                                                                        <p> Si vous ne vous rappelez pas de cette action utilisé ce  <a href="">Lien </a>pour annulé l'inscription faite avec ce compte</p>
+                                                                        <p> Si vous ne vous rappelez pas de cette action utilisé ce  <a href="localhost/MysoulMate/NoActivation.php">Lien </a>pour annulé l'inscription faite avec ce compte</p>
                                                                         
                                                                         <p>
                                                                           -Cordialement-

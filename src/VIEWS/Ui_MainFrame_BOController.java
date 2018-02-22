@@ -100,6 +100,18 @@ public class Ui_MainFrame_BOController implements Initializable {
                  Page_Viewer_ref.getChildren().add(root);// inserting the Node in the GridPane
                  Label_Module_name_ref.setText("Modifier un Plan existent "); // Changing the header text
     }
+      
+            public static void Modifier_Packaging_request() throws IOException
+    {
+                 
+                 Node root;// Making a node
+                 root = FXMLLoader.load(Ui_MainFrame_BOController.class.getResource("/VIEWS/Matching/ui_BO_AjoutPackaging.fxml"));// Getting the View
+                 Page_Viewer_ref.getChildren().clear();
+                 Page_Viewer_ref.getChildren().add(root);// inserting the Node in the GridPane
+                 Label_Module_name_ref.setText("Modifier un packaging existant "); // Changing the header text
+    }
+      
+      
     private void init_workspaes_variables()
     {
         Label_Module_name_ref=Label_Module_name;
@@ -260,6 +272,52 @@ public class Ui_MainFrame_BOController implements Initializable {
         );
 
     }
+       
+       
+        private void init_Matching_Actions()
+    {
+        MenuItem ListePackaging  = new MenuItem("Liste Packagings");
+        MenuItem NewPackaging  = new MenuItem("Ajouter Nouveau Packaging");
+       
+        this.Match_dl.getItems().remove(0, 2);        
+        this.Match_dl.getItems().addAll(ListePackaging,NewPackaging);
+        
+        NewPackaging.setOnAction(
+        (a)->{
+           
+            try { 
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Matching/ui_BO_AjoutPackaging.fxml"));// Getting the View
+                 Page_Viewer.getChildren().clear();
+                 Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  
+                  Label_Module_name.setText(NewPackaging.getText()); // Changing the header text
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+      
+        }         
+        );
+        
+        
+         ListePackaging.setOnAction(
+                (a)->{
+                     try { 
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Matching/ui_BO_ListePackagings.fxml"));// Getting the View
+                  Page_Viewer.getChildren().clear();
+                  Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  Label_Module_name.setText(ListePackaging.getText()); // Changing the header text
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
+        );
+        
+
+    }
+        
+        
      private void init_Plan_Actions()
     {
         MenuItem ListPlan  = new MenuItem("Liste Plans");
@@ -304,6 +362,8 @@ public class Ui_MainFrame_BOController implements Initializable {
         );
 
     }
+     
+     
      
        private void init_Event_Actions()
     {
@@ -364,6 +424,57 @@ public class Ui_MainFrame_BOController implements Initializable {
         );
 
     }
+        private void init_Relation_Actions()
+    {
+        MenuItem ListeRelation  = new MenuItem("Liste Relations");
+        MenuItem AjoutMoment  = new MenuItem("Ajout Conseil");
+        MenuItem StatR =new MenuItem("Statistiques Relations");
+        
+        this.Relations_dl.getItems().remove(0, 2);        
+        this.Relations_dl.getItems().addAll(ListeRelation,AjoutMoment,StatR);
+        
+    
+     ListeRelation.setOnAction(
+                (a)->{
+                     try { 
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Relation/ui_ListeRelation_BO.fxml"));// Getting the View
+                  Page_Viewer.getChildren().clear();
+                  Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  Label_Module_name.setText(ListeRelation.getText()); // Changing the header text
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
+             
+        );
+        AjoutMoment.setOnAction(    
+                (a)->{
+                     try { 
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Relation/AjoutMoment.fxml"));// Getting the View
+                  Page_Viewer.getChildren().clear();
+                  Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  Label_Module_name.setText(AjoutMoment.getText()); // Changing the header text
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                });
+        StatR.setOnAction(
+                       (a)->{
+                                   try { 
+                                   Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Relation/charts.fxml"));// Getting the View
+                  Page_Viewer.getChildren().clear();
+                  Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  Label_Module_name.setText("Statisitiques General"); // Changing the header text
+                                   } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                                   }
+                );
+    
+    }
     
     
     @Override
@@ -371,9 +482,11 @@ public class Ui_MainFrame_BOController implements Initializable {
        Shown=true; // if side bar is shown init it because naturally it's shown
        init_DashBoard_Actions();
        init_User_Actions();
+       init_Matching_Actions();
        init_Plan_Actions();
        init_Event_Actions();
        init_Profil_Actions();
+       init_Relation_Actions();
        init_workspaes_variables();
        
       

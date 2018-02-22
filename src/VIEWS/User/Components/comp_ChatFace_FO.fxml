@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" maxHeight="65.0" maxWidth="65.0" prefHeight="65.0" prefWidth="65.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.User.Comp_ChatFace_FOController">
+   <children>
+      <ImageView fx:id="connected_image" fitHeight="50.0" fitWidth="53.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/default.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="connected_name" layoutX="16.0" layoutY="45.0" text="Name" textAlignment="CENTER" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.Relation.Ui_NewOffreBOController">
+   <children>
+      <Label layoutX="125.0" layoutY="134.0" text="Saisir couple" />
+      <TextField layoutX="235.0" layoutY="130.0" promptText="id couple">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </TextField>
+      <Button layoutX="399.0" layoutY="130.0" mnemonicParsing="false" text="recherche offre" />
+      <TableView fx:id="tableoffre" layoutX="122.0" layoutY="168.0" prefHeight="200.0" prefWidth="374.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -21,11 +21,13 @@ import java.util.List;
  */
 public class GestionnaireRelation implements Gestionnaire {
 
+    
+  
     @Override
     public int create(Object o) throws SQLException {
        
       Relation r=(Relation)o;
-      String query="insert into Relation(ID,Client1,Client2,points_relation,niveau,date_debut,date_fin) values(?,?,?,?,?,?,?)";
+      String query="insert into Relation(ID,client1,client2,point_relation,niveau,date_debut,date_fin) values(?,?,?,?,?,?,?)";
       PreparedStatement pst= DB.prepareStatement(query);
       
       pst.setInt(1, r.getID());
@@ -44,7 +46,7 @@ public class GestionnaireRelation implements Gestionnaire {
     public int update(Object o) throws SQLException {
         Relation r=(Relation)o;
 
-        String query ="update Relation set ID=?,Client1=?,Client2=?,points_relation=?,niveau=?,date_debut=?,date_fin=? where ID=?";
+        String query ="update Relation set ID=?,client1=?,client2=?,point_relation=?,niveau=?,date_debut=?,date_fin=? where client1=? and client2=?";
         PreparedStatement pst=DB.prepareStatement(query);
         
         pst.setInt(1, r.getID());
@@ -54,6 +56,11 @@ public class GestionnaireRelation implements Gestionnaire {
         pst.setString(5,r.getNiveau());
         pst.setDate(6,r.getDate_debut());
         pst.setDate(7,r.getDate_fin());
+        
+        //pst.setInt(8, r.getID());
+        pst.setInt(8,r.getClient1().getID());
+        pst.setInt(9,r.getClient2().getID());
+
         
 
         return pst.executeUpdate();

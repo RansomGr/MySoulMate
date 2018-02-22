@@ -33,7 +33,9 @@ public class TestRelation1 {
         
         GestionnaireRelation g= new GestionnaireRelation();
         try {
-            g.create(r1);
+            //g.create(r1);
+            r1.setPoints_relation(15);
+            g.update(r1);
         } catch (SQLException ex) {
             Logger.getLogger(TestRelation1.class.getName()).log(Level.SEVERE, null, ex);
         }

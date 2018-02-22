@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.ScrollPane?>
@@ -16,15 +17,15 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.Ui_MainFrame_FOController">
    <top>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane maxHeight="60.0" prefHeight="60.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
         </rowConstraints>
          <children>
             <Hyperlink fx:id="create_new_account_hl" onAction="#logout" text="Se déconnecter" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
@@ -33,16 +34,16 @@
                </padding>
             </Hyperlink>
             <TextField promptText="Rechercher personnes., bons plans , évènements..." GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" text="Menu" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets left="110.0" />
-               </GridPane.margin>
-            </Button>
             <ImageView fitHeight="31.0" fitWidth="337.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
                   <Image url="@../images/logo.png" />
                </image>
             </ImageView>
+            <Button fx:id="show_menu" mnemonicParsing="false" onAction="#show_menu" text="&lt;Menu" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="175.0" />
+               </GridPane.margin>
+            </Button>
          </children>
       </GridPane>
    </top>
@@ -65,22 +66,23 @@
           <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="911.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="47.0" vgrow="NEVER" />
         </rowConstraints>
       </GridPane>
    </bottom>
    <right>
-      <GridPane prefHeight="613.0" prefWidth="231.0" BorderPane.alignment="CENTER">
+      <GridPane fx:id="menu_bar" cache="true" prefHeight="613.0" prefWidth="230.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="396.0" minHeight="10.0" prefHeight="269.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="208.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="302.0" minHeight="10.0" prefHeight="302.0" vgrow="SOMETIMES" />
+            <RowConstraints fillHeight="false" maxHeight="65.0" minHeight="10.0" prefHeight="65.0" vgrow="NEVER" />
+            <RowConstraints minHeight="10.0" prefHeight="314.0" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="208.0" minHeight="10.0" prefHeight="40.0" vgrow="NEVER" />
+            <RowConstraints minHeight="10.0" prefHeight="302.0" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
-            <GridPane>
+            <GridPane GridPane.rowIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="10.0" prefWidth="60.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="60.0" />
@@ -102,12 +104,20 @@
                   <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="actualites" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
-            <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+            <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
               <content>
                 <AnchorPane fx:id="connected_friends_scroll_pane" minHeight="0.0" minWidth="0.0" prefHeight="422.0" prefWidth="215.0" translateX="1.0" />
               </content>
             </ScrollPane>
+            <Button fx:id="hide_menu" mnemonicParsing="false" onAction="#hide_menu" text="Menu&gt;" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
+            </Button>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </GridPane>
    </right>
    <left>

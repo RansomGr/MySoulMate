@@ -33,6 +33,13 @@ public class Contenue_Moment {
         this.description=description;
     }
 
+    public Contenue_Moment(String nom, String description, Date date_moment, String photo) {
+        this.nom=nom;
+        this.description=description;
+        this.date_moment=date_moment;
+        this.photo=photo;
+    }
+
     public int getID() {
         return ID;
     }

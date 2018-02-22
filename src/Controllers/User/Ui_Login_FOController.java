@@ -6,13 +6,16 @@
 package Controllers.User;
 
 import Entites.User.Client;
-import Services.Profil.GestionnaireProfil;
 import Services.User.GestionnaireClient;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +25,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import mysoulmate.MySoulMate;
 
 /**
@@ -44,6 +51,8 @@ public class Ui_Login_FOController implements Initializable {
     private Button login_pb;
     @FXML
     private Hyperlink forgot_hl;
+    @FXML
+    private BorderPane BorderPane;
 
     /**
      * Initializes the controller class.
@@ -77,7 +86,11 @@ public class Ui_Login_FOController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+          int numberOfSquares =60;
+        while (numberOfSquares > 0){
+            generateAnimation();
+            numberOfSquares--;
+        }
     }    
 
     @FXML
@@ -109,5 +122,89 @@ public class Ui_Login_FOController implements Initializable {
             login_te.clear();
         }
    }
-    
+    public void generateAnimation(){
+        Random rand = new Random();
+        int sizeOfSqaure = rand.nextInt(50) + 1;
+        int speedOfSqaure = rand.nextInt(10) + 5;
+        int startXPoint = rand.nextInt(1024);
+        int startYPoint = rand.nextInt(720);
+        int direction = rand.nextInt(5) + 1;
+
+        KeyValue moveXAxis = null;
+        KeyValue moveYAxis = null;
+        ImageView r1 = null;
+
+        switch (direction){
+            case 1 :
+                // MOVE LEFT TO RIGHT
+                r1 = new ImageView(new Image("/images/heart.png"));
+                r1.setFitHeight(sizeOfSqaure);
+                r1.setFitWidth(sizeOfSqaure);
+                r1.setX(startXPoint);
+                r1.setY(0);
+                moveXAxis = new KeyValue(r1.xProperty(), 720 -  sizeOfSqaure);
+                break;
+            case 2 :
+                // MOVE TOP TO BOTTOM
+                 r1 = new ImageView(new Image("/images/heart.png"));
+                r1.setFitHeight(sizeOfSqaure);
+                r1.setFitWidth(sizeOfSqaure);
+                r1.setX(startXPoint);
+                r1.setY(0);
+                moveYAxis = new KeyValue(r1.yProperty(), 1024 - sizeOfSqaure);
+                break;
+            case 3 :
+                // MOVE LEFT TO RIGHT, TOP TO BOTTOM
+                 r1 = new ImageView(new Image("/images/heart.png"));
+                r1.setFitHeight(sizeOfSqaure);
+                r1.setFitWidth(sizeOfSqaure);
+                r1.setX(startXPoint);
+                r1.setY(0);
+                moveXAxis = new KeyValue(r1.xProperty(), 720 -  sizeOfSqaure);
+                moveYAxis = new KeyValue(r1.yProperty(), 1024 - sizeOfSqaure);
+                break;
+            case 4 :
+                // MOVE BOTTOM TO TOP
+                r1 = new ImageView(new Image("/images/heart.png"));
+                r1.setFitHeight(sizeOfSqaure);
+                r1.setFitWidth(sizeOfSqaure);
+                r1.setX(startXPoint);
+                r1.setY(0);
+                moveYAxis = new KeyValue(r1.xProperty(), 0);
+                break;
+            case 5 :
+                // MOVE RIGHT TO LEFT
+                r1 = new ImageView(new Image("/images/heart.png"));
+                r1.setFitHeight(sizeOfSqaure);
+                r1.setFitWidth(sizeOfSqaure);
+                r1.setX(startXPoint);
+                r1.setY(0);
+                moveXAxis = new KeyValue(r1.xProperty(), 0);
+                break;
+            case 6 :
+                //MOVE RIGHT TO LEFT, BOTTOM TO TOP
+               r1 = new ImageView(new Image("/images/heart.png"));
+                r1.setFitHeight(sizeOfSqaure);
+                r1.setFitWidth(sizeOfSqaure);
+                r1.setX(startXPoint);
+                r1.setY(0);
+                moveXAxis = new KeyValue(r1.xProperty(), 720 -  sizeOfSqaure);
+                moveYAxis = new KeyValue(r1.yProperty(), 1024 - sizeOfSqaure);
+                break;
+
+            default:
+                System.out.println("default");
+        }
+
+       // r1.setFill(Color.web("#F89406"));
+        r1.setOpacity(0.5);
+
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(speedOfSqaure * 1000), moveXAxis, moveYAxis);
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.setAutoReverse(true);
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.play();
+        BorderPane.getChildren().add(BorderPane.getChildren().size()-1,r1);
+    }
 }
