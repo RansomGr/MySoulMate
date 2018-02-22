@@ -69,11 +69,15 @@ private GestionnairePackaging ga ;
     private CheckBox operations_plus;
     @FXML
     private TableView<Packaging> table_view;
+    @FXML
     private TableColumn<Packaging, Integer> ID_column;
     @FXML
     private TableColumn<Packaging, String> nom_column;
+    @FXML
     private TableColumn<Packaging, String> contenu_column;
+    @FXML
     private TableColumn<Packaging, Integer> duree_column;
+    @FXML
     private TableColumn<Packaging , String> prix_column;
     @FXML
     private TextField current_page_te;
@@ -124,7 +128,7 @@ private GestionnairePackaging ga ;
             ID_column.setCellValueFactory((CellDataFeatures<Packaging, Integer> Packaging) -> new  SimpleIntegerProperty((Packaging.getValue().getID())).asObject());
             nom_column.setCellValueFactory((CellDataFeatures<Packaging, String> Packaging) -> new SimpleStringProperty(Packaging.getValue().getNom())   );
             contenu_column.setCellValueFactory((CellDataFeatures<Packaging,String>Packaging)-> new SimpleStringProperty(Packaging.getValue().getContenu()) );
-            duree_column.setCellValueFactory((CellDataFeatures<Packaging,Integer>Packaging)->new SimpleIntegerProperty((Packaging.getValue().getID())).asObject());
+            duree_column.setCellValueFactory((CellDataFeatures<Packaging,Integer>Packaging)->new SimpleIntegerProperty((Packaging.getValue().getDuree())).asObject());
             prix_column.setCellValueFactory((CellDataFeatures<Packaging,String>Packaging)->new SimpleStringProperty(Packaging.getValue().getPrix()));
             table_view.setRowFactory( tv -> {
             TableRow<Packaging> row = new TableRow<>();
@@ -261,7 +265,7 @@ private GestionnairePackaging ga ;
             Hide.setToY(0);
             Hide.play();
             
-            target_column.getItems().addAll("All","id","nom","prenom","login","motdepasse");
+            target_column.getItems().addAll("All","ID","nom","contenu","duree","pri");
             
             target_column.getSelectionModel().select(0);
            
@@ -283,13 +287,13 @@ private GestionnairePackaging ga ;
         NextActionWindow.getButtonTypes().clear();
         NextActionWindow.getButtonTypes().addAll(Modifier,Supprimer,Annuler);
         NextActionWindow.setTitle("MySoulMate");
-        NextActionWindow.setHeaderText("Gestion Administrateur");
-        NextActionWindow.setContentText("Que Voulez vous faire avec cet Administrateur ?");
+        NextActionWindow.setHeaderText("Gestion Packaging");
+        NextActionWindow.setContentText("Que Voulez vous faire avec ce Packaging ?");
         ConfirmDelete.getButtonTypes().clear();
         ConfirmDelete.getButtonTypes().addAll(Oui,Non);
         ConfirmDelete.setTitle("MySoulMate");
-        ConfirmDelete.setHeaderText("Gestion Administrateur");
-        ConfirmDelete.setContentText("Voulez Vous Vraiment Supprimer cet Administrateur ?");
+        ConfirmDelete.setHeaderText("Gestion Packaging");
+        ConfirmDelete.setContentText("Voulez Vous Vraiment Supprimer ce Packaging ?");
         
     }
         private void init_Actions()
