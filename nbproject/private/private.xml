@@ -3,23 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Entites/Plan/Avis.java</file>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Services/Avis/GestionnaireAvis.java</file>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Services/User/GestionnaireClient.java</file>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Entites/Evenement/PlanEtCeremonie.java</file>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Entites/Relations/Relation.java</file>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Services/Evenement/GestionnairePlanEtCeremonie.java</file>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/test/TestPlan/TestPlan1.java</file>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Services/Evenement/GestionnaireEvenementGroup.java</file>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Entites/Plan/Plan.java</file>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Entites/Relations/Moment.java</file>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Services/Plan/GestionnairePlan.java</file>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Entites/Plan/Reservation.java</file>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Services/Relation/GestionnaireMoment.java</file>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Services/Relation/GestionnaireRelation.java</file>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Entites/User/Client.java</file>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Services/Reservation/GestionnaireReservation.java</file>
-            <file>file:/C:/Users/irou/Documents/GitHub/MySoulMate/src/Entites/Evenement/EvenementGroup.java</file>
+            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Ui_MainFrame_FOController.java</file>
+            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/User/Ui_ListeAdmin_BOController.java</file>
+            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Evenement/Ui_evenement_BOController.java</file>
+            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Profil/Ui_FO_AjouterCaracteristiqueController.java</file>
         </group>
     </open-files>
 </project-private>

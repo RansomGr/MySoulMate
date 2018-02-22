@@ -26,6 +26,10 @@ private String caractere ;
 private String statut ;
 private String cuisine ;
 
+    public Caracteristique() {
+    
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -210,6 +214,21 @@ private String cuisine ;
 
     public Caracteristique(int ID, String corpulence, String pilosite, String origine, String profession, String alcool, String tabac, float taille, String cheveux, String yeux, String caractere, String statut, String cuisine) {
         this.ID = ID;
+        this.corpulence = corpulence;
+        this.pilosite = pilosite;
+        this.origine = origine;
+        this.profession = profession;
+        this.alcool = alcool;
+        this.tabac = tabac;
+        this.taille = taille;
+        this.cheveux = cheveux;
+        this.yeux = yeux;
+        this.caractere = caractere;
+        this.statut = statut;
+        this.cuisine = cuisine;
+    }
+
+    public Caracteristique(String corpulence, String pilosite, String origine, String profession, String alcool, String tabac, float taille, String cheveux, String yeux, String caractere, String statut, String cuisine) {
         this.corpulence = corpulence;
         this.pilosite = pilosite;
         this.origine = origine;

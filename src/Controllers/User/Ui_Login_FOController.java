@@ -5,14 +5,18 @@
  */
 package Controllers.User;
 
+import Entites.User.Client;
+import Services.Profil.GestionnaireProfil;
+import Services.User.GestionnaireClient;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -75,5 +79,35 @@ public class Ui_Login_FOController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void log_me_in(ActionEvent event) throws IOException, SQLException {
+        GestionnaireClient gc = new GestionnaireClient();
+        Client Logged_in_Client= ((List<Client>)gc.fetchAll()).stream().filter(Client->Client.getPseudo().equals(login_te.getText())&&Client.getMotdepasse().equals(password_te.getText())).findFirst().get();
+        if(Logged_in_Client!=null)
+        {
+            GestionnaireClient p = new GestionnaireClient();
+            
+            if(Logged_in_Client.getProfil().getPhoto().equals("no_PROF"))
+            {
+              MySoulMate.setLogged_in_Client(Logged_in_Client);
+              Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_Profile_Creation.fxml"));
+              Scene scene = new Scene(root);
+              MySoulMate.getMainStage().setScene(scene); 
+            }
+            else
+            {
+              MySoulMate.setLogged_in_Client(Logged_in_Client);
+              Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/ui_MainFrame_FO.fxml"));
+              Scene scene = new Scene(root);
+              MySoulMate.getMainStage().setScene(scene);
+            }
+        }
+        else
+        {
+            password_te.clear();
+            login_te.clear();
+        }
+   }
     
 }

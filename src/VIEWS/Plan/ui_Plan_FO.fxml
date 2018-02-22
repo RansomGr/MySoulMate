@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.Plan.Ui_Plan_FOController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="213.0" vgrow="NEVER" />
+    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="342.0" vgrow="ALWAYS" />
+  </rowConstraints>
+   <children>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+         <content>
+            <StackPane fx:id="actualite_sp" prefHeight="403.0" prefWidth="581.0" />
+         </content>
+      </ScrollPane>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="192.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="446.0" minWidth="10.0" prefWidth="408.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ImageView fx:id="imgage_img" fitHeight="209.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/default.png" />
+               </image>
+            </ImageView>
+            <GridPane GridPane.columnIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="101.0" minHeight="10.0" prefHeight="81.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="132.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Text fx:id="notet_label" strokeType="OUTSIDE" strokeWidth="0.0" text="note total" wrappingWidth="115.13671875" GridPane.halignment="CENTER" />
+                  <TextArea fx:id="description_ta" prefHeight="130.0" prefWidth="408.0" GridPane.rowIndex="1" />
+                  <Text fx:id="nomP_label" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom Plan" />
+                  <Button fx:id="Reserver_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Reserver" GridPane.halignment="RIGHT" />
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+   </children>
+</GridPane>

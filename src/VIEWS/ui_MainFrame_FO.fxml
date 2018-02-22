@@ -12,8 +12,9 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.Ui_MainFrame_FOController">
    <top>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -26,7 +27,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Hyperlink fx:id="create_new_account_hl" text="Se déconnecter" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+            <Hyperlink fx:id="create_new_account_hl" onAction="#logout" text="Se déconnecter" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                <padding>
                   <Insets right="10.0" />
                </padding>
@@ -39,7 +40,7 @@
             </Button>
             <ImageView fitHeight="31.0" fitWidth="337.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/logo.png" />
+                  <Image url="@../images/logo.png" />
                </image>
             </ImageView>
          </children>
@@ -53,6 +54,9 @@
         <rowConstraints>
           <RowConstraints maxHeight="900.0" minHeight="10.0" prefHeight="270.0" valignment="BOTTOM" vgrow="ALWAYS" />
         </rowConstraints>
+         <children>
+            <StackPane fx:id="Content_pane" prefHeight="150.0" prefWidth="200.0" />
+         </children>
       </GridPane>
    </center>
    <bottom>
@@ -78,64 +82,39 @@
          <children>
             <GridPane>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="10.0" prefWidth="62.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="59.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="49.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="62.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="10.0" prefWidth="60.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="60.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fitHeight="132.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" translateY="5.0">
-                     <image>
-                        <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/Icônes%20Menu/1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="139.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-                     <image>
-                        <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/Icônes%20Menu/2.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="136.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-                     <image>
-                        <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/Icônes%20Menu/3.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="138.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" translateY="-6.0" GridPane.columnIndex="3">
-                     <image>
-                        <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/Icônes%20Menu/4.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="138.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/Icônes%20Menu/5.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="139.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" translateY="-5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/Icônes%20Menu/6.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="128.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/Icônes%20Menu/8.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="134.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" translateX="-6.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@../../../../../../DropBox/Dropbox/PIDev/Contenu%20FINI/Autre/Icônes%20Menu/7.png" />
-                     </image>
-                  </ImageView>
+                  <Button mnemonicParsing="false" onAction="#load_my_profil" prefHeight="90.0" prefWidth="50.0" style="-fx-background-image: url(&quot;..\images\4.png&quot;);" text="Profil" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="Parametres" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="Button" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="Astuces" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="BonPlans" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="relations" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="Button" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="actualites" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
             <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
               <content>
-                <AnchorPane fx:id="connected_friends_scroll_pane" minHeight="0.0" minWidth="0.0" prefHeight="422.0" prefWidth="215.0" />
+                <AnchorPane fx:id="connected_friends_scroll_pane" minHeight="0.0" minWidth="0.0" prefHeight="422.0" prefWidth="215.0" translateX="1.0" />
               </content>
             </ScrollPane>
          </children>
       </GridPane>
    </right>
+   <left>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <AnchorPane fx:id="bonplans_and_evennements" prefHeight="627.0" prefWidth="180.0" translateX="4.0" />
+         </content>
+      </ScrollPane>
+   </left>
 </BorderPane>

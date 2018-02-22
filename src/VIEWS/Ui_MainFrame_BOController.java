@@ -91,6 +91,15 @@ public class Ui_MainFrame_BOController implements Initializable {
                  Page_Viewer_ref.getChildren().add(root);// inserting the Node in the GridPane
                  Label_Module_name_ref.setText("Modifier un Admin existent "); // Changing the header text
     }
+      public static void Update_Plan_request() throws IOException
+    {
+                 
+                 Node root;// Making a node
+                 root = FXMLLoader.load(Ui_MainFrame_BOController.class.getResource("/VIEWS/Plan/ui_Create_new_Plan_BO.fxml"));// Getting the View
+                 Page_Viewer_ref.getChildren().clear();
+                 Page_Viewer_ref.getChildren().add(root);// inserting the Node in the GridPane
+                 Label_Module_name_ref.setText("Modifier un Plan existent "); // Changing the header text
+    }
     private void init_workspaes_variables()
     {
         Label_Module_name_ref=Label_Module_name;
@@ -192,12 +201,182 @@ public class Ui_MainFrame_BOController implements Initializable {
         );
 
     }
+       private void init_Profil_Actions()
+    {
+        MenuItem ListProfil  = new MenuItem("Liste Profil");
+        MenuItem NewProfil  = new MenuItem("Ajouter nouveau Profil");
+        MenuItem statistique  = new MenuItem("Statistique");
+        
+        this.Profile_dl.getItems().remove(0, 2);        
+        this.Profile_dl.getItems().addAll(ListProfil,NewProfil,statistique);
+        
+        ListProfil.setOnAction(
+                (a)->{
+                     try { 
+                         Ui_Create_new_Admin_BOController.setAdmin_to_be_modified(null);
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_ListeProfil.fxml"));// Getting the View
+                  Page_Viewer.getChildren().clear();
+                  Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  Label_Module_name.setText(ListProfil.getText()); // Changing the header text
+                  
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
+        );
+        
+        NewProfil.setOnAction(
+        (a)->{
+           
+            try { 
+                  Ui_Create_new_Admin_BOController.setAdmin_to_be_modified(null);
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_Ajoute_new_Profil_FO.fxml"));// Getting the View
+                 Page_Viewer.getChildren().clear();
+                 Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  
+                  Label_Module_name.setText(NewProfil.getText()); // Changing the header text
+              
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+      
+        }         
+        );
+        ListProfil.setOnAction(
+        (a)->{
+                 try { 
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_ListeProfil.fxml"));// Getting the View
+                 Page_Viewer.getChildren().clear();
+                 Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  
+                  Label_Module_name.setText(ListProfil.getText()); // Changing the header text
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        );
+
+    }
+     private void init_Plan_Actions()
+    {
+        MenuItem ListPlan  = new MenuItem("Liste Plans");
+        MenuItem NewPlan  = new MenuItem("Ajouter Nouveau Plan");
+   
+        
+        this.Plan_dl.getItems().remove(0, 2);        
+        this.Plan_dl.getItems().addAll(ListPlan,NewPlan);
+        
+        ListPlan.setOnAction(
+                (a)->{
+                     try { 
+                         //Ui_Create_new_Plan_BOController.setPlan_to_be_modified(null);
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Plan/ui_ListePlan_BO.fxml"));// Getting the View
+                  Page_Viewer.getChildren().clear();
+                  Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  Label_Module_name.setText(ListPlan.getText()); // Changing the header text
+                  
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
+        );
+        
+        NewPlan.setOnAction(
+        (a)->{
+           
+            try { 
+                  //Ui_Create_new_Admin_BOController.setAdmin_to_be_modified(null);
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Plan/ui_Create_new_Plan_BO.fxml"));// Getting the View
+                 Page_Viewer.getChildren().clear();
+                 Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  
+                  Label_Module_name.setText(NewPlan.getText()); // Changing the header text
+              
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        );
+
+    }
+     
+       private void init_Event_Actions()
+    {
+        MenuItem ListEvent  = new MenuItem("Liste des évènement");
+        MenuItem NewEvent  = new MenuItem("Ajouter un nouvel évènement");
+        MenuItem Statistiques  = new MenuItem("Statistiques des évènements");
+        
+        this.Event_dl.getItems().remove(0, 2);        
+        this.Event_dl.getItems().addAll(ListEvent,NewEvent,Statistiques);
+        
+        ListEvent.setOnAction(
+                (a)->{
+                     try { 
+                  Ui_Create_new_Admin_BOController.setAdmin_to_be_modified(null);
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Evenement/ui_ListeEvenement.fxml"));// Getting the View
+                  Page_Viewer.getChildren().clear();
+                  Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  Label_Module_name.setText(ListEvent.getText()); // Changing the header text
+                  
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
+        );
+        
+        NewEvent.setOnAction(
+        (a)->{
+           
+            try { 
+                  Ui_Create_new_Admin_BOController.setAdmin_to_be_modified(null);
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Evenement/ui_evenement_BO.fxml"));// Getting the View
+                 Page_Viewer.getChildren().clear();
+                 Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  
+                  Label_Module_name.setText(NewEvent.getText()); // Changing the header text
+              
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+      
+        }         
+        );
+        Statistiques.setOnAction(
+        (a)->{
+                 try { 
+                  Node root;// Making a node
+                  root = FXMLLoader.load(getClass().getResource("/VIEWS/Evenement/ui_statistiques_BO.fxml"));// Getting the View
+                 Page_Viewer.getChildren().clear();
+                 Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
+                  
+                  Label_Module_name.setText(Statistiques.getText()); // Changing the header text
+            } catch (IOException ex) {
+                Logger.getLogger(Ui_MainFrame_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        );
+
+    }
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        Shown=true; // if side bar is shown init it because naturally it's shown
        init_DashBoard_Actions();
        init_User_Actions();
+       init_Plan_Actions();
+       init_Event_Actions();
+       init_Profil_Actions();
        init_workspaes_variables();
+       
+      
     }    
     @FXML
     private void hide_show_menu_pb(ActionEvent event) {

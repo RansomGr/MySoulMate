@@ -6,6 +6,7 @@
 package Entites.User;
 
 import Entites.AbstractEntite;
+import Entites.Profil.Profil;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -19,6 +20,9 @@ public class Client extends AbstractEntite {
     protected String email;
     protected Date date_naissance;
     protected String pseudo ;
+    protected Profil profil;
+    protected int Activation ;
+    protected int ban;
     
        public Client(int ID,String nom,String prenom,String motdepasse,String email,Date date_naissance,String pseudo)
     {
@@ -29,6 +33,19 @@ public class Client extends AbstractEntite {
         this.pseudo=pseudo;
         this.email=email;
     }
+
+    public Client(int ID, String nom,String prenom, String motdepasse, String email, Date date_naissance, String pseudo, Profil profil ,int Activation,int ban) {
+        super(ID, nom);
+        this.prenom = prenom;
+        this.motdepasse = motdepasse;
+        this.email = email;
+        this.date_naissance = date_naissance;
+        this.pseudo = pseudo;
+        this.profil = profil;
+        this.Activation=Activation;
+        this.ban=ban;
+    }
+       
           public Client(String nom,String prenom,String motdepasse,String email,Date date_naissance,String pseudo)
     {
           super(-1,nom);
@@ -132,7 +149,29 @@ public class Client extends AbstractEntite {
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }
- 
+     public Profil getProfil() {
+        return profil;
+    }
+
+    public void setProfil(Profil profil) {
+        this.profil = profil;
+    }
+
+    public int getActivation() {
+        return Activation;
+    }
+
+    public void setActivation(int Activation) {
+        this.Activation = Activation;
+    }
+
+    public int getBan() {
+        return ban;
+    }
+
+    public void setBan(int ban) {
+        this.ban = ban;
+    }
     
     
     

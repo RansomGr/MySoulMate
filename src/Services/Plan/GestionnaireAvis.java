@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Services.Avis;
+package Services.Plan;
 
 import Entites.Plan.Avis;
 import Entites.Plan.Plan;
@@ -37,7 +37,7 @@ public class GestionnaireAvis implements Gestionnaire {
       pst.setInt(1,a.getPlan().getID());
       pst.setInt(2,a.getClient().getID());
       pst.setString(3,a.getCommentaire());
-      pst.setString(4,a.getNote());
+      pst.setFloat(4,a.getNote());
       pst.setDate(5,a.getDateh());
     
       
@@ -57,7 +57,7 @@ public class GestionnaireAvis implements Gestionnaire {
        pst.setInt(1,a.getPlan().getID());
       pst.setInt(2,a.getClient().getID());
       pst.setString(3,a.getCommentaire());
-      pst.setString(4,a.getNote());
+      pst.setFloat(4,a.getNote());
       pst.setDate(5,a.getDateh());
       
      
@@ -68,7 +68,7 @@ public class GestionnaireAvis implements Gestionnaire {
     public int remove(Object o) throws SQLException {
    
     Avis a=(Avis)o;
-    String query=" delete from Avis where Client=? ";
+    String query=" delete from Avis where Avis.Plan=? and Avis.Client=? ";
     
     PreparedStatement pst=DB.prepareStatement(query);
     
@@ -107,7 +107,7 @@ public class GestionnaireAvis implements Gestionnaire {
                 Plan1,
                 client1,
                res.getString("commentaire"),
-            res.getString("Note"),
+            res.getFloat("Note"),
                     res.getDate("dateh")
                                      )
            );
