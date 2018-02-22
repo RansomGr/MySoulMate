@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.40" fx:controller="VIEWS.Relation.ChartsController">
+   <children>
+      <AreaChart fx:id="areachart" layoutX="-18.0" layoutY="3.0" prefHeight="244.0" prefWidth="324.0" title="AreaChart">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </AreaChart>
+      <ScatterChart fx:id="scatterchart" layoutX="-15.0" layoutY="268.0" prefHeight="225.0" prefWidth="304.0" title="ScatterChart">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </ScatterChart>
+      <PieChart fx:id="piechart" layoutX="300.0" layoutY="1.0" prefHeight="276.0" prefWidth="339.0" title="PieChart" />
+      <BarChart fx:id="barchart" layoutX="294.0" layoutY="266.0" prefHeight="225.0" prefWidth="346.0" title="BarChart">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+   </children>
+</AnchorPane>

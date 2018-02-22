@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.Relation.AjoutConseilController">
+   <children>
+      <GridPane layoutX="168.0" layoutY="149.0" prefHeight="152.0" prefWidth="290.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="10.0" prefWidth="72.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="193.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="31.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="106.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="29.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Contenu" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label text="Niveau" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="niv" prefWidth="150.0" promptText="choisir" visibleRowCount="3" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextArea fx:id="con" prefHeight="97.0" prefWidth="169.0" promptText="Ecrire continu" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <Button fx:id="ajbtn" layoutX="339.0" layoutY="359.0" mnemonicParsing="false" onAction="#AjouterConseil" text="Ajouter" />
+      <Button fx:id="annbtn" layoutX="406.0" layoutY="359.0" mnemonicParsing="false" onAction="#annuler" text="Annuler" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.Relation.AjoutMomentController">
+   <children>
+      <GridPane layoutX="158.0" layoutY="150.0" prefHeight="151.0" prefWidth="284.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label prefHeight="37.0" prefWidth="142.0" text="Nom">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label prefHeight="33.0" prefWidth="133.0" text="Description" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label prefHeight="38.0" prefWidth="135.0" text="Date" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label prefHeight="29.0" prefWidth="129.0" text="Photo" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nom" promptText="Nom" GridPane.columnIndex="1">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="des" promptText="Description" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="photo" prefHeight="25.0" prefWidth="62.0" promptText="lien photo" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+            <DatePicker fx:id="date" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <Button layoutX="350.0" layoutY="334.0" mnemonicParsing="false" onAction="#AjouterMoment" prefHeight="33.0" prefWidth="70.0" text="Ajouter" />
+      <Button fx:id="annbtn" layoutX="431.0" layoutY="334.0" mnemonicParsing="false" onAction="#annuler" prefHeight="33.0" prefWidth="70.0" text="Annuler" />
+     
+      <Button layoutX="367.0" layoutY="382.0" mnemonicParsing="false" onAction="#AfficherMoment" prefHeight="45.0" prefWidth="129.0" text="Afficher Moments" />
+   </children>
+</AnchorPane>
