@@ -22,13 +22,13 @@
         </rowConstraints>
          <children>
             <TextArea prefHeight="43.0" prefWidth="537.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES" />
-            <ImageView fitHeight="51.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT">
+            <ImageView fx:id="image_view_actualite" fitHeight="51.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT">
                <image>
                   <Image url="@../../images/default.png" />
                </image>
             </ImageView>
-            <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-            <Label text="Label" GridPane.columnIndex="1">
+            <Button mnemonicParsing="false" onAction="#Partages" text="Partager" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+            <Label fx:id="user" text="Label" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="4.0" right="4.0" top="10.0" />
                </GridPane.margin>
