@@ -56,7 +56,8 @@ public class Ui_BO_AjoutPackagingController implements Initializable {
        }
 
     
-   String Action;
+   
+   static String Action = "Ajouter";
    String Message;
    private Alert InformationWindow  = new Alert(Alert.AlertType.INFORMATION);
    private Alert ErrorWindow = new Alert(Alert.AlertType.ERROR);
