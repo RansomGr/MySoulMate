@@ -46,10 +46,14 @@ public class Ui_BO_AjoutPackagingController implements Initializable {
     private Button ajouter_btn;
     @FXML
     private Button reset_btn;
-    @FXML
-    private Button add_new_pb;
+  
     
      private static Packaging Packaging_a_modifier ;
+     
+    
+               public static void set_Packaging_modif(Packaging Packaging_a_modifier) {
+        Ui_BO_AjoutPackagingController.Packaging_a_modifier = Packaging_a_modifier;
+       }
 
     
    String Action;
@@ -126,29 +130,29 @@ public class Ui_BO_AjoutPackagingController implements Initializable {
             
              @FXML
     private void ajouter_packaging(ActionEvent event) throws SQLException {
-        validate_form();
-        if(Message.equals("Les champs suivants posent des problèmes \n"))
-        {
+        //validate_form();
+        //if(Message.equals("Les champs suivants posent des problèmes : \n"))
+       // {
              GestionnairePackaging gp= new GestionnairePackaging(); 
              int duree = (Integer) duree_s.getValue();
              float prix =  Float.parseFloat(prix_tf.getText());
              
         if(Action.equals("Ajouter"))
         {
-       if( gp.create(new Packaging(nom_tf.getText(),contenu_ta.getText(),duree ,prix_tf.getText()))==1)
-       {
-           InformationWindow.show();
-           clear_tf();
-       }
-       else
-          ErrorWindow.show();
+            if( gp.create(new Packaging(nom_tf.getText(),contenu_ta.getText(),duree ,prix_tf.getText()))==1)
+            {
+                InformationWindow.show();
+                clear_tf();
+            }
+            else
+               ErrorWindow.show();
         }
-        else
+        else if (Action.equals("Modifier"))
         {
                Optional<ButtonType> result = ConfirmWindow.showAndWait();
                      if(result.isPresent()&&result.get()==Oui)
                      {   
-                       if(gp.update(new Packaging(nom_tf.getText(),contenu_ta.getText(),duree ,prix_tf.getText()))==1)
+                       if(gp.update(new Packaging(Packaging_a_modifier.getID(), nom_tf.getText(),contenu_ta.getText(),duree ,prix_tf.getText()))==1)
                        {
                            InformationWindow.setContentText("Packaging modifié avec succès !");
                            InformationWindow.show();
@@ -158,37 +162,37 @@ public class Ui_BO_AjoutPackagingController implements Initializable {
                           ErrorWindow.show();   
                      }
         }
-    }
-    else
-    {
-        WarningWindow.show();
-    }
+//    }
+//    else
+//    {
+//        WarningWindow.show();
+//    }
     }
     
    @FXML
 
-    private boolean validate_form()
-    {
-        Message="Les champs suivants posent des problèmes : \n";
-        if(nom_tf.getText().isEmpty())
-        {Message+="Le champ nom est vide !\n";}
-        if(contenu_ta.getText().isEmpty())
-        {Message+="Le champ contenu est vide !\n";}
-        if(prix_tf.getText().isEmpty())
-        {Message+="Le champ prix est vide !\n";}
-        
-       if(Message.equals("Les champs suivants posent des problèmes : \n"))
-       {WarningWindow.show();
-
-          return false;}
-        
-      else 
-      {
-        return true;
-      }
-
-     
-    }
+//    private boolean validate_form()
+//    {
+//        Message="Les champs suivants posent des problèmes : \n";
+//        if(nom_tf.getText().isEmpty())
+//        {Message+="Le champ nom est vide !\n";}
+//        if(contenu_ta.getText().isEmpty())
+//        {Message+="Le champ contenu est vide !\n";}
+//        if(prix_tf.getText().isEmpty())
+//        {Message+="Le champ prix est vide !\n";}
+//        
+//       if(Message.equals("Les champs suivants posent des problèmes : \n"))
+//        {
+//            WarningWindow.show();
+//           return false;
+//        }
+//        
+//        else 
+//        {
+//          return true;
+//        }
+//
+//    }
     
 
     
@@ -206,10 +210,7 @@ public class Ui_BO_AjoutPackagingController implements Initializable {
     //this.duree_s.setValue(7);
     }
     
-     public static void set_Packaging_modif(Packaging set_Packaging_modif) {
-        Ui_BO_AjoutPackagingController.Packaging_a_modifier = Packaging_a_modifier;
-        
-    }
+
 
     private void check_update() {
             if(Packaging_a_modifier!=null)
@@ -217,7 +218,7 @@ public class Ui_BO_AjoutPackagingController implements Initializable {
            nom_tf.setText(Packaging_a_modifier.getNom());
            contenu_ta.setText(Packaging_a_modifier.getContenu());
            prix_tf.setText(Packaging_a_modifier.getPrix());
-           Action="Modifer";
+           Action="Modifier";
            update_button();
        }
        else
@@ -227,7 +228,7 @@ public class Ui_BO_AjoutPackagingController implements Initializable {
     
         private void update_button()
     {
-        add_new_pb.setText(Action);
+        ajouter_btn.setText(Action);
     }
 
 }
