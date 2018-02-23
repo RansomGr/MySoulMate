@@ -48,7 +48,7 @@ public class GestionnaireInteret implements Gestionnaire {
             pst.setInt(2, i.getCi().getID());//Binding du deuxieme valeur mentionner dans le query "?" 
              pst.setInt(4,i.getC().getID() );// Binding du premier valeur mentionner dans le query "?" 
              pst.setInt(5, i.getCi().getID());//Binding du deuxieme valeur mentionner dans le query "?" 
-    
+             
        
          return pst.executeUpdate(); // Execution et retour du resultat du query 
     }

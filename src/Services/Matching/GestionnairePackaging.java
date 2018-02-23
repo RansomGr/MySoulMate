@@ -43,7 +43,8 @@ public class GestionnairePackaging implements Gestionnaire {
        pst.setString(2,p.getContenu());
        pst.setInt(3, p.getDuree());
        pst.setString(4, p.getPrix());
-       
+       pst.setInt(5, p.getID());
+       System.out.println("ID="+p.getID());
         return pst.executeUpdate();    }
 
     @Override

@@ -42,7 +42,7 @@ public class GestionnaireAchat_packaging implements Gestionnaire{
 
            PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
          
-          pst.setInt(1,ap.getC().getID() );// Binding du premier valeur mentionner dans le query "?" 
+          pst.setInt(1,ap.getC().getID() );// Binding de la première valeur mentionner dans le query "?" 
           pst.setInt(2, ap.getP().getID());//Binding du deuxieme valeur mentionner dans le query "?" 
           pst.setDate(3, ap.getDate_fin());
        
