@@ -200,7 +200,7 @@ Content_pane_static = Content_pane;
     }
     
     @FXML
-    public static void load_preference_page(ActionEvent event) throws IOException {
+    public static void load_preference_page() throws IOException {
          Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
          Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Matching/ui_FO_AjouterPreference.fxml"));
          Content_pane_static.getChildren().clear();
