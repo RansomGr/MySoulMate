@@ -52,6 +52,8 @@ private int AnimationDuration;
     private Button show_menu;
     @FXML
     private Button menu_matching_btn;
+    
+    private static StackPane Content_pane_static ;
 
     /**
      * Initializes the controller class.
@@ -60,6 +62,7 @@ private int AnimationDuration;
     public void initialize(URL url, ResourceBundle rb) {
 Shown=true;
 AnimationDuration=400;//ms
+Content_pane_static = Content_pane;
     }    
 
     @FXML
@@ -194,6 +197,14 @@ AnimationDuration=400;//ms
          Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Matching/ui_FO_RechercheMatchings.fxml"));
          Content_pane.getChildren().clear();
          Content_pane.getChildren().add(root);  
+    }
+    
+    @FXML
+    public static void load_preference_page(ActionEvent event) throws IOException {
+         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
+         Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Matching/ui_FO_AjouterPreference.fxml"));
+         Content_pane_static.getChildren().clear();
+         Content_pane_static.getChildren().add(root);  
     }
     
 }
