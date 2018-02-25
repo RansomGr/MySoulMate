@@ -8,6 +8,8 @@ package VIEWS.Matching;
 import Entites.Profil.Caracteristique;
 import Entites.Profil.Profil;
 import Entites.User.Client;
+import VIEWS.Ui_MainFrame_FOController;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -44,7 +46,8 @@ public class Ui_FO_RechercheMatchingsController implements Initializable {
     }
 
     @FXML
-    private void load_preferences_form(ActionEvent event) {
+    private void load_preferences_form(ActionEvent event) throws IOException {
+        Ui_MainFrame_FOController.load_preference_page();
     }
     
 }
