@@ -181,7 +181,8 @@ public class Ui_BO_AjoutPackagingController implements Initializable {
 //        {Message+="Le champ contenu est vide !\n";}
 //        if(prix_tf.getText().isEmpty())
 //        {Message+="Le champ prix est vide !\n";}
-//        
+//       // if(prix_tf.getText()!= ))
+//      //  {Message+="Le prix doit être un nombre valide !\n";}
 //       if(Message.equals("Les champs suivants posent des problèmes : \n"))
 //        {
 //            WarningWindow.show();
