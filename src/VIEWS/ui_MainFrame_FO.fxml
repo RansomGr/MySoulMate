@@ -95,12 +95,12 @@
               </rowConstraints>
                <children>
                   <Button mnemonicParsing="false" onAction="#load_my_profil" prefHeight="90.0" prefWidth="50.0" style="-fx-background-image: url(&quot;..\images\4.png&quot;);" text="Profil" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="Parametres" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="Paramètres" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="Button" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="Astuces" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="BonPlans" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="relations" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="Button" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="Relation" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Button fx:id="menu_matching_btn" mnemonicParsing="false" onAction="#load_matching_page" prefHeight="90.0" prefWidth="50.0" text="Matchings" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <Button mnemonicParsing="false" prefHeight="90.0" prefWidth="50.0" text="actualites" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                </children>
             </GridPane>

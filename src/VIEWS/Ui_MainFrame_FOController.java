@@ -50,6 +50,8 @@ private int AnimationDuration;
     private Button hide_menu;
     @FXML
     private Button show_menu;
+    @FXML
+    private Button menu_matching_btn;
 
     /**
      * Initializes the controller class.
@@ -183,6 +185,15 @@ AnimationDuration=400;//ms
         }
        
     
+    }
+
+    @FXML
+    private void load_matching_page(ActionEvent event) throws IOException {
+         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
+         
+         Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Matching/ui_FO_RechercheMatchings.fxml"));
+         Content_pane.getChildren().clear();
+         Content_pane.getChildren().add(root);  
     }
     
 }
