@@ -25,6 +25,21 @@ public class Caracteristique {
     private String statut;
     private String cuisine;
 
+        public Caracteristique( String corpulence, String pilosite, String profession, String alcool, String tabac, String taille, String cheveux, String yeux, String caractere, String statut, String cuisine) {
+        this.ID = -1;
+        this.corpulence = corpulence;
+        this.pilosite = pilosite;
+        this.profession = profession;
+        this.alcool = alcool;
+        this.tabac = tabac;
+        this.taille = taille;
+        this.cheveux = cheveux;
+        this.yeux = yeux;
+        this.caractere = caractere;
+        this.statut = statut;
+        this.cuisine = cuisine;
+    }
+
     public Caracteristique(int ID, String corpulence, String pilosite, String profession, String alcool, String tabac, String taille, String cheveux, String yeux, String caractere, String statut, String cuisine) {
         this.ID = ID;
         this.corpulence = corpulence;
