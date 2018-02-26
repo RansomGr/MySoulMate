@@ -34,10 +34,6 @@ import javafx.scene.control.ToggleGroup;
 public class Ui_FO_AjouterPreferenceController implements Initializable {
 
     @FXML
-    private ComboBox<Integer> age_min_cb;
-    @FXML
-    private ComboBox<Integer> age_max_cb;
-    @FXML
     private ComboBox<String> silouhette_cb;
     @FXML
     private ComboBox<String> pilosite_cb;
@@ -48,9 +44,9 @@ public class Ui_FO_AjouterPreferenceController implements Initializable {
     @FXML
     private ComboBox<String> caractere_cb;
     @FXML
-    private Spinner<Float> taille_min_sp;
+    private Spinner<Integer> taille_min_sp;
     @FXML
-    private Spinner<Float> taille_max_sp;
+    private Spinner<Integer> taille_max_sp;
     @FXML
     private ComboBox<String> cheveux_cb;
     @FXML
@@ -103,6 +99,7 @@ public class Ui_FO_AjouterPreferenceController implements Initializable {
     }    
     
     private void init_node() {
+        ville_cb.getItems().addAll("Tous","Ariana","Beja","Ben Arous","Bizerte","Gabes","Gafsa","Jendouba","Kairouan","Kasserine","Kebili","Kef","Mahdia","Mannouba","Medenine","Monastir","Nabeul","Sfax","Sidi Bouzid","Siliana","Sousse","Tataouine","Tozeur","Tunis","Zaghouene");
         cuisine_cb.getItems().addAll("Fast Food","Vegan","Bio","Sushi","Végétarienne");
         pilosite_cb.getItems().addAll("imberbe","poilu");
         caractere_cb.getItems().addAll("Extraverti","Timide","Normal");
@@ -114,22 +111,26 @@ public class Ui_FO_AjouterPreferenceController implements Initializable {
 }
     private void init_actions()
     { 
-    tabac_oui_rb.setToggleGroup(tabas);
-    tabac_non_rb.setToggleGroup(tabas);
-    tabac_indifferent_rb.setToggleGroup(tabas);           
-           
-               alcool_non_rb.setToggleGroup(Alcools);
-               alcool_indifferent_rb.setToggleGroup(Alcools);
-               alcool_oui_rb.setToggleGroup(Alcools);
-           SpinnerValueFactory ValueFac = new SpinnerValueFactory.DoubleSpinnerValueFactory(0, 250.99, 1.00,0.1);
+        tabac_oui_rb.setToggleGroup(tabas);
+        tabac_non_rb.setToggleGroup(tabas);
+        tabac_indifferent_rb.setToggleGroup(tabas);           
+        
+        alcool_oui_rb.setToggleGroup(Alcools);
+        alcool_non_rb.setToggleGroup(Alcools);
+        alcool_indifferent_rb.setToggleGroup(Alcools);
+               
+           SpinnerValueFactory <Integer> ValueFac = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 00, 1);
            taille_min_sp.setValueFactory(ValueFac);
+           taille_max_sp.setValueFactory(ValueFac);
+
+        
     }
     
 
     @FXML
     private void Valider(ActionEvent event) throws SQLException, IOException {
       
-      float taille_moyenne= ((taille_min_sp.getValue() + taille_max_sp.getValue())/2);
+      Integer taille_moyenne= ((taille_min_sp.getValue() + taille_max_sp.getValue())/2);
       
       RadioButton choix_alchool ;
       RadioButton choix_tabac ;

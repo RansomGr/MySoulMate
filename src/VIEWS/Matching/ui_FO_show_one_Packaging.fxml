@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="239.0" prefWidth="224.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane layoutY="1.0" prefHeight="239.0" prefWidth="224.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text fill="#ae0649" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" textAlignment="CENTER" wrappingWidth="223.732421875">
+               <font>
+                  <Font name="Georgia" size="36.0" />
+               </font>
+            </Text>
+            <Text fill="#ff4848" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" textAlignment="CENTER" wrappingWidth="226.306640625" GridPane.rowIndex="1">
+               <font>
+                  <Font size="50.0" />
+               </font>
+            </Text>
+            <Text fill="#856b73" strokeType="OUTSIDE" strokeWidth="0.0" text="Contenu" textAlignment="CENTER" wrappingWidth="225.17578125" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Calibri" size="17.0" />
+               </font>
+            </Text>
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="159.0" text="Acheter" textAlignment="CENTER" textFill="#eb1b1b" translateX="35.0" GridPane.rowIndex="3">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
