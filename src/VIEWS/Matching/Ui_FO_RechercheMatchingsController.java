@@ -47,7 +47,7 @@ public class Ui_FO_RechercheMatchingsController implements Initializable {
 
     @FXML
     private void load_preferences_form(ActionEvent event) throws IOException {
-        Ui_MainFrame_FOController.load_preference_page();
+      //  Ui_MainFrame_FOController.load_preference_page();
     }
     
 }

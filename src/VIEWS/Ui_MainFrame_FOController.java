@@ -197,7 +197,7 @@ private int AnimationDuration;
          Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_Profil_FO.fxml"));
          Content_pane.getChildren().clear();
          Content_pane.getChildren().add(root);    
-    }
+    } 
     @FXML
     private void logout(ActionEvent event) throws IOException {
          MySoulMate.setLogged_in_Client(null);
