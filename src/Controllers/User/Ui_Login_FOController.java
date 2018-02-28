@@ -5,8 +5,14 @@
  */
 package Controllers.User;
 
+
+
+import ChatClient.ChatBoxController;
 import Entites.User.Client;
+import Listner.Listener;
 import Services.User.GestionnaireClient;
+import VIEWS.Ui_MainFrame_FOController;
+import com.messages.Status;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -31,6 +37,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import mysoulmate.MySoulMate;
+import sample.Controller;
 
 /**
  * FXML Controller class
@@ -95,8 +102,10 @@ public class Ui_Login_FOController implements Initializable {
 
     @FXML
     private void log_me_in(ActionEvent event) throws IOException, SQLException {
-        GestionnaireClient gc = new GestionnaireClient();
-        Client Logged_in_Client= ((List<Client>)gc.fetchAll()).stream().filter(Client->Client.getPseudo().equals(login_te.getText())&&Client.getMotdepasse().equals(password_te.getText())).findFirst().get();
+       
+        
+         GestionnaireClient gc = new GestionnaireClient();
+         Client Logged_in_Client= gc.fetchOneByLoginandPass(login_te.getText(),password_te.getText());
         if(Logged_in_Client!=null)
         {
             GestionnaireClient p = new GestionnaireClient();
@@ -110,9 +119,17 @@ public class Ui_Login_FOController implements Initializable {
             }
             else
             {
-              MySoulMate.setLogged_in_Client(Logged_in_Client);
-              Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/ui_MainFrame_FO.fxml"));
+              Logged_in_Client.setStatus(Status.ONLINE);
+              MySoulMate.setLogged_in_Client(Logged_in_Client); 
+              FXMLLoader  fmxlLoader=new FXMLLoader(getClass().getResource("/VIEWS/ui_MainFrame_FO.fxml"));
+              Parent root = fmxlLoader.load();
+              Ui_MainFrame_FOController Controller=fmxlLoader.<Ui_MainFrame_FOController>getController();
+              MySoulMate.setMainController(Controller);
               Scene scene = new Scene(root);
+              Ui_MainFrame_FOController con = fmxlLoader.<Ui_MainFrame_FOController>getController();
+              Listener listener = new Listener("localhost",9001,Logged_in_Client,con);
+              Thread x = new Thread(listener);
+              x.start();
               MySoulMate.getMainStage().setScene(scene);
             }
         }

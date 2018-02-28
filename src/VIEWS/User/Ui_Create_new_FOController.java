@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package VIEWS.User;
-import APIS.Uer.MySoulMateMail;
+import APIS.User.MySoulMateMail;
 import Entites.User.Client;
 import Services.User.GestionnaireClient;
 import java.io.BufferedReader;
@@ -101,7 +101,7 @@ public class Ui_Create_new_FOController implements Initializable {
            
       
         GestionnaireClient gc= new GestionnaireClient();
-        Client C= new Client(nom_tf.getText(),prenom_tf.getText(),password_tf.getText(),email_tf.getText(),Date.valueOf(date_naissance_dp.getValue()),pseudo_tf.getText());
+        Client C= new Client(nom_tf.getText(),prenom_tf.getText(),password_tf.getText(),email_tf.getText(),Date.valueOf(date_naissance_dp.getValue()),pseudo_tf.getText(),"man");
        if( gc.create(C)==1)
        {
              InformationWindow.show();

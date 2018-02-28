@@ -4,14 +4,13 @@
  * and open the template in the editor.
  */
 package Entites;
-
+import java.io.Serializable;
 import java.util.Objects;
-
 /**
  *
  * @author Ransom
  */
-public abstract class AbstractEntite // commit to jiléni and irou 
+public abstract class AbstractEntite implements Serializable // commit to jiléni and irou 
 {
     protected int ID ;//    this one is for you Nadia Trabelsi
     protected String nom;
@@ -21,6 +20,10 @@ public abstract class AbstractEntite // commit to jiléni and irou
   public String getNom() {return nom; }
   public void setNom(String nom) { this.nom = nom;  }
       
+  public AbstractEntite()
+  {
+      this.ID=22;
+  }
   public AbstractEntite(int ID,String nom)
   {
       this.ID=ID;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package APIS.Uer;
+package APIS.User;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;

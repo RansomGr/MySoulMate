@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 package Entites.Profil;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author Sofiene
  */
-public class Profil  {
+public class Profil implements Serializable {
     private int id;
   
    private  Caracteristique Caracteristique;
