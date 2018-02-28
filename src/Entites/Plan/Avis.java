@@ -21,6 +21,13 @@ public class Avis {
     private Float note;
     private Date dateh;
 
+    public Avis( Client client, String commentaire, Float note) {
+       
+        this.client = client;
+        this.commentaire = commentaire;
+        this.note = note;
+    }
+
     public Avis(Plan plan, Client client, String commentaire, Float note, Date dateh) {
         this.plan = plan;
         this.client = client;
@@ -114,6 +121,8 @@ public class Avis {
     public String toString() {
         return "Avis{" + "plan=" + plan + ", client=" + client + ", commentaire=" + commentaire + ", note=" + note + ", dateh=" + dateh + '}';
     }
+
+    
     
     
     

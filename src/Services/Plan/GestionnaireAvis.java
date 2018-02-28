@@ -54,11 +54,13 @@ public class GestionnaireAvis implements Gestionnaire {
               + " set Plan=?,Client=?,commentaire=?,note=?,dateh=?  where Client=? and Plan=?";
       
       PreparedStatement pst=DB.prepareStatement(query);
-       pst.setInt(1,a.getPlan().getID());
+      pst.setInt(1,a.getPlan().getID());
       pst.setInt(2,a.getClient().getID());
       pst.setString(3,a.getCommentaire());
       pst.setFloat(4,a.getNote());
       pst.setDate(5,a.getDateh());
+      pst.setInt(6,a.getPlan().getID());
+      pst.setInt(7,a.getClient().getID());
       
      
       return pst.executeUpdate();
@@ -72,7 +74,8 @@ public class GestionnaireAvis implements Gestionnaire {
     
     PreparedStatement pst=DB.prepareStatement(query);
     
-    //pst.setInt(1,a.getID());
+    pst.setInt(1,a.getPlan().getID());
+    pst.setInt(2,a.getClient().getID());
     
     return pst.executeUpdate();
     
@@ -126,4 +129,44 @@ public class GestionnaireAvis implements Gestionnaire {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-}
+    public List<Avis> fetchall(Plan p) throws SQLException{
+        String query=" select Avis.*,Entite.nom,Client.prenom from avis "
+                + " inner join Client on Client.Entite=Avis.Client "
+                + " inner join Entite on Entite.ID=Client.Entite "
+                + "  where Plan=? "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);
+          pst.setInt(1,p.getID());
+          ResultSet res = pst.executeQuery();
+          List<Avis>ListAvises = new ArrayList<>();
+           GestionnaireAvis a =new GestionnaireAvis();
+           GestionnaireClient gp=new GestionnaireClient();
+           List<Client>Clients =(List<Client>) gp.fetchAll();
+           
+           while(res.next()){
+               int Client1_ID=res.getInt("client");
+                Client client1=Clients.stream().filter(c->c.getID()==Client1_ID).findFirst().get();
+    
+             
+                ListAvises.add(new Avis(
+                   
+                p,
+                client1,
+               res.getString("commentaire"),
+            res.getFloat("Note"),
+                    res.getDate("dateh")
+                                     )
+           );
+           }
+          return ListAvises;    
+
+     
+     
+         
+           
+           }
+    
+    
+    
+    }
+    
+

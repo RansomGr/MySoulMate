@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.Plan.Ui_ListeAvis_BOController">
    <top>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -103,12 +103,11 @@
          <children>
             <TableView fx:id="table_view" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                  <TableColumn fx:id="id_comlun" prefWidth="102.0" text="Identifiant" />
-                <TableColumn fx:id="nomPlan_column" prefWidth="127.0" text="Nom Plan" />
-                <TableColumn fx:id="nomClient_column" prefWidth="122.0" text="Nom Client" />
-                  <TableColumn fx:id="Commentaire_column" prefWidth="225.0" text="Commentaire" />
-                  <TableColumn fx:id="Note_column" prefWidth="107.0" text="Note" />
-                  <TableColumn fx:id="Date_column" prefWidth="170.0" text="Date" />
+                <TableColumn fx:id="nomPlan_column" prefWidth="151.0" text="Nom Plan" />
+                <TableColumn fx:id="nomClient_column" prefWidth="186.0" text="Nom Client" />
+                  <TableColumn fx:id="Commentaire_column" prefWidth="251.0" text="Commentaire" />
+                  <TableColumn fx:id="Note_column" prefWidth="120.0" text="Note" />
+                  <TableColumn fx:id="Date_column" prefWidth="145.0" text="Date" />
               </columns>
             </TableView>
          </children>
