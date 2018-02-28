@@ -1,4 +1,8 @@
-package Chatclient;
+
+
+package ChatClient;
+
+
 import javax.sound.sampled.AudioFormat;
 import java.io.ByteArrayOutputStream;
 
