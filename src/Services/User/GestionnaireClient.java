@@ -65,7 +65,7 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
       pst.setInt(8,c.getBan());    
       pst.setInt(9, c.getProfil().getId());
       pst.setString(10, c.getGender());
-        pst.setInt(10, c.getID());
+      pst.setInt(11, c.getID());
       
       
       return pst.executeUpdate();

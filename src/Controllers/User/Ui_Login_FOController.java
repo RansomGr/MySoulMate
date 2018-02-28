@@ -110,7 +110,7 @@ public class Ui_Login_FOController implements Initializable {
         {
             GestionnaireClient p = new GestionnaireClient();
             
-            if(Logged_in_Client.getProfil().getPhoto().equals("no_PROF"))
+            if(Logged_in_Client.getProfil()==null)
             {
               MySoulMate.setLogged_in_Client(Logged_in_Client);
               Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_Profile_Creation.fxml"));
