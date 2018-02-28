@@ -95,7 +95,7 @@ import java.util.List;
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           while(res.next())// parcour du result set
           {
-              Plans.add(new Plan(res.getInt("entite"),res.getString("nom"),Plan.Type.getAsType(res.getString(1)),res.getString(2),res.getString(3),res.getInt(7),res.getString(5),res.getString(6)));
+              Plans.add(new Plan(res.getInt("entite"),res.getString("nom"),Plan.Type.getAsType(res.getString("type")),res.getString("email"),res.getString("siteweb"),res.getInt("telephone"),res.getString("description"),res.getString("photo")));
              //Type type, String email, String siteweb, int telephone, String description, String photo, int ID, String nom
            }
           return Plans;
@@ -113,7 +113,7 @@ import java.util.List;
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           while(res.next())// parcour du result set
           {
-                Plans.add(new Plan(res.getInt("entite"),res.getString("nom"),Plan.Type.getAsType(res.getString(1)),res.getString(2),res.getString(3),res.getInt(7),res.getString(5),res.getString(6)));
+           Plans.add(new Plan(res.getInt("entite"),res.getString("nom"),Plan.Type.getAsType(res.getString("type")),res.getString("email"),res.getString("siteweb"),res.getInt("telephone"),res.getString("description"),res.getString("photo")));
            }
           return Plans; //To change body of generated methods, choose Tools | Templates.
     }
@@ -135,7 +135,7 @@ import java.util.List;
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           while(res.next())// parcour du result set
           {
-          Plans.add(new Plan(res.getInt("entite"),res.getString("nom"),Plan.Type.getAsType(res.getString(1)),res.getString(2),res.getString(3),res.getInt(7),res.getString(5),res.getString(6)));
+           Plans.add(new Plan(res.getInt("entite"),res.getString("nom"),Plan.Type.getAsType(res.getString("type")),res.getString("email"),res.getString("siteweb"),res.getInt("telephone"),res.getString("description"),res.getString("photo")));
            }
           return Plans;
 
@@ -159,7 +159,7 @@ import java.util.List;
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           while(res.next())// parcour du result set
           {
-            Plans.add(new Plan(res.getInt("entite"),res.getString("nom"),Plan.Type.getAsType(res.getString(1)),res.getString(4),res.getString(3),res.getInt(7),res.getString(5),res.getString(6)));
+            Plans.add(new Plan(res.getInt("entite"),res.getString("nom"),Plan.Type.getAsType(res.getString("type")),res.getString("email"),res.getString("siteweb"),res.getInt("telephone"),res.getString("description"),res.getString("photo")));
            }
           return Plans;
     }

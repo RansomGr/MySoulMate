@@ -6,8 +6,10 @@
 package Services;
 
 import Entites.AbstractEntite;
+import Entites.Profil.Adresse;
 
 import static Services.Gestionnaire.DB;
+import Services.Profil.GestionnaireAdresse;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,12 +25,24 @@ public abstract class GestionnaireAbstractEntite implements Gestionnaire {
 
     @Override
     public int create(Object o) throws SQLException {
-        AbstractEntite e = (AbstractEntite)o;// down Cast
-        String query=" insert into Entite (nom) values (?) "; // preparation du query
-
-         PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
-         
-      
+         AbstractEntite e = (AbstractEntite)o;// down Cast
+         String query;
+         PreparedStatement pst;
+         GestionnaireAdresse gadd= new GestionnaireAdresse();
+        
+        if(e.getAdresse()!=null)
+        {
+             query="insert into Entite (nom,adresse) values (?,?) ";
+             pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
+             e.getAdresse().setID(((List<Adresse>)gadd.fetchAll()).stream().mapToInt(x->x.getID()).max().getAsInt());
+             pst.setInt(2, e.getAdresse().getID());
+            
+        }
+        else
+        {
+          query=" insert into Entite (nom) values (?) "; // preparation du query
+          pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
+         }
          pst.setString(1, e.getNom());//Binding du deuxieme valeur mentionner dans le query "?" 
    
          return pst.executeUpdate(); // Execution et retour du resultat du query 
@@ -68,7 +82,7 @@ public abstract class GestionnaireAbstractEntite implements Gestionnaire {
           while(res.next())// parcour du result set
           {
              AbstractEntites.add(new AbstractEntite(res.getInt(1),res.getString(2)) {});
-           }
+          }
           return AbstractEntites;
     }
 

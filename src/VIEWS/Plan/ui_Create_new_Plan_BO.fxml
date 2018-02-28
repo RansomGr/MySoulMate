@@ -90,6 +90,15 @@
                      </GridPane.margin>
                   </TextField>
                   <ImageView fitHeight="145.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                  <Label text="Localisation" GridPane.halignment="RIGHT">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <Button fx:id="localisation_btn" mnemonicParsing="false" onAction="#Geo_Localistaion" prefHeight="25.0" prefWidth="242.0" text="Choisir Localisation" GridPane.columnIndex="1" />
                </children>
             </GridPane>
             <Button fx:id="add_new_pb" mnemonicParsing="false" onAction="#add_new_plan" text="Ajouter" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -97,7 +106,7 @@
                   <Insets left="80.0" top="30.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="reset_pb" mnemonicParsing="false" onAction="#reset_fields" prefWidth="55.0" text="Reset" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <Button fx:id="reset_pb" mnemonicParsing="false" onAction="#reset_fields" prefHeight="25.0" prefWidth="103.0" text="Réinitialiser" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets right="80.0" top="30.0" />
                </GridPane.margin>

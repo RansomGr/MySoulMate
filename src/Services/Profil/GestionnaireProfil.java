@@ -106,5 +106,30 @@ public class GestionnaireProfil implements Gestionnaire {
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    public Profil fetchOneByID(int id) throws SQLException
+    {
+             
+          String query=" select id,caracteristique,photo,description,preference from profil  where id=?"    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          pst.setInt(1, id);
+          Profil Profil ;//  Creation du List Reclamation
+          //Caracteristique c = new Caracteristique(0, query, query, query, query, query, query, 0, query, query, query, query, query)
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          GestionnaireCaracteristique G= new GestionnaireCaracteristique();
+         res.next();
+              Caracteristique carac=null;
+              Caracteristique pref=null;
+              int id_char=res.getInt(2);
+              int id_pref=res.getInt(5);
+          if(id_char!=0)
+           carac =G.fetchOneById(id_char);
+          if(id_pref!=0)
+           pref =G.fetchOneById(id_pref);
+
+            Profil= new Profil(res.getInt(1),carac,res.getString(3),res.getString(4),pref) ;
+          return Profil;
+    }
+
+    
     
 }

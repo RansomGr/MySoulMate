@@ -5,13 +5,14 @@
  */
 package Entites.Profil;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author Sofiene
  */
-public class Caracteristique {
+public class Caracteristique implements Serializable {
     private int ID ;
 private String corpulence ;
 private String pilosite;

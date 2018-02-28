@@ -22,16 +22,17 @@
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="213.0" vgrow="NEVER" />
-    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="342.0" vgrow="ALWAYS" />
+    <RowConstraints maxHeight="221.0" minHeight="10.0" prefHeight="216.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="111.0" vgrow="NEVER" />
+    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="236.0" vgrow="ALWAYS" />
   </rowConstraints>
    <children>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+      <ScrollPane prefHeight="229.0" prefWidth="600.0" GridPane.rowIndex="2">
          <content>
-            <StackPane prefHeight="403.0" prefWidth="581.0" />
+            <VBox fx:id="actualite_pane" prefHeight="231.0" prefWidth="597.0" spacing="10.0" />
          </content>
       </ScrollPane>
-      <GridPane>
+      <GridPane prefHeight="170.0" prefWidth="600.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="192.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="446.0" minWidth="10.0" prefWidth="408.0" />
@@ -155,5 +156,42 @@
             </GridPane>
          </children>
       </GridPane>
+      <StackPane maxHeight="150.0" minHeight="99.0" minWidth="150.0" prefHeight="99.0" prefWidth="580.0" GridPane.rowIndex="1">
+         <children>
+            <GridPane prefHeight="150.0" prefWidth="560.0" style="-fx-border-color: blue;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="287.0" minWidth="10.0" prefWidth="84.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="287.0" minWidth="10.0" prefWidth="58.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="503.0" minWidth="10.0" prefWidth="445.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ImageView fx:id="client_photo" fitHeight="51.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@../../../../../../Downloads/indian_holi_festival_by_k23-wallpaper-1366x768.jpg" />
+                     </image>
+                     <GridPane.margin>
+                        <Insets left="2.0" />
+                     </GridPane.margin>
+                  </ImageView>
+                  <Label fx:id="user_name" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="15.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <TextArea fx:id="statut_tx" prefHeight="87.0" prefWidth="477.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button fx:id="Publier" mnemonicParsing="false" onAction="#publier_actualiter" text="Publier" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Button>
+               </children>
+            </GridPane>
+         </children>
+      </StackPane>
    </children>
 </GridPane>

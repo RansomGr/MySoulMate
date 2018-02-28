@@ -103,7 +103,18 @@ public class GestionnaireCaracteristique implements Gestionnaire{
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+    public Caracteristique fetchOneById(int id) throws SQLException
+    {
+          Caracteristique c ;
+          String query="select * from caracteristique where id=? ";
+          PreparedStatement pst=DB.prepareStatement(query);
+          pst.setInt(1, id);
+          ResultSet res=pst.executeQuery();
+           res.next();
+           c =new Caracteristique(res.getInt(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getString(7),Float.parseFloat(res.getString(8)),res.getString(9),res.getString(10),res.getString(11),res.getString(12),res.getString(13));
+
+          return c;
+    }
     
 
    

@@ -158,6 +158,7 @@ public class GoogleMapController implements Initializable, MapComponentInitializ
                 outt += output;
             }
             
+            
 
             return outt;
         } catch (MalformedURLException e) {

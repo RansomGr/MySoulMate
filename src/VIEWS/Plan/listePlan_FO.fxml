@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1">
-    
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="180.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.Plan.ListePlan_FOController">
+   <children>
+      <ImageView fx:id="image_img" fitHeight="189.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/default.png" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="text_ta" layoutY="183.0" prefHeight="217.0" prefWidth="180.0" text="yyy&#10;" />
+   </children>
 </AnchorPane>

@@ -70,7 +70,7 @@
                   <Insets left="80.0" top="30.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="reset_btn" mnemonicParsing="false" onAction="#reset" prefWidth="55.0" text="Reset" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <Button fx:id="reset_btn" mnemonicParsing="false" onAction="#reset" prefHeight="25.0" prefWidth="79.0" text="Réinitialiser" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets right="80.0" top="30.0" />
                </GridPane.margin>

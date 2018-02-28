@@ -5,8 +5,11 @@
  */
 package Entites.User;
 
+
 import Entites.AbstractEntite;
 import Entites.Profil.Profil;
+import com.messages.Status;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -14,7 +17,7 @@ import java.util.Objects;
  *
  * @author Ransom
  */
-public class Client extends AbstractEntite {
+public class Client extends AbstractEntite implements Serializable{
     protected String prenom ;
     protected String motdepasse ;
     protected String email;
@@ -23,8 +26,14 @@ public class Client extends AbstractEntite {
     protected Profil profil;
     protected int Activation ;
     protected int ban;
+    protected  Status status;
+    protected String gender ;
     
-       public Client(int ID,String nom,String prenom,String motdepasse,String email,Date date_naissance,String pseudo)
+    public Client()
+    {
+        super();
+    }
+    public Client(int ID,String nom,String prenom,String motdepasse,String email,Date date_naissance,String pseudo)
     {
         super(ID,nom);
         this.date_naissance=date_naissance;
@@ -32,9 +41,9 @@ public class Client extends AbstractEntite {
         this.motdepasse=motdepasse;
         this.pseudo=pseudo;
         this.email=email;
+      
     }
-
-    public Client(int ID, String nom,String prenom, String motdepasse, String email, Date date_naissance, String pseudo, Profil profil ,int Activation,int ban) {
+    public Client(int ID, String nom,String prenom, String motdepasse, String email, Date date_naissance, String pseudo, Profil profil ,int Activation,int ban,String gender) {
         super(ID, nom);
         this.prenom = prenom;
         this.motdepasse = motdepasse;
@@ -44,9 +53,9 @@ public class Client extends AbstractEntite {
         this.profil = profil;
         this.Activation=Activation;
         this.ban=ban;
-    }
-       
-          public Client(String nom,String prenom,String motdepasse,String email,Date date_naissance,String pseudo)
+        this.gender=gender;
+    }  
+          public Client(String nom,String prenom,String motdepasse,String email,Date date_naissance,String pseudo,String gender)
     {
           super(-1,nom);
           this.date_naissance=date_naissance;
@@ -54,6 +63,7 @@ public class Client extends AbstractEntite {
           this.motdepasse=motdepasse;
           this.pseudo=pseudo;
           this.email=email;
+          this.gender=gender;
     }
     @Override
     public String toString() {
@@ -173,7 +183,22 @@ public class Client extends AbstractEntite {
         this.ban = ban;
     }
     
-    
+       public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     
             
     

@@ -6,6 +6,7 @@
 package Entites.Profil;
 
 import Entites.AbstractEntite;
+import Entites.User.Client;
 import java.util.Objects;
 
 /**
@@ -13,23 +14,76 @@ import java.util.Objects;
  * @author Sofiene
  */
 public class Actualite {
-    private int ID;
-private AbstractEntite entite ; 
+private int ID;
+private Client client ; 
 private String contenu ; 
 private String photo;
 
+    public Actualite(int ID, Client client, String contenu, String photo) {
+        this.ID = ID;
+        this.client = client;
+        this.contenu = contenu;
+        this.photo = photo;
+    }
+    public Actualite(int ID ,String contenu ,String photo)
+    {
+        this.ID=ID;
+        this.contenu=contenu;
+        this.photo=photo;
+    }
+
+
+
+    public Actualite(Client client, String contenu, String photo) {
+        this.client = client;
+        this.contenu = contenu;
+        this.photo = photo;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public String getContenu() {
+        return contenu;
+    }
+
+    public void setContenu(String contenu) {
+        this.contenu = contenu;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     @Override
     public String toString() {
-        return "Actualite{" + "ID=" + ID + ", entite=" + entite + ", contenu=" + contenu + ", photo=" + photo + '}';
+        return "Actualite{" + "ID=" + ID + ", client=" + client + ", contenu=" + contenu + ", photo=" + photo + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 67 * hash + this.ID;
-        hash = 67 * hash + Objects.hashCode(this.entite);
-        hash = 67 * hash + Objects.hashCode(this.contenu);
-        hash = 67 * hash + Objects.hashCode(this.photo);
+        hash = 71 * hash + this.ID;
+        hash = 71 * hash + Objects.hashCode(this.client);
+        hash = 71 * hash + Objects.hashCode(this.contenu);
+        hash = 71 * hash + Objects.hashCode(this.photo);
         return hash;
     }
 
@@ -54,49 +108,13 @@ private String photo;
         if (!Objects.equals(this.photo, other.photo)) {
             return false;
         }
-        if (!Objects.equals(this.entite, other.entite)) {
+        if (!Objects.equals(this.client, other.client)) {
             return false;
         }
         return true;
     }
 
-    public int getID() {
-        return ID;
-    }
 
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public AbstractEntite getEntite() {
-        return entite;
-    }
-
-    public void setEntite(AbstractEntite entite) {
-        this.entite = entite;
-    }
-
-    public String getContenu() {
-        return contenu;
-    }
-
-    public void setContenu(String contenu) {
-        this.contenu = contenu;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    public Actualite(int ID, AbstractEntite entite, String contenu, String photo) {
-        this.ID = ID;
-        this.entite = entite;
-        this.contenu = contenu;
-        this.photo = photo;
-    }
+    
     
 }

@@ -73,6 +73,7 @@ public class Ui_FO_AjouterCaracteristiqueController implements Initializable {
     @FXML
     private Button localisation_btn;
     
+    
     /**
      * Initializes the controller class.
      */

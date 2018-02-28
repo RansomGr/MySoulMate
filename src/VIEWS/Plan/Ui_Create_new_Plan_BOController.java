@@ -11,6 +11,7 @@ import Entites.Plan.Plan.Type;
 import Services.Plan.GestionnairePlan;
 
 import java.io.File;
+import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.net.URL;
 import java.sql.SQLException;
@@ -23,7 +24,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import java.util.regex.*;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -32,6 +36,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import mysoulmate.MySoulMate;
 
 /**
@@ -86,7 +91,8 @@ public class Ui_Create_new_Plan_BOController implements Initializable {
     private Button add_new_pb;
     @FXML
     private Button reset_pb;
-
+   @FXML
+    private Button localisation_btn;
     /**
      * Initializes the controller class.
      */
@@ -154,11 +160,12 @@ public class Ui_Create_new_Plan_BOController implements Initializable {
                Optional<ButtonType> result = ConfirmWindow.showAndWait();
                      if(result.isPresent()&&result.get()==Oui)
                      {   
-                       if( Gp.create(new Plan(nom_tf.getText(),Plan.Type.getAsType(type_cb.getValue()),email_tf.getText(),siteweb_tf.getText(),Integer.parseInt(telephone_tf.getText()),description_ta.getText(),photo_img.getText()))==1)
-                       {
+                       if( Gp.update(new Plan(Plan_to_be_modified.getID(),nom_tf.getText(),Plan.Type.getAsType(type_cb.getValue()),email_tf.getText(),siteweb_tf.getText(),Integer.parseInt(telephone_tf.getText()),description_ta.getText(),photo_img.getText()))==1)
+                       {System.out.println("modifiing ....");
                            InformationWindow.setContentText("Plan modifié avec succée !");
                            InformationWindow.show();
                            OperationMode="Ajouter";
+                           Plan_to_be_modified=new Plan(Plan_to_be_modified.getID(),nom_tf.getText(),Plan.Type.getAsType(type_cb.getValue()),email_tf.getText(),siteweb_tf.getText(),Integer.parseInt(telephone_tf.getText()),description_ta.getText(),photo_img.getText());
                        }
                        else
                           ErrorWindow.show();   
@@ -225,6 +232,14 @@ photo_img.setText(img.getAbsolutePath());
     private void update_button()
     {
         add_new_pb.setText(OperationMode);
+    }
+    @FXML
+    private void Geo_Localistaion(ActionEvent event) throws IOException {
+        Stage GMapsStage = new Stage();
+        Parent root= FXMLLoader.load(getClass().getResource("/APIS/Plan/GoogleMap.fxml"));
+        Scene Gmaps = new Scene(root);
+        GMapsStage.setScene(Gmaps);
+        GMapsStage.show();   
     }
 
   

@@ -8,7 +8,6 @@ package Services.User;
 import Entites.AbstractEntite;
 import Entites.Profil.Profil;
 import Entites.User.Client;
-import Entites.User.Reclamation;
 import Services.Gestionnaire;
 import static Services.Gestionnaire.DB;
 import Services.GestionnaireAbstractEntite;
@@ -30,7 +29,7 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
       super.create(o);
     
       Client c=(Client)o;
-      String query="insert into Client(Entite,prenom,motdepasse,email,date_naissane,pseudo) values(?,?,?,?,?,?)";
+      String query="insert into Client(Entite,prenom,motdepasse,email,date_naissane,pseudo,gender) values(?,?,?,?,?,?,?)";
       PreparedStatement pst= DB.prepareStatement(query);
       GestionnaireAbstractEntite g= new GestionnaireAbstractEntite() {};
       List<AbstractEntite>Entities =(List<AbstractEntite>) g.fetchAll();
@@ -41,6 +40,7 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
       pst.setString(4,c.getEmail());
       pst.setDate(5,c.getDate_naissance());
       pst.setString(6,c.getPseudo());
+      pst.setString(7, c.getGender());
       
       return pst.executeUpdate();
       
@@ -51,7 +51,7 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
         
       super.update(o);
       Client c=(Client)o;
-      String query ="update Client set Entite=?,prenom=?,motdepasse=?,email=?,date_naissane=?,pseudo=? ,activation=?, ban=?,profil=? where Entite=?";
+      String query ="update Client set Entite=?,prenom=?,motdepasse=?,email=?,date_naissane=?,pseudo=? ,activation=?, ban=?,profil=?,gender=?  where Entite=?";
       
       PreparedStatement pst=DB.prepareStatement(query);
       
@@ -64,6 +64,7 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
       pst.setInt(7,c.getActivation());
       pst.setInt(8,c.getBan());    
       pst.setInt(9, c.getProfil().getId());
+      pst.setString(10, c.getGender());
         pst.setInt(10, c.getID());
       
       
@@ -86,7 +87,7 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
 
     @Override
     public List<? extends Object> fetchAll() throws SQLException {
-           String query=" select Entite.nom as nom,Client.*  from  Client inner join Entite on Client.Entite=Entite.ID  "    ; // preparation du requete sql
+          String query=" select Entite.nom as nom,Client.*  from  Client inner join Entite on Client.Entite=Entite.ID  "    ; // preparation du requete sql
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Client>Clients = new ArrayList<>();//  Creation du List Reclamation
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
@@ -98,11 +99,13 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
              Profil profil= new Profil();
              
              if(Id_profil!=0)
-              profil=((List<Profil>)gp.fetchAll()).stream().filter(x->x.getId()==Id_profil).findAny().get();
+              profil=gp.fetchOneByID(Id_profil);
              int is_activated=res.getInt(9);
              if(is_activated==1)
-             profil= ((List<Profil>)gp.fetchAll()).stream().filter(x->x.getId()==Id_profil).findFirst().get();
-             Clients.add(new Client(res.getInt("entite"),res.getString("nom"),res.getString(3),res.getString(4),res.getString(5),res.getDate(6),res.getString(7),profil,is_activated,res.getInt(9)));
+             profil=gp.fetchOneByID(Id_profil);
+             Clients.add(
+                     new Client(res.getInt("entite"),res.getString("nom"),res.getString(3),res.getString(4),res.getString(5),res.getDate(6),res.getString(7),profil,is_activated,res.getInt(9),res.getString("gender")
+                     ));
            }
           return Clients;
     }
@@ -164,6 +167,47 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
     @Override
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    public Client fetchOneByLoginandPass(String login ,String pass) throws SQLException
+    {
+        Client Client ;
+           String query=" select Entite.nom as nom,Client.*  from  Client inner join Entite on Client.Entite=Entite.ID where pseudo =? and motdepasse =? "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          pst.setString(1, login);
+          pst.setString(2, pass);
+          Profil profil= null;
+          GestionnaireProfil gp = new GestionnaireProfil();
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          res.next();
+          
+          int Id_profil=res.getInt(8);
+          int is_activated=res.getInt(9);
+          if(is_activated==1&&Id_profil!=0)
+           profil=gp.fetchOneByID(Id_profil);
+       
+          Client=  new Client(res.getInt("entite"),res.getString("nom"),res.getString(3),res.getString(4),res.getString(5),res.getDate(6),res.getString(7),profil,is_activated,res.getInt(9),res.getString("gender"));
+
+        return Client;
+    }
+        public Client fetchOneById(int id) throws SQLException
+    {
+        Client Client ;
+           String query=" select Entite.nom as nom,Client.*  from  Client inner join Entite on Client.Entite=Entite.ID where client.Entite= ? "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          pst.setInt(1, id);
+          Profil profil= null;
+          GestionnaireProfil gp = new GestionnaireProfil();
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          res.next();
+          
+          int Id_profil=res.getInt(8);
+          int is_activated=res.getInt(9);
+          if(is_activated==1&&Id_profil!=0)
+           profil=gp.fetchOneByID(Id_profil);
+       
+          Client=  new Client(res.getInt("entite"),res.getString("nom"),res.getString(3),res.getString(4),res.getString(5),res.getDate(6),res.getString(7),profil,is_activated,res.getInt(9),res.getString("gender"));
+
+        return Client;
     }
     
 }

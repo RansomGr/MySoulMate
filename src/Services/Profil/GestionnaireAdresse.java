@@ -8,7 +8,9 @@ package Services.Profil;
 import Entites.Profil.Adresse;
 import Services.Gestionnaire;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -63,7 +65,16 @@ Adresse a=(Adresse)o;
 
     @Override
     public List<? extends Object> fetchAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+          String query=" select * from entite "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          List<Adresse>AbstractEntites = new ArrayList<>();//  Creation du List Reclamation
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          while(res.next())// parcour du result set
+          {
+             AbstractEntites.add(new Adresse(res.getInt(1),res.getInt(2),res.getString(3),res.getInt(4),res.getString(5)));
+          }
+          return AbstractEntites;
     }
 
     @Override
