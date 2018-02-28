@@ -47,14 +47,10 @@
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pilosité:" GridPane.columnIndex="1" GridPane.rowIndex="9" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Origine:" GridPane.columnIndex="1" GridPane.rowIndex="10" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Profession" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Age:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Taille" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-      <ComboBox fx:id="age_min_cb" prefHeight="25.0" prefWidth="0.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <ComboBox fx:id="age_max_cb" prefHeight="25.0" prefWidth="15.0" translateX="7.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="de" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <ComboBox fx:id="silouhette_cb" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-      <ComboBox fx:id="pilosite_cb" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-      <ComboBox fx:id="origine_cb" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+      <ComboBox fx:id="silouhette_cb" prefWidth="150.0" promptText="choisir" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+      <ComboBox fx:id="pilosite_cb" prefWidth="150.0" promptText="choisir" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+      <ComboBox fx:id="origine_cb" prefWidth="150.0" promptText="choisir" GridPane.columnIndex="3" GridPane.rowIndex="10" />
       <TextField fx:id="profession_tf" GridPane.columnIndex="3" GridPane.rowIndex="11" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Alcool" GridPane.columnIndex="1" GridPane.rowIndex="5" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tabac" GridPane.columnIndex="1" GridPane.rowIndex="4" />
@@ -63,22 +59,19 @@
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Caractère" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Statut" GridPane.columnIndex="1" GridPane.rowIndex="14" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Régime Alimentaire" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <ComboBox fx:id="caractere_cb" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-      <Spinner fx:id="taille_min_sp" prefHeight="25.0" prefWidth="46.0" translateX="45.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1," translateX="30.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-      <ComboBox fx:id="cheveux_cb" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="12" />
-      <ComboBox fx:id="yeux_cb" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="13" />
-      <ComboBox fx:id="statut_cb" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="14" />
-      <ComboBox fx:id="cuisine_cb" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="à" translateX="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+      <ComboBox fx:id="caractere_cb" prefWidth="150.0" promptText="choisir" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+      <Spinner fx:id="taille_min_sp" editable="true" prefHeight="25.0" prefWidth="56.0" translateX="32.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+      <ComboBox fx:id="cheveux_cb" prefWidth="150.0" promptText="choisir" GridPane.columnIndex="3" GridPane.rowIndex="12" />
+      <ComboBox fx:id="yeux_cb" prefWidth="150.0" promptText="choisir" GridPane.columnIndex="3" GridPane.rowIndex="13" />
+      <ComboBox fx:id="statut_cb" prefWidth="150.0" promptText="choisir" GridPane.columnIndex="3" GridPane.rowIndex="14" />
+      <ComboBox fx:id="cuisine_cb" prefWidth="150.0" promptText="choisir" GridPane.columnIndex="3" GridPane.rowIndex="6" />
       <Button fx:id="valider_btn" mnemonicParsing="false" onAction="#Valider" text="Valider" GridPane.columnIndex="5" GridPane.rowIndex="17" />
       <Button fx:id="reset_btn" mnemonicParsing="false" onAction="#Reset" text="Reset" GridPane.columnIndex="3" GridPane.rowIndex="17" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prendre en compte " GridPane.columnIndex="1" GridPane.rowIndex="15" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="à" translateX="100.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1," translateX="1.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
-      <Spinner fx:id="taille_max_sb" prefHeight="25.0" prefWidth="46.0" translateX="12.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+      <Spinner fx:id="taille_max_sp" editable="true" prefHeight="25.0" prefWidth="58.0" translateX="12.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ville" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <ComboBox fx:id="ville_cb" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+      <ComboBox fx:id="ville_cb" prefWidth="150.0" promptText="choisir" GridPane.columnIndex="3" GridPane.rowIndex="3" />
       <RadioButton fx:id="tabac_oui_rb" mnemonicParsing="false" text="Oui" GridPane.columnIndex="3" GridPane.rowIndex="4" />
       <RadioButton fx:id="tabac_non_rb" mnemonicParsing="false" text="Non" translateX="58.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
       <RadioButton fx:id="tabac_indifferent_rb" mnemonicParsing="false" text="Indifférent" GridPane.columnIndex="5" GridPane.rowIndex="4" />
@@ -87,5 +80,7 @@
       <RadioButton fx:id="alcool_indifferent_rb" mnemonicParsing="false" text="Indifférent" GridPane.columnIndex="5" GridPane.rowIndex="5" />
       <CheckBox fx:id="horoscope_cb" mnemonicParsing="false" prefHeight="17.0" prefWidth="140.0" text="Horoscope" GridPane.columnIndex="3" GridPane.rowIndex="15" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="de" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1," translateX="20.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1," GridPane.columnIndex="5" GridPane.rowIndex="7" />
    </children>
 </GridPane>

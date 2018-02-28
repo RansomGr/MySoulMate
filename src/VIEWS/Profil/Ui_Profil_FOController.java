@@ -74,7 +74,7 @@ public class Ui_Profil_FOController implements Initializable {
         yeux_lb.setText(profile_owner.getProfil().getCaracteristique().getYeux());
         cheveux_lb.setText(profile_owner.getProfil().getCaracteristique().getCheveux());
                 alcool_lb.setText(profile_owner.getProfil().getCaracteristique().getAlcool());
-                        tabac_lb.setText(profile_owner.getProfil().getCaracteristique().getTabac());
+                 tabac_lb.setText(profile_owner.getProfil().getCaracteristique().getTabac());
             taille_lb.setText(Float.toString(profile_owner.getProfil().getCaracteristique().getTaille()));
         statut_lb.setText(profile_owner.getProfil().getCaracteristique().getStatut());
                 cuisine_lb.setText(profile_owner.getProfil().getCaracteristique().getCuisine());

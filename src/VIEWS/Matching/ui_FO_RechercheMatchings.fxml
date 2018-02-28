@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.Matching.Ui_FO_RechercheMatchingsController">
+   <children>
+      <GridPane prefHeight="399.0" prefWidth="600.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="362.0" minHeight="10.0" prefHeight="362.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <GridPane>
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="132.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="397.0" minWidth="10.0" prefWidth="342.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="125.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Hyperlink fx:id="achat_packaging_lien" onAction="#load_achat_packaging" prefHeight="39.0" prefWidth="344.0" text="Voir plus de compatibilité!" textAlignment="CENTER" textFill="#f86666" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Georgia" size="24.0" />
+                     </font>
+                  </Hyperlink>
+                  <Button fx:id="preferences_btn" mnemonicParsing="false" onAction="#load_preferences_form" prefHeight="25.0" prefWidth="117.0" text="Mes préférences" GridPane.columnIndex="2" />
+               </children>
+            </GridPane>
+            <ScrollPane prefHeight="220.0" prefWidth="477.0" GridPane.rowIndex="1">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="361.0" prefWidth="585.0" />
+              </content>
+            </ScrollPane>
+         </children>
+      </GridPane>
+   </children>
+</StackPane>
