@@ -7,6 +7,7 @@ package testsof;
 
 import Entites.Profil.Adresse;
 import Services.Profil.GestionnaireAdresse;
+import Services.Profil.GestionnaireProfil;
 import java.sql.SQLException;
 
 /**
@@ -26,12 +27,11 @@ public class test {
                 Adresse C= new Adresse(12,3,"FAZEET",1114558,"sousse");
 
       
-        GestionnaireAdresse ga= new GestionnaireAdresse();
-        ga.update(C);
-       
+        GestionnaireProfil ga= new GestionnaireProfil();
+        ga.fetchAll().forEach(System.out::println);
            //    ga.create(b);
           // ga.remove(b);
-           ga.remove(b);//
+         //  ga.remove(b);//
            
                 
         
