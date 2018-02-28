@@ -93,7 +93,7 @@ public class Ui_Plan_FOController implements Initializable {
             
         } catch (SQLException ex) {
             Logger.getLogger(Ui_Plan_FOController.class.getName()).log(Level.SEVERE, null, ex);
-        
+        }
        nomP_label.setText(plan.getNom());
        notet_label.setText(avises.stream().mapToDouble(e->e.getNote()).average().toString());
        description_ta.setText(plan.getDescription());

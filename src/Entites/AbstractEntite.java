@@ -5,6 +5,7 @@
  */
 package Entites;
 
+import Entites.Profil.Adresse;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -16,15 +17,23 @@ public abstract class AbstractEntite implements Serializable // commit to jilén
 {
     protected int ID ;//    this one is for you Nadia Trabelsi
     protected String nom;
+    protected Adresse adresse;
 
   public int getID() {return ID;}
   public void setID(int ID) { this.ID = ID; }
   public String getNom() {return nom; }
   public void setNom(String nom) { this.nom = nom;  }
-      
+  public Adresse getAdresse() {return adresse; }
+  public void setAdresse(Adresse adresse) { this.adresse = adresse;  }
   public AbstractEntite()
   {
       this.ID=22;
+  }
+   public AbstractEntite(int ID,String nom,Adresse adresse)
+  {
+      this.ID=ID;
+      this.nom=nom;
+      this.adresse=adresse;
   }
   public AbstractEntite(int ID,String nom)
   {
