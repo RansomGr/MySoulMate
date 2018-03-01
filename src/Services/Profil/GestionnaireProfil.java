@@ -125,6 +125,8 @@ public class GestionnaireProfil implements Gestionnaire {
            carac =G.fetchOneById(id_char);
           if(id_pref!=0)
            pref =G.fetchOneById(id_pref);
+          System.out.println("bref = " +id+ pref);
+                  
 
             Profil= new Profil(res.getInt(1),carac,res.getString(3),res.getString(4),pref) ;
           return Profil;
