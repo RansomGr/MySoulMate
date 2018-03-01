@@ -182,7 +182,7 @@
                            <graphic>
                               <ImageView fitHeight="90.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/menu_icons/unactivated/matching.png" />
+                                    <Image url="@../images/menu_icons/unactivated/accueil.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -223,14 +223,14 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button maxWidth="-Infinity" mnemonicParsing="false" prefHeight="80.0" prefWidth="50.0" style="-fx-background-color: #1C1C1C;" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <Button fx:id="menu_matching_btn" maxWidth="-Infinity" mnemonicParsing="false" onAction="#load_matching_page" prefHeight="80.0" prefWidth="50.0" style="-fx-background-color: #1C1C1C;" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <padding>
                               <Insets bottom="-20.0" left="-20.0" right="-20.0" top="-20.0" />
                            </padding>
                            <graphic>
                               <ImageView fitHeight="90.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/menu_icons/unactivated/accueil.png" />
+                                    <Image url="@../images/menu_icons/unactivated/matching.png" />
                                  </image>
                               </ImageView>
                            </graphic>

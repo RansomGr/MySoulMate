@@ -104,6 +104,11 @@ private int AnimationDuration;
     @FXML
     private Label msg_count;
     private boolean messages_shown;
+    @FXML
+    private Button menu_matching_btn;
+    @FXML
+    private Button messages_btn;
+  
 
     /**
      * Initializes the controller class.
@@ -114,6 +119,7 @@ private int AnimationDuration;
        conversations= new HashMap();
        Shown=true;
        messages_shown=false;
+        
        AnimationDuration=400;//ms
        static_chat_windows = new ArrayList<>();
        messages.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -492,4 +498,21 @@ private int AnimationDuration;
        chat_windows.getChildren().remove(chat_windows.getChildren().get(static_chat_windows.indexOf(controller)));
        static_chat_windows.remove(controller);
      }
+
+       @FXML
+    private void load_matching_page(ActionEvent event) throws IOException {
+         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
+         
+         Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Matching/ui_FO_RechercheMatchings.fxml"));
+         Content_pane.getChildren().clear();
+         Content_pane.getChildren().add(root);  
+    }
+    
+    @FXML
+    public  void load_preference_page() throws IOException {
+         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
+         Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Matching/ui_FO_AjouterPreference.fxml"));
+         Content_pane.getChildren().clear();
+         Content_pane.getChildren().add(root);  
+    }
 }
