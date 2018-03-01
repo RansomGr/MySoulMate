@@ -33,7 +33,7 @@ public class GestionnaireEvenement extends GestionnaireAbstractEntite implements
       PreparedStatement pst= DB.prepareStatement(query);
       pst.setInt(1, evt.getID());
       pst.setDate(2,evt.getDate_evenement());
-      pst.setDate(3,evt.getHeure());
+      pst.setString(3,evt.getHeure());
       pst.setString(4,evt.getType_evenement());
       
       return pst.executeUpdate();
@@ -49,7 +49,7 @@ public class GestionnaireEvenement extends GestionnaireAbstractEntite implements
       
       pst.setInt(1, evt.getID());
       pst.setDate(2,evt.getDate_evenement());
-      pst.setDate(3,evt.getHeure());
+      pst.setString(3,evt.getHeure());
       pst.setString(4,evt.getType_evenement());
       
       return pst.executeUpdate(); 
@@ -76,7 +76,7 @@ public class GestionnaireEvenement extends GestionnaireAbstractEntite implements
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           while(res.next())// parcour du result set
           {
-             Evenements.add(new Evenement(res.getDate("date_evennement"),res.getDate(3),res.getString(5),res.getInt("entite"),res.getString("nom")));
+             Evenements.add(new Evenement(res.getDate("date_evennement"),res.getString(3),res.getString(5),res.getInt("entite"),res.getString("nom")));
            }
           return Evenements;
     }

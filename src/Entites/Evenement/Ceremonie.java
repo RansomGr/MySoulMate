@@ -64,7 +64,7 @@ public class Ceremonie extends EvenementGroup{
         return true;
     }
 
-    public Ceremonie(String type, int nb_max, Client organisation, Date heure, String description, Plan plan, int ID, String nom) {
+    public Ceremonie(String type, int nb_max, Client organisation, String heure, String description, Plan plan, int ID, String nom) {
         super(organisation, heure, description, plan, ID, nom);
         this.type = type;
         this.nb_max = nb_max;

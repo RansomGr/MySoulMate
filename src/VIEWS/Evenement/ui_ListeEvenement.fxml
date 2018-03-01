@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.Evenement.Ui_ListeEvenementController">
    <top>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -33,27 +33,36 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField prefHeight="25.0" prefWidth="313.0" promptText="Recherche par ... ,... ,... " GridPane.columnIndex="1" />
+                  <TextField fx:id="recherc_txf" prefHeight="25.0" prefWidth="313.0" promptText="Recherche par ... ,... ,... " GridPane.columnIndex="1" />
                   <Label text="Recherche Dynamique" textAlignment="RIGHT" GridPane.halignment="RIGHT">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <CheckBox mnemonicParsing="false" text="Operations Avancé" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                  <CheckBox fx:id="optav_chb" mnemonicParsing="false" text="Operations Avancé" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                </children>
+            </GridPane>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="536.0" minWidth="10.0" prefWidth="521.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.0" minWidth="10.0" prefWidth="154.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
             </GridPane>
          </children>
       </GridPane>
    </top>
    <left>
-      <TableView prefHeight="363.0" prefWidth="692.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="lstevt_tbl" prefHeight="363.0" prefWidth="692.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="133.0" text="Nom évènement" />
-            <TableColumn prefWidth="106.0" text="Type évènement" />
-          <TableColumn prefWidth="124.0" text="Date évènement" />
-            <TableColumn prefWidth="116.0" text="Liste des invités" />
-            <TableColumn prefWidth="100.0" text="Emplacement" />
-            <TableColumn prefWidth="93.0" text="Description" />
+          <TableColumn fx:id="nomevt_cl" prefWidth="133.0" text="Nom évènement" />
+            <TableColumn fx:id="typeevt_cl" prefWidth="106.0" text="Type évènement" />
+          <TableColumn fx:id="dateevt_cl" prefWidth="124.0" text="Date évènement" />
+            <TableColumn fx:id="ivtevt_cl" prefWidth="116.0" text="Liste des invités" />
+            <TableColumn fx:id="plan_cl" prefWidth="100.0" text="Emplacement" />
+            <TableColumn fx:id="descrip_cl" prefWidth="93.0" text="Description" />
         </columns>
       </TableView>
    </left>

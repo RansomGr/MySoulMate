@@ -35,11 +35,9 @@ public class GestionnairePlanEtCeremonie implements Gestionnaire{
 
     @Override
     public int update(Object o) throws SQLException {
-         PlanEtCeremonie plancer=(PlanEtCeremonie)o;
-        String query ="update ceremonie_et_plan set evenement_groupe=?,plan_ceremonie=? where evenement_groupe=?,plan_ceremonie=?";
-      
-      PreparedStatement pst=DB.prepareStatement(query);
-      
+    PlanEtCeremonie plancer=(PlanEtCeremonie)o;
+    String query ="update ceremonie_et_plan set evenement_groupe=?,plan_ceremonie=? where evenement_groupe=?,plan_ceremonie=?";
+    PreparedStatement pst=DB.prepareStatement(query);
       pst.setInt(1, plancer.getEvtgroup().getID());
       pst.setInt(2,plancer.getPlan().getID());
       
@@ -52,9 +50,8 @@ public class GestionnairePlanEtCeremonie implements Gestionnaire{
         String query=" delete from ceremonie_et_plan where evenement_groupe=?,plan_ceremonie=? ";
     
     PreparedStatement pst=DB.prepareStatement(query);
-    
     pst.setInt(1, plancer.getEvtgroup().getID());
-      pst.setInt(2,plancer.getPlan().getID());
+    pst.setInt(2,plancer.getPlan().getID());
     
     return pst.executeUpdate();
     }

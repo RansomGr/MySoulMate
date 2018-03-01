@@ -5,6 +5,7 @@
  */
 package Services.Evenement;
 
+import Entites.Evenement.Evenement;
 import Entites.Evenement.EvenementGroup;
 import Entites.Plan.Plan;
 import Entites.User.Client;
@@ -21,19 +22,30 @@ import java.util.List;
  *
  * @author dellpro
  */
-public class GestionnaireEvenementGroup implements Gestionnaire{
+public class GestionnaireEvenementGroup extends GestionnaireEvenement implements Gestionnaire {
 
     @Override
     public int create(Object o) throws SQLException {
-        
+        super.create(o);
     EvenementGroup evtgrp=(EvenementGroup)o;
-      String query="insert into evenement_group(Entite,organisateur,heure,description,plan) values(?,?,?,?,?)";
-      PreparedStatement pst= DB.prepareStatement(query);
+    String query;
+     PreparedStatement pst;
+    if(evtgrp.getOrganisateur()==null)
+    {
+          query="insert into evenement_group(evenement,heure,description,plan) values(?,?,?,?)";
+           pst= DB.prepareStatement(query);
+    }
+    else
+    {
+       query="insert into evenement_group(evenement,heure,description,plan,organisateur) values(?,?,?,?,?)";
+        pst= DB.prepareStatement(query);
+        pst.setInt(5,evtgrp.getOrganisateur().getID());
+    }
+      
       pst.setInt(1, evtgrp.getID());
-      pst.setInt(2,evtgrp.getOrganisateur().getID());
-      pst.setDate(3,evtgrp.getHeure());
-      pst.setString(4,evtgrp.getDescription());
-      pst.setInt(5,evtgrp.getPlan().getID());
+      pst.setString(2,evtgrp.getHeure());
+      pst.setString(3,evtgrp.getDescription());
+      pst.setInt(4,evtgrp.getPlan().getID());
       
       return pst.executeUpdate();}
 
@@ -44,9 +56,9 @@ public class GestionnaireEvenementGroup implements Gestionnaire{
       
       PreparedStatement pst=DB.prepareStatement(query);
       
-       pst.setInt(1, evtgrp.getID());
+      pst.setInt(1, evtgrp.getID());
       pst.setInt(2,evtgrp.getOrganisateur().getID());
-      pst.setDate(3,evtgrp.getHeure());
+      pst.setString(3,evtgrp.getHeure());
       pst.setString(4,evtgrp.getDescription());
       pst.setInt(5,evtgrp.getPlan().getID());
       
@@ -59,7 +71,6 @@ public class GestionnaireEvenementGroup implements Gestionnaire{
     String query=" delete from evenement_group where Entite=? ";
     
     PreparedStatement pst=DB.prepareStatement(query);
-    
     pst.setInt(1,evtgrp.getID());
     
     return pst.executeUpdate();
@@ -83,7 +94,7 @@ public class GestionnaireEvenementGroup implements Gestionnaire{
              int Client_ID_in_question =res.getInt("organisateur");
              EvenementGroups.add(new EvenementGroup(
                      clients.stream().filter(x->x.getID()==Client_ID_in_question).findFirst().get(),// fetching client
-                     res.getDate("heure"),
+                     res.getString("heure"),
                      res.getString(3),
                      p,
                      res.getInt("evennement"),

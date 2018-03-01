@@ -212,6 +212,35 @@ private int AnimationDuration;
          MySoulMate.getMainStage().setScene(sene);
     }
     @FXML
+    private void load_event(ActionEvent event) throws IOException {
+         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
+         Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Evenement/ui_ListeEvents_FO.fxml"));
+         Content_pane.getChildren().clear();
+         Content_pane.getChildren().add(root);    
+    }
+    
+    @FXML
+     public void load_ajout_event(ActionEvent event) throws IOException {
+         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
+         Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_evenement_FO.fxml"));
+         Content_pane.getChildren().clear();
+         Content_pane.getChildren().add(root);    
+    }
+     @FXML
+     public void charger_ajout_event(ActionEvent event) throws IOException {
+         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
+         Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_interfaceEvt_FO.fxml"));
+         Content_pane.getChildren().clear();
+         Content_pane.getChildren().add(root);    
+    }
+    public  void Update_Event_request() throws IOException {
+                 Node root;// Making a node
+                 root = FXMLLoader.load(Ui_MainFrame_BOController.class.getResource("/VIEWS/Evenement/ui_evenement_FO.fxml"));// Getting the View
+                 Content_pane.getChildren().clear();
+                 Content_pane.getChildren().add(root);// inserting the Node in the GridPane
+                // Label_Module_name_ref.setText("Modifier un évènement existent "); // Changing the header text
+    }
+    @FXML
     private void hide_menu(ActionEvent event) {
             if(Shown)
         { 

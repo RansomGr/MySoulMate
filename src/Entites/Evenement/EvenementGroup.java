@@ -16,16 +16,16 @@ import Entites.User.Client;
  */
 public class EvenementGroup extends Evenement{
   
-    private Client organisateur;
-    public Date heure;
-    public String description;
-    public Plan plan;
+    protected Client organisateur;
+    protected String heure;
+    protected String description;
+    protected Plan plan;
 
     public EvenementGroup(int ID, String nom) {
         super(ID, nom);
     }
 
-    public EvenementGroup( Client organisateur, Date heure, String description, Plan plan, int ID, String nom) {
+    public EvenementGroup( Client organisateur, String heure, String description, Plan plan, int ID, String nom) {
         super(ID, nom);
      
         this.organisateur = organisateur;
@@ -34,7 +34,7 @@ public class EvenementGroup extends Evenement{
         this.plan = plan;
     }
 
-    public EvenementGroup( Client organisateur, Date heure, String description, Plan plan, String nom) {
+    public EvenementGroup( Client organisateur, String heure, String description, Plan plan, String nom) {
         super(-1, nom);
      
         this.organisateur = organisateur;
@@ -42,9 +42,18 @@ public class EvenementGroup extends Evenement{
         this.description = description;
         this.plan = plan;
     }
-    
 
-  
+    public EvenementGroup() {
+        super(0,"");
+    }
+
+    public EvenementGroup(Client organisateur, String description, Plan plan, Date date_evenement, String heure, String type_evenement, String nom) {
+        super(date_evenement, heure, type_evenement,-1, nom);
+        this.organisateur = organisateur;
+        this.heure = heure;
+        this.description = description;
+        this.plan = plan;
+    }
 
     public Client getOrganisateur() {
         return organisateur;
@@ -54,11 +63,11 @@ public class EvenementGroup extends Evenement{
         this.organisateur = organisateur;
     }
 
-    public Date getHeure() {
+    public String getHeure() {
         return heure;
     }
 
-    public void setHeure(Date heure) {
+    public void setHeure(String heure) {
         this.heure = heure;
     }
 
