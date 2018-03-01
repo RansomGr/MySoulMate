@@ -103,12 +103,12 @@ public class Ui_FO_AjouterPreferenceController implements Initializable {
     }    
     
     private void init_node() {
-              if (MySoulMate.getLogged_in_Client().getGender()=="H")
+              if (MySoulMate.getLogged_in_Client().getGender().equals("H"))
       {
       Taille_text.setText("Taille Maximum");
       
       }
-      else if (MySoulMate.getLogged_in_Client().getGender()=="F")
+      else if (MySoulMate.getLogged_in_Client().getGender().equals("F"))
       {      
           Taille_text.setText("Taille Minimum");
       }

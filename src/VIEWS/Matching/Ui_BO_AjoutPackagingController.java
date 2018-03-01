@@ -131,9 +131,9 @@ public class Ui_BO_AjoutPackagingController implements Initializable {
             
              @FXML
     private void ajouter_packaging(ActionEvent event) throws SQLException {
-        //validate_form();
-        //if(Message.equals("Les champs suivants posent des problèmes : \n"))
-       // {
+        validate_form();
+        if(Message.equals("Les champs suivants posent des problèmes : \n"))
+        {
              GestionnairePackaging gp= new GestionnairePackaging(); 
              int duree = (Integer) duree_s.getValue();
              float prix =  Float.parseFloat(prix_tf.getText());
@@ -163,38 +163,39 @@ public class Ui_BO_AjoutPackagingController implements Initializable {
                           ErrorWindow.show();   
                      }
         }
-//    }
-//    else
-//    {
-//        WarningWindow.show();
-//    }
+    }
+    else
+    {
+        WarningWindow.show();
+    }
     }
     
    @FXML
 
-//    private boolean validate_form()
-//    {
-//        Message="Les champs suivants posent des problèmes : \n";
-//        if(nom_tf.getText().isEmpty())
-//        {Message+="Le champ nom est vide !\n";}
-//        if(contenu_ta.getText().isEmpty())
-//        {Message+="Le champ contenu est vide !\n";}
-//        if(prix_tf.getText().isEmpty())
-//        {Message+="Le champ prix est vide !\n";}
-//       // if(prix_tf.getText()!= ))
-//      //  {Message+="Le prix doit être un nombre valide !\n";}
-//       if(Message.equals("Les champs suivants posent des problèmes : \n"))
-//        {
-//            WarningWindow.show();
-//           return false;
-//        }
-//        
-//        else 
-//        {
-//          return true;
-//        }
-//
-//    }
+    private boolean validate_form()
+    {
+        Message="Les champs suivants posent des problèmes : \n";
+        if(nom_tf.getText().isEmpty())
+        {Message+="Le champ nom est vide !\n";}
+        if(contenu_ta.getText().isEmpty())
+        {Message+="Le champ contenu est vide !\n";}
+        if(prix_tf.getText().isEmpty())
+        {Message+="Le champ prix est vide !\n";}
+      //  if(prix_tf.getText(). <0 ))
+       // {Message+="Le prix doit être un nombre valide !\n";}
+       if(!Message.equals("Les champs suivants posent des problèmes : \n"))
+        {
+              WarningWindow.setContentText(Message);
+            WarningWindow.show();
+           return false;
+        }
+        
+        else 
+        {
+          return true;
+        }
+
+    }
     
 
     
@@ -225,6 +226,8 @@ public class Ui_BO_AjoutPackagingController implements Initializable {
        }
        else
            clear_tf();
+            Action="Ajouter";
+            update_button();
     }
     
     
