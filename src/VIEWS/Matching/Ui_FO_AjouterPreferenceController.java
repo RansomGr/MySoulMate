@@ -6,6 +6,7 @@
 package VIEWS.Matching;
 
 import Entites.Profil.Caracteristique;
+import VIEWS.Profil.Ui_Profil_FOController;
 import VIEWS.Profil.Ui_Profile_CreationController;
 import java.io.IOException;
 import java.net.URL;
@@ -24,6 +25,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.text.Text;
+import mysoulmate.MySoulMate;
 
 
 /**
@@ -45,7 +48,6 @@ public class Ui_FO_AjouterPreferenceController implements Initializable {
     private ComboBox<String> caractere_cb;
     @FXML
     private Spinner<Integer> taille_min_sp;
-    @FXML
     private Spinner<Integer> taille_max_sp;
     @FXML
     private ComboBox<String> cheveux_cb;
@@ -84,6 +86,8 @@ public class Ui_FO_AjouterPreferenceController implements Initializable {
    private Alert InformationWindow  = new Alert(Alert.AlertType.INFORMATION);
    private Alert ErrorWindow = new Alert(Alert.AlertType.ERROR);
    private Alert WarningWindow = new Alert(Alert.AlertType.WARNING);
+    @FXML
+    private Text Taille_text;
 
    
   
@@ -99,6 +103,20 @@ public class Ui_FO_AjouterPreferenceController implements Initializable {
     }    
     
     private void init_node() {
+              if (MySoulMate.getLogged_in_Client().getGender()=="H")
+      {
+      Taille_text.setText("Taille Maximum");
+      
+      }
+      else if (MySoulMate.getLogged_in_Client().getGender()=="F")
+      {      
+          Taille_text.setText("Taille Minimum");
+      }
+      else 
+      {      
+          Taille_text.setText("Taille Souhaitée");
+      }
+              
         ville_cb.getItems().addAll("Tous","Ariana","Beja","Ben Arous","Bizerte","Gabes","Gafsa","Jendouba","Kairouan","Kasserine","Kebili","Kef","Mahdia","Mannouba","Medenine","Monastir","Nabeul","Sfax","Sidi Bouzid","Siliana","Sousse","Tataouine","Tozeur","Tunis","Zaghouene");
         cuisine_cb.getItems().addAll("Fast Food","Vegan","Bio","Sushi","Végétarienne");
         pilosite_cb.getItems().addAll("imberbe","poilu");
@@ -121,17 +139,13 @@ public class Ui_FO_AjouterPreferenceController implements Initializable {
                
            SpinnerValueFactory <Integer> ValueFac = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 00, 1);
            taille_min_sp.setValueFactory(ValueFac);
-           taille_max_sp.setValueFactory(ValueFac);
-
-        
+       
     }
     
 
     @FXML
     private void Valider(ActionEvent event) throws SQLException, IOException {
-      
-      Integer taille_moyenne= ((taille_min_sp.getValue() + taille_max_sp.getValue())/2);
-      
+                 
       RadioButton choix_alchool ;
       RadioButton choix_tabac ;
       
@@ -149,7 +163,7 @@ public class Ui_FO_AjouterPreferenceController implements Initializable {
                       profession_tf.getText(),
                       choix_alchool.getText(),
                       choix_tabac.getText(),
-                      taille_moyenne,
+                      taille_min_sp.getValue(),
                       cheveux_cb.getValue(),
                       yeux_cb.getValue(),
                       caractere_cb.getValue(),
