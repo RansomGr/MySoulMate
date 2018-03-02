@@ -8,12 +8,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.40">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.Relation.Ui_ListeMoment_FOController">
    <children>
-      <ButtonBar layoutX="367.0" layoutY="41.0" />
-      <JFXButton layoutX="415.0" layoutY="51.0" prefHeight="49.0" prefWidth="141.0" text="Toggle Expansion" />
-      <JFXButton layoutX="435.0" layoutY="123.0" text="Add new node" />
-      <JFXListView layoutX="32.0" layoutY="49.0" prefHeight="302.0" prefWidth="229.0" />
+      <Hyperlink layoutX="505.0" layoutY="15.0" text="Ajouter moment" underline="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Hyperlink>
+      <ScrollPane layoutX="9.0" layoutY="61.0" prefHeight="323.0" prefWidth="488.0">
+         <content>
+            <VBox fx:id="cm_vb" prefHeight="321.0" prefWidth="489.0" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

@@ -6,7 +6,7 @@
 package testsof;
 
 import Entites.User.Client;
-import VIEWS.Profil.Ui_ajout_new_actualiteController;
+//import VIEWS.Profil.Ui_ajout_new_actualiteController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

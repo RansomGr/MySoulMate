@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -37,13 +38,14 @@ public class GestionnaireConseil implements Gestionnaire {
     @Override
     public int update(Object o) throws SQLException {
         Conseil c=(Conseil)o;
-      String query ="update Conseil set ID=?,contenue=?,etat=?,niveau=? where ID=?";
+      String query ="update Conseil set ID=?,contenu=?,niveau=? where ID=?";
       
       PreparedStatement pst=DB.prepareStatement(query);
       pst.setInt(1, c.getID());
       pst.setString(2,c.getContenue());
-      pst.setBoolean(3,c.getEtat());
-      pst.setInt(4,c.getNiveau());
+      //pst.setBoolean(3,c.getEtat());
+      pst.setInt(3,c.getNiveau());
+      pst.setInt(4,c.getID());
    
       return pst.executeUpdate();
     }
@@ -68,7 +70,7 @@ public class GestionnaireConseil implements Gestionnaire {
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           while(res.next())// parcour du result set
           {
-             Conseils.add(new Conseil(res.getInt("ID"),res.getString("contenue"),res.getBoolean("etat"),res.getInt("niveau")));
+             Conseils.add(new Conseil(res.getInt("ID"),res.getString("contenu"),/*res.getBoolean("etat"),*/res.getInt("niveau")));
            }
           return Conseils;
     }
@@ -82,5 +84,16 @@ public class GestionnaireConseil implements Gestionnaire {
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+    public List<? extends Object> ParNiveau(int n) throws SQLException {
+         String query=" select *  from  Conseil "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          List<Conseil>Conseils = new ArrayList<>();//  Creation du List Reclamation
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          while(res.next()) // parcour du result set
+          {
+       
+             Conseils.add(new Conseil(res.getInt("ID"),res.getString("contenu"),res.getInt("niveau")));
+           }
+          return Conseils.stream().filter(c->c.getNiveau()==n).distinct().collect(Collectors.toList());
+    }
 }

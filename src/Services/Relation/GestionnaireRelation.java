@@ -9,11 +9,14 @@ import Entites.Relation.Relation;
 import Entites.User.Client;
 import Services.Gestionnaire;
 import Services.User.GestionnaireClient;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import mysoulmate.MySoulMate;
 
 /**
  *
@@ -46,7 +49,7 @@ public class GestionnaireRelation implements Gestionnaire {
     public int update(Object o) throws SQLException {
         Relation r=(Relation)o;
 
-        String query ="update Relation set ID=?,client1=?,client2=?,point_relation=?,niveau=?,date_debut=?,date_fin=? where client1=? and client2=?";
+        String query ="update Relation set ID=?,client1=?,client2=?,point_relation=?,niveau=?,date_debut=?,date_fin=? where ID=? ";
         PreparedStatement pst=DB.prepareStatement(query);
         
         pst.setInt(1, r.getID());
@@ -57,9 +60,10 @@ public class GestionnaireRelation implements Gestionnaire {
         pst.setDate(6,r.getDate_debut());
         pst.setDate(7,r.getDate_fin());
         
-        //pst.setInt(8, r.getID());
-        pst.setInt(8,r.getClient1().getID());
-        pst.setInt(9,r.getClient2().getID());
+        pst.setInt(8, r.getID());
+        /*pst.setInt(8,r.getClient1().getID());
+        pst.setInt(9,r.getClient2().getID());*/
+        
 
         
 
@@ -119,5 +123,37 @@ String query=" select *  from  Relation "    ; // preparation du requete sql
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+    public boolean ClientValide(Client c) throws SQLException
+    {
+        List<Relation> Relations=(List<Relation>) fetchAll();
+        if (Relations.stream().anyMatch(r->r.getClient1().equals(c) || r.getClient2().equals(c))){
+            return true;
+        }
+        return false;
+    }
+    public String NbPoint() throws SQLException
+    {   
+         List<Relation> Relations=(List<Relation>) fetchAll();
+       return Integer.toString(Relations.stream().filter(r->r.getClient1().getID()==MySoulMate.getLogged_in_Client().getID() || 
+             r.getClient2().getID()==MySoulMate.getLogged_in_Client().getID()).mapToInt(r->r.getPoints_relation()).findFirst().getAsInt());
+               /* Relations.stream().filter(r->r.getClient1().getID()==MySoulMate.getLogged_in_Client().getID() || 
+             r.getClient2().getID()==MySoulMate.getLogged_in_Client().getID()).mapToInt(x->x.getPoints_relation()).findFirst().getAsInt()+"";*/
+    }
+    public String Niveau() throws SQLException
+    {   
+         List<Relation> Relations=(List<Relation>) fetchAll();
+       return Relations.stream().filter(r->r.getClient1().equals(MySoulMate.getLogged_in_Client()) || 
+               r.getClient2().equals(MySoulMate.getLogged_in_Client())).map(r->r.getNiveau()).findFirst().get()+"";
+             
+    }
+    public String Temps() throws SQLException
+    {   //ChronolicalDate d = new ChronolicalDate(); 
+         List<Relation> Relations=(List<Relation>) fetchAll();
+        // LocalDate n = new LocalDate();
+         //n.until(d);
+         
+       return Relations.stream().filter(r->r.getClient1().equals(MySoulMate.getLogged_in_Client()) || 
+               r.getClient2().equals(MySoulMate.getLogged_in_Client())).map(r->r.getDate_fin().getTime()-r.getDate_debut().getTime()).findFirst().get()+"";
+             
+    }
 }

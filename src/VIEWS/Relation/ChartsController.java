@@ -66,7 +66,7 @@ public class ChartsController implements Initializable {
         ObservableList <PieChart.Data> piechartData
                 =FXCollections.observableArrayList(
                 
-               new PieChart.Data("Relation de niveau 1", Relations.stream().filter(r->r.getNiveau().equals("niveau1")).count()),
+                new PieChart.Data("Relation de niveau 1", Relations.stream().filter(r->r.getNiveau().equals("niveau1")).count()),
                 new PieChart.Data("Relation de niveau 2", Relations.stream().filter(r->r.getNiveau().equals("niveau2")).count()),
                 new PieChart.Data("Realtion de niveau 3", Relations.stream().filter(r->r.getNiveau().equals("niveau3")).count())
                 //new PieChart.Data("cycles", 22)

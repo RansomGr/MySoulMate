@@ -447,7 +447,7 @@ public class Ui_MainFrame_BOController implements Initializable {
                 (a) -> {
                     try {
                         Node root;// Making a node
-                        root = FXMLLoader.load(getClass().getResource("/VIEWS/Relation/AjoutMoment.fxml"));// Getting the View
+                        root = FXMLLoader.load(getClass().getResource("/VIEWS/Relation/AjoutConseil.fxml"));// Getting the View
                         Page_Viewer.getChildren().clear();
                         Page_Viewer.getChildren().add(root);// inserting the Node in the GridPane
                         Label_Module_name.setText(AjoutMoment.getText()); // Changing the header text

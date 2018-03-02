@@ -14,15 +14,15 @@ import java.util.Objects;
 public class Conseil {
     private int ID;
     private String contenue;
-    private boolean etat;
+    //private boolean etat;
     private int niveau;
     
     public Conseil(){}
     
-    public Conseil(int ID,String contenue,boolean etat,int niveau){
+    public Conseil(int ID,String contenue/*,boolean etat*/,int niveau){
         this.ID=ID;
         this.contenue=contenue;
-        this.etat=etat;
+        //this.etat=etat;
         this.niveau=niveau;
     }
 
@@ -47,7 +47,7 @@ public class Conseil {
         this.contenue = contenue;
     }
 
-    public Boolean getEtat() {
+  /*  public Boolean getEtat() {
         return etat;
     }
 
@@ -57,7 +57,7 @@ public class Conseil {
     
      public boolean isEtat() {
         return etat;
-    }
+    }*/
 
     public int getNiveau() {
         return niveau;
@@ -72,7 +72,7 @@ public class Conseil {
         int hash = 7;
         hash = 53 * hash + this.ID;
         hash = 53 * hash + Objects.hashCode(this.contenue);
-        hash = 53 * hash + (this.etat ? 1 : 0);
+        //hash = 53 * hash + (this.etat ? 1 : 0);
         hash = 53 * hash + Objects.hashCode(this.niveau);
         return hash;
     }
@@ -92,9 +92,9 @@ public class Conseil {
         if (this.ID != other.ID) {
             return false;
         }
-        if (this.etat != other.etat) {
+       /* if (this.etat != other.etat) {
             return false;
-        }
+        }*/
         if (!Objects.equals(this.contenue, other.contenue)) {
             return false;
         }
@@ -106,7 +106,7 @@ public class Conseil {
 
     @Override
     public String toString() {
-        return "Conseil{" + "ID=" + ID + ", contenue=" + contenue + ", etat=" + etat + ", niveau=" + niveau + '}';
+        return "Conseil{" + "ID=" + ID + ", contenue=" + contenue +/* ", etat=" + etat + */", niveau=" + niveau + '}';
     }
 
    

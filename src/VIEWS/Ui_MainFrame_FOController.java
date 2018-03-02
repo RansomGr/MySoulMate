@@ -14,11 +14,13 @@ import Entites.Events.Events;
 import Listner.Listener;
 import Entites.User.Client;
 import Services.Evenement.GestionnaireEvents;
+import Services.Relation.GestionnaireRelation;
 import Services.User.GestionnaireClient;
 import VIEWS.Evenement.Ui_even_FOController;
 import com.messages.Message;
 import com.messages.Status;
 import VIEWS.Profil.Ui_Profil_FOController;
+import VIEWS.Relation.Ui_InterfaceRE_FOController;
 import com.messages.MessageType;
 import java.io.IOException;
 import java.net.URL;
@@ -70,6 +72,7 @@ import mysoulmate.MySoulMate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tray.animations.AnimationType;
+import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 
 
@@ -221,7 +224,7 @@ private int AnimationDuration;
          MySoulMate.getMainStage().setScene(sene);
     }
     @FXML
-    private void load_event(ActionEvent event) throws IOException {
+     private void load_event(ActionEvent event) throws IOException {
          Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
          Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Evenement/ui_ListeEvents_FO.fxml"));
          Content_pane.getChildren().clear();
@@ -237,7 +240,7 @@ private int AnimationDuration;
      public void load_ajout_event(ActionEvent event) throws IOException {
          Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
          Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_evenement_FO.fxml"));
-         Node root2 = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_even_FO.fxml"));
+         //Node root2 = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_even_FO.fxml"));
          Content_pane.getChildren().clear();
          Content_pane.getChildren().add(root);    
     }

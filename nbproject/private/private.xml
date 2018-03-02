@@ -4,11 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Evenement/Ui_ListeEvents_FOController.java</file>
-            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Evenement/SendSms.java</file>
             <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Evenement/Ui_interfaceEvt_FOController.java</file>
+            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Evenement/Ui_evenement_FOController.java</file>
+            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/Controllers/User/Ui_Login_FOController.java</file>
             <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/Services/Events/GestionnaireEvent.java</file>
             <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Evenement/Ui_even_FOController.java</file>
-            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Ui_MainFrame_BOController.java</file>
+            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/mysoulmate/MySoulMate.java</file>
             <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Ui_MainFrame_FOController.java</file>
         </group>
     </open-files>

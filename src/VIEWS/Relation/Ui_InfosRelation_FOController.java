@@ -7,6 +7,7 @@ package VIEWS.Relation;
 
 import Entites.Relation.Relation;
 import Services.Relation.GestionnaireRelation;
+import VIEWS.Profil.Ui_Profil_FOController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.text.Text;
+import mysoulmate.MySoulMate;
+
 
 /**
  * FXML Controller class
@@ -42,6 +45,8 @@ public class Ui_InfosRelation_FOController implements Initializable {
         
         // TODO
        // Relation r = new Relation(temps.getText)
+               
+
         temps.setText("0");
         pts.setText("0");
         niv.setText("0");

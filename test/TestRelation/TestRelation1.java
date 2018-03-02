@@ -26,8 +26,8 @@ public class TestRelation1 {
         // TODO code application logic here
          Relation r1;
         r1 = new Relation(1,
-        new Client ("mounir","sabbaghi","falfoul11","falfoul@falfoul@esprit.tn",new Date(1987,12,1),"foufou"),
-        new Client ("manel","naily","maily","maily@esprit.tn",new Date(1957,5,10),"maily"), 
+        new Client (1,"mounir","sabbaghi","falfoul11","falfoul@falfoul@esprit.tn",new Date(1987,12,1),"foufou"),
+        new Client (2,"manel","naily","maily","maily@esprit.tn",new Date(1957,5,10),"maily"), 
                 5,"niveau1",new Date(2018,02,05),new Date(2018,02,07)
         );
         
