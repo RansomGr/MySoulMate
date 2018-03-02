@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.Evenement.Ui_interfaceEvt_FOController">
+   <children>
+      <GridPane>
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.0" minWidth="10.0" prefWidth="79.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.0" minWidth="10.0" prefWidth="123.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.0" minWidth="10.0" prefWidth="407.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="type_lbel" text="Type" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="date_lbel" text="Date" GridPane.columnIndex="1" />
+            <Label fx:id="heur_lbel" text="Heure" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="dure_lbel" text="Durée" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="description_lbel" text="Description" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="plan_lbel" text="Emplacement" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="nbivt_lbel" text="Nombre d'invité" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label fx:id="date_don" text="dd" GridPane.columnIndex="2" />
+            <Label fx:id="heur_don" text="hh" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label fx:id="dure_don" text="du" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label fx:id="type_don" text="ty" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Label fx:id="description_don" text="des" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label fx:id="plan_don" text="pl" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Label fx:id="nbivt_don" text="iv" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+         </children>
+      </GridPane>
+   </children>
+</StackPane>

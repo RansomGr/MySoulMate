@@ -128,8 +128,7 @@ public class GestionnaireAdmin implements Gestionnaire {
            }
           return Admins;
     }
-      
-
+            
     @Override
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

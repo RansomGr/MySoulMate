@@ -15,6 +15,10 @@ public class InviteEvenement {
     EvenementGroup evtgroup;
     Client clt;
 
+    public InviteEvenement(Events ev, Client x) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public EvenementGroup getEvtgroup() {
         return evtgroup;
     }

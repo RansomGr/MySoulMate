@@ -104,7 +104,7 @@ public class GestionnaireCeremonie implements Gestionnaire{
                      res.getString(1),
                      res.getInt(2),
                      c,
-                     res.getDate(4),
+                     res.getString(4),
                      res.getString(5),
                      p,
                      res.getInt(7),

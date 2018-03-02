@@ -8,6 +8,8 @@ package Entites.Evenement;
 import java.sql.Date;
 import java.util.Objects;
 import Entites.AbstractEntite;
+import Entites.User.Client;
+import java.util.List;
 
 /**
  *
@@ -15,12 +17,10 @@ import Entites.AbstractEntite;
  */
 public class Evenement extends AbstractEntite{
     
-    public Date date_evenement;
-    public Date heure;
-    public String type_evenement;
-    
-    
-
+    protected Date date_evenement;
+    protected String heure;
+    protected String type_evenement;
+   
     public Date getDate_evenement() {
         return date_evenement;
     }
@@ -29,11 +29,11 @@ public class Evenement extends AbstractEntite{
         this.date_evenement = date_evenement;
     }
 
-    public Date getHeure() {
+    public String getHeure() {
         return heure;
     }
 
-    public void setHeure(Date heure) {
+    public void setHeure(String heure) {
         this.heure = heure;
     }
 
@@ -49,14 +49,14 @@ public class Evenement extends AbstractEntite{
         super(ID, nom);
     }
 
-    public Evenement( Date date_evenement, Date heure, String type_evenement, int ID, String nom) {
+    public Evenement( Date date_evenement, String heure, String type_evenement, int ID, String nom) {
         super(ID, nom);
         this.date_evenement = date_evenement;
         this.heure = heure;
         this.type_evenement = type_evenement;
     }
 
-     public Evenement( Date date_evenement, Date heure, String type_evenement, String nom) {
+     public Evenement( Date date_evenement, String heure, String type_evenement, String nom) {
         super(-1, nom);
         this.date_evenement = date_evenement;
         this.heure = heure;
