@@ -17,6 +17,7 @@ import Services.Evenement.GestionnaireEvents;
 import Services.Relation.GestionnaireRelation;
 import Services.User.GestionnaireClient;
 import VIEWS.Evenement.Ui_even_FOController;
+import VIEWS.Plan.Ui_FO_RecherchePlansController;
 import com.messages.Message;
 import com.messages.Status;
 import VIEWS.Profil.Ui_Profil_FOController;
@@ -675,5 +676,20 @@ private int AnimationDuration;
          Content_pane.getChildren().add(root);    
 }
             //***event
+
+    @FXML
+    private void load_plan() throws IOException, SQLException {
+         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
+         FXMLLoader fxml = new FXMLLoader(getClass().getResource("/VIEWS/Plan/ui_FO_RecherchePlans.fxml"));
+         Node root = fxml.load();
+         Ui_FO_RecherchePlansController con= fxml.<Ui_FO_RecherchePlansController>getController();
+         con.chercher_les_Plans();
+         Content_pane.getChildren().clear();
+         Content_pane.getChildren().add(root);
+    }
+
+    public StackPane getContent_pane() {
+        return Content_pane;
+    }
     
 }
