@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="356.0" prefWidth="366.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VIEWS.Relation.MomentController">
+   <children>
+      <TextArea fx:id="contenu" layoutX="39.0" layoutY="203.0" prefHeight="112.0" prefWidth="298.0" />
+      <Text fx:id="date" layoutX="56.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" wrappingWidth="82.13671875" />
+      <Button layoutX="193.0" layoutY="326.0" mnemonicParsing="false" text="Modifier" />
+      <Button layoutX="263.0" layoutY="326.0" mnemonicParsing="false" text="Supprimer" />
+      <ImageView fx:id="photo" fitHeight="143.0" fitWidth="262.0" layoutX="158.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../Desktop/other/covers/lowell-birge-harrison-the-evening-star-nd-oil-on-canvas.jpg" />
+         </image>
+      </ImageView>
+      <Text fx:id="nom" layoutX="76.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="71.99999839067459">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

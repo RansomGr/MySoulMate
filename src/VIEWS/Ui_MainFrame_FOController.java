@@ -12,10 +12,12 @@ import ChatClient.ChatBoxController;
 import ChatClient.VoicePlayback;
 import Listner.Listener;
 import Entites.User.Client;
+import Services.Relation.GestionnaireRelation;
 import Services.User.GestionnaireClient;
 import com.messages.Message;
 import com.messages.Status;
 import VIEWS.Profil.Ui_Profil_FOController;
+import VIEWS.Relation.Ui_InterfaceRE_FOController;
 import com.messages.MessageType;
 import java.io.IOException;
 import java.net.URL;
@@ -65,6 +67,7 @@ import mysoulmate.MySoulMate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tray.animations.AnimationType;
+import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 
 
@@ -515,4 +518,21 @@ private int AnimationDuration;
          Content_pane.getChildren().clear();
          Content_pane.getChildren().add(root);  
     }
+     @FXML
+    private void load_my_relation(ActionEvent event) throws IOException, SQLException {
+        GestionnaireRelation gr = new GestionnaireRelation();
+        Ui_InterfaceRE_FOController.setRelation_owner(MySoulMate.getLogged_in_Client());
+          if(gr.ClientValide(MySoulMate.getLogged_in_Client())){
+         Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Relation/ui_InterfaceRE_FO.fxml"));
+         Content_pane.getChildren().clear();
+         Content_pane.getChildren().add(root); 
+         }
+          else{     
+         TrayNotification tray = new TrayNotification(
+         MySoulMate.getLogged_in_Client().getPseudo()+",",
+         "Vous n'etes pas encore en relation !!", NotificationType.WARNING);
+         tray.showAndDismiss(javafx.util.Duration.seconds(1));
+         }
+    }
+   
 }

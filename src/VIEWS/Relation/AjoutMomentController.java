@@ -46,7 +46,7 @@ public class AjoutMomentController implements Initializable {
 	
         @Override
     public void initialize(URL location, ResourceBundle resources) {
-        TrayNotification tray = new TrayNotification("Notification !", "Ajouter des moments pour gagner des points !!", NotificationType.SUCCESS);
+        TrayNotification tray = new TrayNotification("Notification !", "Ajouter des moments pour gagner des points !!", NotificationType.CUSTOM);
         tray.showAndDismiss(javafx.util.Duration.seconds(2));
     }
 

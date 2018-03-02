@@ -16,7 +16,7 @@ public class Main extends Application {
 	
 	public void start(Stage primaryStage) throws IOException {
        
-            Parent root = FXMLLoader.load(getClass().getResource("AjoutConseil.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("ui_InterfaceRE_FO.fxml"));
         
              Scene scene = new Scene(root);
              primaryStage.setScene(scene);
