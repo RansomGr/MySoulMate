@@ -77,9 +77,7 @@ public class Ui_Profile_CreationController implements Initializable {
         Step_ig=Step_img;
         try {
             Nodes = new ArrayList<>();
-            Parent ajoutcarac = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_FO_AjouterCaracteristique.fxml"));
-           
-          
+        Parent ajoutcarac = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_FO_AjouterCaracteristique.fxml"));// first we go to caracs 
         step_container.getChildren().clear();
         step_container.getChildren().add(ajoutcarac);
         } catch (IOException ex) {
@@ -87,9 +85,9 @@ public class Ui_Profile_CreationController implements Initializable {
         }
         InformationWindow = new Alert(Alert.AlertType.INFORMATION);
         InformationWindow.setTitle("MySoulMate");
-        InformationWindow.setContentText("Votre Profil est Pret vos chances a trouv // nadia salla7  est proche !");
+        InformationWindow.setContentText("Votre Profil est Pret vos chances de trouver votre âme soeur ont  augmenté");
         InformationWindow.setHeaderText("Gestion Profil ");
-     
+        
         
     }
     public static void next_step() throws IOException, SQLException
