@@ -67,5 +67,10 @@ public class Ui_even_FOController implements Initializable {
             Logger.getLogger(Ui_even_FOController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    public void charger_evt() {
+       Services.Events.GestionnaireEvent ge = new Services.Events.GestionnaireEvent();
+        date_lb.setText(evt.getDate_evt().toString());
+        description_lb.setText(evt.getDescription_evt());       
+      
+    }
 }

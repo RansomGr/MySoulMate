@@ -182,5 +182,6 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="heure(s)" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
       </GridPane>
+      <Button fx:id="sms_btn" mnemonicParsing="false" onAction="#envoyersms" text="SMS" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
    </children>
 </GridPane>

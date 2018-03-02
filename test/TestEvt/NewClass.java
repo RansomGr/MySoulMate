@@ -33,16 +33,16 @@ public class NewClass {
             Logger.getLogger(NewClass.class.getName()).log(Level.SEVERE, null, ex);
         }
         //***********
-    Client c1= new Client("Admin","Admin","Admin","admin@esprit.tn",new Date(1987,12,1),"Admin");
+   // Client c1= new Client("Admin","Admin","Admin","admin@esprit.tn",new Date(1987,12,1),"Admin");
     Plan p = new Plan("cafe", Plan.Type.culturel, "cafe", "cafe", 0, "cafe", "cafe");
-    Events evt = new Events("uioo", Date.valueOf("1987-12-03"), "12h", "2h", "conf", c1, "conf", p, 2, -1, "event");
+  //  Events evt = new Events("uioo", Date.valueOf("1987-12-03"), "12h", "2h", "conf", c1, "conf", p, 2, -1, "event");
    
-    GestionnaireEvent ge= new GestionnaireEvent();
-        try {
-            ge.create(evt);
-        } catch (SQLException ex) {
-            Logger.getLogger(TestEvt01.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//    GestionnaireEvent ge= new GestionnaireEvent();
+//        try {
+//            ge.create(evt);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(TestEvt01.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         //**************
           List<Events>evts;
           List<Events> eventssss;
