@@ -17,6 +17,7 @@ import Services.Events.GestionnaireEvent;
 import Services.Events.GestionnaireInviteEvent;
 import Services.Plan.GestionnairePlan;
 import Services.User.GestionnaireClient;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -126,6 +127,8 @@ public class Ui_evenement_FOController implements Initializable {
     private Spinner<Integer> duree_sp;
     @FXML
     private ComboBox<String> plan_cmb;
+    @FXML
+    private Button sms_btn;
 
     /**
      * Initializes the controller class.
@@ -399,5 +402,14 @@ public class Ui_evenement_FOController implements Initializable {
 //        plan_txf.setText(planTrouve.getNom());
 //       }
 //    }
+
+    @FXML
+    private void envoyersms(ActionEvent event) {
+       try {
+           MySoulMate.getMainController().load_ajout_sms(event);
+       } catch (IOException ex) {
+           Logger.getLogger(Ui_evenement_FOController.class.getName()).log(Level.SEVERE, null, ex);
+       }
+    }
     
 }

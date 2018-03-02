@@ -10,9 +10,12 @@ import ChatClient.BubbledLabel;
 import ChatClient.CellRenderer;
 import ChatClient.ChatBoxController;
 import ChatClient.VoicePlayback;
+import Entites.Events.Events;
 import Listner.Listener;
 import Entites.User.Client;
+import Services.Evenement.GestionnaireEvents;
 import Services.User.GestionnaireClient;
+import VIEWS.Evenement.Ui_even_FOController;
 import com.messages.Message;
 import com.messages.Status;
 import VIEWS.Profil.Ui_Profil_FOController;
@@ -26,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
@@ -58,6 +62,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
@@ -108,6 +113,8 @@ private int AnimationDuration;
     private Button menu_matching_btn;
     @FXML
     private Button messages_btn;
+    @FXML
+    private VBox event_vb;
   
 
     /**
@@ -115,6 +122,7 @@ private int AnimationDuration;
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
        init_combobox();
        conversations= new HashMap();
        Shown=true;
@@ -195,7 +203,8 @@ private int AnimationDuration;
             }
         }
     });
-
+       
+     
     }    
     @FXML
     private void load_my_profil(ActionEvent event) throws IOException {
@@ -218,15 +227,20 @@ private int AnimationDuration;
          Content_pane.getChildren().clear();
          Content_pane.getChildren().add(root);    
     }
-    
-    @FXML
-     public void load_ajout_event(ActionEvent event) throws IOException {
+     public void load_ajout_sms(ActionEvent event) throws IOException {
          Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
-         Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_evenement_FO.fxml"));
+         Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_sms_evt_FO.fxml"));
          Content_pane.getChildren().clear();
          Content_pane.getChildren().add(root);    
     }
-     @FXML
+    
+     public void load_ajout_event(ActionEvent event) throws IOException {
+         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
+         Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_evenement_FO.fxml"));
+         Node root2 = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_even_FO.fxml"));
+         Content_pane.getChildren().clear();
+         Content_pane.getChildren().add(root);    
+    }
      public void charger_ajout_event(ActionEvent event) throws IOException {
          Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
          Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_interfaceEvt_FO.fxml"));
@@ -537,11 +551,40 @@ private int AnimationDuration;
          Content_pane.getChildren().add(root);  
     }
     
-    @FXML
     public  void load_preference_page() throws IOException {
          Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
          Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Matching/ui_FO_AjouterPreference.fxml"));
          Content_pane.getChildren().clear();
          Content_pane.getChildren().add(root);  
     }
+    
+    //***event
+         public void chercher_les_events() throws SQLException, IOException
+    {
+        GestionnaireEvents ge = new GestionnaireEvents();
+       List <Events> evts =  ( (List <Events>) ge.fetchAll()).stream().collect(Collectors.toList());
+       event_vb.setSpacing(20);
+       for (int i=0 ; i<evts.size(); i++)
+    {
+        HBox evens_hb = new HBox();
+        evens_hb.setSpacing(10);
+        evens_hb.setMinSize(120, 160);
+        for(int j=0 ; j<4&&i<evts.size();i++, j++)
+        {
+            System.out.println("I is ="+i);
+            FXMLLoader fxml= new FXMLLoader(getClass().getResource("/VIEWS/Evenement/ui_even_FO.fxml"));
+            Node root = fxml.load();
+            Ui_even_FOController con= fxml.<Ui_even_FOController>getController();
+            con.setEvt(evts.get(i));
+            con.charger_evt();
+            evens_hb.getChildren().add(root);
+        }
+        event_vb.getChildren().add(evens_hb);
+    }
+   
+}
+       
+       //event
+  
+    
 }
