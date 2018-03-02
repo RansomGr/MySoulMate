@@ -586,6 +586,22 @@ private int AnimationDuration;
     }
    
 }
+          @FXML
+    private void load_my_relation(ActionEvent event) throws IOException, SQLException {
+        GestionnaireRelation gr = new GestionnaireRelation();
+        Ui_InterfaceRE_FOController.setRelation_owner(MySoulMate.getLogged_in_Client());
+          if(gr.ClientValide(MySoulMate.getLogged_in_Client())){
+         Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Relation/ui_InterfaceRE_FO.fxml"));
+         Content_pane.getChildren().clear();
+         Content_pane.getChildren().add(root); 
+         }
+          else{     
+         TrayNotification tray = new TrayNotification(
+         MySoulMate.getLogged_in_Client().getPseudo()+",",
+         "Vous n'etes pas encore en relation !!", NotificationType.WARNING);
+         tray.showAndDismiss(javafx.util.Duration.seconds(1));
+         }
+    }
        
        //event
   
