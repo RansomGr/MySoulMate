@@ -5,9 +5,8 @@
  */
 package Entites.Plan;
 
-import Entites.User.Client;
+
 import Entites.User.Utilisateur;
-import java.sql.Date;
 import java.util.Objects;
 
 /**

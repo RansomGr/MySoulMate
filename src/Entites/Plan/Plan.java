@@ -13,6 +13,7 @@ import java.util.Objects;
  * @author irou
  */
 public class Plan {
+    private int Id;
      private String nom;
     private String type;
     private String email;
@@ -25,6 +26,29 @@ public class Plan {
     private String photo2;
     private Float X;
     private Float y;
+
+    public Plan(int Id, String nom, String type, String email, String photo, int telephone, String Description, String photo1, String photo2, Float X, Float y) {
+        this.Id = Id;
+        this.nom = nom;
+        this.type = type;
+        this.email = email;
+        this.photo = photo;
+        this.telephone = telephone;
+        this.Description = Description;
+        this.photo1 = photo1;
+        this.photo2 = photo2;
+        this.X = X;
+        this.y = y;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int Id) {
+        this.Id = Id;
+    }
+    
 
     public Plan(String nom, String type, String email, String photo, int telephone, String Description, String photo1, String photo2, Float X, Float y) {
         this.nom = nom;
@@ -122,16 +146,17 @@ public class Plan {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.nom);
-        hash = 79 * hash + Objects.hashCode(this.type);
-        hash = 79 * hash + Objects.hashCode(this.email);
-        hash = 79 * hash + Objects.hashCode(this.photo);
-        hash = 79 * hash + this.telephone;
-        hash = 79 * hash + Objects.hashCode(this.Description);
-        hash = 79 * hash + Objects.hashCode(this.photo1);
-        hash = 79 * hash + Objects.hashCode(this.photo2);
-        hash = 79 * hash + Objects.hashCode(this.X);
-        hash = 79 * hash + Objects.hashCode(this.y);
+        hash = 97 * hash + this.Id;
+        hash = 97 * hash + Objects.hashCode(this.nom);
+        hash = 97 * hash + Objects.hashCode(this.type);
+        hash = 97 * hash + Objects.hashCode(this.email);
+        hash = 97 * hash + Objects.hashCode(this.photo);
+        hash = 97 * hash + this.telephone;
+        hash = 97 * hash + Objects.hashCode(this.Description);
+        hash = 97 * hash + Objects.hashCode(this.photo1);
+        hash = 97 * hash + Objects.hashCode(this.photo2);
+        hash = 97 * hash + Objects.hashCode(this.X);
+        hash = 97 * hash + Objects.hashCode(this.y);
         return hash;
     }
 
@@ -147,6 +172,9 @@ public class Plan {
             return false;
         }
         final Plan other = (Plan) obj;
+        if (this.Id != other.Id) {
+            return false;
+        }
         if (this.telephone != other.telephone) {
             return false;
         }
@@ -182,8 +210,12 @@ public class Plan {
 
     @Override
     public String toString() {
-        return "Plan{" + "nom=" + nom + ", type=" + type + ", email=" + email + ", photo=" + photo + ", telephone=" + telephone + ", Description=" + Description + ", photo1=" + photo1 + ", photo2=" + photo2 + ", X=" + X + ", y=" + y + '}';
+        return "Plan{" + "Id=" + Id + ", nom=" + nom + ", type=" + type + ", email=" + email + ", photo=" + photo + ", telephone=" + telephone + ", Description=" + Description + ", photo1=" + photo1 + ", photo2=" + photo2 + ", X=" + X + ", y=" + y + '}';
     }
+
+   
+
+   
     
     
     
