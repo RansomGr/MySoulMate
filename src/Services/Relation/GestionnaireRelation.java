@@ -8,7 +8,6 @@ package Services.Relation;
 import Entites.Relation.Relation;
 import Entites.User.Utilisateur;
 import Services.Gestionnaire;
-import Services.User.GestionnaireClient;
 import Services.User.GestionnaireUser;
 import java.sql.Date;
 import java.sql.PreparedStatement;
