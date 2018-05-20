@@ -130,6 +130,7 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
                c= clients.stream().filter(c1->c1.getId()==Client_ID_in_question).findFirst().get();   
               }
              Evenements.add(new Events(
+                     res.getInt("id"),
                      res.getString("nom_evt"), 
                      res.getDate("date_evt"),
                      res.getString("heure"), 
@@ -175,7 +176,8 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
                c= clients.stream().filter(c1->c1.getId()==Client_ID_in_question).findFirst().get();   
               }
              evenent.add(new Events(
-             res.getString("nom_evt"), 
+                     res.getInt("id"),
+                     res.getString("nom_evt"), 
                      res.getDate("date_evt"),
                      res.getString("heure"), 
                      res.getString("duree_evt"),
@@ -221,6 +223,7 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
                c= clients.stream().filter(c1->c1.getId()==Client_ID_in_question).findFirst().get();   
               }
              Evenent.add(new Events(
+                     res.getInt("id"),
                      res.getString("nom_evt"), 
                      res.getDate("date_evt"),
                      res.getString("heure"), 
@@ -261,6 +264,7 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
                c= clients.stream().filter(c1->c1.getId()==Client_ID_in_question).findFirst().get();   
               }
              evenent.add(new Events(
+                     res.getInt("id"),
                     res.getString("nom_evt"), 
                      res.getDate("date_evt"),
                      res.getString("heure"), 
@@ -275,32 +279,20 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
           return evenent;
     }
 
-    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); 
-    }
-
-//    @Override
-//    public Object fetchOneById(int id) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public Object fetchOnByCriteria(Map Criteras) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+   //***********  newww *****
 
     @Override
-    public List fetchSomeBy(String aux, String target_column, int StartPoint, int BreakPoint) {
+    public List<Events> fetchSomeBy(String aux, String target_column, int StartPoint, int BreakPoint) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List fetchSomeBy(String aux, int target_column) {
+    public List<Events> fetchSomeBy(String aux, int target_column) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List fetchSomeBy(String aux, int StartPoint, int BreakPoint) {
+    public List<Events> fetchSomeBy(String aux, int StartPoint, int BreakPoint) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
