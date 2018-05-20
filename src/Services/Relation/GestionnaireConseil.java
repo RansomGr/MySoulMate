@@ -12,15 +12,84 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
  *
  * @author zhanimm
  */
-public class GestionnaireConseil implements Gestionnaire {
+public class GestionnaireConseil implements Gestionnaire<Conseil> {
 
     @Override
+    public int create(Conseil c) throws SQLException {
+      String query="insert into Conseil(titre,contenu) values(?,?)";
+      PreparedStatement pst= DB.prepareStatement(query);
+      pst.setString(1,c.getContenue());
+      pst.setString(2,c.getTitre());
+
+      return pst.executeUpdate();    }
+
+    @Override
+    public int update(Conseil c) throws SQLException {
+String query ="update Conseil set titre=?,contenu=? where ID=?";
+      
+      PreparedStatement pst=DB.prepareStatement(query);
+      pst.setString(1, c.getTitre());
+      pst.setString(2,c.getContenue());
+      pst.setInt(3,c.getID());
+   
+      return pst.executeUpdate();    }
+
+    @Override
+    public int remove(Conseil c) throws SQLException {
+    String query=" delete from Conseil where ID=? ";
+    
+    PreparedStatement pst=DB.prepareStatement(query);
+    
+    pst.setInt(1,c.getID());
+    
+    return pst.executeUpdate();    }
+
+    @Override
+    public List<Conseil> fetchAll() throws SQLException {
+                 String query=" select *  from  Conseil "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          List<Conseil>Conseils = new ArrayList<>();//  Creation du List Reclamation
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          while(res.next())// parcour du result set
+          {
+             Conseils.add(new Conseil(res.getString("titre"),res.getString("contenu")));/*res.getBoolean("etat"),*///res.getInt("niveau")));
+           }
+          return Conseils;
+    }
+
+    @Override
+    public Conseil fetchOneById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Conseil fetchOnByCriteria(Map<String, String> Criteras) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Conseil> fetchSomeBy(String aux, String target_column, int StartPoint, int BreakPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Conseil> fetchSomeBy(String aux, int target_column) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Conseil> fetchSomeBy(String aux, int StartPoint, int BreakPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+   /* @Override
     public int create(Object o) throws SQLException {
         Conseil c=(Conseil)o;
       String query="insert into Conseil(contenu,niveau) values(?,?)";
@@ -70,8 +139,8 @@ public class GestionnaireConseil implements Gestionnaire {
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           while(res.next())// parcour du result set
           {
-             Conseils.add(new Conseil(res.getInt("ID"),res.getString("contenu"),/*res.getBoolean("etat"),*/res.getInt("niveau")));
-           }
+             Conseils.add(new Conseil(res.getInt("ID"),res.getString("contenu"),/*res.getBoolean("etat"),*///res.getInt("niveau")));
+   /*        }
           return Conseils;
     }
 
@@ -95,5 +164,8 @@ public class GestionnaireConseil implements Gestionnaire {
              Conseils.add(new Conseil(res.getInt("ID"),res.getString("contenu"),res.getInt("niveau")));
            }
           return Conseils.stream().filter(c->c.getNiveau()==n).distinct().collect(Collectors.toList());
-    }
+    }*/
+    
+
+   
 }
