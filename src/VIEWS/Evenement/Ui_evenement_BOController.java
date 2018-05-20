@@ -8,7 +8,7 @@ package VIEWS.Evenement;
 import Entites.Events.Events;
 import Entites.Events.InviteEvents;
 import Entites.Plan.Plan;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import Services.Events.GestionnaireEvent;
 import Services.Events.GestionnaireInviteEvent;
 import Services.Plan.GestionnairePlan;
@@ -103,13 +103,13 @@ public class Ui_evenement_BOController implements Initializable {
    private Alert ErrorWindow;
    private Alert WarningWindow;
    private Alert ConfirmWindow;
-   private ObservableList<Client> Clients ;
+   private ObservableList<Utilisateur> Clients ;
    
     //private TextField Plan_txf;
     @FXML
-    private TableColumn<Client, String> invit_tbl;
+    private TableColumn<Utilisateur, String> invit_tbl;
     @FXML
-    private TableColumn<Client, String> user_tbl;
+    private TableColumn<Utilisateur, String> user_tbl;
     @FXML
     private Button plus_bt;
     @FXML
@@ -117,9 +117,9 @@ public class Ui_evenement_BOController implements Initializable {
     
   // private static Events Evenementmodifier ;
     @FXML
-    private TableView<Client> invt_cl;
+    private TableView<Utilisateur> invt_cl;
     @FXML
-    private TableView<Client> user_cl;
+    private TableView<Utilisateur> user_cl;
     @FXML
     private TextField rechIvt_txt;
     private Plan planTrouve;
@@ -170,10 +170,10 @@ public class Ui_evenement_BOController implements Initializable {
     }
     private void init_table_Views() throws SQLException
     {
-        invit_tbl.setCellValueFactory((CellDataFeatures<Client, String>Client)->new SimpleStringProperty((Client.getValue().getNom()+" "+ Client.getValue().getPrenom())));
-        user_tbl.setCellValueFactory((CellDataFeatures<Client, String>Client)->new SimpleStringProperty((Client.getValue().getNom()+" "+ Client.getValue().getPrenom())));
+        invit_tbl.setCellValueFactory((CellDataFeatures<Utilisateur, String>Client)->new SimpleStringProperty((Client.getValue().getNom()+" "+ Client.getValue().getPrenom())));
+        user_tbl.setCellValueFactory((CellDataFeatures<Utilisateur, String>Client)->new SimpleStringProperty((Client.getValue().getNom()+" "+ Client.getValue().getPrenom())));
         GestionnaireClient gc = new GestionnaireClient();
-        Clients = FXCollections.observableArrayList((ArrayList<Client>)gc.fetchAll());
+        Clients = FXCollections.observableArrayList((ArrayList<Utilisateur>)gc.fetchAll());
         user_cl.setItems(Clients);
         
     }
@@ -273,14 +273,20 @@ public class Ui_evenement_BOController implements Initializable {
             Plan p;
                 if(ge.create(new Events(
                        "eventAdmin",
-              Date.valueOf(date_dp.getValue()), heure_sp.getValue()+":"+min_sp.getValue(), duree_sp.getValue().toString(),
-              type_cb.getValue(),null, descriptin_txa.getText(), planTrouve, 200, -1, "event"))==1)
+              Date.valueOf(date_dp.getValue()),
+                        heure_sp.getValue()+":"+min_sp.getValue(),
+                        duree_sp.getValue().toString(),
+              type_cb.getValue(),
+                        null,
+                        descriptin_txa.getText(),
+                        planTrouve,
+                        200))==1)
               
            {
-           int id_ev=((List<Events>)ge.fetchAll()).stream().mapToInt(x->x.getID()).max().getAsInt();
+           int id_ev=((List<Events>)ge.fetchAll()).stream().mapToInt(x->x.getId()).max().getAsInt();
            System.out.println("id eve"+id_ev);
-           Events ev = new Events(id_ev, "nom_evt");
-           ev.setID(id_ev);
+           Events ev = new Events();
+           ev.setId(id_ev);
            GestionnaireInviteEvent gi = new GestionnaireInviteEvent();
            invt_cl.getItems().stream().collect(Collectors.toList()).forEach(
            x->{
@@ -307,10 +313,14 @@ public class Ui_evenement_BOController implements Initializable {
                           Plan p;
                        if( ge.update(new Events(
                                "eventAdmin",
-              Date.valueOf(date_dp.getValue()), heure_sp.getValue()+":"+min_sp.getValue(),
-              duree_sp.getValue().toString(),
-              type_cb.getValue(),null, descriptin_txa.getText(),
-                               planTrouve , 200, Event_to_be_modified.getID(), "event"))==1)
+                               Date.valueOf(date_dp.getValue()),
+                               heure_sp.getValue()+":"+min_sp.getValue(),
+                               duree_sp.getValue().toString(),
+                               type_cb.getValue(),
+                               null,
+                               descriptin_txa.getText(),
+                               planTrouve ,
+                               200))==1)
                        {
                            InformationWindow.setContentText("Evènement modifié avec succé !");
                            InformationWindow.show();
@@ -342,7 +352,7 @@ public class Ui_evenement_BOController implements Initializable {
     @FXML
     private void filter(KeyEvent event) throws SQLException {
         GestionnaireClient gc =new GestionnaireClient();
-        Clients=FXCollections.observableArrayList((List<Client>)gc.fetchAll(rechIvt_txt.getText(), 20, " yyyy"));
+        Clients=FXCollections.observableArrayList((List<Utilisateur>)gc.fetchAll(rechIvt_txt.getText(), 20, " yyyy"));
         user_cl.setItems(Clients);
         
     }
@@ -351,7 +361,7 @@ public class Ui_evenement_BOController implements Initializable {
     private void AjouterIvt_btn(ActionEvent event) {
       if(!user_cl.getSelectionModel().isEmpty())
         {
-        Client Clientselected = user_cl.getSelectionModel().getSelectedItem();
+        Utilisateur Clientselected = user_cl.getSelectionModel().getSelectedItem();
         if(!invt_cl.getItems().contains(Clientselected))
         invt_cl.getItems().add(Clientselected);
         user_cl.getSelectionModel().clearSelection();
@@ -365,7 +375,7 @@ public class Ui_evenement_BOController implements Initializable {
         
         if(!invt_cl.getSelectionModel().isEmpty())
         {
-            Client Clientselected = invt_cl.getSelectionModel().getSelectedItem();
+            Utilisateur Clientselected = invt_cl.getSelectionModel().getSelectedItem();
             invt_cl.getItems().remove(Clientselected);
             invt_cl.getSelectionModel().clearSelection();
         }

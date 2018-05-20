@@ -5,8 +5,6 @@
  */
 package VIEWS.Evenement;
 
-import Entites.Evenement.EvenementGroup;
-import Services.Evenement.GestionnaireEvenementGroup;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -40,7 +38,7 @@ import javafx.scene.input.KeyCombination.Modifier;
  * @author dellpro
  */
 public class Ui_ListeEvenementController implements Initializable {
-    private EvenementGroup ge;
+    //private EvenementGroup ge;
      private ScaleTransition Hide;
     private  ScaleTransition Show;
     private int StartPoint;
@@ -48,7 +46,7 @@ public class Ui_ListeEvenementController implements Initializable {
     private int pages;
     private  int current_page;
     private String selected_column;
-    private  ObservableList<EvenementGroup> events;
+    //private  ObservableList<EvenementGroup> events;
     private Alert NextActionWindow;
     private Alert ConfirmDelete;
     
@@ -63,19 +61,19 @@ public class Ui_ListeEvenementController implements Initializable {
     @FXML
     private CheckBox optav_chb;
     @FXML
-    private TableColumn<EvenementGroup, String> nomevt_cl;
-    @FXML
-    private TableColumn<EvenementGroup, String> typeevt_cl;
-    @FXML
-    private TableColumn<EvenementGroup, Date> dateevt_cl;
-    @FXML
-    private TableColumn<EvenementGroup, String> ivtevt_cl;
-    @FXML
-    private TableColumn<EvenementGroup, String> plan_cl;
-    @FXML
-    private TableColumn<EvenementGroup, String> descrip_cl;
-    @FXML
-    private TableView<EvenementGroup> lstevt_tbl;
+//    private TableColumn<EvenementGroup, String> nomevt_cl;
+//    @FXML
+//    private TableColumn<EvenementGroup, String> typeevt_cl;
+//    @FXML
+//    private TableColumn<EvenementGroup, Date> dateevt_cl;
+//    @FXML
+//    private TableColumn<EvenementGroup, String> ivtevt_cl;
+//    @FXML
+//    private TableColumn<EvenementGroup, String> plan_cl;
+//    @FXML
+//    private TableColumn<EvenementGroup, String> descrip_cl;
+//    @FXML
+//    private TableView<EvenementGroup> lstevt_tbl;
 
     /**
      * Initializes the controller class.
@@ -90,15 +88,17 @@ public class Ui_ListeEvenementController implements Initializable {
     }    
     private void init_tableView()
     {
-            nomevt_cl.setCellValueFactory((CellDataFeatures<EvenementGroup, String> EvenementGroup) -> new  SimpleStringProperty((EvenementGroup.getValue().getNom())));
-            typeevt_cl.setCellValueFactory((CellDataFeatures<EvenementGroup, String> EvenementGroup) -> new SimpleObjectProperty<String>(EvenementGroup.getValue().getNom()));
-            dateevt_cl.setCellValueFactory((CellDataFeatures<EvenementGroup,Date>EvenementGroup)-> new SimpleObjectProperty<Date>(EvenementGroup.getValue().getDate_evenement()) );
-            ivtevt_cl.setCellValueFactory((CellDataFeatures<EvenementGroup,String>EvenementGroup)->new SimpleStringProperty(EvenementGroup.getValue().getNom()));
-            plan_cl.setCellValueFactory((CellDataFeatures<EvenementGroup,String>EvenementGroup)->{
-                return new SimpleStringProperty(EvenementGroup.getValue().getPlan().getNom());
-            });
-            descrip_cl.setCellValueFactory((CellDataFeatures<EvenementGroup,String>EvenementGroup)->new SimpleStringProperty(EvenementGroup.getValue().getDescription()));
-//            lstevt_tbl.setRowFactory( tv -> {
+//            nomevt_cl.setCellValueFactory((CellDataFeatures<EvenementGroup, String> EvenementGroup) -> new  SimpleStringProperty((EvenementGroup.getValue().getNom())));
+//            typeevt_cl.setCellValueFactory((CellDataFeatures<EvenementGroup, String> EvenementGroup) -> new SimpleObjectProperty<String>(EvenementGroup.getValue().getNom()));
+//            dateevt_cl.setCellValueFactory((CellDataFeatures<EvenementGroup,Date>EvenementGroup)-> new SimpleObjectProperty<Date>(EvenementGroup.getValue().getDate_evenement()) );
+//            ivtevt_cl.setCellValueFactory((CellDataFeatures<EvenementGroup,String>EvenementGroup)->new SimpleStringProperty(EvenementGroup.getValue().getNom()));
+//            plan_cl.setCellValueFactory((CellDataFeatures<EvenementGroup,String>EvenementGroup)->{
+//                return new SimpleStringProperty(EvenementGroup.getValue().getPlan().getNom());
+//            });
+//            descrip_cl.setCellValueFactory((CellDataFeatures<EvenementGroup,String>EvenementGroup)->new SimpleStringProperty(EvenementGroup.getValue().getDescription()));
+
+//*****************************************************************************
+////            lstevt_tbl.setRowFactory( tv -> {
 //            TableRow<EvenementGroup> row = new TableRow<>();
  //           }
     
