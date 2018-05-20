@@ -7,7 +7,7 @@ package Entites.Events;
 
 import Entites.AbstractEntite;
 import Entites.Plan.Plan;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import java.util.Date;
 import java.util.Objects;
 
@@ -23,12 +23,12 @@ public class Events {
     protected String heure_evt;
     protected String duree_evt;
     protected String Type_evt;
-    protected Client organisateur;
+    protected Utilisateur organisateur;
     protected String description_evt;
     protected Plan plan_evt;
     protected int nb_max;
     
-    public Events(int id,String nom_evt, Date date_evt, String heure_evt, String duree_evt, String Type_evt, Client organisateur, String description_evt, Plan plan_evt, int nb_max, int ID, String nom) {
+    public Events(int id,String nom_evt, Date date_evt, String heure_evt, String duree_evt, String Type_evt, Utilisateur organisateur, String description_evt, Plan plan_evt, int nb_max, int ID, String nom) {
         this.id = id;
         this.nom_evt = nom_evt;
         this.date_evt = date_evt;
@@ -155,11 +155,11 @@ public class Events {
         this.Type_evt = Type_evt;
     }
 
-    public Client getOrganisateur() {
+    public Utilisateur getOrganisateur() {
         return organisateur;
     }
 
-    public void setOrganisateur(Client organisateur) {
+    public void setOrganisateur(Utilisateur organisateur) {
         this.organisateur = organisateur;
     }
 
