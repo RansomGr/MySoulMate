@@ -7,10 +7,9 @@ package Services.Plan;
 
 import Entites.Plan.Avis;
 import Entites.Plan.Plan;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import Services.Gestionnaire;
 import static Services.Gestionnaire.DB;
-import Services.GestionnaireAbstractEntite;
 import Services.Plan.GestionnairePlan;
 import Services.User.GestionnaireClient;
 import java.sql.PreparedStatement;
@@ -18,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -32,13 +32,14 @@ public class GestionnaireAvis implements Gestionnaire {
      
     
       Avis a=(Avis)o;
-      String query="insert into Avis(Plan,Client,commentaire,note,dateh) values(?,?,?,?,?)";
+      String query="insert into Avis(Plan,Client,commentaire,note) values(?,?,?,?)";
       PreparedStatement pst= DB.prepareStatement(query);
-      pst.setInt(1,a.getPlan().getID());
-      pst.setInt(2,a.getClient().getID());
+      
+      pst.setInt(1,a.getPlan().getId());
+      pst.setInt(2,a.getClient().getId());
       pst.setString(3,a.getCommentaire());
       pst.setFloat(4,a.getNote());
-      pst.setDate(5,a.getDateh());
+    
     
       
       return pst.executeUpdate();
@@ -51,16 +52,14 @@ public class GestionnaireAvis implements Gestionnaire {
       
       Avis a=(Avis)o;
       String query ="update Avis"
-              + " set Plan=?,Client=?,commentaire=?,note=?,dateh=?  where Client=? and Plan=?";
+              + " Plan=?,Client=?,commentaire=?,note=?  where id=? ";
       
       PreparedStatement pst=DB.prepareStatement(query);
-      pst.setInt(1,a.getPlan().getID());
-      pst.setInt(2,a.getClient().getID());
+      pst.setInt(1,a.getPlan().getId());
+      pst.setInt(2,a.getClient().getId());
       pst.setString(3,a.getCommentaire());
       pst.setFloat(4,a.getNote());
-      pst.setDate(5,a.getDateh());
-      pst.setInt(6,a.getPlan().getID());
-      pst.setInt(7,a.getClient().getID());
+    
       
      
       return pst.executeUpdate();
@@ -70,12 +69,12 @@ public class GestionnaireAvis implements Gestionnaire {
     public int remove(Object o) throws SQLException {
    
     Avis a=(Avis)o;
-    String query=" delete from Avis where Avis.Plan=? and Avis.Client=? ";
+    String query=" delete from Avis where id=? ";
     
     PreparedStatement pst=DB.prepareStatement(query);
     
-    pst.setInt(1,a.getPlan().getID());
-    pst.setInt(2,a.getClient().getID());
+    pst.setInt(1,a.getId());
+    
     
     return pst.executeUpdate();
     
@@ -95,15 +94,15 @@ public class GestionnaireAvis implements Gestionnaire {
           GestionnaireAvis a =new GestionnaireAvis();
           GestionnaireClient g=new GestionnaireClient();
           GestionnairePlan p=new GestionnairePlan();
-           List<Client> Clients=(List<Client>) g.fetchAll();
+           List<Utilisateur> Clients=(List<Utilisateur>) g.fetchAll();
          List<Plan> Plans=(List<Plan>) a.fetchAll();
           while(res.next())// parcour du result set
           {
              int Client1_ID=res.getInt("client1");
              int Plan1_ID=res.getInt("Plan1");
     
-             Client client1=Clients.stream().filter(c->c.getID()==Client1_ID).findFirst().get();
-      Plan Plan1= Plans.stream().filter(c->c.getID()==Plan1_ID).findFirst().get();
+             Utilisateur client1=Clients.stream().filter(c->c.getId()==Client1_ID).findFirst().get();
+      Plan Plan1= Plans.stream().filter(c->c.getId()==Plan1_ID).findFirst().get();
 
            Avises.add(new Avis(
                    
@@ -111,59 +110,75 @@ public class GestionnaireAvis implements Gestionnaire {
                 client1,
                res.getString("commentaire"),
             res.getFloat("Note"),
-                    res.getDate("dateh")
-                                     )
+                    
+           )
            );
            }
           return Avises;    
     } 
     
 
+//    
+//    public List<Avis> fetchall(Plan p) throws SQLException{
+//        String query=" select Avis.*,Entite.nom,Client.prenom from avis "
+//                + " inner join Client on Client.Entite=Avis.Client "
+//                + " inner join Entite on Entite.ID=Client.Entite "
+//                + "  where Plan=? "    ; // preparation du requete sql
+//          PreparedStatement pst=DB.prepareStatement(query);
+//          pst.setInt(1,p.getID());
+//          ResultSet res = pst.executeQuery();
+//          List<Avis>ListAvises = new ArrayList<>();
+//           GestionnaireAvis a =new GestionnaireAvis();
+//           GestionnaireClient gp=new GestionnaireClient();
+//           List<Client>Clients =(List<Client>) gp.fetchAll();
+//           
+//           while(res.next()){
+//               int Client1_ID=res.getInt("client");
+//                Client client1=Clients.stream().filter(c->c.getID()==Client1_ID).findFirst().get();
+//    
+//             
+//                ListAvises.add(new Avis(
+//                   
+//                p,
+//                client1,
+//               res.getString("commentaire"),
+//            res.getFloat("Note"),
+//                    res.getDate("dateh")
+//                                     )
+//           );
+//           }
+//          return ListAvises;    
+//
+//     
+//     
+//         
+//           
+//           }
+
     @Override
-    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
+    public Object fetchOneById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
+    public Object fetchOnByCriteria(Map Criteras) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public List<Avis> fetchall(Plan p) throws SQLException{
-        String query=" select Avis.*,Entite.nom,Client.prenom from avis "
-                + " inner join Client on Client.Entite=Avis.Client "
-                + " inner join Entite on Entite.ID=Client.Entite "
-                + "  where Plan=? "    ; // preparation du requete sql
-          PreparedStatement pst=DB.prepareStatement(query);
-          pst.setInt(1,p.getID());
-          ResultSet res = pst.executeQuery();
-          List<Avis>ListAvises = new ArrayList<>();
-           GestionnaireAvis a =new GestionnaireAvis();
-           GestionnaireClient gp=new GestionnaireClient();
-           List<Client>Clients =(List<Client>) gp.fetchAll();
-           
-           while(res.next()){
-               int Client1_ID=res.getInt("client");
-                Client client1=Clients.stream().filter(c->c.getID()==Client1_ID).findFirst().get();
-    
-             
-                ListAvises.add(new Avis(
-                   
-                p,
-                client1,
-               res.getString("commentaire"),
-            res.getFloat("Note"),
-                    res.getDate("dateh")
-                                     )
-           );
-           }
-          return ListAvises;    
 
-     
-     
-         
-           
-           }
+    @Override
+    public List fetchSomeBy(String aux, String target_column, int StartPoint, int BreakPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List fetchSomeBy(String aux, int target_column) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List fetchSomeBy(String aux, int StartPoint, int BreakPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     
