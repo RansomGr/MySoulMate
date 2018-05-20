@@ -70,12 +70,12 @@ public class Avis {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 19 * hash + this.Id;
-        hash = 19 * hash + Objects.hashCode(this.plan);
-        hash = 19 * hash + Objects.hashCode(this.client);
-        hash = 19 * hash + Objects.hashCode(this.commentaire);
-        hash = 19 * hash + Objects.hashCode(this.note);
+        int hash = 3;
+        hash = 13 * hash + this.Id;
+        hash = 13 * hash + Objects.hashCode(this.plan);
+        hash = 13 * hash + Objects.hashCode(this.client);
+        hash = 13 * hash + Objects.hashCode(this.commentaire);
+        hash = 13 * hash + Objects.hashCode(this.note);
         return hash;
     }
 
@@ -113,7 +113,8 @@ public class Avis {
     public String toString() {
         return "Avis{" + "Id=" + Id + ", plan=" + plan + ", client=" + client + ", commentaire=" + commentaire + ", note=" + note + '}';
     }
-    
+
+   
     
    
 }
