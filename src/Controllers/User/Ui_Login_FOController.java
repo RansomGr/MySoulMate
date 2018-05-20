@@ -8,7 +8,6 @@ package Controllers.User;
 
 import Entites.User.Utilisateur;
 import Listner.Listener;
-import Services.User.GestionnaireClient;
 import Services.User.GestionnaireUser;
 import VIEWS.Ui_MainFrame_FOController;
 import com.messages.Status;
@@ -124,7 +123,7 @@ public class Ui_Login_FOController implements Initializable {
         Criterias.put(login_te.getText(), password_te.getText());
         Utilisateur Logged_in_Client = gc.fetchOnByCriteria(Criterias);
         if (Logged_in_Client != null) {
-            GestionnaireClient p = new GestionnaireClient();
+            GestionnaireUser p = new GestionnaireUser();
             if(Logged_in_Client.getEnabled()==0)
             {
                 WarningWindow.show();
