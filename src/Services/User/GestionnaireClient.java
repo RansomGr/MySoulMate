@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Services.User;
-
+/*
 import Entites.AbstractEntite;
 import Entites.Profil.Profil;
 import Entites.User.Client;
@@ -23,6 +23,7 @@ import java.util.List;
  *
  * @author Ransom
  */
+/*
 public class GestionnaireClient extends GestionnaireAbstractEntite implements Gestionnaire {
 
     @Override
@@ -281,3 +282,4 @@ public class GestionnaireClient extends GestionnaireAbstractEntite implements Ge
 
     //////////////////////PARTIE MATCHING //////////////////////////////
 }
+*/

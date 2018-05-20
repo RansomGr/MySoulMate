@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+/*
 package Services.User;
 
 import Entites.User.Admin;
@@ -18,6 +18,7 @@ import java.util.List;
  *
  * @author Ransom
  */
+/*
 public class GestionnaireAdmin implements Gestionnaire {
 
     @Override
@@ -135,3 +136,4 @@ public class GestionnaireAdmin implements Gestionnaire {
     }
     
 }
+*/
