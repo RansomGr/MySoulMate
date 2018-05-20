@@ -11,7 +11,7 @@ import Entites.Plan.Plan;
 import Entites.User.Utilisateur;
 import Services.Gestionnaire;
 import Services.Plan.GestionnairePlan;
-import Services.User.GestionnaireClient;
+import Services.User.GestionnaireUser;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
@@ -115,7 +115,7 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Events>Evenements = new ArrayList<>();//  Creation du List Reclamation
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
-          GestionnaireClient gclt = new GestionnaireClient();
+          GestionnaireUser gclt = new GestionnaireUser();
           List<Utilisateur>clients= (List<Utilisateur>) gclt.fetchAll();
            GestionnairePlan gpl= new GestionnairePlan();
           List<Plan> Plans= (List<Plan>) gpl.fetchAll();
@@ -150,7 +150,7 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
         String query=" select events.*,id.nom from events inner join id on "
                 + "id.id=events.entite "
                 + " where ( nom_evt like ? or date_evt like ? or heure like ? or type_evt like ? or plan_evt like ? ) "    ; // preparation du requete sql
-        GestionnaireClient gclt = new GestionnaireClient();
+        GestionnaireUser gclt = new GestionnaireUser();
           List<Utilisateur>clients= (List<Utilisateur>) gclt.fetchAll();
            GestionnairePlan gpl= new GestionnairePlan();  
         PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
@@ -193,7 +193,7 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
     
     public List<? extends Object> fetchAll(String aux,int StartPoint,int BreakPoint) throws SQLException {
         
-        GestionnaireClient gclt = new GestionnaireClient();
+        GestionnaireUser gclt = new GestionnaireUser();
           List<Utilisateur>clients= (List<Utilisateur>) gclt.fetchAll();
            GestionnairePlan gpl= new GestionnairePlan();
            
@@ -244,7 +244,7 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
                   + " where ( "+target_column+" like ?  )  " ;
                  // preparation du requete sql
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
-          GestionnaireClient gclt = new GestionnaireClient();
+          GestionnaireUser gclt = new GestionnaireUser();
           List<Utilisateur>clients= (List<Utilisateur>) gclt.fetchAll();
           GestionnairePlan gpl= new GestionnairePlan();
           List<Events>evenent = new ArrayList<>();//  Creation du List Reclamation
