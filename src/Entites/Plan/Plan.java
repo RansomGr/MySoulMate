@@ -17,6 +17,7 @@ public class Plan {
      private String nom;
     private String type;
     private String email;
+    private String siteweb;
     private String photo;
     
 
@@ -27,11 +28,12 @@ public class Plan {
     private Float X;
     private Float y;
 
-    public Plan(int Id, String nom, String type, String email, String photo, int telephone, String Description, String photo1, String photo2, Float X, Float y) {
+    public Plan(int Id, String nom, String type, String email, String siteweb, String photo, int telephone, String Description, String photo1, String photo2, Float X, Float y) {
         this.Id = Id;
         this.nom = nom;
         this.type = type;
         this.email = email;
+        this.siteweb = siteweb;
         this.photo = photo;
         this.telephone = telephone;
         this.Description = Description;
@@ -47,20 +49,6 @@ public class Plan {
 
     public void setId(int Id) {
         this.Id = Id;
-    }
-    
-
-    public Plan(String nom, String type, String email, String photo, int telephone, String Description, String photo1, String photo2, Float X, Float y) {
-        this.nom = nom;
-        this.type = type;
-        this.email = email;
-        this.photo = photo;
-        this.telephone = telephone;
-        this.Description = Description;
-        this.photo1 = photo1;
-        this.photo2 = photo2;
-        this.X = X;
-        this.y = y;
     }
 
     public String getNom() {
@@ -85,6 +73,14 @@ public class Plan {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSiteweb() {
+        return siteweb;
+    }
+
+    public void setSiteweb(String siteweb) {
+        this.siteweb = siteweb;
     }
 
     public String getPhoto() {
@@ -146,17 +142,18 @@ public class Plan {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + this.Id;
-        hash = 97 * hash + Objects.hashCode(this.nom);
-        hash = 97 * hash + Objects.hashCode(this.type);
-        hash = 97 * hash + Objects.hashCode(this.email);
-        hash = 97 * hash + Objects.hashCode(this.photo);
-        hash = 97 * hash + this.telephone;
-        hash = 97 * hash + Objects.hashCode(this.Description);
-        hash = 97 * hash + Objects.hashCode(this.photo1);
-        hash = 97 * hash + Objects.hashCode(this.photo2);
-        hash = 97 * hash + Objects.hashCode(this.X);
-        hash = 97 * hash + Objects.hashCode(this.y);
+        hash = 79 * hash + this.Id;
+        hash = 79 * hash + Objects.hashCode(this.nom);
+        hash = 79 * hash + Objects.hashCode(this.type);
+        hash = 79 * hash + Objects.hashCode(this.email);
+        hash = 79 * hash + Objects.hashCode(this.siteweb);
+        hash = 79 * hash + Objects.hashCode(this.photo);
+        hash = 79 * hash + this.telephone;
+        hash = 79 * hash + Objects.hashCode(this.Description);
+        hash = 79 * hash + Objects.hashCode(this.photo1);
+        hash = 79 * hash + Objects.hashCode(this.photo2);
+        hash = 79 * hash + Objects.hashCode(this.X);
+        hash = 79 * hash + Objects.hashCode(this.y);
         return hash;
     }
 
@@ -187,6 +184,9 @@ public class Plan {
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
+        if (!Objects.equals(this.siteweb, other.siteweb)) {
+            return false;
+        }
         if (!Objects.equals(this.photo, other.photo)) {
             return false;
         }
@@ -210,8 +210,10 @@ public class Plan {
 
     @Override
     public String toString() {
-        return "Plan{" + "Id=" + Id + ", nom=" + nom + ", type=" + type + ", email=" + email + ", photo=" + photo + ", telephone=" + telephone + ", Description=" + Description + ", photo1=" + photo1 + ", photo2=" + photo2 + ", X=" + X + ", y=" + y + '}';
+        return "Plan{" + "Id=" + Id + ", nom=" + nom + ", type=" + type + ", email=" + email + ", siteweb=" + siteweb + ", photo=" + photo + ", telephone=" + telephone + ", Description=" + Description + ", photo1=" + photo1 + ", photo2=" + photo2 + ", X=" + X + ", y=" + y + '}';
     }
+
+
 
    
 
