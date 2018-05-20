@@ -10,7 +10,7 @@ import Entites.Events.InviteEvents;
 import Entites.User.Utilisateur;
 import Services.Gestionnaire;
 import static Services.Gestionnaire.DB;
-import Services.User.GestionnaireClient;
+import Services.User.GestionnaireUser;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -68,7 +68,7 @@ public class GestionnaireInviteEvent implements Gestionnaire{
           List<Utilisateur>Clients ;
           List<Events>events;
           GestionnaireEvent g = new GestionnaireEvent();
-          GestionnaireClient c= new GestionnaireClient();
+          GestionnaireUser c= new GestionnaireUser();
           Clients=(List<Utilisateur>) c.fetchAll();
           events=(List<Events>) g.fetchAll();
           while(res.next())// parcour du result set
