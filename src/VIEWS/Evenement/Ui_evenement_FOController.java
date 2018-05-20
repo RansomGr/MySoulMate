@@ -10,7 +10,7 @@ package VIEWS.Evenement;
 import Entites.Events.Events;
 import Entites.Events.InviteEvents;
 import Entites.Plan.Plan;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 //import Services.Evenement.GestionnaireEvenementGroup;
 //import Services.Evenement.GestionnaireInviteEvenement;
 import Services.Events.GestionnaireEvent;
@@ -85,7 +85,7 @@ public class Ui_evenement_FOController implements Initializable {
    private Alert ErrorWindow;
    private Alert WarningWindow;
    private Alert ConfirmWindow;
-   private ObservableList<Client> Clients ;
+   private ObservableList<Utilisateur> Clients ;
    private Plan planTrouve;
    private static Events Event_to_be_modified;
   // private static Events Evenementmodifier ;
@@ -103,15 +103,15 @@ public class Ui_evenement_FOController implements Initializable {
     @FXML
     private TextField recherche_ivt_txf;
     @FXML
-    private TableView<Client> table_amis;
+    private TableView<Utilisateur> table_amis;
 //    private TableColumn<Client, Integer> amisID_cl;
     @FXML
-    private TableColumn<Client, String> amisNom_cl;
+    private TableColumn<Utilisateur, String> amisNom_cl;
     @FXML
-    private TableView<Client> table_invt;
+    private TableView<Utilisateur> table_invt;
 //    private TableColumn<Client, Integer> ivtID_cl;
     @FXML
-    private TableColumn<Client, String> ivtNom_cl;
+    private TableColumn<Utilisateur, String> ivtNom_cl;
     @FXML
     private Button plus_btn;
     @FXML
@@ -172,10 +172,10 @@ public class Ui_evenement_FOController implements Initializable {
     {
 //        amisID_cl.setCellValueFactory((TableColumn.CellDataFeatures<Client, Integer>Client)->new SimpleIntegerProperty((Client.getValue().getID())).asObject());
 //        ivtID_cl.setCellValueFactory((TableColumn.CellDataFeatures<Client, Integer>Client)->new SimpleIntegerProperty((Client.getValue().getID())).asObject());
-        amisNom_cl.setCellValueFactory((TableColumn.CellDataFeatures<Client, String>Client)->new SimpleStringProperty((Client.getValue().getNom()+" "+ Client.getValue().getPrenom())));
-        ivtNom_cl.setCellValueFactory((TableColumn.CellDataFeatures<Client, String>Client)->new SimpleStringProperty((Client.getValue().getNom()+" "+ Client.getValue().getPrenom())));
+        amisNom_cl.setCellValueFactory((TableColumn.CellDataFeatures<Utilisateur, String>Client)->new SimpleStringProperty((Client.getValue().getNom()+" "+ Client.getValue().getPrenom())));
+        ivtNom_cl.setCellValueFactory((TableColumn.CellDataFeatures<Utilisateur, String>Client)->new SimpleStringProperty((Client.getValue().getNom()+" "+ Client.getValue().getPrenom())));
         GestionnaireClient gc = new GestionnaireClient();
-        Clients = FXCollections.observableArrayList((ArrayList<Client>)gc.fetchAll());
+        Clients = FXCollections.observableArrayList((ArrayList<Utilisateur>)gc.fetchAll());
         table_amis.setItems(Clients);
         
     }
@@ -254,7 +254,7 @@ public class Ui_evenement_FOController implements Initializable {
     private void plusFO(ActionEvent event) {
         if(!table_amis.getSelectionModel().isEmpty())
         {
-        Client Clientselected = table_amis.getSelectionModel().getSelectedItem();
+        Utilisateur Clientselected = table_amis.getSelectionModel().getSelectedItem();
         if(!table_invt.getItems().contains(Clientselected))
         table_invt.getItems().add(Clientselected);
         table_amis.getSelectionModel().clearSelection();
@@ -265,7 +265,7 @@ public class Ui_evenement_FOController implements Initializable {
     private void moinsFO(ActionEvent event) {
         if(!table_invt.getSelectionModel().isEmpty())
         {
-            Client Clientselected = table_invt.getSelectionModel().getSelectedItem();
+            Utilisateur Clientselected = table_invt.getSelectionModel().getSelectedItem();
             table_invt.getItems().remove(Clientselected);
             table_invt.getSelectionModel().clearSelection();
         }
@@ -295,7 +295,7 @@ public class Ui_evenement_FOController implements Initializable {
     }
     private void filter(KeyEvent event) throws SQLException {
         GestionnaireClient gc =new GestionnaireClient();
-        Clients=FXCollections.observableArrayList((List<Client>)gc.fetchAll(recherche_ivt_txf.getText(), 20, " yyyy"));
+        Clients=FXCollections.observableArrayList((List<Utilisateur>)gc.fetchAll(recherche_ivt_txf.getText(), 20, " yyyy"));
         table_amis.setItems(Clients);
         
     }
@@ -312,13 +312,18 @@ public class Ui_evenement_FOController implements Initializable {
             Plan p;
       if(ge.create(new Events(
                        "eventUser",
-              Date.valueOf(date_pk.getValue()), hour_sp.getValue()+":"+min_sp.getValue(), duree_sp.getValue().toString(),
-              type_cmb.getValue(),MySoulMate.getLogged_in_Client(),description_txa.getText(), planTrouve, 200, -1, "event"))==1)
+              Date.valueOf(date_pk.getValue()),
+              hour_sp.getValue()+":"+min_sp.getValue(),
+              duree_sp.getValue().toString(),
+              type_cmb.getValue(),MySoulMate.getLogged_in_Client(),
+              description_txa.getText(),
+              planTrouve,
+              200))==1)
        {
-           int id_ev=((List<Events>)ge.fetchAll()).stream().mapToInt(x->x.getID()).max().getAsInt();
+           int id_ev=((List<Events>)ge.fetchAll()).stream().mapToInt(x->x.getId()).max().getAsInt();
            System.out.println("id eve"+id_ev);
-           Events ev = new Events(id_ev, "nom_evt");
-           ev.setID(id_ev);
+           Events ev = new Events();
+           ev.setId(id_ev);
            GestionnaireInviteEvent gi = new GestionnaireInviteEvent();
            table_invt.getItems().stream().collect(Collectors.toList()).forEach(
            x->{
@@ -343,9 +348,14 @@ public class Ui_evenement_FOController implements Initializable {
                      {   
                        if(ge.update(new Events(
                        "eventUser",
-              Date.valueOf(date_pk.getValue()), hour_sp.getValue()+":"+min_sp.getValue(), duree_sp.getValue().toString(),
-              type_cmb.getValue(),MySoulMate.getLogged_in_Client(),description_txa.getText(),
-                               planTrouve, 200, Event_to_be_modified.getID(), "event"))==1)
+              Date.valueOf(date_pk.getValue()),
+                               hour_sp.getValue()+":"+min_sp.getValue(),
+                               duree_sp.getValue().toString(),
+                               type_cmb.getValue(),
+                               MySoulMate.getLogged_in_Client(),
+                               description_txa.getText(),
+                               planTrouve, 
+                               200))==1)
                        {
                            InformationWindow.setContentText("Evènement modifié avec succé !");
                            InformationWindow.show();

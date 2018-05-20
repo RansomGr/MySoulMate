@@ -8,7 +8,7 @@ package Services.Relation;
 import Entites.Relation.Relation;
 import Entites.User.Utilisateur;
 import Services.Gestionnaire;
-import Services.User.GestionnaireClient;
+import Services.User.GestionnaireUser;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,18 +48,17 @@ public class GestionnaireRelation implements Gestionnaire<Relation> {
     @Override
     public int update(Relation r) throws SQLException {
 
-        String query ="update Relation set ID=?,client1=?,client2=?,point_relation=?,niveau=?,date_debut=?,date_fin=? where ID=? ";
+        String query ="update Relation set client1=?,client2=?,point_relation=?,niveau=?,date_debut=?,date_fin=? where ID=? ";
         PreparedStatement pst=DB.prepareStatement(query);
         
-        pst.setInt(1, r.getID());
-        pst.setInt(2,r.getClient1().getId());// Binding du premier valeur mentionner dans le query "?" 
-        pst.setInt(3,r.getClient2().getId());
-        pst.setInt(4,r.getPoints_relation());
-        pst.setString(5,r.getNiveau());
-        pst.setDate(6,r.getDate_debut());
-        pst.setDate(7,r.getDate_fin());
+        pst.setInt(1,r.getClient1().getId());// Binding du premier valeur mentionner dans le query "?" 
+        pst.setInt(2,r.getClient2().getId());
+        pst.setInt(3,r.getPoints_relation());
+        pst.setString(4,r.getNiveau());
+        pst.setDate(5,r.getDate_debut());
+        pst.setDate(6,r.getDate_fin());
         
-        pst.setInt(8, r.getID());
+        pst.setInt(7, r.getID());
         /*pst.setInt(8,r.getClient1().getID());
         pst.setInt(9,r.getClient2().getID());*/
         
@@ -89,15 +88,15 @@ String query=" select *  from  Relation "    ; // preparation du requete sql
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Relation>Relations = new ArrayList<>();//  Creation du List Reclamation
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
-          GestionnaireClient g=new GestionnaireClient();
-           List<Utilisateur> Clients=(List<Utilisateur>) g.fetchAll();
+          GestionnaireUser g=new GestionnaireUser();
+         // List<User> Clients = g.
           while(res.next())// parcour du result set
           {
              int Client1_ID=res.getInt("client1");
              int Client2_ID=res.getInt("client2");
 
-              Utilisateur client1=Clients.stream().filter(c->c.getId()==Client1_ID).findFirst().get();
-              Utilisateur client2=Clients.stream().filter(c->c.getId()==Client2_ID).findFirst().get();
+              Utilisateur client1=g.fetchOneById(Client1_ID);
+              Utilisateur client2=g.fetchOneById(Client2_ID);
 
             Relations.add(new Relation(
                     res.getInt("ID"),

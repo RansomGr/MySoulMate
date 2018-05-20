@@ -6,24 +6,26 @@
 package Services.Profil;
 
 import Entites.Profil.Caracteristique;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import Services.Gestionnaire;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Nadia
  */
-public class GestionnaireCaracteristique implements Gestionnaire {
+public class GestionnaireCaracteristique implements Gestionnaire <Caracteristique> {
 
     @Override
-    public int create(Object o) throws SQLException {
+    public int create(Caracteristique c) throws SQLException {
 
-        Caracteristique c = (Caracteristique) o;// down Cast
         String query = " insert into Caracteristique (corpulence,pilosite,origine,profession,alcool,tabac,taille,cheveux,yeux ,caractere, statut ,cuisine) values (?,?,?,?,?,?,?,?,?,?,?,?) "; // preparation du query
 
         PreparedStatement pst = DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
@@ -45,8 +47,7 @@ public class GestionnaireCaracteristique implements Gestionnaire {
     } // Execution et retour du resultat du query     }
 
     @Override
-    public int update(Object o) throws SQLException {
-        Caracteristique c = (Caracteristique) o;// down Cast du Object => Admin 
+    public int update(Caracteristique c) throws SQLException {
         String query = " update  Caracteristique set corpulence=?,pilosite=?,origine=?,profession=?,alcool=?,tabac=?,taille=?,cheveux=?,yeux=? ,caractere=?, statut=? ,cuisine=? where id=?  "; // preparation du query
         PreparedStatement pst = DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
 
@@ -67,9 +68,8 @@ public class GestionnaireCaracteristique implements Gestionnaire {
     } // Execution et retour du resultat du query     }
 
     @Override
-    public int remove(Object o) throws SQLException {
+    public int remove(Caracteristique c) throws SQLException {
 
-        Caracteristique c = (Caracteristique) o;
         String query = "delete  from caracteristique where ID=? ";
 
         PreparedStatement pst = DB.prepareStatement(query);
@@ -80,7 +80,7 @@ public class GestionnaireCaracteristique implements Gestionnaire {
     }
 
     @Override
-    public List<? extends Object> fetchAll() throws SQLException {
+    public List<Caracteristique> fetchAll() throws SQLException {
         String query = "select * from caracteristique ";
         PreparedStatement pst = DB.prepareStatement(query);
         ResultSet res = pst.executeQuery();
@@ -92,24 +92,38 @@ public class GestionnaireCaracteristique implements Gestionnaire {
         return Caracteristiques;
     }
 
+    
     @Override
-    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Caracteristique fetchOneById(int id) throws SQLException {
-        Caracteristique c;
+    public Caracteristique fetchOneById(int id) {
+        Caracteristique c = null;
         String query = "select * from caracteristique where id=? ";
-        PreparedStatement pst = DB.prepareStatement(query);
-        pst.setInt(1, id);
-        ResultSet res = pst.executeQuery();
-        res.next();
-        c = new Caracteristique(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getString(7), Float.parseFloat(res.getString(8)), res.getString(9), res.getString(10), res.getString(11), res.getString(12), res.getString(13));
+        PreparedStatement pst = null;
+        try {
+            pst = DB.prepareStatement(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionnaireCaracteristique.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            pst.setInt(1, id);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionnaireCaracteristique.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ResultSet res = null;
+        try {
+            res = pst.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionnaireCaracteristique.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            res.next();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionnaireCaracteristique.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            c = new Caracteristique(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getString(7), Float.parseFloat(res.getString(8)), res.getString(9), res.getString(10), res.getString(11), res.getString(12), res.getString(13));
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionnaireCaracteristique.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         return c;
     }
@@ -123,51 +137,51 @@ public class GestionnaireCaracteristique implements Gestionnaire {
     }
 
     /////////////////////////////////// PARTIE MATCHING /////////////////////////////
-    public int matching_selon_preference(Client cl1, Client cl2) {
+    public int matching_selon_preference(Utilisateur cl1, Utilisateur cl2) {
         int resultat_matching_preference = 0;
 
         System.out.println("client 2:" + cl2.getProfil().getPreference());
-        System.out.println("client 1:" + cl1.getProfil().getCaracteristique());
+        System.out.println("client 1:" + cl1.getProfil().getCaracteristique_id());
       
-        if (cl1.getProfil().getCaracteristique().getCorpulence() .equals(cl2.getProfil().getPreference().getCorpulence())) {
+        if (cl1.getProfil().getCaracteristique_id().getCorpulence() .equals(cl2.getProfil().getPreference().getCorpulence())) {
                
             resultat_matching_preference += 8;
         } else {
         }
 
-        if (cl1.getProfil().getCaracteristique().getPilosite() .equals( cl2.getProfil().getPreference().getPilosite())) {
+        if (cl1.getProfil().getCaracteristique_id().getPilosite() .equals( cl2.getProfil().getPreference().getPilosite())) {
             resultat_matching_preference += 8;
         }
 
-        if (cl1.getProfil().getCaracteristique().getAlcool().equals(cl2.getProfil().getPreference().getAlcool())) {
+        if (cl1.getProfil().getCaracteristique_id().getAlcool().equals(cl2.getProfil().getPreference().getAlcool())) {
             resultat_matching_preference += 8;
         }
 
-        if (cl1.getProfil().getCaracteristique().getAlcool().equals(cl2.getProfil().getPreference().getAlcool()) ){
+        if (cl1.getProfil().getCaracteristique_id().getAlcool().equals(cl2.getProfil().getPreference().getAlcool()) ){
             resultat_matching_preference += 8;
         }
 
-        if (cl1.getProfil().getCaracteristique().getCheveux().equals( cl2.getProfil().getPreference().getCheveux()) ){
+        if (cl1.getProfil().getCaracteristique_id().getCheveux().equals( cl2.getProfil().getPreference().getCheveux()) ){
             resultat_matching_preference += 8;
         }
 
-        if (cl1.getProfil().getCaracteristique().getYeux().equals( cl2.getProfil().getPreference().getYeux())) {
+        if (cl1.getProfil().getCaracteristique_id().getYeux().equals( cl2.getProfil().getPreference().getYeux())) {
             resultat_matching_preference += 8;
         }
 
-        if (cl1.getProfil().getCaracteristique().getCaractere().equals( cl2.getProfil().getPreference().getCaractere())) {
+        if (cl1.getProfil().getCaracteristique_id().getCaractere().equals( cl2.getProfil().getPreference().getCaractere())) {
             resultat_matching_preference += 8;
         }
 
-        if (cl1.getProfil().getCaracteristique().getStatut() .equals( cl2.getProfil().getPreference().getStatut())) {
+        if (cl1.getProfil().getCaracteristique_id().getStatut() .equals( cl2.getProfil().getPreference().getStatut())) {
             resultat_matching_preference += 8;
         }
 
-        if (cl1.getProfil().getCaracteristique().getCuisine() .equals( cl2.getProfil().getPreference().getCuisine()) ){
+        if (cl1.getProfil().getCaracteristique_id().getCuisine() .equals( cl2.getProfil().getPreference().getCuisine()) ){
             resultat_matching_preference += 8;
         }
 
-        if (algorithme_de_syntaxe(cl1.getProfil().getCaracteristique().getProfession(), cl2.getProfil().getPreference().getProfession()) == true) {
+        if (algorithme_de_syntaxe(cl1.getProfil().getCaracteristique_id().getProfession(), cl2.getProfil().getPreference().getProfession()) == true) {
             resultat_matching_preference += 8;
         }
 
@@ -176,4 +190,24 @@ public class GestionnaireCaracteristique implements Gestionnaire {
     }
 
     /////////////////////////////////// PARTIE MATCHING /////////////////////////////
+
+    @Override
+    public Caracteristique fetchOnByCriteria(Map<String, String> Criteras) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Caracteristique> fetchSomeBy(String aux, String target_column, int StartPoint, int BreakPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Caracteristique> fetchSomeBy(String aux, int target_column) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Caracteristique> fetchSomeBy(String aux, int StartPoint, int BreakPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

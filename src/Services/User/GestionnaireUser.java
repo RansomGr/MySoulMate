@@ -8,6 +8,7 @@ package Services.User;
 import Entites.User.Utilisateur;
 import Services.Gestionnaire;
 import Services.Profil.GestionnaireAdresse;
+import Services.Profil.GestionnaireProfil;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,7 +45,7 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
 
     @Override
     public Utilisateur fetchOneById(int id) {
-         // ServiceProfil Sp = new ServiceProfil();
+     GestionnaireProfil Sp = new GestionnaireProfil();
      GestionnaireAdresse Sa= new GestionnaireAdresse();
         
         try {
@@ -66,7 +67,7 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
 
     @Override
     public Utilisateur fetchOnByCriteria(Map<String, String> Criteras) {
-     // ServiceProfil Sp = new ServiceProfil();
+   GestionnaireProfil Sp = new GestionnaireProfil();
     GestionnaireAdresse Sa= new GestionnaireAdresse();
         
         try {
@@ -94,7 +95,7 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
                      res.getString(14), res.getString(15), res.getString(16), res.getString(17), res.getDate(18)
              );
              } catch (SQLException ex) {
-            Logger.getLogger(ServiceUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionnaireUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

@@ -81,6 +81,7 @@ public class GestionnaireInviteEvent implements Gestionnaire{
            }
           return InviteEvent;
     }
+    // correct
 
 //    @Override
 //    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {

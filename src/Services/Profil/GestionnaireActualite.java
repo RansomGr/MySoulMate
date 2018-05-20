@@ -6,87 +6,101 @@
 package Services.Profil;
 
 import Entites.Profil.Actualite;
-import Entites.Profil.Profil;
-import Entites.User.Client;
 import Services.Gestionnaire;
-import Services.GestionnaireAbstractEntite;
-import Services.User.GestionnaireClient;
+import Services.User.GestionnaireUser;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author Sofiene
  */
-public class GestionnaireActualite implements Gestionnaire {
+public class GestionnaireActualite implements Gestionnaire <Actualite> {
 
-    @Override
-    public int create(Object o) throws SQLException {
-        Actualite a = (Actualite) o;
-        String query = " insert into Actualite (entite,contenu,photo,createur) values (?,?,?,?) "; // preparation du query
+     @Override
+    public int create(Actualite a ) throws SQLException {
+        
+        String query = " insert into Actualite (createur,contenu,photo,add_date) values (?,?,?,?) "; // preparation du query
 
         PreparedStatement pst = DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
 
-        pst.setInt(1, a.getOwner().getID());
+        pst.setInt(1, a.getCreateur().getId());
         pst.setString(2, a.getContenu());
         pst.setString(3, a.getPhoto());
-        pst.setInt(4, a.getWriter().getID());
 
         return pst.executeUpdate();
     }
-
-    @Override
-    public int update(Object o) throws SQLException {
-        Actualite a = (Actualite) o;
-        String query = " update  Actualite set entite=?,contenu=?,photo=?,createur=? where id=?  ";
+  @Override
+    public int update(Actualite a) throws SQLException {
+        String query = " update  Actualite set createur=?,contenu=?,photo=?,createur=? where id=?  ";
         PreparedStatement pst = DB.prepareStatement(query);
-        pst.setInt(1, a.getOwner().getID());
+        pst.setInt(1, a.getCreateur().getId());
         pst.setString(2, a.getContenu());
         pst.setString(3, a.getPhoto());
-        pst.setInt(4, a.getWriter().getID());
         pst.setInt(5, a.getID());
         return pst.executeUpdate();
     }
 
-    @Override
-    public int remove(Object o) throws SQLException {
-        Actualite a = (Actualite) o;
+      @Override
+    public int remove(Actualite a) throws SQLException {
         String query = "delete  from Actualite where ID=? ";
         PreparedStatement pst = DB.prepareStatement(query);
         pst.setInt(1, a.getID());
         return pst.executeUpdate();
     }
-
     public List<Actualite> fetchAllById(int id) throws SQLException {
-        String query = " select * from actualite where entite=? ";
+        String query = " select * from actualite where ID=? ";
         PreparedStatement pst = DB.prepareStatement(query);
         pst.setInt(1, id);
         ResultSet res = pst.executeQuery();
-        GestionnaireClient gc = new GestionnaireClient();
+        GestionnaireUser gc;
+        gc = new GestionnaireUser();
        
         List<Actualite> ListActualites = new ArrayList<>();
         while (res.next()) {
-            ListActualites.add(new Actualite(res.getInt(1), GestionnaireAbstractEntite.findDerviedChildbyId(res.getInt(2)), res.getString("contenu"), res.getString("photo"), res.getDate("add_date").toLocalDate(), gc.fetchOneById(res.getInt("createur"))));
+            ListActualites.add(new Actualite(res.getInt(1),gc.fetchOneById(res.getInt("createur")), res.getString("contenu"), res.getString("photo"), res.getDate("add_date").toLocalDate()));
         }
         return ListActualites;
     }
-
-    @Override
+  
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
+    public List<Actualite> fetchAll() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<? extends Object> fetchAll() throws SQLException {
+    public Actualite fetchOneById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Actualite fetchOnByCriteria(Map<String, String> Criteras) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Actualite> fetchSomeBy(String aux, String target_column, int StartPoint, int BreakPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Actualite> fetchSomeBy(String aux, int target_column) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Actualite> fetchSomeBy(String aux, int StartPoint, int BreakPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+ 
+   
 
 }
