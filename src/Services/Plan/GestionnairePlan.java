@@ -75,7 +75,7 @@ import java.util.Map;
     public int update(Object o) throws SQLException {
         
       Plan p=(Plan)o;
-      String query ="update Plan" + " nom=?,type=?,email=?,siteweb=?,photo=?,telephone=?,description=?,photo1=?,photo2=?,x=?,y=?  where Id=?";
+      String query ="update Plan" + " nom=?,type=?,email=?,siteweb=?,photo=?,telephone=?,description=?,photo1=?,photo2=?,x=?,y=?  where id=?";
       
       PreparedStatement pst=DB.prepareStatement(query);
       
