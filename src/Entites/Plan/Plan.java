@@ -70,6 +70,10 @@ public class Plan extends AbstractEntite {
         this.description = description;
         this.photo = photo;
     }
+    public Plan(int Id ,String nom)
+    {
+        super(Id,nom);
+    }
 
     public Type getType() {
         return type;

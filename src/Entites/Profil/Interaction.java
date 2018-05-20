@@ -1,6 +1,7 @@
+package Entites.Profil;
 
-import Entites.AbstractEntite;
-import Entites.Profil.Actualite;
+
+import Entites.User.Client;
 import java.sql.Date;
 import java.util.Objects;
 /**
@@ -8,16 +9,33 @@ import java.util.Objects;
  * @author Sofiene
  */
 public class Interaction  {
-    private Actualite Actualite;
+
+private int ID;
+private Actualite Actualite;
+private Client owner ;
 private String commentaire ; 
-private String mention_jaime; 
 private Date dateheure ;
 
-    public Interaction(Actualite Actualite, String commentaire, String mention_jaime, Date dateheure) {
+    public Interaction(int ID, Actualite Actualite, Client owner, String commentaire, Date dateheure) {
+        this.ID = ID;
         this.Actualite = Actualite;
+        this.owner = owner;
         this.commentaire = commentaire;
-        this.mention_jaime = mention_jaime;
         this.dateheure = dateheure;
+    }
+
+    public Interaction(Actualite Actualite, Client owner, String commentaire) {
+        this.Actualite = Actualite;
+        this.owner = owner;
+        this.commentaire = commentaire;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public Actualite getActualite() {
@@ -28,20 +46,20 @@ private Date dateheure ;
         this.Actualite = Actualite;
     }
 
+    public Client getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Client owner) {
+        this.owner = owner;
+    }
+
     public String getCommentaire() {
         return commentaire;
     }
 
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
-    }
-
-    public String getMention_jaime() {
-        return mention_jaime;
-    }
-
-    public void setMention_jaime(String mention_jaime) {
-        this.mention_jaime = mention_jaime;
     }
 
     public Date getDateheure() {
@@ -55,10 +73,11 @@ private Date dateheure ;
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 47 * hash + Objects.hashCode(this.Actualite);
-        hash = 47 * hash + Objects.hashCode(this.commentaire);
-        hash = 47 * hash + Objects.hashCode(this.mention_jaime);
-        hash = 47 * hash + Objects.hashCode(this.dateheure);
+        hash = 79 * hash + this.ID;
+        hash = 79 * hash + Objects.hashCode(this.Actualite);
+        hash = 79 * hash + Objects.hashCode(this.owner);
+        hash = 79 * hash + Objects.hashCode(this.commentaire);
+        hash = 79 * hash + Objects.hashCode(this.dateheure);
         return hash;
     }
 
@@ -74,13 +93,16 @@ private Date dateheure ;
             return false;
         }
         final Interaction other = (Interaction) obj;
+        if (this.ID != other.ID) {
+            return false;
+        }
         if (!Objects.equals(this.commentaire, other.commentaire)) {
             return false;
         }
-        if (!Objects.equals(this.mention_jaime, other.mention_jaime)) {
+        if (!Objects.equals(this.Actualite, other.Actualite)) {
             return false;
         }
-        if (!Objects.equals(this.Actualite, other.Actualite)) {
+        if (!Objects.equals(this.owner, other.owner)) {
             return false;
         }
         if (!Objects.equals(this.dateheure, other.dateheure)) {
@@ -91,10 +113,10 @@ private Date dateheure ;
 
     @Override
     public String toString() {
-        return "Interaction{" + "Actualite=" + Actualite + ", commentaire=" + commentaire + ", mention_jaime=" + mention_jaime + ", dateheure=" + dateheure + '}';
+        return "Interaction{" + "ID=" + ID + ", Actualite=" + Actualite + ", owner=" + owner + ", commentaire=" + commentaire + ", dateheure=" + dateheure + '}';
     }
-    
 
+   
     
     }
 

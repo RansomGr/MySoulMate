@@ -161,10 +161,11 @@ public class ChatBoxController implements Initializable {
                 if (msg.getType() == MessageType.VOICE) {
                     ImageView imageview = new ImageView(new Image(getClass().getClassLoader().getResource("images/sound.png").toString()));
                     bl6.setGraphic(imageview);
+                    System.out.println("wiring messsage in the lisgtview");
                     bl6.setText("Sent a voice message!");
                     VoicePlayback.playAudio(msg.getVoiceMsg());
                 } else {
-                    bl6.setText(msg.getID() + ": " + msg.getMsg());
+                    bl6.setText(msg.getSender().getNom() + ": " + msg.getMsg());
                 }
                 bl6.setBackground(new Background(new BackgroundFill(Color.BLANCHEDALMOND, null, null)));
                 HBox x = new HBox();
@@ -190,7 +191,9 @@ public class ChatBoxController implements Initializable {
                 profileImage.setFitWidth(32);
 
                 BubbledLabel bl6 = new BubbledLabel();
+                System.out.println("type"+msg.getType());
                 if (msg.getType() == MessageType.VOICE) {
+                      System.out.println("sending voice inside add toChat");
                     bl6.setGraphic(new ImageView(new Image(getClass().getClassLoader().getResource("images/sound.png").toString())));
                     bl6.setText("Sent a voice message!");
                     VoicePlayback.playAudio(msg.getVoiceMsg());

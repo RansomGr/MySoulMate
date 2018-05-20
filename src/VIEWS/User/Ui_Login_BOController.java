@@ -57,20 +57,22 @@ public class Ui_Login_BOController implements Initializable {
 
     @FXML
     private void login_admin(ActionEvent event) throws SQLException, IOException {// missing animations
-        GestionnaireAdmin ga = new GestionnaireAdmin();
-        Admin Logged_in_Admin= ((List<Admin>)ga.fetchAll()).stream().filter(Admin->Admin.getLogin().equals(login_tf.getText())&&Admin.getMotdepasse().equals(password_tf.getText())).findFirst().get();
-        if(Logged_in_Admin!=null)
-        {
-         MySoulMate.setLogged_in_Admin(Logged_in_Admin);
+//        GestionnaireAdmin ga = new GestionnaireAdmin();
+//        Admin Logged_in_Admin= ((List<Admin>)ga.fetchAll()).stream().filter(Admin->Admin.getLogin().equals(login_tf.getText())&&Admin.getMotdepasse().equals(password_tf.getText())).findFirst().get();
+//        if(Logged_in_Admin!=null)
+//        {
+       // MySoulMate.setLogged_in_Admin(Logged_in_Admin);
+       Admin a = new Admin(0, "7ableu", "7ableu", "chfamma", "*****");
+        MySoulMate.setLogged_in_Admin(a);
         Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/ui_MainFrame_BO.fxml"));
         Scene scene = new Scene(root);
         MySoulMate.getMainStage().setScene(scene);
-        }
-        else
-        {
-            password_tf.clear();
-            login_tf.clear();
-        }
+//        }
+//        else
+//        {
+//            password_tf.clear();
+//            login_tf.clear();
+//        }
     }
     
 }

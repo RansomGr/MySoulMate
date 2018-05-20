@@ -7,6 +7,7 @@ package Entites.Profil;
 
 import Entites.AbstractEntite;
 import Entites.User.Client;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -14,30 +15,28 @@ import java.util.Objects;
  * @author Sofiene
  */
 public class Actualite {
-private int ID;
-private Client client ; 
-private String contenu ; 
-private String photo;
 
-    public Actualite(int ID, Client client, String contenu, String photo) {
+    private int ID;
+    private AbstractEntite Owner;
+    private String contenu;
+    private String photo;
+    private LocalDate add_date;
+    private Client writer;
+
+    public Actualite(int ID, AbstractEntite Owner, String contenu, String photo, LocalDate add_date, Client writer) {
         this.ID = ID;
-        this.client = client;
+        this.Owner = Owner;
         this.contenu = contenu;
         this.photo = photo;
-    }
-    public Actualite(int ID ,String contenu ,String photo)
-    {
-        this.ID=ID;
-        this.contenu=contenu;
-        this.photo=photo;
+        this.add_date = add_date;
+        this.writer = writer;
     }
 
-
-
-    public Actualite(Client client, String contenu, String photo) {
-        this.client = client;
+    public Actualite(AbstractEntite Owner, String contenu, String photo, Client writer) {
+        this.Owner = Owner;
         this.contenu = contenu;
         this.photo = photo;
+        this.writer = writer;
     }
 
     public int getID() {
@@ -46,14 +45,6 @@ private String photo;
 
     public void setID(int ID) {
         this.ID = ID;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
     }
 
     public String getContenu() {
@@ -72,18 +63,39 @@ private String photo;
         this.photo = photo;
     }
 
-    @Override
-    public String toString() {
-        return "Actualite{" + "ID=" + ID + ", client=" + client + ", contenu=" + contenu + ", photo=" + photo + '}';
+    public AbstractEntite getOwner() {
+        return Owner;
+    }
+
+    public void setOwner(AbstractEntite Owner) {
+        this.Owner = Owner;
+    }
+
+    public LocalDate getAdd_date() {
+        return add_date;
+    }
+
+    public void setAdd_date(LocalDate add_date) {
+        this.add_date = add_date;
+    }
+
+    public Client getWriter() {
+        return writer;
+    }
+
+    public void setWriter(Client writer) {
+        this.writer = writer;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 71 * hash + this.ID;
-        hash = 71 * hash + Objects.hashCode(this.client);
-        hash = 71 * hash + Objects.hashCode(this.contenu);
-        hash = 71 * hash + Objects.hashCode(this.photo);
+        int hash = 7;
+        hash = 53 * hash + this.ID;
+        hash = 53 * hash + Objects.hashCode(this.Owner);
+        hash = 53 * hash + Objects.hashCode(this.contenu);
+        hash = 53 * hash + Objects.hashCode(this.photo);
+        hash = 53 * hash + Objects.hashCode(this.writer);
+        
         return hash;
     }
 
@@ -108,13 +120,18 @@ private String photo;
         if (!Objects.equals(this.photo, other.photo)) {
             return false;
         }
-        if (!Objects.equals(this.client, other.client)) {
+        if (!Objects.equals(this.Owner, other.Owner)) {
+            return false;
+        }
+        if (!Objects.equals(this.writer, other.writer)) {
             return false;
         }
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Actualite{" + "ID=" + ID + ", Owner=" + Owner.getNom() + ", contenu=" + contenu + ", photo=" + photo + "DateTime =" + add_date +"Writer =" +writer+ '}';
+    }
 
-    
-    
 }

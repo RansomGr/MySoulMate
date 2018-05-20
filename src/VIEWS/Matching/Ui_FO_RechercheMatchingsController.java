@@ -73,19 +73,20 @@ public class Ui_FO_RechercheMatchingsController implements Initializable {
 
     private void chercher_les_matchings() throws SQLException, IOException
     {
-        GestionnaireClient gcl = new GestionnaireClient();
-       List <Client> clients =  ( (List <Client>) gcl.fetchAll()).stream().filter(x->x.getActivation()==1 && x.getProfil()!=null).collect(Collectors.toList());
+       GestionnaireClient gcl = new GestionnaireClient();
+       List <Client> clients =  ( (List <Client>) gcl.fetchAll()).stream().filter(x->x.getActivation()==1 && x.getProfil()!=null&&x.getProfil().getCaracteristique()!=null&&x.getProfil().getPreference()!=null).collect(Collectors.toList());
        clients.remove(MySoulMate.getLogged_in_Client());
-       for (int i=0 ; i<12; i++)
+       for (int i=0 ; i<clients.size(); )
     {
         HBox matchings_hb = new HBox();
         matchings_hb.setMinSize(170,240);
          
-        for(int j=0 ; j<3 ;i++, j++)
+        for(int j=0 ; j<2 ;i++, j++)
         {
             FXMLLoader fxml= new FXMLLoader(getClass().getResource("/VIEWS/Matching/ui_FO_show_one_Matching.fxml"));
             Node root = fxml.load();
             Ui_FO_show_one_MatchingController contr= fxml.<Ui_FO_show_one_MatchingController>getController();
+            System.out.println(clients.get(i));
             contr.setThe_matching(clients.get(i));
             contr.charger_matchings();
             matchings_hb.getChildren().add(root);

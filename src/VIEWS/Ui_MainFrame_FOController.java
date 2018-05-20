@@ -17,7 +17,6 @@ import Services.Evenement.GestionnaireEvents;
 import Services.Relation.GestionnaireRelation;
 import Services.User.GestionnaireClient;
 import VIEWS.Evenement.Ui_even_FOController;
-import VIEWS.Plan.Ui_FO_RecherchePlansController;
 import com.messages.Message;
 import com.messages.Status;
 import VIEWS.Profil.Ui_Profil_FOController;
@@ -57,8 +56,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -66,6 +67,8 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
@@ -76,14 +79,14 @@ import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 
-
 /**
  * FXML Controller class
  *
  * @author Ransom
  */
 public class Ui_MainFrame_FOController implements Initializable {
-private int AnimationDuration;
+
+    private int AnimationDuration;
     @FXML
     private Hyperlink create_new_account_hl;
     @FXML
@@ -93,7 +96,7 @@ private int AnimationDuration;
     private boolean Shown;
     @FXML
     private StackPane menu_bar;
-     @FXML
+    @FXML
     private Button hide_menu;
     @FXML
     private Button show_menu;
@@ -103,11 +106,11 @@ private int AnimationDuration;
     private ComboBox status_combobox;
     @FXML
     private ListView<Client> connected_friends;
-    private Map<Client,ListView<HBox>> conversations ;// who sent me a message , and the conversation tha took place between us 
-    private  Logger logger = LoggerFactory.getLogger(Ui_MainFrame_FOController.class);
+    private Map<Client, ListView<HBox>> conversations;// who sent me a message , and the conversation tha took place between us 
+    private Logger logger = LoggerFactory.getLogger(Ui_MainFrame_FOController.class);
     @FXML
     private HBox chat_windows;
-    private static  List<ChatBoxController> static_chat_windows;
+    private static List<ChatBoxController> static_chat_windows;
     @FXML
     private ListView<HBox> messages;
     @FXML
@@ -117,10 +120,11 @@ private int AnimationDuration;
     private Button menu_matching_btn;
     @FXML
     private Button messages_btn;
-    @FXML
     private VBox event_vb;
 
     private int unread_msg_count;
+    @FXML
+    private TextField recherche_dyn;
 
     public int getUnread_msg_count() {
         return unread_msg_count;
@@ -243,8 +247,10 @@ private int AnimationDuration;
 
     @FXML
     private void load_my_profil(ActionEvent event) throws IOException {
-        Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
-        Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_Profil_FO.fxml"));
+        FXMLLoader fxml = new FXMLLoader(getClass().getResource("/VIEWS/Profil/ui_Profil_FO.fxml"));
+        Node root = fxml.load();
+        Ui_Profil_FOController controller = fxml.<Ui_Profil_FOController>getController();
+        controller.setProfile_owner(MySoulMate.getLogged_in_Client());
         Content_pane.getChildren().clear();
         Content_pane.getChildren().add(root);
     }
@@ -255,6 +261,14 @@ private int AnimationDuration;
         Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/User/ui_Login_FO.fxml"));
         Scene sene = new Scene(root);
         MySoulMate.getMainStage().setScene(sene);
+       Platform.runLater(()->{
+            try {
+                MySoulMate.getListener().stop();
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(Ui_MainFrame_FOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                       });
+      
     }
 
     @FXML
@@ -388,24 +402,38 @@ private int AnimationDuration;
     }
 
     public void newUserNotification(Message msg) {
+        System.out.println("sending a notification to all users");
+        System.out.println(msg.getSender());
+        if(msg.getID()!=MySoulMate.getLogged_in_Client().getID())
+        {
+            Client c= null ;
+          GestionnaireClient gc= new GestionnaireClient();
+    
+            try {
+               c= gc.fetchOneById(msg.getID());
+                     msg.setSender(c);
+            } catch (SQLException ex) {
+                java.util.logging.Logger.getLogger(Ui_MainFrame_FOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         Platform.runLater(() -> {
             Image profileImg = new Image(getClass().getClassLoader().getResource("images/" + msg.getSender().getProfil().getPhoto()).toString(), 50, 50, false, false);
             TrayNotification tray = new TrayNotification();
-            tray.setTitle("A new user has joined!");
-            tray.setMessage(msg.getSender().getNom() + " has joined the MySoulMate APP Chatroom!");
+            tray.setTitle("Un Ami s'est connecter ");
+            tray.setMessage(msg.getSender().getNom() + " est maintenant connecter !");
             tray.setRectangleFill(Paint.valueOf("#2C3E50"));
             tray.setAnimationType(AnimationType.POPUP);
             tray.setImage(profileImg);
             tray.showAndDismiss(Duration.seconds(5));
             try {
-                //   Media hit = new Media(getClass().getClassLoader().getResource("sounds/notification.wav").toString());
-                //  MediaPlayer mediaPlayer = new MediaPlayer(hit);
-                // mediaPlayer.play();
+                   Media hit = new Media(getClass().getClassLoader().getResource("sounds/notification.wav").toString());
+                  MediaPlayer mediaPlayer = new MediaPlayer(hit);
+                   mediaPlayer.play();
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
         });
+        }
     }
 
     /*------------------Adding Chat from reciver and sender -------------*/
@@ -504,8 +532,6 @@ private int AnimationDuration;
                 x.setAlignment(Pos.TOP_RIGHT);
                 bl6.setBubbleSpec(BubbleSpec.FACE_RIGHT_CENTER);
                 x.getChildren().addAll(bl6, profileImage);
-
-                //        setOnlineLabel(Integer.toString(msg.getOnlineCount()));
                 x.setId(msg.getReciver().getID() + "");
                 return x;
             }
@@ -569,8 +595,6 @@ private int AnimationDuration;
         static_chat_windows.remove(controller);
     }
 
-
-
     public void update_count() {
         msg_count.setText(unread_msg_count + "");
     }
@@ -581,115 +605,125 @@ private int AnimationDuration;
     }
 
 // nadia
-       @FXML
+    @FXML
     private void load_matching_page(ActionEvent event) throws IOException {
-         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
-         
-         Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Matching/ui_FO_RechercheMatchings.fxml"));
-         Content_pane.getChildren().clear();
-         Content_pane.getChildren().add(root);  
+
+
+        Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Matching/ui_FO_RechercheMatchings.fxml"));
+        Content_pane.getChildren().clear();
+        Content_pane.getChildren().add(root);
     }
-    
-    public  void load_preference_page() throws IOException {
-         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
-         Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Matching/ui_FO_AjouterPreference.fxml"));
-         Content_pane.getChildren().clear();
-         Content_pane.getChildren().add(root);  
+
+    public void load_preference_page() throws IOException {
+
+        Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Matching/ui_FO_AjouterPreference.fxml"));
+        Content_pane.getChildren().clear();
+        Content_pane.getChildren().add(root);
     }
-    
+
 // nadia ##
-         // jileni
-          @FXML
+    // jileni
+    @FXML
     private void load_my_relation(ActionEvent event) throws IOException, SQLException {
         GestionnaireRelation gr = new GestionnaireRelation();
         Ui_InterfaceRE_FOController.setRelation_owner(MySoulMate.getLogged_in_Client());
-          if(gr.ClientValide(MySoulMate.getLogged_in_Client())){
-         Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Relation/ui_InterfaceRE_FO.fxml"));
-         Content_pane.getChildren().clear();
-         Content_pane.getChildren().add(root); 
-         }
-          else{     
-         TrayNotification tray = new TrayNotification(
-         MySoulMate.getLogged_in_Client().getPseudo()+",",
-         "Vous n'etes pas encore en relation !!", NotificationType.WARNING);
-         tray.showAndDismiss(javafx.util.Duration.seconds(1));
-         }
-    }
-       
-       //event
-       public void load_ajout_sms(ActionEvent event) throws IOException {
-         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
-         Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_sms_evt_FO.fxml"));
-         Content_pane.getChildren().clear();
-         Content_pane.getChildren().add(root);    
+        if (gr.ClientValide(MySoulMate.getLogged_in_Client())) {
+            Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Relation/ui_InterfaceRE_FO.fxml"));
+            Content_pane.getChildren().clear();
+            Content_pane.getChildren().add(root);
+        } else {
+            TrayNotification tray = new TrayNotification(
+                    MySoulMate.getLogged_in_Client().getPseudo() + ",",
+                    "Vous n'etes pas encore en relation !!", NotificationType.WARNING);
+            tray.showAndDismiss(javafx.util.Duration.seconds(1));
+        }
     }
 
-         public void chercher_les_events() throws SQLException, IOException
-    {
+    //event
+    public void load_ajout_sms(ActionEvent event) throws IOException {
+     
+        Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_sms_evt_FO.fxml"));
+        Content_pane.getChildren().clear();
+        Content_pane.getChildren().add(root);
+    }
+
+    public void chercher_les_events() throws SQLException, IOException {
         GestionnaireEvents ge = new GestionnaireEvents();
-       List <Events> evts =  ( (List <Events>) ge.fetchAll()).stream().collect(Collectors.toList());
-       event_vb.setSpacing(20);
-       for (int i=0 ; i<evts.size(); i++)
-    {
-        HBox evens_hb = new HBox();
-        evens_hb.setSpacing(10);
-        evens_hb.setMinSize(120, 160);
-        for(int j=0 ; j<4&&i<evts.size();i++, j++)
-        {
-            System.out.println("I is ="+i);
-            FXMLLoader fxml= new FXMLLoader(getClass().getResource("/VIEWS/Evenement/ui_even_FO.fxml"));
-            Node root = fxml.load();
-            Ui_even_FOController con= fxml.<Ui_even_FOController>getController();
-            con.setEvt(evts.get(i));
-            con.charger_evt();
-            evens_hb.getChildren().add(root);
+        List<Events> evts = ((List<Events>) ge.fetchAll()).stream().collect(Collectors.toList());
+        event_vb.setSpacing(20);
+        for (int i = 0; i < evts.size(); i++) {
+            HBox evens_hb = new HBox();
+            evens_hb.setSpacing(10);
+            evens_hb.setMinSize(120, 160);
+            for (int j = 0; j < 4 && i < evts.size(); i++, j++) {
+                System.out.println("I is =" + i);
+                FXMLLoader fxml = new FXMLLoader(getClass().getResource("/VIEWS/Evenement/ui_even_FO.fxml"));
+                Node root = fxml.load();
+                Ui_even_FOController con = fxml.<Ui_even_FOController>getController();
+                con.setEvt(evts.get(i));
+                con.charger_evt();
+                evens_hb.getChildren().add(root);
+            }
+            event_vb.getChildren().add(evens_hb);
         }
-        event_vb.getChildren().add(evens_hb);
+
     }
-   
-}
-     public void load_ajout_event(ActionEvent event) throws IOException {
-         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
-         Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_evenement_FO.fxml"));
-         //Node root2 = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_even_FO.fxml"));
-         Content_pane.getChildren().clear();
-         Content_pane.getChildren().add(root);    
+
+    public void load_ajout_event(ActionEvent event) throws IOException {
+        Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_evenement_FO.fxml"));
+        Content_pane.getChildren().clear();
+        Content_pane.getChildren().add(root);
     }
-     public void charger_ajout_event(ActionEvent event) throws IOException {
-         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
-         Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_interfaceEvt_FO.fxml"));
-         Content_pane.getChildren().clear();
-         Content_pane.getChildren().add(root);    
+
+    public void charger_ajout_event(ActionEvent event) throws IOException {
+        //   Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
+        Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_interfaceEvt_FO.fxml"));
+        Content_pane.getChildren().clear();
+        Content_pane.getChildren().add(root);
     }
-    public  void Update_Event_request() throws IOException {
-                 Node root;// Making a node
-                 root = FXMLLoader.load(Ui_MainFrame_BOController.class.getResource("/VIEWS/Evenement/ui_evenement_FO.fxml"));// Getting the View
-                 Content_pane.getChildren().clear();
-                 Content_pane.getChildren().add(root);// inserting the Node in the GridPane
-                // Label_Module_name_ref.setText("Modifier un évènement existent "); // Changing the header text
+
+    public void Update_Event_request() throws IOException {
+        Node root;// Making a node
+        root = FXMLLoader.load(Ui_MainFrame_BOController.class.getResource("/VIEWS/Evenement/ui_evenement_FO.fxml"));// Getting the View
+        Content_pane.getChildren().clear();
+        Content_pane.getChildren().add(root);// inserting the Node in the GridPane
+        // Label_Module_name_ref.setText("Modifier un évènement existent "); // Changing the header text
     }
-      @FXML
-     private void load_event(ActionEvent event) throws IOException {
-         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
-         Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Evenement/ui_ListeEvents_FO.fxml"));
-         Content_pane.getChildren().clear();
-         Content_pane.getChildren().add(root);    
-}
-            //***event
 
     @FXML
+    private void load_event(ActionEvent event) throws IOException {
+        //    Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
+        Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Evenement/ui_ListeEvents_FO.fxml"));
+        Content_pane.getChildren().clear();
+        Content_pane.getChildren().add(root);
+    }
+    //***event
+
     private void load_plan() throws IOException, SQLException {
-         Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
-         FXMLLoader fxml = new FXMLLoader(getClass().getResource("/VIEWS/Plan/ui_FO_RecherchePlans.fxml"));
-         Node root = fxml.load();
-         Ui_FO_RecherchePlansController con= fxml.<Ui_FO_RecherchePlansController>getController();
-         con.chercher_les_Plans();
-         Content_pane.getChildren().clear();
-         Content_pane.getChildren().add(root);
+        //      Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
+        FXMLLoader fxml = new FXMLLoader(getClass().getResource("/VIEWS/Plan/ui_FO_RecherchePlans.fxml"));
+        Node root = fxml.load();
+        //     Ui_FO_RecherchePlansController con= fxml.<Ui_FO_RecherchePlansController>getController();
+        //    con.chercher_les_Plans();
+        Content_pane.getChildren().clear();
+        Content_pane.getChildren().add(root);
     }
 
     public StackPane getContent_pane() {
         return Content_pane;
     }
-    
+
+    @FXML
+    private void look_up(KeyEvent event) {
+
+    }
+
+    public void open_profile(Client this_dude) throws IOException {
+        FXMLLoader fxml = new FXMLLoader(getClass().getResource("/VIEWS/Profil/ui_Profil_FO.fxml"));
+        Node root = fxml.load();
+        Ui_Profil_FOController controller = fxml.<Ui_Profil_FOController>getController();
+        controller.setProfile_owner(this_dude);
+        Content_pane.getChildren().clear();
+        Content_pane.getChildren().add(root);
+    }
 }

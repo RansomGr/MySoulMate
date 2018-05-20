@@ -6,6 +6,8 @@
 package VIEWS.Matching;
 
 import Entites.Profil.Caracteristique;
+import Services.Matching.GestionnaireCaracteristique;
+import Services.Profil.GestionnaireProfil;
 import VIEWS.Profil.Ui_Profil_FOController;
 import VIEWS.Profil.Ui_Profile_CreationController;
 import java.io.IOException;
@@ -21,13 +23,13 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import java.sql.SQLException;
+import java.util.List;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 import mysoulmate.MySoulMate;
-
 
 /**
  * FXML Controller class
@@ -77,106 +79,105 @@ public class Ui_FO_AjouterPreferenceController implements Initializable {
     private RadioButton alcool_indifferent_rb;
     @FXML
     private CheckBox horoscope_cb;
-    
-        ToggleGroup tabas = new ToggleGroup();
-        ToggleGroup Alcools =new ToggleGroup();
-    
-   String Action;
-   String Message;
-   private Alert InformationWindow  = new Alert(Alert.AlertType.INFORMATION);
-   private Alert ErrorWindow = new Alert(Alert.AlertType.ERROR);
-   private Alert WarningWindow = new Alert(Alert.AlertType.WARNING);
+
+    ToggleGroup tabas = new ToggleGroup();
+    ToggleGroup Alcools = new ToggleGroup();
+
+    String Action;
+    String Message;
+    private Alert InformationWindow = new Alert(Alert.AlertType.INFORMATION);
+    private Alert ErrorWindow = new Alert(Alert.AlertType.ERROR);
+    private Alert WarningWindow = new Alert(Alert.AlertType.WARNING);
     @FXML
     private Text Taille_text;
 
-   
-  
-   
     /**
      * Initializes the controller class.
      */
-
     @Override
-    public void initialize(URL url, ResourceBundle rb) {           
+    public void initialize(URL url, ResourceBundle rb) {
         init_node();
         init_actions();
-    }    
-    
-    private void init_node() {
-              if (MySoulMate.getLogged_in_Client().getGender().equals("H"))
+    }
+  private void init_values()
+  {
+      Caracteristique pref =MySoulMate.getLogged_in_Client().getProfil().getPreference();
+      if(pref!=null)
       {
-      Taille_text.setText("Taille Maximum");
-      
+          caractere_cb.setValue(pref.getCaractere());
+          tabas.selectToggle(tabac_oui_rb);
       }
-      else if (MySoulMate.getLogged_in_Client().getGender().equals("F"))
-      {      
-          Taille_text.setText("Taille Minimum");
-      }
-      else 
-      {      
-          Taille_text.setText("Taille Souhaitée");
-      }
-              
-        ville_cb.getItems().addAll("Tous","Ariana","Beja","Ben Arous","Bizerte","Gabes","Gafsa","Jendouba","Kairouan","Kasserine","Kebili","Kef","Mahdia","Mannouba","Medenine","Monastir","Nabeul","Sfax","Sidi Bouzid","Siliana","Sousse","Tataouine","Tozeur","Tunis","Zaghouene");
-        cuisine_cb.getItems().addAll("Fast Food","Vegan","Bio","Sushi","Végétarienne");
-        pilosite_cb.getItems().addAll("imberbe","poilu");
-        caractere_cb.getItems().addAll("Extraverti","Timide","Normal");
-        origine_cb.getItems().addAll("Arabe","Europienne","Africaine","Métisse");
-        silouhette_cb.getItems().addAll("Normal","Mince","Dodu");
-        cheveux_cb.getItems().addAll("Crêpu","Lisse","Rasé","longs","Mi-longs");
-        statut_cb.getItems().addAll("Divorcé","Veuf","Célibataire","Marié");
-        yeux_cb.getItems().addAll("Noir","Marron","Jaune","Bleu","Vert");
-}
-    private void init_actions()
-    { 
+  }
+    private void init_node() {
+        if (MySoulMate.getLogged_in_Client().getGender().equals("Homme")) {
+            Taille_text.setText("Taille Maximum");
+
+        } else if (MySoulMate.getLogged_in_Client().getGender().equals("Femme")) {
+            Taille_text.setText("Taille Minimum");
+        } else {
+            Taille_text.setText("Taille Souhaitée");
+        }
+
+        ville_cb.getItems().addAll("Tous", "Ariana", "Beja", "Ben Arous", "Bizerte", "Gabes", "Gafsa", "Jendouba", "Kairouan", "Kasserine", "Kebili", "Kef", "Mahdia", "Mannouba", "Medenine", "Monastir", "Nabeul", "Sfax", "Sidi Bouzid", "Siliana", "Sousse", "Tataouine", "Tozeur", "Tunis", "Zaghouene");
+        cuisine_cb.getItems().addAll("Fast Food", "Vegan", "Bio", "Sushi", "Végétarienne");
+        pilosite_cb.getItems().addAll("imberbe", "poilu");
+        caractere_cb.getItems().addAll("Extraverti", "Timide", "Normal");
+        origine_cb.getItems().addAll("Arabe", "Europienne", "Africaine", "Métisse");
+        silouhette_cb.getItems().addAll("Normal", "Mince", "Dodu");
+        cheveux_cb.getItems().addAll("Crêpu", "Lisse", "Rasé", "longs", "Mi-longs");
+        statut_cb.getItems().addAll("Divorcé", "Veuf", "Célibataire", "Marié");
+        yeux_cb.getItems().addAll("Noir", "Marron", "Jaune", "Bleu", "Vert");
+    }
+
+    private void init_actions() {
         tabac_oui_rb.setToggleGroup(tabas);
         tabac_non_rb.setToggleGroup(tabas);
-        tabac_indifferent_rb.setToggleGroup(tabas);           
-        
+        tabac_indifferent_rb.setToggleGroup(tabas);
+
         alcool_oui_rb.setToggleGroup(Alcools);
         alcool_non_rb.setToggleGroup(Alcools);
         alcool_indifferent_rb.setToggleGroup(Alcools);
-               
-           SpinnerValueFactory <Integer> ValueFac = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 00, 1);
-           taille_min_sp.setValueFactory(ValueFac);
-       
+
+        SpinnerValueFactory<Integer> ValueFac = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99, 00, 1);
+        taille_min_sp.setValueFactory(ValueFac);
+
     }
-    
 
     @FXML
     private void Valider(ActionEvent event) throws SQLException, IOException {
-                 
-      RadioButton choix_alchool ;
-      RadioButton choix_tabac ;
-      
-      choix_alchool=(RadioButton) Alcools.getSelectedToggle();
-      choix_tabac=(RadioButton)tabas.getSelectedToggle();
-      System.out.println(taille_min_sp.getValue().toString());
-      System.out.println("taille:"+taille_min_sp.getValue().toString());
-        Caracteristique Caracteristique =
-                
-   
-              new Caracteristique(
-                      silouhette_cb.getValue() ,
-                      pilosite_cb.getValue(),
-                      origine_cb.getValue(),
-                      profession_tf.getText(),
-                      choix_alchool.getText(),
-                      choix_tabac.getText(),
-                      taille_min_sp.getValue(),
-                      cheveux_cb.getValue(),
-                      yeux_cb.getValue(),
-                      caractere_cb.getValue(),
-                      statut_cb.getValue(),
-                      cuisine_cb.getValue()
-              );
-        Ui_Profile_CreationController.setCarac(Caracteristique);
-        Ui_Profile_CreationController.next_step();
+
+        RadioButton choix_alchool;
+        RadioButton choix_tabac;
+
+        choix_alchool = (RadioButton) Alcools.getSelectedToggle();
+        choix_tabac = (RadioButton) tabas.getSelectedToggle();
+        System.out.println(taille_min_sp.getValue().toString());
+        System.out.println("taille:" + taille_min_sp.getValue().toString());
+        Caracteristique Caracteristique
+                = new Caracteristique(
+                        silouhette_cb.getValue(),
+                        pilosite_cb.getValue(),
+                        origine_cb.getValue(),
+                        profession_tf.getText(),
+                        choix_alchool.getText(),
+                        choix_tabac.getText(),
+                        taille_min_sp.getValue(),
+                        cheveux_cb.getValue(),
+                        yeux_cb.getValue(),
+                        caractere_cb.getValue(),
+                        statut_cb.getValue(),
+                        cuisine_cb.getValue()
+                );
+        GestionnaireCaracteristique gc = new GestionnaireCaracteristique();
+        gc.create(Caracteristique);
+        Caracteristique.setID(((List<Caracteristique>) gc.fetchAll()).stream().mapToInt(x -> x.getID()).max().getAsInt());
+        GestionnaireProfil gp = new GestionnaireProfil();
+        MySoulMate.getLogged_in_Client().getProfil().setPreference(Caracteristique);
+        gp.update(MySoulMate.getLogged_in_Client().getProfil());
     }
 
     @FXML
     private void Reset(ActionEvent event) {
     }
 
-    
 }

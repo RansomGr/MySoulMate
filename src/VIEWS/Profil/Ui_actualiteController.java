@@ -92,7 +92,7 @@ public class Ui_actualiteController implements Initializable {
         {
             GestionnaireActualite act = new GestionnaireActualite();
             actualite.setContenu(actu_txt.getText());
-            actualite.setClient(owner);
+       //     actualite.setClient(owner);
             act.update(actualite);
             actu_txt.setEditable(false);
             actu_txt.setOpacity(0.9);

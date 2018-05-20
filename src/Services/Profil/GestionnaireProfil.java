@@ -23,79 +23,77 @@ public class GestionnaireProfil implements Gestionnaire {
 
     @Override
     public int create(Object o) throws SQLException {
-       Profil a=(Profil)o;// down Cast
-   
-        String query=" insert into Profil (caracteristique,photo,description) values (?,?,?) "; // preparation du query
+        Profil a = (Profil) o;// down Cast
 
-         PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
-         GestionnaireCaracteristique car= new GestionnaireCaracteristique();
-         car.create(a.getCaracteristique());
-        
-         System.out.println("carac id :"+((List<Caracteristique>)car.fetchAll()).stream().mapToInt(x->x.getID()).max().getAsInt());
-         System.out.println("client id :"+MySoulMate.getLogged_in_Client().getID());
-         a.getCaracteristique().setID(((List<Caracteristique>)car.fetchAll()).stream().mapToInt(x->x.getID()).max().getAsInt());
-         pst.setInt(1,a.getCaracteristique().getID());// Binding du premier valeur mentionner dans le query "?" 
-         pst.setString(2,a.getPhoto());//Binding du deuxieme valeur mentionner dans le query "?" 
-         pst.setString(3,a.getDescription());
+        String query = " insert into Profil (caracteristique,photo,description) values (?,?,?) "; // preparation du query
 
-    
+        PreparedStatement pst = DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
+        GestionnaireCaracteristique car = new GestionnaireCaracteristique();
+        car.create(a.getCaracteristique());
 
-       
-         return pst.executeUpdate(); // Execution et retour du resultat du query 
-    }    
+        System.out.println("carac id :" + ((List<Caracteristique>) car.fetchAll()).stream().mapToInt(x -> x.getID()).max().getAsInt());
+        System.out.println("client id :" + MySoulMate.getLogged_in_Client().getID());
+        a.getCaracteristique().setID(((List<Caracteristique>) car.fetchAll()).stream().mapToInt(x -> x.getID()).max().getAsInt());
+        pst.setInt(1, a.getCaracteristique().getID());// Binding du premier valeur mentionner dans le query "?" 
+        pst.setString(2, a.getPhoto());//Binding du deuxieme valeur mentionner dans le query "?" 
+        pst.setString(3, a.getDescription());
+
+        return pst.executeUpdate(); // Execution et retour du resultat du query 
+    }
 
     @Override
     public int update(Object o) throws SQLException {
-     Profil a = (Profil)o;// down Cast du Object => Admin 
-        String query=" update  Profil set caracteristique=?,photo=?,description=?,preference=? where id=?  "; // preparation du query
+        Profil a = (Profil) o;// down Cast du Object => Admin 
+        String query = " update  Profil set caracteristique=?,photo=?,description=?,preference=? where id=?  "; // preparation du query
 
-         PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
-         
-         pst.setInt(1,a.getCaracteristique().getID() );// Binding du premier valeur mentionner dans le query "?" 
-         pst.setString(2,a.getPhoto());//Binding du deuxieme valeur mentionner dans le query "?" 
-         pst.setString(3,a.getDescription());
-         pst.setInt(4, a.getPreference().getID());//Binding du valeur de l'id mentionné dans le query "?" 
-         return pst.executeUpdate(); // Execution et retour du resultat du query 
+        PreparedStatement pst = DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
+
+        pst.setInt(1, a.getCaracteristique().getID());// Binding du premier valeur mentionner dans le query "?" 
+        pst.setString(2, a.getPhoto());//Binding du deuxieme valeur mentionner dans le query "?" 
+        pst.setString(3, a.getDescription());
+        pst.setInt(4, a.getPreference().getID());//Binding du valeur de l'id mentionné dans le query "?" 
+        return pst.executeUpdate(); // Execution et retour du resultat du query 
     }
 
     @Override
     public int remove(Object o) throws SQLException {
- Profil a=(Profil)o;
-        
-        String query="delete  from Profil where ID=? ";
-        
-        PreparedStatement pst=DB.prepareStatement(query);
-        
-        pst.setInt(1,a.getId());
-        
-        return pst.executeUpdate();    }
+        Profil a = (Profil) o;
 
-    @Override
-   
-     public List<? extends Object> fetchAll() throws SQLException {
-        
-          String query=" select id,caracteristique,photo,description,preference from profil "    ; // preparation du requete sql
-          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
-          List<Profil>Profils = new ArrayList<>();//  Creation du List Reclamation
-          //Caracteristique c = new Caracteristique(0, query, query, query, query, query, query, 0, query, query, query, query, query)
-          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
-          GestionnaireCaracteristique G= new GestionnaireCaracteristique();
-          while(res.next())// parcour du result set
-          { 
-              Caracteristique carac=null;
-              Caracteristique pref=null;
-              int id_char=res.getInt(2);
-             int id_pref=res.getInt(5);
+        String query = "delete  from Profil where ID=? ";
 
-           carac =((List<Caracteristique>)G.fetchAll()).stream().filter(x->x.getID()==id_char).findFirst().get();
-          if(id_pref!=0)
-           pref =((List<Caracteristique>)G.fetchAll()).stream().filter(x->x.getID()==id_pref).findFirst().get();
+        PreparedStatement pst = DB.prepareStatement(query);
 
-             Profils.add(new Profil(res.getInt(1),carac,res.getString(3),res.getString(4),pref) );
-           }
-          return Profils;
+        pst.setInt(1, a.getId());
+
+        return pst.executeUpdate();
     }
 
+    @Override
+
+    public List<? extends Object> fetchAll() throws SQLException {
+
+        String query = " select id,caracteristique,photo,description,preference from profil "; // preparation du requete sql
+        PreparedStatement pst = DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+        List<Profil> Profils = new ArrayList<>();//  Creation du List Reclamation
+        //Caracteristique c = new Caracteristique(0, query, query, query, query, query, query, 0, query, query, query, query, query)
+        ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+        GestionnaireCaracteristique G = new GestionnaireCaracteristique();
+        while (res.next())// parcour du result set
+        {
+            Caracteristique carac = null;
+            Caracteristique pref = null;
+            int id_char = res.getInt(2);
+            int id_pref = res.getInt(5);
+
+            carac = ((List<Caracteristique>) G.fetchAll()).stream().filter(x -> x.getID() == id_char).findFirst().get();
+            if (id_pref != 0) {
+                pref = ((List<Caracteristique>) G.fetchAll()).stream().filter(x -> x.getID() == id_pref).findFirst().get();
+            }
+
+            Profils.add(new Profil(res.getInt(1), carac, res.getString(3), res.getString(4), pref));
+        }
+        return Profils;
+    }
 
     @Override
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
@@ -106,32 +104,33 @@ public class GestionnaireProfil implements Gestionnaire {
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    public Profil fetchOneByID(int id) throws SQLException
-    {
-             
-          String query=" select id,caracteristique,photo,description,preference from profil  where id=?"    ; // preparation du requete sql
-          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
-          pst.setInt(1, id);
-          Profil Profil ;//  Creation du List Reclamation
-          //Caracteristique c = new Caracteristique(0, query, query, query, query, query, query, 0, query, query, query, query, query)
-          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
-          GestionnaireCaracteristique G= new GestionnaireCaracteristique();
-         res.next();
-              Caracteristique carac=null;
-              Caracteristique pref=null;
-              int id_char=res.getInt(2);
-              int id_pref=res.getInt(5);
-          if(id_char!=0)
-           carac =G.fetchOneById(id_char);
-          if(id_pref!=0)
-           pref =G.fetchOneById(id_pref);
-          System.out.println("bref = " +id+ pref);
-                  
 
-            Profil= new Profil(res.getInt(1),carac,res.getString(3),res.getString(4),pref) ;
-          return Profil;
+    public Profil fetchOneByID(int id) throws SQLException {
+
+        String query = " select id,caracteristique,photo,description,preference from profil  where id=?"; // preparation du requete sql
+        PreparedStatement pst = DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+        pst.setInt(1, id);
+        Profil Profil = null;
+
+        ResultSet res = pst.executeQuery();
+        GestionnaireCaracteristique G = new GestionnaireCaracteristique();
+        if (res.next()) {
+
+            Caracteristique carac = null;
+            Caracteristique pref = null;
+            int id_char = res.getInt(2);
+            int id_pref = res.getInt(5);
+            if (id_char != 0) {
+                carac = G.fetchOneById(id_char);
+            }
+            if (id_pref != 0) {
+                pref = G.fetchOneById(id_pref);
+            }
+            System.out.println("bref = " + id + pref);
+
+            Profil = new Profil(res.getInt(1), carac, res.getString(3), res.getString(4), pref);
+        }
+        return Profil;
     }
 
-    
-    
 }

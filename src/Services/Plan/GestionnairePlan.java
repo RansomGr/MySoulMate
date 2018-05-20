@@ -163,6 +163,18 @@ import java.util.List;
            }
           return Plans;
     }
+     public Plan fetchOneById(int id) throws SQLException
+     {
+               String query="  select Entite,nom,Entite.adresse,plan.* from plan join Entite where entite =?" ;
+               PreparedStatement pst = DB.prepareStatement(query);
+               pst.setInt(1, id);
+               ResultSet res =pst.executeQuery();
+               if(res.next())
+               {
+                   return new Plan(res.getInt("entite"),res.getString("nom"));
+               }
+         return null;
+     }
     
     
     

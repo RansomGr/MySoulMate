@@ -11,6 +11,7 @@ import Entites.User.Client;
 import Entites.User.Logger;
 import Services.Matching.GestionnaireCaracteristique;
 import Services.User.GestionnaireClient;
+import VIEWS.Profil.Ui_Profil_FOController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -20,7 +21,9 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -77,7 +80,7 @@ public class Ui_FO_show_one_MatchingController implements Initializable {
     public void charger_matchings() {
         Services.Profil.GestionnaireCaracteristique gc = new Services.Profil.GestionnaireCaracteristique();
         GestionnaireClient gcl = new GestionnaireClient();
-        photo_img.setImage(new Image("images/dom.png") );
+        photo_img.setImage(new Image("images/"+the_matching.getProfil().getPhoto()) );
         //photo_img.setImage(new Image("/images/" + the_matching.getProfil().getPhoto()));
         prenom_text.setText(the_matching.getPrenom());
         //ville_text.setText(the_matching.(get adresse) ) ;
@@ -89,6 +92,11 @@ public class Ui_FO_show_one_MatchingController implements Initializable {
 
     @FXML
     private void inviter_ami(ActionEvent event) {
+        try {
+            MySoulMate.getMainController().open_profile(the_matching);
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Ui_FO_show_one_MatchingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

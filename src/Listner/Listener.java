@@ -29,7 +29,10 @@ public class Listener implements Runnable{
     private ObjectInputStream input;
     private OutputStream outputStream;
     Logger logger = LoggerFactory.getLogger(Listener.class);
-
+    public static Client getClient()
+    {
+        return client;
+    }
     public Listener(String hostname, int port, Client client, Ui_MainFrame_FOController controller) {
         this.hostname = hostname;
         this.port = port;
@@ -68,15 +71,18 @@ public class Listener implements Runnable{
                     }
                             break;
                         case VOICE:
-                            System.out.println("voice sent");
+                            System.out.println("voice is being sent");
+                            MySoulMate.getMainController().addToChat(message);
                     for (ChatBoxController x : Ui_MainFrame_FOController.getStatic_Controllerschat_windows()) {
-                         System.out.println("voice sent");
+                            System.out.println("writing voice into proper window");
+                            System.out.println(message.getSender());
+                            System.out.println(message.getReciver());
                             x.addToChat(message);
                     }
                             break;
                         case NOTIFICATION:
-                         //  if(message.getSender()!=client)
-                          // controller.newUserNotification(message);
+                            System.out.println("sender id :"+message.getID());
+                           controller.newUserNotification(message);
                             break;
                         case SERVER:
                         for (ChatBoxController x : Ui_MainFrame_FOController.getStatic_Controllerschat_windows()) 
@@ -149,5 +155,10 @@ public class Listener implements Runnable{
         createMessage.setMsg(HASCONNECTED);
         oos.writeObject(createMessage);
     }
+    public void stop() throws IOException
+    {
+        socket.close();
+    }
+    
 
 }

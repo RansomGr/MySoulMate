@@ -140,8 +140,7 @@ public class Ui_Login_FOController implements Initializable {
                 Scene scene = new Scene(root);
                 Ui_MainFrame_FOController con = fmxlLoader.<Ui_MainFrame_FOController>getController();
                 Listener listener = new Listener("localhost", 9001, Logged_in_Client, con);
-                Thread x = new Thread(listener);
-                x.start();
+                MySoulMate.setListener(listener);
                 MySoulMate.getMainStage().setScene(scene);
             }
         } else {

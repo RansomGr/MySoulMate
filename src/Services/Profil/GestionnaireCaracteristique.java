@@ -126,7 +126,7 @@ public class GestionnaireCaracteristique implements Gestionnaire {
     public int matching_selon_preference(Client cl1, Client cl2) {
         int resultat_matching_preference = 0;
 
-        System.out.println("client 2:" + cl2.getProfil().getCaracteristique());
+        System.out.println("client 2:" + cl2.getProfil().getPreference());
         System.out.println("client 1:" + cl1.getProfil().getCaracteristique());
       
         if (cl1.getProfil().getCaracteristique().getCorpulence() .equals(cl2.getProfil().getPreference().getCorpulence())) {
