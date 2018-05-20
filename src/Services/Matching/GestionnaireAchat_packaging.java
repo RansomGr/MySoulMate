@@ -9,7 +9,7 @@ import Entites.Matching.Packaging;
 
 import Entites.User.Utilisateur;
 import Services.Gestionnaire;
-import Services.User.GestionnaireClient;
+import Services.User.GestionnaireUser;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -67,7 +67,7 @@ public class GestionnaireAchat_packaging implements Gestionnaire{
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Achat_packaging>Loggers = new ArrayList<>();//  Creation du List Reclamation
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
-          GestionnaireClient g= new GestionnaireClient();
+          GestionnaireUser g= new GestionnaireUser();
           GestionnairePackaging p=new GestionnairePackaging();
           
           List<Utilisateur> clients=(List<Utilisateur>) g.fetchAll();
