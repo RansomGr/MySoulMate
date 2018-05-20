@@ -5,7 +5,6 @@
  */
 package Entites.Matching;
 import java.sql.Date;
-import Entites.User.Client;
 import Entites.User.Utilisateur;
 import java.util.Objects;
 /**
