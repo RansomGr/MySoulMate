@@ -1,6 +1,6 @@
 package ChatClient;
 
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import Listner.Listener;
 
 import javax.sound.sampled.*;
@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class VoiceRecorder extends VoiceUtil {
 
-    public static void captureAudio(Client reciver) {
+    public static void captureAudio(Utilisateur reciver) {
         try {
             final AudioFormat format = getAudioFormat();
             DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);

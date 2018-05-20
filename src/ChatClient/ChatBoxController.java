@@ -5,7 +5,7 @@
  */
 package ChatClient;
 
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import Listner.Listener;
 import com.messages.Message;
 import com.messages.MessageType;
@@ -53,8 +53,8 @@ public class ChatBoxController implements Initializable {
     private TextField messageBox;
     @FXML
     private ListView conversation_pane;
-    private final Client user = MySoulMate.getLogged_in_Client();
-    private Client partner;
+    private final Utilisateur user = MySoulMate.getLogged_in_Client();
+    private Utilisateur partner;
 
     private final Image microphoneActiveImage = new Image(getClass().getClassLoader().getResource("images/microphone-active.png").toString());
     private final Image microphoneInactiveImage = new Image(getClass().getClassLoader().getResource("images/microphone.png").toString());
@@ -78,11 +78,11 @@ public class ChatBoxController implements Initializable {
         this.shown = shown;
     }
 
-    public Client getPartner() {
+    public Utilisateur getPartner() {
         return partner;
     }
 
-    public Client getSender() {
+    public Utilisateur getSender() {
         return this.user;
     }
 
@@ -96,7 +96,7 @@ public class ChatBoxController implements Initializable {
         this.conversation_pane.getItems().addAll(conversation_pane.getItems());
     }
 
-    public void setPartner(Client partner) {
+    public void setPartner(Utilisateur partner) {
         this.partner = partner;
         this.user_name.setText(partner.getNom());
         this.partner_image.setImage(new Image("images/" + partner.getProfil().getPhoto()));
@@ -214,11 +214,11 @@ public class ChatBoxController implements Initializable {
         };
         yourMessages.setOnSucceeded(event -> conversation_pane.getItems().add(yourMessages.getValue()));
 
-        if (msg.getSender().getID() == user.getID() && msg.getReciver().getID() == partner.getID()) {
+        if (msg.getSender().getId() == user.getId() && msg.getReciver().getId() == partner.getId()) {
             Thread t2 = new Thread(yourMessages);
             t2.setDaemon(true);
             t2.start();
-        } else if (msg.getSender().getID() == partner.getID() && msg.getReciver().getID() == user.getID()) {
+        } else if (msg.getSender().getId() == partner.getId() && msg.getReciver().getId() == user.getId()) {
             Thread t = new Thread(othersMessages);
             t.setDaemon(true);
             t.start();

@@ -2,7 +2,7 @@ package Listner;
 
 
 import ChatClient.ChatBoxController;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import VIEWS.Ui_MainFrame_FOController;
 import com.messages.Message;
 import com.messages.MessageType;
@@ -21,7 +21,7 @@ public class Listener implements Runnable{
     private static final String HASCONNECTED = "has connected";
     private Socket socket;
     public String hostname;
-    public static Client client;
+    public static Utilisateur client;
     public int port;   
     public Ui_MainFrame_FOController controller;
     private static ObjectOutputStream oos;
@@ -29,11 +29,11 @@ public class Listener implements Runnable{
     private ObjectInputStream input;
     private OutputStream outputStream;
     Logger logger = LoggerFactory.getLogger(Listener.class);
-    public static Client getClient()
+    public static Utilisateur getClient()
     {
         return client;
     }
-    public Listener(String hostname, int port, Client client, Ui_MainFrame_FOController controller) {
+    public Listener(String hostname, int port, Utilisateur client, Ui_MainFrame_FOController controller) {
         this.hostname = hostname;
         this.port = port;
         Listener.client=client;
@@ -109,7 +109,7 @@ public class Listener implements Runnable{
     /* This method is used for sending a normal Message
      * @param msg - The message which the user generates
      */
-    public static void send(String msg,Client reciver) throws IOException {
+    public static void send(String msg,Utilisateur reciver) throws IOException {
         Message createMessage = new Message();
         
         createMessage.setSender(client);
@@ -124,7 +124,7 @@ public class Listener implements Runnable{
     /* This method is used for sending a voice Message
  * @param msg - The message which the user generates
  */
-    public static void sendVoiceMessage(byte[] audio,Client reciver) throws IOException {
+    public static void sendVoiceMessage(byte[] audio,Utilisateur reciver) throws IOException {
         Message createMessage = new Message();
         createMessage.setSender(client);
         createMessage.setReciver(reciver);
