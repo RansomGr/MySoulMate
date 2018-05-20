@@ -109,7 +109,7 @@ public class GestionnaireAvis implements Gestionnaire {
                 Plan1,
                 client1,
                res.getString("commentaire"),
-            res.getFloat("Note"),
+            res.getFloat("Note")
                     
            )
            );
