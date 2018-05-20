@@ -11,7 +11,7 @@ import Entites.User.Utilisateur;
 import Services.Gestionnaire;
 import static Services.Gestionnaire.DB;
 import Services.Plan.GestionnairePlan;
-import Services.User.GestionnaireClient;
+import Services.User.GestionnaireUser;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -92,7 +92,7 @@ public class GestionnaireAvis implements Gestionnaire {
           
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           GestionnaireAvis a =new GestionnaireAvis();
-          GestionnaireClient g=new GestionnaireClient();
+          GestionnaireUser g=new GestionnaireUser();
           GestionnairePlan p=new GestionnairePlan();
            List<Utilisateur> Clients=(List<Utilisateur>) g.fetchAll();
          List<Plan> Plans=(List<Plan>) a.fetchAll();
