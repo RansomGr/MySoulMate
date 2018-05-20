@@ -11,16 +11,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author Nadia
  */
-public class GestionnairePackaging implements Gestionnaire {
+public class GestionnairePackaging implements Gestionnaire <Packaging>{
     
      @Override
-    public int create(Object o) throws SQLException {
-       Packaging p=(Packaging)o;// down Cast
+    public int create(Packaging p) throws SQLException {
+    
    
         String query=" insert into packaging (nom,contenu,duree,prix) values (?,?,?,?) "; // preparation du query
 
@@ -35,8 +36,8 @@ public class GestionnairePackaging implements Gestionnaire {
     }
 
     @Override
-    public int update(Object o) throws SQLException {
-       Packaging p=(Packaging)o;
+    public int update(Packaging p) throws SQLException {
+       
        String query="update packaging set nom=?, contenu=?, duree=?, prix=? where ID=?";
        PreparedStatement pst=DB.prepareStatement(query);
        pst.setString(1, p.getNom());
@@ -48,15 +49,15 @@ public class GestionnairePackaging implements Gestionnaire {
         return pst.executeUpdate();    }
 
     @Override
-    public int remove(Object o) throws SQLException {
-        Packaging p=(Packaging)o;
+    public int remove(Packaging p) throws SQLException {
+        
         String query="delete  from packaging where ID=? ";  
         PreparedStatement pst=DB.prepareStatement(query);
         pst.setInt(1,p.getID());
         return pst.executeUpdate();    }
 
     @Override
-    public List<? extends Object> fetchAll() throws SQLException {       
+    public List<Packaging> fetchAll() throws SQLException {       
         String query="select * from packaging ";
         PreparedStatement pst=DB.prepareStatement(query);
         ResultSet res=pst.executeQuery();
@@ -69,8 +70,7 @@ public class GestionnairePackaging implements Gestionnaire {
     }
 
     
-    @Override
-    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
+    public List<Packaging> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
           String query=" select * from Packaging where ( nom like ? or contenu like ? or duree like ? or prix like ? or ID like ? ) "    ; // preparation du requete sql
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Packaging>Packagings = new ArrayList<>();//  Creation du List Reclamation
@@ -123,8 +123,32 @@ public class GestionnairePackaging implements Gestionnaire {
           return Packagings;
     }
 
+    public List<Packaging> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     @Override
-    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
+    public Packaging fetchOneById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Packaging fetchOnByCriteria(Map<String, String> Criteras) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Packaging> fetchSomeBy(String aux, String target_column, int StartPoint, int BreakPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Packaging> fetchSomeBy(String aux, int target_column) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Packaging> fetchSomeBy(String aux, int StartPoint, int BreakPoint) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
       
