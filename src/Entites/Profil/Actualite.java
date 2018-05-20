@@ -5,8 +5,7 @@
  */
 package Entites.Profil;
 
-import Entites.AbstractEntite;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -17,26 +16,18 @@ import java.util.Objects;
 public class Actualite {
 
     private int ID;
-    private AbstractEntite Owner;
+    private Utilisateur createur;
     private String contenu;
     private String photo;
     private LocalDate add_date;
-    private Client writer;
 
-    public Actualite(int ID, AbstractEntite Owner, String contenu, String photo, LocalDate add_date, Client writer) {
+    public Actualite(int ID, Utilisateur createur, String contenu, String photo, LocalDate add_date) {
         this.ID = ID;
-        this.Owner = Owner;
+        this.createur = createur;
         this.contenu = contenu;
         this.photo = photo;
         this.add_date = add_date;
-        this.writer = writer;
-    }
-
-    public Actualite(AbstractEntite Owner, String contenu, String photo, Client writer) {
-        this.Owner = Owner;
-        this.contenu = contenu;
-        this.photo = photo;
-        this.writer = writer;
+       
     }
 
     public int getID() {
@@ -45,6 +36,14 @@ public class Actualite {
 
     public void setID(int ID) {
         this.ID = ID;
+    }
+
+    public Utilisateur getCreateur() {
+        return createur;
+    }
+
+    public void setCreateur(Utilisateur createur) {
+        this.createur = createur;
     }
 
     public String getContenu() {
@@ -63,14 +62,6 @@ public class Actualite {
         this.photo = photo;
     }
 
-    public AbstractEntite getOwner() {
-        return Owner;
-    }
-
-    public void setOwner(AbstractEntite Owner) {
-        this.Owner = Owner;
-    }
-
     public LocalDate getAdd_date() {
         return add_date;
     }
@@ -79,23 +70,23 @@ public class Actualite {
         this.add_date = add_date;
     }
 
-    public Client getWriter() {
-        return writer;
+ 
+
+    @Override
+    public String toString() {
+        return "Actualite{" + "ID=" + ID + ", createur=" + createur + ", contenu=" + contenu + ", photo=" + photo + ", add_date=" + add_date + '}';
     }
 
-    public void setWriter(Client writer) {
-        this.writer = writer;
-    }
+  
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + this.ID;
-        hash = 53 * hash + Objects.hashCode(this.Owner);
-        hash = 53 * hash + Objects.hashCode(this.contenu);
-        hash = 53 * hash + Objects.hashCode(this.photo);
-        hash = 53 * hash + Objects.hashCode(this.writer);
-        
+        hash = 59 * hash + this.ID;
+        hash = 59 * hash + Objects.hashCode(this.createur);
+        hash = 59 * hash + Objects.hashCode(this.contenu);
+        hash = 59 * hash + Objects.hashCode(this.photo);
+        hash = 59 * hash + Objects.hashCode(this.add_date);
         return hash;
     }
 
@@ -120,18 +111,16 @@ public class Actualite {
         if (!Objects.equals(this.photo, other.photo)) {
             return false;
         }
-        if (!Objects.equals(this.Owner, other.Owner)) {
+        if (!Objects.equals(this.createur, other.createur)) {
             return false;
         }
-        if (!Objects.equals(this.writer, other.writer)) {
+        if (!Objects.equals(this.add_date, other.add_date)) {
             return false;
         }
+      
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Actualite{" + "ID=" + ID + ", Owner=" + Owner.getNom() + ", contenu=" + contenu + ", photo=" + photo + "DateTime =" + add_date +"Writer =" +writer+ '}';
-    }
+    
 
 }
