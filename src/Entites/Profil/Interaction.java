@@ -1,7 +1,7 @@
 package Entites.Profil;
 
 
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import java.sql.Date;
 import java.util.Objects;
 /**
@@ -12,11 +12,11 @@ public class Interaction  {
 
 private int ID;
 private Actualite Actualite;
-private Client owner ;
+private Utilisateur owner ;
 private String commentaire ; 
 private Date dateheure ;
 
-    public Interaction(int ID, Actualite Actualite, Client owner, String commentaire, Date dateheure) {
+    public Interaction(int ID, Actualite Actualite, Utilisateur owner, String commentaire, Date dateheure) {
         this.ID = ID;
         this.Actualite = Actualite;
         this.owner = owner;
@@ -24,7 +24,7 @@ private Date dateheure ;
         this.dateheure = dateheure;
     }
 
-    public Interaction(Actualite Actualite, Client owner, String commentaire) {
+    public Interaction(Actualite Actualite, Utilisateur owner, String commentaire) {
         this.Actualite = Actualite;
         this.owner = owner;
         this.commentaire = commentaire;
@@ -46,11 +46,11 @@ private Date dateheure ;
         this.Actualite = Actualite;
     }
 
-    public Client getOwner() {
+    public Utilisateur getOwner() {
         return owner;
     }
 
-    public void setOwner(Client owner) {
+    public void setOwner(Utilisateur owner) {
         this.owner = owner;
     }
 

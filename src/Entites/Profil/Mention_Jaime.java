@@ -5,7 +5,7 @@
  */
 package Entites.Profil;
 
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import java.util.Objects;
 
 /**
@@ -14,10 +14,10 @@ import java.util.Objects;
  */
 public class Mention_Jaime {
     private Actualite actualite ;
-    private Client owner;
+    private Utilisateur owner;
     private String jaime;
 
-    public Mention_Jaime(Actualite actualite, Client owner, String jaime) {
+    public Mention_Jaime(Actualite actualite, Utilisateur owner, String jaime) {
         this.actualite = actualite;
         this.owner = owner;
         this.jaime = jaime;
@@ -64,11 +64,11 @@ public class Mention_Jaime {
         this.actualite = actualite;
     }
 
-    public Client getOwner() {
+    public Utilisateur getOwner() {
         return owner;
     }
 
-    public void setOwner(Client owner) {
+    public void setOwner(Utilisateur owner) {
         this.owner = owner;
     }
 
