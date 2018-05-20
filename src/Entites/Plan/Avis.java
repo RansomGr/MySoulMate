@@ -20,6 +20,14 @@ public class Avis {
     private String commentaire;
     private Float note;
 
+    public Avis(Plan plan, Utilisateur client, String commentaire, Float note) {
+        this.plan = plan;
+        this.client = client;
+        this.commentaire = commentaire;
+        this.note = note;
+    }
+    
+
     public Avis(int Id, Plan plan, Utilisateur client, String commentaire, Float note) {
         this.Id = Id;
         this.plan = plan;
