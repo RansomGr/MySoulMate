@@ -5,7 +5,7 @@
  */
 package Entites.Relation;
 
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -15,8 +15,8 @@ import java.util.Objects;
  */
 public class Relation {
     private int ID;
-    private Client Client1;
-    private Client Client2;
+    private Utilisateur Client1;
+    private Utilisateur Client2;
     private int points_relation;
     private String niveau;
     private Date date_debut;
@@ -24,7 +24,7 @@ public class Relation {
     
     public Relation(){}
     
-    public Relation(int ID, Client Client1 , Client Client2, int points_relation, String niveau , Date date_debut, Date date_fin) {
+    public Relation(int ID, Utilisateur Client1 , Utilisateur Client2, int points_relation, String niveau , Date date_debut, Date date_fin) {
         this.ID=ID;
         this.Client1=Client1;
         this.Client2=Client2;
@@ -39,19 +39,19 @@ public class Relation {
         return ID;
     }
 
-    public Client getClient1() {
+    public Utilisateur getClient1() {
         return Client1;
     }
 
-    public void setClient1(Client Client1) {
+    public void setClient1(Utilisateur Client1) {
         this.Client1 = Client1;
     }
 
-    public Client getClient2() {
+    public Utilisateur getClient2() {
         return Client2;
     }
 
-    public void setClient2(Client Client2) {
+    public void setClient2(Utilisateur Client2) {
         this.Client2 = Client2;
     }
 
