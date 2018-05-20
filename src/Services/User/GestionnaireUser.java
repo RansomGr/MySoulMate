@@ -67,7 +67,7 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
     @Override
     public Utilisateur fetchOnByCriteria(Map<String, String> Criteras) {
      // ServiceProfil Sp = new ServiceProfil();
-    //    ServiceAdresse Sa= new ServiceAdresse();
+    GestionnaireAdresse Sa= new GestionnaireAdresse();
         
         try {
             String req ="Select * from utilisateur where ";

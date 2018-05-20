@@ -8,9 +8,8 @@ package Services.Events;
 import Entites.AbstractEntite;
 import Entites.Events.Events;
 import Entites.Plan.Plan;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import Services.Gestionnaire;
-import Services.GestionnaireAbstractEntite;
 import Services.Plan.GestionnairePlan;
 import Services.User.GestionnaireClient;
 import java.sql.Date;
@@ -19,82 +18,78 @@ import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  *
  * @author dellpro
  */
-public class GestionnaireEvent extends GestionnaireAbstractEntite implements Gestionnaire{
-    public int create(Object o) throws SQLException {
-         super.create(o);
+public class GestionnaireEvent implements Gestionnaire<Events>{
+    @Override
+    public int create(Events o) throws SQLException {
          String query;
          PreparedStatement pst;
-         Events evt=(Events)o;
-         GestionnaireAbstractEntite ge = new GestionnaireAbstractEntite() {};
-         List<AbstractEntite>entities =(List<AbstractEntite>) ge.fetchAll();
-         int last_id_inserted=entities.stream().mapToInt(x->x.getID()).max().getAsInt();
-         evt.setID(last_id_inserted);
+         Events evt=o;
          if(evt.getOrganisateur()!=null)
          {
-      query="INSERT INTO events (Entite,nom_evt,date_evt,heure,duree_evt,type_evt,description_evt,plan_evt,nb_max,organisateur_evt) VALUES (?,?,?,?,?,?,?,?,?,?)";
+      query="INSERT INTO events (nom_evt,date_evt,heure,duree_evt,type_evt,description_evt,plan_evt,nb_max,organisateur_evt) VALUES (?,?,?,?,?,?,?,?,?)";
        pst= DB.prepareStatement(query);
-       pst.setInt(10,evt.getOrganisateur().getID());
+       pst.setInt(10,evt.getOrganisateur().getId());
          }
          else {
-             query="INSERT INTO events (Entite,nom_evt,date_evt,heure,duree_evt,type_evt,description_evt,plan_evt,nb_max) VALUES (?,?,?,?,?,?,?,?,?)";
+             query="INSERT INTO events (nom_evt,date_evt,heure,duree_evt,type_evt,description_evt,plan_evt,nb_max) VALUES (?,?,?,?,?,?,?,?)";
           pst= DB.prepareStatement(query);
          }
-      pst.setInt(1, evt.getID());
-      pst.setString(2,evt.getNom());
-      pst.setDate(3, (Date) evt.getDate_evt());
-      pst.setString(4,evt.getHeure_evt());
-      pst.setString(5,evt.getDuree_evt());
-      pst.setString(6,evt.getType_evt()); 
-      pst.setString(7,evt.getDescription_evt());
-      pst.setInt(8,evt.getPlan_evt().getID());
-      pst.setInt(9,evt.getNb_max());
+      
+      pst.setString(1,evt.getNom_evt());
+      pst.setDate(2, (Date) evt.getDate_evt());
+      pst.setString(3,evt.getHeure_evt());
+      pst.setString(4,evt.getDuree_evt());
+      pst.setString(5,evt.getType_evt()); 
+      pst.setString(6,evt.getDescription_evt());
+      pst.setInt(7,evt.getPlan_evt().getId());
+      pst.setInt(8,evt.getNb_max());
       return pst.executeUpdate();
     }
     
     @Override
-    public int update(Object o) throws SQLException {
-      super.update(o);
+    public int update(Events o) throws SQLException {
+      //update(o);
       String query;
       PreparedStatement pst;
-      Events evt=(Events)o;
+      Events evt=o;
       if(evt.getOrganisateur()!=null)
          {
-       query ="update events set Entite=?,nom_evt=?,date_evt=?,heure=?,duree_evt=?,type_evt=?,description_evt=?,plan_evt=?,nb_max=?,organisateur_evt=? where Entite=?";
+      query ="update events set id=?,nom_evt=?,date_evt=?,heure=?,duree_evt=?,type_evt=?,description_evt=?,plan_evt=?,nb_max=?,organisateur_evt=? where Entite=?";
       pst=DB.prepareStatement(query);
-      pst.setInt(10,evt.getOrganisateur().getID());
-      pst.setInt(11, evt.getID());
-      pst.setInt(1, evt.getID());
-      pst.setString(2,evt.getNom());
+      pst.setInt(10,evt.getOrganisateur().getId());
+      pst.setInt(11, evt.getId());
+      pst.setInt(1, evt.getId());
+      pst.setString(2,evt.getNom_evt());
       pst.setDate(3, (Date) evt.getDate_evt());
       pst.setString(4,evt.getHeure_evt());
       pst.setString(5,evt.getDuree_evt());
       pst.setString(6,evt.getType_evt());
-     // pst.setInt(7,evt.getOrganisateur().getID());
       pst.setString(7,evt.getDescription_evt());
-      pst.setInt(8,evt.getPlan_evt().getID());
+      pst.setInt(8,evt.getPlan_evt().getId());
       pst.setInt(9,evt.getNb_max());
          }
       else 
       {
-      query ="update events set Entite=?,nom_evt=?,date_evt=?,heure=?,duree_evt=?,type_evt=?,description_evt=?,plan_evt=?,nb_max=? where Entite=?";
+      query ="update events set id=?,nom_evt=?,date_evt=?,heure=?,duree_evt=?,type_evt=?,description_evt=?,plan_evt=?,nb_max=? where Entite=?";
       pst=DB.prepareStatement(query);
-      pst.setInt(1, evt.getID());
-      System.out.println("id event"+evt.getID());
-      pst.setString(2,evt.getNom());
+      pst.setInt(1, evt.getId());
+      System.out.println("id event"+evt.getId());
+      pst.setString(2,evt.getNom_evt());
       pst.setDate(3, (Date) evt.getDate_evt());
       pst.setString(4,evt.getHeure_evt());
       pst.setString(5,evt.getDuree_evt());
       pst.setString(6,evt.getType_evt());
      // pst.setInt(7,evt.getOrganisateur().getID());
       pst.setString(7,evt.getDescription_evt());
-      pst.setInt(8,evt.getPlan_evt().getID());
+      pst.setInt(8,evt.getPlan_evt().getId());
       pst.setInt(9,evt.getNb_max());
-      pst.setInt(10, evt.getID());
+      pst.setInt(10, evt.getId());
       }
   
       return pst.executeUpdate(); 
@@ -102,56 +97,61 @@ public class GestionnaireEvent extends GestionnaireAbstractEntite implements Ges
     }
     
      @Override
-    public int remove(Object o) throws SQLException {
+    public int remove(Events o) throws SQLException {
     
-    Events evt=(Events)o;
-    String query=" delete from events where Entite=? ";
+    Events evt=o;
+    String query=" delete from events where id=? ";
     
     PreparedStatement pst=DB.prepareStatement(query);
-    pst.setInt(1,evt.getID());
+    pst.setInt(1,evt.getId());
     pst.executeUpdate();
-    return super.remove(o);
+    return remove(o);
     
     }
 
-     @Override
-    public List<? extends Object> fetchAll() throws SQLException {
+    public List< Events> fetchAll() throws SQLException {
           
-        String query=" select Entite.nom as nom,Events.*  from  events inner join Entite on Events.Entite=Entite.ID "    ; // preparation du requete sql
+        String query=" select id.nom as nom,Events.*  from  events inner join id on Events.id=id.ID "    ; // preparation du requete sql
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Events>Evenements = new ArrayList<>();//  Creation du List Reclamation
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           GestionnaireClient gclt = new GestionnaireClient();
-          List<Client>clients= (List<Client>) gclt.fetchAll();
+          List<Utilisateur>clients= (List<Utilisateur>) gclt.fetchAll();
            GestionnairePlan gpl= new GestionnairePlan();
           List<Plan> Plans= (List<Plan>) gpl.fetchAll();
           while(res.next())// parcour du result set
           {
               int Plan_ID_in_question = res.getInt("plan_evt");
-              Plan p= Plans.stream().filter(p1->p1.getID()==Plan_ID_in_question).findFirst().get();
-              Client c=null;
+              Plan p= Plans.stream().filter(p1->p1.getId()==Plan_ID_in_question).findFirst().get();
+              Utilisateur c=null;
               int Client_ID_in_question =res.getInt("organisateur_evt");
               if(Client_ID_in_question!=0)
               {
-               c= clients.stream().filter(c1->c1.getID()==Client_ID_in_question).findFirst().get();   
+               c= clients.stream().filter(c1->c1.getId()==Client_ID_in_question).findFirst().get();   
               }
-             Evenements.add(new Events(res.getString("nom_evt"), res.getDate("date_evt"),
-                     res.getString("heure"), res.getString("duree_evt"), res.getString("type_evt"),
-                      c, res.getString("description_evt"), p,res.getInt("nb_max"),
-                      res.getInt("entite"), res.getString("nom")
+             Evenements.add(new Events(
+                     res.getInt("id"),
+                     res.getString("nom_evt"), 
+                     res.getDate("date_evt"),
+                     res.getString("heure"), 
+                     res.getString("duree_evt"),
+                     res.getString("type_evt"),
+                      c,
+                     res.getString("description_evt"),
+                     p,
+                     res.getInt("nb_max")
              )
              );
            }
          return Evenements;
     }
 
-    @Override
     public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
-        String query=" select events.*,entite.nom from events inner join entite on "
-                + "entite.id=events.entite "
+        String query=" select events.*,id.nom from events inner join id on "
+                + "id.id=events.entite "
                 + " where ( nom_evt like ? or date_evt like ? or heure like ? or type_evt like ? or plan_evt like ? ) "    ; // preparation du requete sql
         GestionnaireClient gclt = new GestionnaireClient();
-          List<Client>clients= (List<Client>) gclt.fetchAll();
+          List<Utilisateur>clients= (List<Utilisateur>) gclt.fetchAll();
            GestionnairePlan gpl= new GestionnairePlan();  
         PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Events>evenent = new ArrayList<>();//  Creation du List Reclamation
@@ -168,18 +168,25 @@ public class GestionnaireEvent extends GestionnaireAbstractEntite implements Ges
               
               
           int Plan_ID_in_question = res.getInt("plan_evt");
-              Plan p= Plans.stream().filter(p1->p1.getID()==Plan_ID_in_question).findFirst().get();
-              Client c=null;
+              Plan p= Plans.stream().filter(p1->p1.getId()==Plan_ID_in_question).findFirst().get();
+              Utilisateur c=null;
               int Client_ID_in_question =res.getInt("organisateur_evt");
               if(Client_ID_in_question!=0)
               {
-               c= clients.stream().filter(c1->c1.getID()==Client_ID_in_question).findFirst().get();   
+               c= clients.stream().filter(c1->c1.getId()==Client_ID_in_question).findFirst().get();   
               }
-             evenent.add(new Events(res.getString("nom_evt"), res.getDate("date_evt"),
-                     res.getString("heure"), res.getString("duree_evt"), res.getString("type_evt"),
-                      c, res.getString("description_evt"), p,res.getInt("nb_max"),
-                      res.getInt("entite"),
-                     res.getString("nom_evt")) );
+             evenent.add(new Events(
+                     res.getInt("id"),
+                     res.getString("nom_evt"), 
+                     res.getDate("date_evt"),
+                     res.getString("heure"), 
+                     res.getString("duree_evt"),
+                     res.getString("type_evt"),
+                      c,
+                     res.getString("description_evt"),
+                     p,
+                     res.getInt("nb_max")        
+             ) );
            }
           return evenent;
     }
@@ -187,7 +194,7 @@ public class GestionnaireEvent extends GestionnaireAbstractEntite implements Ges
     public List<? extends Object> fetchAll(String aux,int StartPoint,int BreakPoint) throws SQLException {
         
         GestionnaireClient gclt = new GestionnaireClient();
-          List<Client>clients= (List<Client>) gclt.fetchAll();
+          List<Utilisateur>clients= (List<Utilisateur>) gclt.fetchAll();
            GestionnairePlan gpl= new GestionnairePlan();
            
            
@@ -208,30 +215,37 @@ public class GestionnaireEvent extends GestionnaireAbstractEntite implements Ges
           {
               
           int Plan_ID_in_question = res.getInt("plan_evt");
-              Plan p= Plans.stream().filter(p1->p1.getID()==Plan_ID_in_question).findFirst().get();
-              Client c=null;
+              Plan p= Plans.stream().filter(p1->p1.getId()==Plan_ID_in_question).findFirst().get();
+              Utilisateur c=null;
               int Client_ID_in_question =res.getInt("organisateur_evt");
               if(Client_ID_in_question!=0)
               {
-               c= clients.stream().filter(c1->c1.getID()==Client_ID_in_question).findFirst().get();   
+               c= clients.stream().filter(c1->c1.getId()==Client_ID_in_question).findFirst().get();   
               }
-             Evenent.add(new Events(res.getString("nom_evt"), res.getDate("date_evt"),
-                     res.getString("heure"), res.getString("duree_evt"), res.getString("type_evt"),
-                      c, res.getString("description_evt"), p,res.getInt("nb_max"),
-                      res.getInt("entite"),
-                     res.getString("nom_evt") 
+             Evenent.add(new Events(
+                     res.getInt("id"),
+                     res.getString("nom_evt"), 
+                     res.getDate("date_evt"),
+                     res.getString("heure"), 
+                     res.getString("duree_evt"),
+                     res.getString("type_evt"),
+                      c,
+                     res.getString("description_evt"),
+                     p,
+                     res.getInt("nb_max")
+                      
              ));
            }
           return Evenent;
     }
   
     public List<? extends Object> fetchAll(String aux, String target_column ,int StartPoint,int BreakPoint) throws SQLException {
-          String query=" select * from (select events.*,entite.nom from events inner join entite on entite.id=events.entite limit  "+StartPoint+","+BreakPoint+" ) event_l "
+          String query=" select * from (select events.*,id.nom from events inner join id on id.id=events.entite limit  "+StartPoint+","+BreakPoint+" ) event_l "
                   + " where ( "+target_column+" like ?  )  " ;
                  // preparation du requete sql
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           GestionnaireClient gclt = new GestionnaireClient();
-          List<Client>clients= (List<Client>) gclt.fetchAll();
+          List<Utilisateur>clients= (List<Utilisateur>) gclt.fetchAll();
           GestionnairePlan gpl= new GestionnairePlan();
           List<Events>evenent = new ArrayList<>();//  Creation du List Reclamation
           pst.setString(1, "%"+aux+"%");
@@ -242,25 +256,54 @@ public class GestionnaireEvent extends GestionnaireAbstractEntite implements Ges
           {
               
           int Plan_ID_in_question = res.getInt("plan_evt");
-              Plan p= Plans.stream().filter(p1->p1.getID()==Plan_ID_in_question).findFirst().get();
-              Client c=null;
+              Plan p= Plans.stream().filter(p1->p1.getId()==Plan_ID_in_question).findFirst().get();
+              Utilisateur c=null;
               int Client_ID_in_question =res.getInt("organisateur_evt");
               if(Client_ID_in_question!=0)
               {
-               c= clients.stream().filter(c1->c1.getID()==Client_ID_in_question).findFirst().get();   
+               c= clients.stream().filter(c1->c1.getId()==Client_ID_in_question).findFirst().get();   
               }
-             evenent.add(new Events(res.getString("nom_evt"), res.getDate("date_evt"),
-                     res.getString("heure"), res.getString("duree_evt"), res.getString("type_evt"),
-                      c, res.getString("description_evt"), p,res.getInt("nb_max"),
-                      res.getInt("entite"),
-                     res.getString("nom_evt")) );
+             evenent.add(new Events(
+                     res.getInt("id"),
+                    res.getString("nom_evt"), 
+                     res.getDate("date_evt"),
+                     res.getString("heure"), 
+                     res.getString("duree_evt"),
+                     res.getString("type_evt"),
+                      c,
+                     res.getString("description_evt"),
+                     p,
+                     res.getInt("nb_max")
+             ) );
            }
           return evenent;
     }
 
+   //***********  newww *****
+
     @Override
-    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public List<Events> fetchSomeBy(String aux, String target_column, int StartPoint, int BreakPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Events> fetchSomeBy(String aux, int target_column) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Events> fetchSomeBy(String aux, int StartPoint, int BreakPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Events fetchOneById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Events fetchOnByCriteria(Map<String, String> Criteras) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

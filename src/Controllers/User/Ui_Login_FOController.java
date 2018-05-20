@@ -5,15 +5,18 @@
  */
 package Controllers.User;
 
-import ChatClient.ChatBoxController;
-import Entites.User.Client;
+
+import Entites.User.Utilisateur;
 import Listner.Listener;
 import Services.User.GestionnaireClient;
+import Services.User.GestionnaireUser;
 import VIEWS.Ui_MainFrame_FOController;
 import com.messages.Status;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
@@ -115,11 +118,14 @@ public class Ui_Login_FOController implements Initializable {
     @FXML
     private void log_me_in(ActionEvent event) throws IOException, SQLException {
 
-        GestionnaireClient gc = new GestionnaireClient();
-        Client Logged_in_Client = gc.fetchOneByLoginandPass(login_te.getText(), password_te.getText());
+        GestionnaireUser gc = new GestionnaireUser();
+        Map<String,String> Criterias = new HashMap<>();
+        
+        Criterias.put(login_te.getText(), password_te.getText());
+        Utilisateur Logged_in_Client = gc.fetchOnByCriteria(Criterias);
         if (Logged_in_Client != null) {
             GestionnaireClient p = new GestionnaireClient();
-            if(Logged_in_Client.getActivation()==0)
+            if(Logged_in_Client.getEnabled()==0)
             {
                 WarningWindow.show();
             }
