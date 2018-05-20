@@ -16,9 +16,15 @@ import java.util.Objects;
 public class InviteEvents {
     Events evts;
     Client invite;
-
-    public InviteEvents(Events evts, Client invite) {
+    protected String participe;
+    public InviteEvents(Events evts, Client invite, String participe) {
         this.evts = evts;
+        this.invite = invite;
+        this.participe = participe;
+    }
+
+    public InviteEvents(Events evt, Client clt) {
+          this.evts = evts;
         this.invite = invite;
     }
 
@@ -70,5 +76,14 @@ public class InviteEvents {
     public void setInvite(Client invite) {
         this.invite = invite;
     }
+
+    public String getParticipe() {
+        return participe;
+    }
+
+    public void setParticipe(String participe) {
+        this.participe = participe;
+    }
+    
     
 }

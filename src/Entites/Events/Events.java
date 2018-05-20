@@ -15,8 +15,9 @@ import java.util.Objects;
  *
  * @author dellpro
  */
-public class Events extends AbstractEntite{
+public class Events {
     
+    protected int id;
     protected String nom_evt;
     protected Date date_evt;
     protected String heure_evt;
@@ -27,8 +28,8 @@ public class Events extends AbstractEntite{
     protected Plan plan_evt;
     protected int nb_max;
     
-    public Events(String nom_evt, Date date_evt, String heure_evt, String duree_evt, String Type_evt, Client organisateur, String description_evt, Plan plan_evt, int nb_max, int ID, String nom) {
-        super(ID, nom);
+    public Events(int id,String nom_evt, Date date_evt, String heure_evt, String duree_evt, String Type_evt, Client organisateur, String description_evt, Plan plan_evt, int nb_max, int ID, String nom) {
+        this.id = id;
         this.nom_evt = nom_evt;
         this.date_evt = date_evt;
         this.heure_evt = heure_evt;
@@ -40,8 +41,8 @@ public class Events extends AbstractEntite{
         this.nb_max = nb_max;
     }
 
-    public Events(String nom_evt, Date date_evt, String heure_evt, String duree_evt, String Type_evt, String description_evt, Plan plan_evt, int nb_max, int ID, String nom) {
-        super(ID, nom);
+    public Events(int id,String nom_evt, Date date_evt, String heure_evt, String duree_evt, String Type_evt, String description_evt, Plan plan_evt, int nb_max, int ID, String nom) {
+        this.id = id;
         this.nom_evt = nom_evt;
         this.date_evt = date_evt;
         this.heure_evt = heure_evt;
@@ -54,13 +55,11 @@ public class Events extends AbstractEntite{
     
     
 
-    public Events(int ID, String nom) {
-        super(ID, nom);
+    public Events() {
+       
     }
 
-  
-
-     @Override
+   @Override
     public int hashCode() {
         int hash = 7;
         return hash;
@@ -108,7 +107,13 @@ public class Events extends AbstractEntite{
         return true;
     }
 
-    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
     public String getNom_evt() {
         return nom_evt;
