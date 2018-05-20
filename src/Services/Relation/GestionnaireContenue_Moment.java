@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -20,13 +21,31 @@ import javafx.collections.ObservableList;
  *
  * @author zhanimm
  */
-public class GestionnaireContenue_Moment implements Gestionnaire {
+public class GestionnaireContenue_Moment implements Gestionnaire<Contenue_Moment> {
+
+  
+
 
     @Override
-    public int create(Object o) throws SQLException {
-         
-    
-      Contenue_Moment c=(Contenue_Moment)o;
+    public List<Contenue_Moment> fetchAll() throws SQLException {
+          String query=" select *  from  Contenu_Moment "    ; // preparation du requete sql
+          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+          List<Contenue_Moment>Contenues = new ArrayList<>();//  Creation du List Reclamation
+          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+          while(res.next())// parcour du result set
+          {
+             Contenues.add(new Contenue_Moment(res.getInt("ID"),res.getString("nom"),res.getString("contenu"),res.getString("photo"),res.getString("description"),res.getDate("date_moment")));
+           }
+          return Contenues;
+    }
+public void populateListView() {
+           
+        }
+
+
+    @Override
+    public int create(Contenue_Moment c) throws SQLException {
+
       //String query="insert into Contenu_Moment(ID,nom,contenu,photo,description,date_moment) values(?,?,?,?,?,?)";
       String query="insert into Contenu_Moment(nom,description,date_moment,photo) values(?,?,?,?)";
       PreparedStatement pst= DB.prepareStatement(query);
@@ -39,14 +58,11 @@ public class GestionnaireContenue_Moment implements Gestionnaire {
       pst.setString(4,c.getPhoto());
 
       
-      return pst.executeUpdate();
-    }
+      return pst.executeUpdate();    }
 
     @Override
-    public int update(Object o) throws SQLException {
-         
-      Contenue_Moment c=(Contenue_Moment)o;
-      String query ="update Contenu_Moment set ID=?,nom=?,contenu=?,photo=?,description=?,date_moment=? where ID=?";
+    public int update(Contenue_Moment c) throws SQLException {
+ String query ="update Contenu_Moment set ID=?,nom=?,contenu=?,photo=?,description=?,date_moment=? where ID=?";
       
       PreparedStatement pst=DB.prepareStatement(query);
       /*pst.setInt(1, c.getID());
@@ -63,44 +79,40 @@ public class GestionnaireContenue_Moment implements Gestionnaire {
       
       pst.setInt(6, c.getID());
       
-      return pst.executeUpdate();
-
-    }
+      return pst.executeUpdate();    }
 
     @Override
-    public int remove(Object o) throws SQLException {
-    Contenue_Moment c=(Contenue_Moment)o;
-    String query=" delete from Contenu_Moment where ID=? ";
+    public int remove(Contenue_Moment c) throws SQLException {
+String query=" delete from Contenu_Moment where ID=? ";
     
     PreparedStatement pst=DB.prepareStatement(query);
     
     pst.setInt(1,c.getID());
     
-    return pst.executeUpdate();
-    }
+    return pst.executeUpdate();   }
 
     @Override
-    public List<? extends Object> fetchAll() throws SQLException {
-          String query=" select *  from  Contenu_Moment "    ; // preparation du requete sql
-          PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
-          List<Contenue_Moment>Contenues = new ArrayList<>();//  Creation du List Reclamation
-          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
-          while(res.next())// parcour du result set
-          {
-             Contenues.add(new Contenue_Moment(res.getInt("ID"),res.getString("nom"),res.getString("contenu"),res.getString("photo"),res.getString("description"),res.getDate("date_moment")));
-           }
-          return Contenues;
-    }
-public void populateListView() {
-           
-        }
-    @Override
-    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
+    public Contenue_Moment fetchOneById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
+    public Contenue_Moment fetchOnByCriteria(Map<String, String> Criteras) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Contenue_Moment> fetchSomeBy(String aux, String target_column, int StartPoint, int BreakPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Contenue_Moment> fetchSomeBy(String aux, int target_column) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Contenue_Moment> fetchSomeBy(String aux, int StartPoint, int BreakPoint) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
