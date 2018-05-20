@@ -28,7 +28,7 @@ public class Events {
     protected Plan plan_evt;
     protected int nb_max;
     
-    public Events(int id,String nom_evt, Date date_evt, String heure_evt, String duree_evt, String Type_evt, Utilisateur organisateur, String description_evt, Plan plan_evt, int nb_max, int ID, String nom) {
+    public Events(int id,String nom_evt, Date date_evt, String heure_evt, String duree_evt, String Type_evt, Utilisateur organisateur, String description_evt, Plan plan_evt, int nb_max) {
         this.id = id;
         this.nom_evt = nom_evt;
         this.date_evt = date_evt;
@@ -41,13 +41,14 @@ public class Events {
         this.nb_max = nb_max;
     }
 
-    public Events(int id,String nom_evt, Date date_evt, String heure_evt, String duree_evt, String Type_evt, String description_evt, Plan plan_evt, int nb_max, int ID, String nom) {
-        this.id = id;
+    public Events(String nom_evt, Date date_evt, String heure_evt, String duree_evt, String Type_evt,Utilisateur organisateur, String description_evt, Plan plan_evt, int nb_max) {
+        
         this.nom_evt = nom_evt;
         this.date_evt = date_evt;
         this.heure_evt = heure_evt;
         this.duree_evt = duree_evt;
         this.Type_evt = Type_evt;
+        this.organisateur = organisateur;
         this.description_evt = description_evt;
         this.plan_evt = plan_evt;
         this.nb_max = nb_max;
