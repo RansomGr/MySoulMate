@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Entites.Profil;
+import Entites.User.Utilisateur;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -14,33 +15,11 @@ import java.util.Objects;
 public class Profil implements Serializable {
     private int id;
   
-   private  Caracteristique Caracteristique;
+   private  Caracteristique Caracteristique_id;
    private String photo;
    private String description;	
    private Caracteristique preference;
-
-   
-
-
-
-    public Profil(int id,Caracteristique Caracteristique, String photo, String description, Caracteristique preference) {
-        this.id = id;
-       
-        this.Caracteristique = Caracteristique;
-        this.photo = photo;
-        this.description = description;
-        this.preference = preference;
-    }
-
-    public Profil(Caracteristique Caracteristique, String photo, String description) {
-       this.Caracteristique = Caracteristique;
-        this.photo = photo;
-        this.description = description;
-    }
-
-    public Profil() {
-       photo="no_PROF";
-    }
+private Utilisateur user_id;
 
     public int getId() {
         return id;
@@ -50,14 +29,12 @@ public class Profil implements Serializable {
         this.id = id;
     }
 
-    
-
-    public Caracteristique getCaracteristique() {
-        return Caracteristique;
+    public Caracteristique getCaracteristique_id() {
+        return Caracteristique_id;
     }
 
-    public void setCaracteristique(Caracteristique Caracteristique) {
-        this.Caracteristique = Caracteristique;
+    public void setCaracteristique_id(Caracteristique Caracteristique_id) {
+        this.Caracteristique_id = Caracteristique_id;
     }
 
     public String getPhoto() {
@@ -84,14 +61,37 @@ public class Profil implements Serializable {
         this.preference = preference;
     }
 
+    public Utilisateur getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Utilisateur user_id) {
+        this.user_id = user_id;
+    }
+
+    public Profil(int id, Caracteristique Caracteristique_id, String photo, String description, Caracteristique preference, Utilisateur user_id) {
+        this.id = id;
+        this.Caracteristique_id = Caracteristique_id;
+        this.photo = photo;
+        this.description = description;
+        this.preference = preference;
+        this.user_id = user_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Profil{" + "id=" + id + ", Caracteristique_id=" + Caracteristique_id + ", photo=" + photo + ", description=" + description + ", preference=" + preference + ", user_id=" + user_id + '}';
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 67 * hash + this.id;
-        hash = 67 * hash + Objects.hashCode(this.Caracteristique);
-        hash = 67 * hash + Objects.hashCode(this.photo);
-        hash = 67 * hash + Objects.hashCode(this.description);
-        hash = 67 * hash + Objects.hashCode(this.preference);
+        hash = 89 * hash + this.id;
+        hash = 89 * hash + Objects.hashCode(this.Caracteristique_id);
+        hash = 89 * hash + Objects.hashCode(this.photo);
+        hash = 89 * hash + Objects.hashCode(this.description);
+        hash = 89 * hash + Objects.hashCode(this.preference);
+        hash = 89 * hash + Objects.hashCode(this.user_id);
         return hash;
     }
 
@@ -116,20 +116,20 @@ public class Profil implements Serializable {
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-       
-        if (!Objects.equals(this.Caracteristique, other.Caracteristique)) {
+        if (!Objects.equals(this.Caracteristique_id, other.Caracteristique_id)) {
             return false;
         }
         if (!Objects.equals(this.preference, other.preference)) {
             return false;
         }
+        if (!Objects.equals(this.user_id, other.user_id)) {
+            return false;
+        }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Profil{" + "id=" + id + ", Caracteristique=" + Caracteristique + ", photo=" + photo + ", description=" + description + ", preference=" + preference + '}';
-    }
    
+
+
+
     
 }
