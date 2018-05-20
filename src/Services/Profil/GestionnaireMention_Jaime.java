@@ -7,55 +7,53 @@ package Services.Profil;
 
 import Entites.Profil.Actualite;
 import Entites.Profil.Mention_Jaime;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import Services.Gestionnaire;
-import Services.User.GestionnaireClient;
+import Services.User.GestionnaireUser;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author Ransom
  */
-public class GestionnaireMention_Jaime implements Gestionnaire{
+public class GestionnaireMention_Jaime implements Gestionnaire<Mention_Jaime>{
 
     @Override
-    public int create(Object o) throws SQLException {
-      Mention_Jaime Mj=(Mention_Jaime)o;
+    public int create(Mention_Jaime Mj ) throws SQLException {
       String query ="insert into mention_jaime(client,actualite,jaime) values(?,?,?)";
       PreparedStatement pst =DB.prepareStatement(query);
-      pst.setInt(1, Mj.getOwner().getID());
+      pst.setInt(1, Mj.getOwner().getId());
       pst.setInt(2,Mj.getActualite().getID());
       pst.setString(3,Mj.getJaime());
       return pst.executeUpdate();
     }
 
     @Override
-    public int update(Object o) throws SQLException {
+    public int update(Mention_Jaime Mj) throws SQLException {
         
-      Mention_Jaime Mj=(Mention_Jaime)o;
       String query ="update  mention_jaime set client=?,actualite=?,jaime=? where client=? and actualite=?";
       PreparedStatement pst =DB.prepareStatement(query);
       
-      pst.setInt(1, Mj.getOwner().getID());
+      pst.setInt(1, Mj.getOwner().getId());
       pst.setInt(2,Mj.getActualite().getID());
       pst.setString(3,Mj.getJaime());
-      pst.setInt(4, Mj.getOwner().getID());
+      pst.setInt(4, Mj.getOwner().getId());
       pst.setInt(5,Mj.getActualite().getID());
       
       return pst.executeUpdate();
     }
 
     @Override
-    public int remove(Object o) throws SQLException {
+    public int remove(Mention_Jaime Mj) throws SQLException {
       
-      Mention_Jaime Mj=(Mention_Jaime)o;
       String query ="delete from  mention_jaime  where client=? and actualite=?";
       PreparedStatement pst =DB.prepareStatement(query);   
-      pst.setInt(1, Mj.getOwner().getID());
+      pst.setInt(1, Mj.getOwner().getId());
       pst.setInt(2,Mj.getActualite().getID()); 
       return pst.executeUpdate();
     }
@@ -64,7 +62,7 @@ public class GestionnaireMention_Jaime implements Gestionnaire{
       String query ="select * from  mention_jaime   where  actualite=?";
       PreparedStatement pst =DB.prepareStatement(query);
       List<Mention_Jaime>Mentions = new ArrayList<>();
-      GestionnaireClient gc = new GestionnaireClient();
+        GestionnaireUser gc = new GestionnaireUser();
       pst.setInt(1,a.getID());
       ResultSet res = pst.executeQuery();
       while(res.next())
@@ -73,12 +71,12 @@ public class GestionnaireMention_Jaime implements Gestionnaire{
       }
       return Mentions;
     }
-    public Mention_Jaime fetchOneByOwners(Client c,Actualite a) throws SQLException
+    public Mention_Jaime fetchOneByOwners(Utilisateur c,Actualite a) throws SQLException
     {          
       String query ="select jaime from  mention_jaime  where client=? and actualite=?";
       PreparedStatement pst =DB.prepareStatement(query);
       
-      pst.setInt(1, c.getID());
+      pst.setInt(1, c.getId());
       pst.setInt(2,a.getID());
       ResultSet res = pst.executeQuery();
       if(res.next())
@@ -88,18 +86,34 @@ public class GestionnaireMention_Jaime implements Gestionnaire{
       return null;
     }
     @Override
-    public List<? extends Object> fetchAll() throws SQLException {
+    public List<Mention_Jaime> fetchAll() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
+    public Mention_Jaime fetchOneById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
+    public Mention_Jaime fetchOnByCriteria(Map<String, String> Criteras) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Mention_Jaime> fetchSomeBy(String aux, String target_column, int StartPoint, int BreakPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Mention_Jaime> fetchSomeBy(String aux, int target_column) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Mention_Jaime> fetchSomeBy(String aux, int StartPoint, int BreakPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 }
