@@ -6,7 +6,7 @@
 package VIEWS.Plan;
 
 import Entites.Plan.Avis;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import Services.Plan.GestionnaireAvis;
 import java.io.IOException;
 import java.net.URL;

@@ -101,7 +101,7 @@ public class Ui_Plan_FOController implements Initializable {
        List<Avis> avis;
       
         try {
-             avis=  ((List<Avis>)gav.fetchall(plan));
+             avis=  ((List<Avis>)gav.fetchAll());
           Parent root;
                  
            FXMLLoader FXML;

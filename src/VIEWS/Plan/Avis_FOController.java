@@ -7,7 +7,7 @@ package VIEWS.Plan;
 
 import Entites.Plan.Avis;
 import Entites.Plan.Plan;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import Services.Plan.GestionnaireAvis;
 import java.net.URL;
 import java.sql.SQLException;
@@ -43,13 +43,13 @@ public class Avis_FOController implements Initializable {
 //    public void setOwner(Client owner) {
 //        this.owner = owner;
 //    }
-    private Client Client;
+    private Utilisateur Client;
 
-    public Client getClient() {
+    public Utilisateur getClient() {
         return Client;
     }
 
-    public void setClient(Client Client) {
+    public void setClient(Utilisateur Client) {
         this.Client = Client;
     }
    private Avis Avis;

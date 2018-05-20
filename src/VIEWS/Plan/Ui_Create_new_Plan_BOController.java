@@ -6,7 +6,7 @@
 package VIEWS.Plan;
 
 import Entites.Plan.Plan;
-import Entites.Plan.Plan.Type;
+import Entites.Plan.Plan;
 
 import Services.Plan.GestionnairePlan;
 
@@ -147,7 +147,7 @@ public class Ui_Create_new_Plan_BOController implements Initializable {
              GestionnairePlan Gp= new GestionnairePlan();
         if(OperationMode.equals("Ajouter"))
         {
-       if( Gp.create(new Plan(nom_tf.getText(),Plan.Type.getAsType(type_cb.getValue()),email_tf.getText(),siteweb_tf.getText(),Integer.parseInt(telephone_tf.getText()),description_ta.getText(),photo_img.getText()))==1)
+       if( Gp.create(new Plan(nom_tf.getText(),(type_cb.getValue()),email_tf.getText(),siteweb_tf.getText(),Integer.parseInt(telephone_tf.getText()),description_ta.getText(),photo_img.getText()))==1)
        {
            InformationWindow.show();
            clear_tf();
@@ -160,12 +160,12 @@ public class Ui_Create_new_Plan_BOController implements Initializable {
                Optional<ButtonType> result = ConfirmWindow.showAndWait();
                      if(result.isPresent()&&result.get()==Oui)
                      {   
-                       if( Gp.update(new Plan(Plan_to_be_modified.getID(),nom_tf.getText(),Plan.Type.getAsType(type_cb.getValue()),email_tf.getText(),siteweb_tf.getText(),Integer.parseInt(telephone_tf.getText()),description_ta.getText(),photo_img.getText()))==1)
+                       if( Gp.update(new Plan(Plan_to_be_modified.getId(),nom_tf.getText(),type_cb.getValue(),email_tf.getText(),siteweb_tf.getText(),Integer.parseInt(telephone_tf.getText()),description_ta.getText(),photo_img.getText()))==1)
                        {System.out.println("modifiing ....");
                            InformationWindow.setContentText("Plan modifié avec succée !");
                            InformationWindow.show();
                            OperationMode="Ajouter";
-                           Plan_to_be_modified=new Plan(Plan_to_be_modified.getID(),nom_tf.getText(),Plan.Type.getAsType(type_cb.getValue()),email_tf.getText(),siteweb_tf.getText(),Integer.parseInt(telephone_tf.getText()),description_ta.getText(),photo_img.getText());
+                           Plan_to_be_modified=new Plan(Plan_to_be_modified.getId(),nom_tf.getText(),type_cb.getValue(),email_tf.getText(),siteweb_tf.getText(),Integer.parseInt(telephone_tf.getText()),description_ta.getText(),photo_img.getText());
                        }
                        else
                           ErrorWindow.show();   
