@@ -6,20 +6,21 @@
 package Services.Matching;
 import Entites.Matching.Caracteristique;
 import Services.Gestionnaire;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author Nadia
  */
 
-public class GestionnaireCaracteristique implements Gestionnaire{
+public class GestionnaireCaracteristique implements Gestionnaire<Caracteristique>{
 
-    public int create(Object o) throws SQLException {
+    public int create(Caracteristique c) throws SQLException {
         
-        Caracteristique c =(Caracteristique)o;// down Cast
         String query=" insert into Profil (corpulence,pilosite,origine,profession,alcool,tabac,taille,cheveux,yeux ,caractere, statut ,cuisine) values (?,?,?,?,?,?,?,?,?,?,?,?) "; // preparation du query
 
          PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
@@ -41,8 +42,7 @@ public class GestionnaireCaracteristique implements Gestionnaire{
          return pst.executeUpdate();} // Execution et retour du resultat du query     }
 
     @Override
-    public int update(Object o) throws SQLException {
-    Caracteristique c = (Caracteristique)o;// down Cast du Object => Admin 
+    public int update(Caracteristique c) throws SQLException {
     String query=" update  Caracteristique set corpulence=?,pilosite=?,origine=?,profession=?,alcool=?,tabac=?,taille=?,cheveux=?,yeux=? ,caractere=?, statut=? ,cuisine=? where id=?  "; // preparation du query
     PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
          
@@ -63,10 +63,8 @@ public class GestionnaireCaracteristique implements Gestionnaire{
          return pst.executeUpdate();} // Execution et retour du resultat du query     }
 
 
-    @Override
-    public int remove(Object o) throws SQLException {
+    public int remove(Caracteristique c) throws SQLException {
     
-    Caracteristique c=(Caracteristique)o;
     String query="delete  from caracteristique where ID=? ";
         
     PreparedStatement pst=DB.prepareStatement(query);
@@ -76,18 +74,46 @@ public class GestionnaireCaracteristique implements Gestionnaire{
     return pst.executeUpdate();  
     }
 
+  
+
+    
+    public List<? extends Caracteristique > fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+    public List<? extends Caracteristique > fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
     @Override
-    public List<? extends Object> fetchAll() throws SQLException {
+    public Caracteristique fetchOneById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
+    public Caracteristique fetchOnByCriteria(Map<String, String> Criteras) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy, int startPoint, int breakPoint) throws SQLException {
+    public List<Caracteristique> fetchSomeBy(String aux, String target_column, int StartPoint, int BreakPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Caracteristique> fetchSomeBy(String aux, int target_column) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Caracteristique> fetchSomeBy(String aux, int StartPoint, int BreakPoint) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Caracteristique> fetchAll() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

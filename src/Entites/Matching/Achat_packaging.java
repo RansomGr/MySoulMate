@@ -5,28 +5,28 @@
  */
 package Entites.Matching;
 import java.sql.Date;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import java.util.Objects;
 /**
  *
  * @author Nadia
  */
 public class Achat_packaging {
-    private Client c;
+    private Utilisateur c;
     private Packaging p;
     private Date date_fin;
 
-    public Achat_packaging(Client c, Packaging p, Date date_fin) {
+    public Achat_packaging(Utilisateur c, Packaging p, Date date_fin) {
         this.c = c;
         this.p = p;
         this.date_fin = date_fin;
     }
 
-    public Client getC() {
+    public Utilisateur getC() {
         return c;
     }
 
-    public void setC(Client c) {
+    public void setC(Utilisateur c) {
         this.c = c;
     }
 

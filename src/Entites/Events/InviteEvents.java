@@ -6,7 +6,7 @@
 package Entites.Events;
 
 import Entites.Events.Events;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import java.util.Objects;
 
 /**
@@ -15,10 +15,16 @@ import java.util.Objects;
  */
 public class InviteEvents {
     Events evts;
-    Client invite;
-
-    public InviteEvents(Events evts, Client invite) {
+    Utilisateur invite;
+    protected String participe;
+    public InviteEvents(Events evts, Utilisateur invite, String participe) {
         this.evts = evts;
+        this.invite = invite;
+        this.participe = participe;
+    }
+
+    public InviteEvents(Events evt, Utilisateur clt) {
+          this.evts = evts;
         this.invite = invite;
     }
 
@@ -63,12 +69,21 @@ public class InviteEvents {
         this.evts = evts;
     }
 
-    public Client getInvite() {
+    public Utilisateur getInvite() {
         return invite;
     }
 
-    public void setInvite(Client invite) {
+    public void setInvite(Utilisateur invite) {
         this.invite = invite;
     }
+
+    public String getParticipe() {
+        return participe;
+    }
+
+    public void setParticipe(String participe) {
+        this.participe = participe;
+    }
+    
     
 }

@@ -5,7 +5,6 @@
  */
 package Entites.Plan;
 
-import Entites.AbstractEntite;
 
 import java.util.Objects;
 
@@ -13,73 +12,58 @@ import java.util.Objects;
  *
  * @author irou
  */
-public class Plan extends AbstractEntite {
-    
-    public enum Type{
-        culturel,sportif,divertissment;
-        public static String getAsString(Type t)
-        {
-            
-            if(null!=t)
-                switch (t) {
-                case sportif:
-                    return "sportif";
-                case divertissment:
-                    return "divertissement";
-                case culturel:
-                    return "culturel";
-                default:
-                    break;
-            }
-           return "nop";
-        }
-        public static Type getAsType(String s)
-        {
-            if(s.equals("sportif"))
-                return Type.sportif;
-            else if(s.equals("divertissement"))
-                return Type.divertissment;
-           
-                return Type.culturel;
-            
-        }
-    } ;
-    private Type type;
+public class Plan {
+    private int Id;
+     private String nom;
+    private String type;
     private String email;
     private String siteweb;
-    private int telephone ;
-    private String description ;
     private String photo;
- 
+    
 
-    public Plan(int ID, String nom,Type type, String email, String siteweb, int telephone, String description, String photo ) {
-        super(ID, nom);
+    private int telephone;
+    private String Description;
+    private String photo1;
+    private String photo2;
+    private Float X;
+    private Float y;
+
+    public Plan(int Id, String nom, String type, String email, String siteweb, String photo, int telephone, String Description, String photo1, String photo2, Float X, Float y) {
+        this.Id = Id;
+        this.nom = nom;
         this.type = type;
         this.email = email;
         this.siteweb = siteweb;
-        this.telephone = telephone;
-        this.description = description;
         this.photo = photo;
-    }
-    public Plan( String nom,Type type, String email, String siteweb, int telephone, String description, String photo ) {
-        super(-1,nom);
-        this.type = type;
-        this.email = email;
-        this.siteweb = siteweb;
         this.telephone = telephone;
-        this.description = description;
-        this.photo = photo;
-    }
-    public Plan(int Id ,String nom)
-    {
-        super(Id,nom);
+        this.Description = Description;
+        this.photo1 = photo1;
+        this.photo2 = photo2;
+        this.X = X;
+        this.y = y;
     }
 
-    public Type getType() {
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int Id) {
+        this.Id = Id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -99,6 +83,14 @@ public class Plan extends AbstractEntite {
         this.siteweb = siteweb;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     public int getTelephone() {
         return telephone;
     }
@@ -108,31 +100,60 @@ public class Plan extends AbstractEntite {
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String Description) {
+        this.Description = Description;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getPhoto1() {
+        return photo1;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setPhoto1(String photo1) {
+        this.photo1 = photo1;
+    }
+
+    public String getPhoto2() {
+        return photo2;
+    }
+
+    public void setPhoto2(String photo2) {
+        this.photo2 = photo2;
+    }
+
+    public Float getX() {
+        return X;
+    }
+
+    public void setX(Float X) {
+        this.X = X;
+    }
+
+    public Float getY() {
+        return y;
+    }
+
+    public void setY(Float y) {
+        this.y = y;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.type);
-        hash = 41 * hash + Objects.hashCode(this.email);
-        hash = 41 * hash + Objects.hashCode(this.siteweb);
-        hash = 41 * hash + this.telephone;
-        hash = 41 * hash + Objects.hashCode(this.description);
-        hash = 41 * hash + Objects.hashCode(this.photo);
-       
+        hash = 79 * hash + this.Id;
+        hash = 79 * hash + Objects.hashCode(this.nom);
+        hash = 79 * hash + Objects.hashCode(this.type);
+        hash = 79 * hash + Objects.hashCode(this.email);
+        hash = 79 * hash + Objects.hashCode(this.siteweb);
+        hash = 79 * hash + Objects.hashCode(this.photo);
+        hash = 79 * hash + this.telephone;
+        hash = 79 * hash + Objects.hashCode(this.Description);
+        hash = 79 * hash + Objects.hashCode(this.photo1);
+        hash = 79 * hash + Objects.hashCode(this.photo2);
+        hash = 79 * hash + Objects.hashCode(this.X);
+        hash = 79 * hash + Objects.hashCode(this.y);
         return hash;
     }
 
@@ -148,7 +169,16 @@ public class Plan extends AbstractEntite {
             return false;
         }
         final Plan other = (Plan) obj;
+        if (this.Id != other.Id) {
+            return false;
+        }
         if (this.telephone != other.telephone) {
+            return false;
+        }
+        if (!Objects.equals(this.nom, other.nom)) {
+            return false;
+        }
+        if (!Objects.equals(this.type, other.type)) {
             return false;
         }
         if (!Objects.equals(this.email, other.email)) {
@@ -157,29 +187,38 @@ public class Plan extends AbstractEntite {
         if (!Objects.equals(this.siteweb, other.siteweb)) {
             return false;
         }
-        if (!Objects.equals(this.description, other.description)) {
-            return false;
-        }
         if (!Objects.equals(this.photo, other.photo)) {
             return false;
         }
-        if (this.type != other.type) {
+        if (!Objects.equals(this.Description, other.Description)) {
             return false;
         }
-        
-       
+        if (!Objects.equals(this.photo1, other.photo1)) {
+            return false;
+        }
+        if (!Objects.equals(this.photo2, other.photo2)) {
+            return false;
+        }
+        if (!Objects.equals(this.X, other.X)) {
+            return false;
+        }
+        if (!Objects.equals(this.y, other.y)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return super.toString()+"Plan{" + "type=" + type + ", email=" + email + ", siteweb=" + siteweb + ", telephone=" + telephone + ", description=" + description + ", photo=" + photo + '}';
+        return "Plan{" + "Id=" + Id + ", nom=" + nom + ", type=" + type + ", email=" + email + ", siteweb=" + siteweb + ", photo=" + photo + ", telephone=" + telephone + ", Description=" + Description + ", photo1=" + photo1 + ", photo2=" + photo2 + ", X=" + X + ", y=" + y + '}';
     }
+
+
 
    
 
+   
     
-
     
     
     

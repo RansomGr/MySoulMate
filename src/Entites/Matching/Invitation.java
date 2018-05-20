@@ -5,7 +5,7 @@
  */
 package Entites.Matching;
 import java.sql.Date;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import java.util.Objects;
 
 /**
@@ -13,31 +13,31 @@ import java.util.Objects;
  * @author Nadia
  */
 public class Invitation {
-    private Client client1;
-    private Client client2;
+    private Utilisateur client1;
+    private Utilisateur client2;
     private String statut;
     private Date date_amitie;
 
-    public Invitation(Client client1, Client client2, String statut, Date date_amitie) {
+    public Invitation(Utilisateur client1, Utilisateur client2, String statut, Date date_amitie) {
         this.client1 = client1;
         this.client2 = client2;
         this.statut = statut;
         this.date_amitie = date_amitie;
     }
 
-    public Client getClient1() {
+    public Utilisateur getClient1() {
         return client1;
     }
 
-    public void setClient1(Client client1) {
+    public void setClient1(Utilisateur client1) {
         this.client1 = client1;
     }
 
-    public Client getClient2() {
+    public Utilisateur getClient2() {
         return client2;
     }
 
-    public void setClient2(Client client2) {
+    public void setClient2(Utilisateur client2) {
         this.client2 = client2;
     }
 

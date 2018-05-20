@@ -5,8 +5,8 @@
  */
 package Entites.Plan;
 
-import Entites.User.Client;
-import java.sql.Date;
+
+import Entites.User.Utilisateur;
 import java.util.Objects;
 
 /**
@@ -14,26 +14,26 @@ import java.util.Objects;
  * @author irou
  */
 public class Avis {
-    
+    private int Id;
     private Plan plan;
-    private Client client;
+    private Utilisateur client ;
     private String commentaire;
     private Float note;
-    private Date dateh;
 
-    public Avis( Client client, String commentaire, Float note) {
-       
+    public Avis(int Id, Plan plan, Utilisateur client, String commentaire, Float note) {
+        this.Id = Id;
+        this.plan = plan;
         this.client = client;
         this.commentaire = commentaire;
         this.note = note;
     }
 
-    public Avis(Plan plan, Client client, String commentaire, Float note, Date dateh) {
-        this.plan = plan;
-        this.client = client;
-        this.commentaire = commentaire;
-        this.note = note;
-        this.dateh = dateh;
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int Id) {
+        this.Id = Id;
     }
 
     public Plan getPlan() {
@@ -44,11 +44,11 @@ public class Avis {
         this.plan = plan;
     }
 
-    public Client getClient() {
+    public Utilisateur getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(Utilisateur client) {
         this.client = client;
     }
 
@@ -68,22 +68,14 @@ public class Avis {
         this.note = note;
     }
 
-    public Date getDateh() {
-        return dateh;
-    }
-
-    public void setDateh(Date dateh) {
-        this.dateh = dateh;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.plan);
-        hash = 29 * hash + Objects.hashCode(this.client);
-        hash = 29 * hash + Objects.hashCode(this.commentaire);
-        hash = 29 * hash + Objects.hashCode(this.note);
-        hash = 29 * hash + Objects.hashCode(this.dateh);
+        int hash = 5;
+        hash = 19 * hash + this.Id;
+        hash = 19 * hash + Objects.hashCode(this.plan);
+        hash = 19 * hash + Objects.hashCode(this.client);
+        hash = 19 * hash + Objects.hashCode(this.commentaire);
+        hash = 19 * hash + Objects.hashCode(this.note);
         return hash;
     }
 
@@ -99,10 +91,10 @@ public class Avis {
             return false;
         }
         final Avis other = (Avis) obj;
-        if (!Objects.equals(this.commentaire, other.commentaire)) {
+        if (this.Id != other.Id) {
             return false;
         }
-        if (!Objects.equals(this.note, other.note)) {
+        if (!Objects.equals(this.commentaire, other.commentaire)) {
             return false;
         }
         if (!Objects.equals(this.plan, other.plan)) {
@@ -111,7 +103,7 @@ public class Avis {
         if (!Objects.equals(this.client, other.client)) {
             return false;
         }
-        if (!Objects.equals(this.dateh, other.dateh)) {
+        if (!Objects.equals(this.note, other.note)) {
             return false;
         }
         return true;
@@ -119,15 +111,9 @@ public class Avis {
 
     @Override
     public String toString() {
-        return "Avis{" + "plan=" + plan + ", client=" + client + ", commentaire=" + commentaire + ", note=" + note + ", dateh=" + dateh + '}';
+        return "Avis{" + "Id=" + Id + ", plan=" + plan + ", client=" + client + ", commentaire=" + commentaire + ", note=" + note + '}';
     }
-
     
     
-    
-    
-    
-    
-    
-    
+   
 }

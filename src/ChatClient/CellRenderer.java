@@ -1,5 +1,5 @@
 package ChatClient;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import javafx.geometry.Pos;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -13,14 +13,14 @@ import javafx.util.Callback;
 /**
  * A Class for Rendering users images / name on the Clientlist.
  */
-public class CellRenderer implements Callback<ListView<Client>,ListCell<Client>>{
+public class CellRenderer implements Callback<ListView<Utilisateur>,ListCell<Utilisateur>>{
         @Override
-    public ListCell<Client> call(ListView<Client> p) {
+    public ListCell<Utilisateur> call(ListView<Utilisateur> p) {
 
-        ListCell<Client> cell = new ListCell<Client>(){
+        ListCell<Utilisateur> cell = new ListCell<Utilisateur>(){
 
             @Override
-            protected void updateItem(Client user, boolean bln) {
+            protected void updateItem(Utilisateur user, boolean bln) {
                 super.updateItem(user, bln);
                 setGraphic(null);
                 setText(null);
