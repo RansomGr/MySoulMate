@@ -5,8 +5,7 @@
  */
 package mysoulmate;
 
-import Entites.User.Admin;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import Listner.Listener;
 import VIEWS.Ui_MainFrame_FOController;
 import javafx.application.Application;
@@ -23,8 +22,7 @@ import javafx.stage.WindowEvent;
  */
 public class MySoulMate extends Application {
     private static Stage MainStage;
-    private static Admin Logged_in_Admin;
-    private static Client Logged_in_Client;
+    private static Utilisateur Logged_in_Client;
     private static Ui_MainFrame_FOController MainController;
     private static Listener listener;
     private static Thread  client_thread;
@@ -54,19 +52,19 @@ public class MySoulMate extends Application {
         MySoulMate.MainController = MainController;
     }
 
-    public static void setLogged_in_Admin(Admin Logged_in_Admin) {
-        MySoulMate.Logged_in_Admin = Logged_in_Admin;
+    public static void setLogged_in_Admin(Utilisateur Logged_in_Admin) {
+        MySoulMate.Logged_in_Client = Logged_in_Admin;
     }
 
-    public static void setLogged_in_Client(Client Logged_in_Client) {
+    public static void setLogged_in_Client(Utilisateur Logged_in_Client) {
         MySoulMate.Logged_in_Client = Logged_in_Client;
     }
 
-    public static Admin getLogged_in_Admin() {
-        return Logged_in_Admin;
+    public static Utilisateur getLogged_in_Admin() {
+        return Logged_in_Client;
     }
 
-    public static Client getLogged_in_Client() {
+    public static Utilisateur getLogged_in_Client() {
         return Logged_in_Client;
     }
 
