@@ -133,7 +133,7 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
         con.addResponseListener((NetworkEvent evt) -> {
              String str = new String(con.getResponseData());
              JSONParser jsonp = new JSONParser();
-            try {
+       
               
                 Map<String, Object> Users = jsonp.parseJSON(new CharArrayReader(new String(con.getResponseData()).toCharArray()));
                 if((int)Float.parseFloat(Users.get("id").toString())!=-1){// getting the user if found -1 not found 
@@ -191,9 +191,8 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
                 }
                 else
                  MySoulMate.setLogged_in_Client(null);        
-                } catch (IOException ex) {
-            }
-        });
+             
+                    });
         NetworkManager.getInstance().addToQueueAndWait(con);   
         return u;
     }
