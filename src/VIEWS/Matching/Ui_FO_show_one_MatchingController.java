@@ -91,7 +91,7 @@ public class Ui_FO_show_one_MatchingController implements Initializable {
     }
 
     @FXML
-    private void inviter_ami(ActionEvent event) {
+    private void inviter_ami(ActionEvent event) throws SQLException {
         try {
             MySoulMate.getMainController().open_profile(the_matching);
         } catch (IOException ex) {
