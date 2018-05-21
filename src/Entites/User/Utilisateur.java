@@ -78,6 +78,16 @@ public class Utilisateur {
         this.gender = gender;
         this.datanaissance = datanaissance;
     }
+//  Utilisateur C = new Utilisateur(nom_tf.getText(), prenom_tf.getText(), password_tf.getText(), email_tf.getText(), Date.valueOf(date_naissance_dp.getValue()), pseudo_tf.getText(),genre_cmb.getValue());
+    public Utilisateur(String nom, String prenom, String password, String email, Date Date_naissance, String username, String genre) {
+    this.nom=nom;
+    this.prenom=prenom;
+    this.password=password;
+    this.email=email;
+    this.datanaissance=Date_naissance;
+    this.username=username;
+    this.gender=genre;
+    }
 
     public int getId() {
         return id;
