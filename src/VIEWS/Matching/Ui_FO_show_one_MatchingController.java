@@ -5,26 +5,15 @@
  */
 package VIEWS.Matching;
 
-import Entites.Matching.Packaging;
-import Entites.Profil.Caracteristique;
+
 
 import Entites.User.Utilisateur;
-import Services.Matching.GestionnaireCaracteristique;
 import Services.User.GestionnaireUser;
-import VIEWS.Profil.Ui_Profil_FOController;
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -92,11 +81,11 @@ public class Ui_FO_show_one_MatchingController implements Initializable {
 
     @FXML
     private void inviter_ami(ActionEvent event) {
-        try {
-            MySoulMate.getMainController().open_profile(the_matching);
-        } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(Ui_FO_show_one_MatchingController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      //  try {
+     //       MySoulMate.getMainController().open_profile(the_matching);
+     //   } catch (IOException ex) {
+   //         java.util.logging.Logger.getLogger(Ui_FO_show_one_MatchingController.class.getName()).log(Level.SEVERE, null, ex);
+      ///  }
     }
     
 }
