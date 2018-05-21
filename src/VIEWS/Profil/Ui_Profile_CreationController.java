@@ -7,9 +7,9 @@ package VIEWS.Profil;
 
 import Entites.Profil.Caracteristique;
 import Entites.Profil.Profil;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import Services.Profil.GestionnaireProfil;
-import Services.User.GestionnaireClient;
+import Services.User.GestionnaireUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -65,7 +65,7 @@ public class Ui_Profile_CreationController implements Initializable {
 
     public static void setProf(Profil prof) {
         Ui_Profile_CreationController.prof = prof;
-        prof.setCaracteristique(carac);
+        prof.setCaracteristique_id(carac);
     }
     /**
      * Initializes the controller class.
@@ -105,13 +105,13 @@ public class Ui_Profile_CreationController implements Initializable {
         GestionnaireProfil gp= new GestionnaireProfil();
         gp.create(Ui_Profile_CreationController.prof);
         Ui_Profile_CreationController.InformationWindow.show();
-        GestionnaireClient gc = new GestionnaireClient();
+            GestionnaireUser gc = new GestionnaireUser();
         Profil p  = new Profil();
         p.setId(((List<Profil>)gp.fetchAll()).stream().mapToInt(w->w.getId()).max().getAsInt());
         MySoulMate.getLogged_in_Client().setProfil(p);
-        Client c =MySoulMate.getLogged_in_Client();
+        Utilisateur c =MySoulMate.getLogged_in_Client();
         gc.update(c);
-        MySoulMate.setLogged_in_Client(((List<Client>)gc.fetchAll()).stream().filter(x->x.getID()==c.getID()).findFirst().get());
+        MySoulMate.setLogged_in_Client(((List<Utilisateur>)gc.fetchAll()).stream().filter(x->x.getId()==c.getId()).findFirst().get());
         }
      }
     

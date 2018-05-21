@@ -102,7 +102,7 @@ public class Ui_FO_AjouterCaracteristiqueController implements Initializable {
                       profession_tf.getText(),
                       choix_alchool.getText(),
                       choix_tabac.getText(),
-                      taille_min_sp.getValue().floatValue(),
+                      taille_min_sp.getValue().toString(),
                       cheveux_cb.getValue(),
                       yeux_cb.getValue(),
                       caractere_cb.getValue(),

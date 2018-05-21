@@ -7,8 +7,8 @@ package VIEWS.Profil;
 
 import Entites.Profil.Actualite;
 import Entites.Profil.Interaction;
+import Entites.User.Utilisateur;
 
-import Entites.User.Client;
 import Services.Profil.GestionnaireInteraction;
 import java.net.URL;
 import java.sql.SQLException;
@@ -43,7 +43,7 @@ public class Ui_Commentaire_FOController implements Initializable {
     @FXML
     private MenuButton actions;
     /* Non FXML Variables */
-    Client commentaire_owner;
+    Utilisateur commentaire_owner;
     Actualite parent;
     MenuItem supprimer;
     MenuItem modifier;
@@ -97,7 +97,7 @@ public class Ui_Commentaire_FOController implements Initializable {
         if (commentaire_owner.equals(MySoulMate.getLogged_in_Client())) {
             this.actions.getItems().add(modifier);
         }
-        if (commentaire_owner.equals(MySoulMate.getLogged_in_Client()) || MySoulMate.getLogged_in_Client().equals((Client) parent.getOwner())) {
+        if (commentaire_owner.equals(MySoulMate.getLogged_in_Client()) || MySoulMate.getLogged_in_Client().equals((Utilisateur) parent.getCreateur())) {
             this.actions.getItems().add(supprimer);
         }
 

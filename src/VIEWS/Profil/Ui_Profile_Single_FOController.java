@@ -5,7 +5,7 @@
  */
 package VIEWS.Profil;
 
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
@@ -36,7 +36,7 @@ public class Ui_Profile_Single_FOController implements Initializable {
     @FXML
     private MenuButton actions;
      /* non fxml variables */
-    Client owner ;
+    Utilisateur owner ;
     
     /**
      * Initializes the controller class.
@@ -46,13 +46,13 @@ public class Ui_Profile_Single_FOController implements Initializable {
         
     }    
 
-    public Client getOwner() {
+    public Utilisateur getOwner() {
         return owner;
     }
 
-    public void setOwner(Client owner) {
+    public void setOwner(Utilisateur owner) {
         this.owner = owner;  
-        this.owner_age.setText(Period.between(owner.getDate_naissance().toLocalDate(), LocalDate.now()).getYears()+"");
+        this.owner_age.setText(Period.between(owner.getDatanaissance().toLocalDate(), LocalDate.now()).getYears()+"");
         this.owner_gender.setText(owner.getGender());
         this.owner_photo.setImage(new Image("images/"+owner.getProfil().getPhoto()));
     }

@@ -5,7 +5,6 @@
  */
 package VIEWS.Profil;
 
-import Entites.User.Admin;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;

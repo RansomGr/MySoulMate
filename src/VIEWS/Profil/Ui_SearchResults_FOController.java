@@ -8,7 +8,7 @@ package VIEWS.Profil;
 import Entites.AbstractEntite;
 import Entites.Events.Events;
 import Entites.Plan.Plan;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -32,7 +32,7 @@ public class Ui_SearchResults_FOController implements Initializable {
     @FXML
     private VBox list_vb;
     /*non fxml vars */
-    private List<AbstractEntite>Items_found;
+    private List<Utilisateur>Items_found;
 
 
     
@@ -43,7 +43,7 @@ public class Ui_SearchResults_FOController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
     }    
-        public List<AbstractEntite> getItems_found() {
+        public List<Utilisateur> getItems_found() {
         return Items_found;
     }
     private void load_data()
@@ -52,11 +52,11 @@ public class Ui_SearchResults_FOController implements Initializable {
        HBox list_hb = new HBox();
         this.Items_found.forEach(x->{
             
-        if(x instanceof Client)
+        if(x instanceof Utilisateur)
         {
             
             try {
-                Client c =(Client)x ;
+                Utilisateur c =(Utilisateur)x ;
                 FXMLLoader fxml  = new FXMLLoader(getClass().getResource("/VIEWS/Profil/ui_Profil_Single_FO.fxml"));
                 Node root =fxml.load();
                 list_hb.getChildren().add(root);
@@ -64,20 +64,20 @@ public class Ui_SearchResults_FOController implements Initializable {
                 Logger.getLogger(Ui_SearchResults_FOController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else if(x instanceof Plan)
-        {
+      //  else if(x instanceof Plan)
+   /*     {
             
         }
-        else if(x instanceof Events)
+     //   else if(x instanceof Events)
         {
         
-        }
+        }*/
         if(i==3)
         list_vb.getChildren().add(list_hb);
         
         } );
     }
-    public void setItems_found(List<AbstractEntite> Items_found) {
+    public void setItems_found(List<Utilisateur> Items_found) {
         this.Items_found = Items_found;
         
     }

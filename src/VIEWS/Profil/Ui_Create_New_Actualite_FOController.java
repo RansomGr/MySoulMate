@@ -9,6 +9,7 @@ import Entites.AbstractEntite;
 import Entites.Profil.Actualite;
 import Entites.Profil.Interaction;
 import Entites.Profil.Mention_Jaime;
+import Entites.User.Utilisateur;
 import Services.Profil.GestionnaireActualite;
 import Services.Profil.GestionnaireInteraction;
 import Services.Profil.GestionnaireMention_Jaime;
@@ -74,7 +75,7 @@ public class Ui_Create_New_Actualite_FOController implements Initializable {
     private GestionnaireActualite ga;
     private GestionnaireInteraction gi;
     private GestionnaireMention_Jaime gmj;
-    private AbstractEntite Parent;
+    private Utilisateur Parent;
     Alert ConfirmDelete;
     ButtonType oui;
     ButtonType non;
@@ -137,8 +138,8 @@ public class Ui_Create_New_Actualite_FOController implements Initializable {
     public void setContent(Actualite content) {
         System.out.println(" cvonetn is :" + content);
         this.content = content;
-        publication_owner.setImage(new Image("images/" + content.getWriter().getProfil().getPhoto()));
-        this.Parent = content.getOwner();
+        publication_owner.setImage(new Image("images/" + content.getCreateur().getProfil().getPhoto()));
+        this.Parent = content.getCreateur();
         publication_tea.setText(content.getContenu());
         publication_tea.setEditable(false);
         publication_tea.setOpacity(0.8);
@@ -206,11 +207,11 @@ public class Ui_Create_New_Actualite_FOController implements Initializable {
         supprimer = new MenuItem("supprimer");
         modifier = new MenuItem("modifier");
         actions.getItems().clear();
-        if (content.getWriter().getID() == MySoulMate.getLogged_in_Client().getID()) {
+        if (content.getCreateur().getId() == MySoulMate.getLogged_in_Client().getId()) {
             actions.getItems().add(modifier);
         }
 
-        if (content.getOwner().getID() == MySoulMate.getLogged_in_Client().getID() || content.getWriter().getID() == MySoulMate.getLogged_in_Client().getID()) {
+        if (content.getCreateur().getId() == MySoulMate.getLogged_in_Client().getId() || content.getCreateur().getId() == MySoulMate.getLogged_in_Client().getId()) {
             actions.getItems().add(supprimer);
         }
 
@@ -345,11 +346,11 @@ public class Ui_Create_New_Actualite_FOController implements Initializable {
 
     }
 
-    public AbstractEntite getParent() {
+    public Utilisateur getParent() {
         return Parent;
     }
 
-    public void setParent(AbstractEntite Parent) {
+    public void setParent(Utilisateur Parent) {
         this.Parent = Parent;
     }
 

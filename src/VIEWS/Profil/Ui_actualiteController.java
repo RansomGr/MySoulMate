@@ -6,9 +6,8 @@
 package VIEWS.Profil;
 
 import Entites.Profil.Actualite;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import Services.Profil.GestionnaireActualite;
-import Services.User.GestionnaireAction;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -37,14 +36,14 @@ public class Ui_actualiteController implements Initializable {
     private GridPane actualite_pane;
     @FXML
     private Label owner_name;
-    private Client owner;
+    private Utilisateur owner;
     private Actualite actualite;
 
-    public Client getOwner() {
+    public Utilisateur getOwner() {
         return owner;
     }
 
-    public void setOwner(Client owner) {
+    public void setOwner(Utilisateur owner) {
         this.owner = owner;
     }
     
