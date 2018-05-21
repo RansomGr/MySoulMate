@@ -36,7 +36,7 @@ public class GestionnaireCaracteristique implements Gestionnaire <Caracteristiqu
         pst.setString(4, c.getProfession());
         pst.setString(5, c.getAlcool());//Binding du deuxieme valeur mentionner dans le query "?" 
         pst.setString(6, c.getTabac());//Binding du deuxieme valeur mentionner dans le query "?" 
-        pst.setString(7, Double.toString(c.getTaille()));//Binding du deuxieme valeur mentionner dans le query "?" 
+        pst.setString(7, c.getTaille());//Binding du deuxieme valeur mentionner dans le query "?" 
         pst.setString(8, c.getCheveux());//Binding du deuxieme valeur mentionner dans le query "?" 
         pst.setString(9, c.getYeux());//Binding du deuxieme valeur mentionner dans le query "?" 
         pst.setString(10, c.getCaractere());//Binding du deuxieme valeur mentionner dans le query "?" 
@@ -57,7 +57,7 @@ public class GestionnaireCaracteristique implements Gestionnaire <Caracteristiqu
         pst.setString(4, c.getProfession());
         pst.setString(5, c.getAlcool());//Binding du deuxieme valeur mentionner dans le query "?" 
         pst.setString(6, c.getTabac());//Binding du deuxieme valeur mentionner dans le query "?" 
-        pst.setString(7, Double.toString(c.getTaille()));//Binding du deuxieme valeur mentionner dans le query "?" 
+        pst.setString(7, c.getTaille());//Binding du deuxieme valeur mentionner dans le query "?" 
         pst.setString(8, c.getCheveux());//Binding du deuxieme valeur mentionner dans le query "?" 
         pst.setString(9, c.getYeux());//Binding du deuxieme valeur mentionner dans le query "?" 
         pst.setString(10, c.getCaractere());//Binding du deuxieme valeur mentionner dans le query "?" 
@@ -87,7 +87,7 @@ public class GestionnaireCaracteristique implements Gestionnaire <Caracteristiqu
         List<Caracteristique> Caracteristiques = new ArrayList<>();
 
         while (res.next()) {
-            Caracteristiques.add(new Caracteristique(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getString(7), Float.parseFloat(res.getString(8)), res.getString(9), res.getString(10), res.getString(11), res.getString(12), res.getString(13)));
+            Caracteristiques.add(new Caracteristique(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getString(8), res.getString(9), res.getString(10), res.getString(11), res.getString(12), res.getString(13)));
         }
         return Caracteristiques;
     }
@@ -120,7 +120,7 @@ public class GestionnaireCaracteristique implements Gestionnaire <Caracteristiqu
             Logger.getLogger(GestionnaireCaracteristique.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            c = new Caracteristique(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getString(7), Float.parseFloat(res.getString(8)), res.getString(9), res.getString(10), res.getString(11), res.getString(12), res.getString(13));
+            c = new Caracteristique(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getString(8), res.getString(9), res.getString(10), res.getString(11), res.getString(12), res.getString(13));
         } catch (SQLException ex) {
             Logger.getLogger(GestionnaireCaracteristique.class.getName()).log(Level.SEVERE, null, ex);
         }
