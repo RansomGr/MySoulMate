@@ -7,6 +7,7 @@ package VIEWS.User;
 
 
 import Entites.User.Utilisateur;
+import Services.User.GestionnaireUser;
 import VIEWS.Ui_MainFrame_BOController;
 import java.io.IOException;
 import java.net.URL;
@@ -49,7 +50,7 @@ import mysoulmate.MySoulMate;
  */
 public class Ui_ListeAdmin_BOController implements Initializable {
 
-    private GestionnaireAdmin ga;
+    private GestionnaireUser ga;
     private ScaleTransition Hide;
     private ScaleTransition Show;
     private int StartPoint;
@@ -57,7 +58,7 @@ public class Ui_ListeAdmin_BOController implements Initializable {
     private int pages;
     private int current_page;
     private String selected_column;
-    private ObservableList<Admin> Admins;
+    private ObservableList<Utilisateur> Admins;
     private Alert NextActionWindow;
     private Alert ConfirmDelete;
     private ButtonType Modifier;
@@ -152,8 +153,12 @@ public class Ui_ListeAdmin_BOController implements Initializable {
                             } else if (result.isPresent() && result.get() == Supprimer) {
                                 Optional<ButtonType> result_del = ConfirmDelete.showAndWait();
                                 if (result_del.isPresent() && result_del.get() == Oui) {
-                                    ga.remove(row.getItem());
-                                    reload_data();
+                                    try {
+                                        ga.remove(row.getItem());
+                                        reload_data();
+                                    } catch (SQLException ex) {
+                                        Logger.getLogger(Ui_ListeAdmin_BOController.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
                                 }
                             }
                         } else {
@@ -180,8 +185,8 @@ public class Ui_ListeAdmin_BOController implements Initializable {
         int All_row_size;
         
             if (operations_plus.isSelected()) {
+            try {
                 All_row_size = ga.fetchAll().size();
-
                 pages = (All_row_size / BreakPoint);
                 if ((All_row_size % BreakPoint != 0)) {
                     pages += 1;
@@ -194,12 +199,15 @@ public class Ui_ListeAdmin_BOController implements Initializable {
                 }
                 current_page_te.setText(Integer.toString(current_page) + " / " + Integer.toString(pages));
                 if (selected_column.equals("All")) {
-                    Admins = FXCollections.observableArrayList((ArrayList<Utilisateur>) ga.fetchAll(recherche_dyn_tf.getText(), (current_page - 1) * BreakPoint, BreakPoint));
+                    Admins = FXCollections.observableArrayList((ArrayList<Utilisateur>) ga.fetchSomeBy(recherche_dyn_tf.getText(), (current_page - 1) * BreakPoint, BreakPoint));
                 } else {
-                    Admins = FXCollections.observableArrayList((ArrayList<Utilisateur>) ga.fetchAll(recherche_dyn_tf.getText(), selected_column, (current_page - 1) * BreakPoint, BreakPoint));
+                    Admins = FXCollections.observableArrayList((ArrayList<Utilisateur>) ga.fetchSomeBy(recherche_dyn_tf.getText(), selected_column, (current_page - 1) * BreakPoint, BreakPoint));
                 }
+            } catch (SQLException ex) {
+                Logger.getLogger(Ui_ListeAdmin_BOController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             } else {
-                Admins = FXCollections.observableArrayList((ArrayList<Utilisateur>) ga. );
+                Admins = FXCollections.observableArrayList((ArrayList<Utilisateur>) ga.fetchSomeBy(recherche_dyn_tf.getText(),-1) );
 
             }
 
@@ -271,7 +279,7 @@ public class Ui_ListeAdmin_BOController implements Initializable {
     private void init_node() {
         Hide = new ScaleTransition();
         Show = new ScaleTransition();
-        ga = new GestionnaireAdmin();
+        ga = new GestionnaireUser();
         Hide.setNode(operation_grid);
         Show.setNode(operation_grid);
         Show.setFromY(0);
