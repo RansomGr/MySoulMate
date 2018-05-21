@@ -131,66 +131,70 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
          Utilisateur u =new Utilisateur();
         con.setUrl(url+"User?login="+login+"&password="+pass);
         con.addResponseListener((NetworkEvent evt) -> {
-             String str = new String(con.getResponseData());
-             JSONParser jsonp = new JSONParser();
-       
-              
+            try {
+                String str = new String(con.getResponseData());
+                JSONParser jsonp = new JSONParser();
+                
+                
                 Map<String, Object> Users = jsonp.parseJSON(new CharArrayReader(new String(con.getResponseData()).toCharArray()));
-                if((int)Float.parseFloat(Users.get("id").toString())!=-1){// getting the user if found -1 not found 
-                   u.setId((int)Float.parseFloat(Users.get("id").toString()));
-                   u.setNom(Users.get("nom").toString());
-                   u.setPrenom(Users.get("prenom").toString());
-                   u.setGender(Users.get("gender").toString());
-                   u.setUsername(Users.get("username").toString());
-                   CustomEspritJSONParser cejp = new CustomEspritJSONParser(Users.get("datenaissance").toString());      
-                   String x=cejp.getNestedItems().get("timestamp").toString();  
-                   u.setDatanaissance(new java.util.Date((long)Float.parseFloat(x)*1000));   
-                   cejp =new CustomEspritJSONParser(Users.get("profil").toString());
-                   Map<String,Object>Profil=cejp.getNestedItems();
-                   cejp = new CustomEspritJSONParser(Profil.get("caracteristique").toString());
-                   Map<String,Object>Caracteristique =cejp.getNestedItems();
-                   cejp= new   CustomEspritJSONParser(Profil.get("preference").toString());
-                   Map<String,Object>Preference = cejp.getNestedItems();
-                   Caracteristique C = new Caracteristique(
-                           (int)Float.parseFloat(Caracteristique.get("id").toString()),
-                           Caracteristique.get("corpulence").toString(),
-                           Caracteristique.get("pilosite").toString(),
-                           Caracteristique.get("origine").toString(),
-                           Caracteristique.get("profession").toString(),
-                           Caracteristique.get("alcool").toString(),
-                           Caracteristique.get("tabac").toString(),
-                           Caracteristique.get("taille").toString(),
-                           Caracteristique.get("cheveux").toString(),
-                           Caracteristique.get("yeux").toString(),
-                           Caracteristique.get("caractere").toString(),
-                           Caracteristique.get("statut").toString(),
-                           Caracteristique.get("cuisine").toString());
-
-                   Caracteristique pref =new Caracteristique(
-                           (int)Float.parseFloat(Preference.get("id").toString()),
-                           Preference.get("corpulence").toString(),
-                           Preference.get("pilosite").toString(),
-                           Preference.get("origine").toString(),
-                           Preference.get("profession").toString(),
-                           Preference.get("alcool").toString(),
-                           Preference.get("tabac").toString(),
-                           Preference.get("taille").toString(),
-                           Preference.get("cheveux").toString(),
-                           Preference.get("yeux").toString(),
-                           Preference.get("caractere").toString(),
-                           Preference.get("statut").toString(),
-                           Preference.get("cuisine").toString());    
-                   Profil p= new Profil(
-                           (int)Float.parseFloat(Profil.get("id").toString()),
-                           C,Profil.get("photo").toString(),
-                           Profil.get("description").toString(),
-                           pref,null);
-                   u.setProfil(p);
- 
-              MySoulMate.setLogged_in_Client(u);
+                if((int)Float.parseFloat(Users.get("id").toString())!=-1){// getting the user if found -1 not found
+                    u.setId((int)Float.parseFloat(Users.get("id").toString()));
+                    u.setNom(Users.get("nom").toString());
+                    u.setPrenom(Users.get("prenom").toString());
+                    u.setGender(Users.get("gender").toString());
+                    u.setUsername(Users.get("username").toString());
+                    CustomEspritJSONParser cejp = new CustomEspritJSONParser(Users.get("datenaissance").toString());
+                    String x=cejp.getNestedItems().get("timestamp").toString();
+                    u.setDatanaissance(new java.util.Date((long)Float.parseFloat(x)*1000));
+                    cejp =new CustomEspritJSONParser(Users.get("profil").toString());
+                    Map<String,Object>Profil=cejp.getNestedItems();
+                    cejp = new CustomEspritJSONParser(Profil.get("caracteristique").toString());
+                    Map<String,Object>Caracteristique =cejp.getNestedItems();
+                    cejp= new   CustomEspritJSONParser(Profil.get("preference").toString());
+                    Map<String,Object>Preference = cejp.getNestedItems();
+                    Caracteristique C = new Caracteristique(
+                            (int)Float.parseFloat(Caracteristique.get("id").toString()),
+                            Caracteristique.get("corpulence").toString(),
+                            Caracteristique.get("pilosite").toString(),
+                            Caracteristique.get("origine").toString(),
+                            Caracteristique.get("profession").toString(),
+                            Caracteristique.get("alcool").toString(),
+                            Caracteristique.get("tabac").toString(),
+                            Caracteristique.get("taille").toString(),
+                            Caracteristique.get("cheveux").toString(),
+                            Caracteristique.get("yeux").toString(),
+                            Caracteristique.get("caractere").toString(),
+                            Caracteristique.get("statut").toString(),
+                            Caracteristique.get("cuisine").toString());
+                    
+                    Caracteristique pref =new Caracteristique(
+                            (int)Float.parseFloat(Preference.get("id").toString()),
+                            Preference.get("corpulence").toString(),
+                            Preference.get("pilosite").toString(),
+                            Preference.get("origine").toString(),
+                            Preference.get("profession").toString(),
+                            Preference.get("alcool").toString(),
+                            Preference.get("tabac").toString(),
+                            Preference.get("taille").toString(),
+                            Preference.get("cheveux").toString(),
+                            Preference.get("yeux").toString(),
+                            Preference.get("caractere").toString(),
+                            Preference.get("statut").toString(),
+                            Preference.get("cuisine").toString());
+                    Profil p= new Profil(
+                            (int)Float.parseFloat(Profil.get("id").toString()),
+                            C,Profil.get("photo").toString(),
+                            Profil.get("description").toString(),
+                            pref,null);
+                    u.setProfil(p);
+                    
+                    MySoulMate.setLogged_in_Client(u);
                 }
                 else
-                 MySoulMate.setLogged_in_Client(null);        
+                    MySoulMate.setLogged_in_Client(null);        
+            } catch (IOException ex) {
+                Logger.getLogger(GestionnaireUser.class.getName()).log(Level.SEVERE, null, ex);
+            }
              
                     });
         NetworkManager.getInstance().addToQueueAndWait(con);   
