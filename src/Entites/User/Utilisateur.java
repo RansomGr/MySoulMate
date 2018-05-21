@@ -8,7 +8,7 @@ package Entites.User;
 import Entites.Profil.Adresse;
 import Entites.Profil.Profil;
 import com.messages.Status;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -87,6 +87,16 @@ public class Utilisateur {
     this.datanaissance=Date_naissance;
     this.username=username;
     this.gender=genre;
+    }
+
+    public Utilisateur() {
+         this.nom="";
+    this.prenom="";
+    this.password="";
+    this.email="";
+    this.datanaissance=null;
+    this.username="";
+    this.gender="";
     }
 
     public int getId() {
