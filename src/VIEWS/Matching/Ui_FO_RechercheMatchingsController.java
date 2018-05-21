@@ -8,10 +8,10 @@ package VIEWS.Matching;
 import Entites.Matching.Packaging;
 import Entites.Profil.Caracteristique;
 import Entites.Profil.Profil;
-import Entites.User.Client;
-import Entites.User.Logger;
+import Entites.User.Utilisateur;
+//import Entites.User.Logger;
 import Services.Matching.GestionnairePackaging;
-import Services.User.GestionnaireClient;
+import Services.User.GestionnaireUser;
 import VIEWS.Ui_MainFrame_FOController;
 import java.io.IOException;
 import java.net.URL;
@@ -73,8 +73,8 @@ public class Ui_FO_RechercheMatchingsController implements Initializable {
 
     private void chercher_les_matchings() throws SQLException, IOException
     {
-       GestionnaireClient gcl = new GestionnaireClient();
-       List <Client> clients =  ( (List <Client>) gcl.fetchAll()).stream().filter(x->x.getActivation()==1 && x.getProfil()!=null&&x.getProfil().getCaracteristique()!=null&&x.getProfil().getPreference()!=null).collect(Collectors.toList());
+       GestionnaireUser gcl = new GestionnaireUser();
+       List <Utilisateur> clients =  ( (List <Utilisateur>) gcl.fetchAll()).stream().filter(x->x.getEnabled()==1 && x.getProfil()!=null&&x.getProfil().getCaracteristique_id()!=null&&x.getProfil().getPreference()!=null).collect(Collectors.toList());
        clients.remove(MySoulMate.getLogged_in_Client());
        for (int i=0 ; i<clients.size(); )
     {

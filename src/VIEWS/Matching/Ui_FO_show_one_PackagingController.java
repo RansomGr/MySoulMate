@@ -7,7 +7,7 @@ package VIEWS.Matching;
 
 import Entites.Matching.Packaging;
 import Entites.Profil.Caracteristique;
-import Entites.User.Logger;
+
 import Services.Matching.GestionnairePackaging;
 import java.io.IOException;
 import java.net.URL;

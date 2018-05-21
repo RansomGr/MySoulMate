@@ -25,14 +25,13 @@ import tray.notification.TrayNotification;
 
 public class AjoutConseilController implements Initializable {
 	
-	
-    @FXML
+  @FXML
     private TextArea con;
 
     @FXML
-    private ComboBox<Integer> niv;
-    
-  @FXML
+    private TextField titre;
+
+    @FXML
     private Button ajbtn;
 
     @FXML
@@ -44,7 +43,8 @@ public class AjoutConseilController implements Initializable {
    private Alert ErrorWindow;
    private Alert WarningWindow;
    private Alert ConfirmWindow;
-   Map<TextArea,String>Fields;
+   Map<TextField,String>Field1;
+   Map<TextArea,String>Field2;
 	@Override
     public void initialize(URL location, ResourceBundle resources) {
           OperationMode="Ajouter";
@@ -61,13 +61,14 @@ public class AjoutConseilController implements Initializable {
         WarningWindow.setContentText(Message_Warning);
         WarningWindow.setHeaderText("Gestion Conseil");
         WarningWindow.setTitle("MySoulMate");
-        niv.getItems().addAll(1,2,3);
         fill_Nodes();
     }
      private void fill_Nodes()
         {
-            Fields= new HashMap<>();
-            Fields.put(con,"Contenu");
+            Field1= new HashMap<>();
+            Field1.put(titre,"Titre");
+             Field2= new HashMap<>();
+            Field2.put(con,"Contenu");
              
         }
     @FXML
@@ -78,7 +79,7 @@ public class AjoutConseilController implements Initializable {
         {
              GestionnaireConseil ga= new GestionnaireConseil();
       
-       if( ga.create(new Conseil(con.getText(),niv.getValue()))==1)
+       if( ga.create(new Conseil(titre.getText(),con.getText()))==1)
        {
            InformationWindow.show();
            clear_tf();
@@ -114,16 +115,23 @@ public class AjoutConseilController implements Initializable {
 	private void validate_form()
     {
        Message_Warning="Les champs suivants posent des problèmes \n";
-        Fields.entrySet().forEach(x->{
+        Field1.entrySet().forEach(x->{
             if(x.getKey().getText().isEmpty())
                 Message_Warning+="Le champ : "+x.getValue()+" est vide !\n";
         });
                       WarningWindow.setContentText(Message_Warning);
+         Field2.entrySet().forEach(x->{
+            if(x.getKey().getText().isEmpty())
+                Message_Warning+="Le champ : "+x.getValue()+" est vide !\n";
+        });
+                      WarningWindow.setContentText(Message_Warning);             
         
     }
          private void clear_tf()
     {
-         Fields.keySet().forEach(x->x.clear());
+         Field1.keySet().forEach(x->x.clear());
+         Field2.keySet().forEach(x->x.clear());
+
     }
     
 }

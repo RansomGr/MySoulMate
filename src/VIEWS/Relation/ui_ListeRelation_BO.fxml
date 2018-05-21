@@ -40,7 +40,7 @@
                   <CheckBox mnemonicParsing="false" text="Operations Avancé" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
-            <Button fx:id="operations_plus" mnemonicParsing="false" onAction="#action" text="Button" GridPane.rowIndex="2" />
+            <Button fx:id="operations_plus" mnemonicParsing="false" onAction="#action" text="TriPTS" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </top>

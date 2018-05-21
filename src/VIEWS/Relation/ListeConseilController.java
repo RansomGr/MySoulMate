@@ -35,7 +35,7 @@ GestionnaireConseil gc;
     @FXML
     private TableColumn<Conseil, String> c2;
     @FXML
-    private TableColumn<Conseil, Integer> c3;
+    private TableColumn<Conseil, String> c3;
      @FXML
     private TextField niv;
      
@@ -52,53 +52,13 @@ public void afficher(ActionEvent e)
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //c1.setCellValueFactory((CellDataFeatures<Conseil, Integer> Conseil) -> new  SimpleIntegerProperty((Conseil.getValue().getID())).asObject());
-          c2.setCellValueFactory((CellDataFeatures<Conseil,String>Conseil)->new SimpleStringProperty(Conseil.getValue().getContenue()));
-        c3.setCellValueFactory((CellDataFeatures<Conseil,Integer>Conseil)-> new SimpleIntegerProperty((Conseil.getValue().getNiveau())).asObject());
+        c2.setCellValueFactory((CellDataFeatures<Conseil,String>Conseil)->new SimpleStringProperty(Conseil.getValue().getTitre()));
+        c3.setCellValueFactory((CellDataFeatures<Conseil,String>Conseil)->new SimpleStringProperty(Conseil.getValue().getContenue()));
         liste.setVisible(false);
          gc = new GestionnaireConseil();
          
         
     
     }
-    public void Niveau1(ActionEvent a){
-      
-        liste.setVisible(true);
-        
-         try {
-           
-            ObservableList<Conseil> Conseils = FXCollections.observableArrayList((ArrayList<Conseil>) gc.ParNiveau(1));
-              
-                liste.setItems(Conseils);
-         }catch (SQLException ex) {
-            Logger.getLogger(Ui_ListeRelation_BOController.class.getName()).log(Level.SEVERE, null, ex);
-         }   
-        
-    }
-     public void Niveau2(ActionEvent a){
-       
-        liste.setVisible(true);
-         try {
-           
-            ObservableList<Conseil> Conseils = FXCollections.observableArrayList((ArrayList<Conseil>) gc.ParNiveau(2));
-               
-               
-                liste.setItems(Conseils);
-         }catch (SQLException ex) {
-            Logger.getLogger(Ui_ListeRelation_BOController.class.getName()).log(Level.SEVERE, null, ex);
-         } 
-     }
-      public void Niveau3(ActionEvent a){
-       
-        liste.setVisible(true);
-         try {
-           
-            ObservableList<Conseil> Conseils = FXCollections.observableArrayList((ArrayList<Conseil>) gc.ParNiveau(3));
-               
-               
-                liste.setItems(Conseils);
-         }catch (SQLException ex) {
-            Logger.getLogger(Ui_ListeRelation_BOController.class.getName()).log(Level.SEVERE, null, ex);
-         }   
-      }
     
 }

@@ -5,8 +5,7 @@
  */
 package VIEWS.User;
 
-import Entites.User.Admin;
-import Services.User.GestionnaireAdmin;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -62,8 +61,8 @@ public class Ui_Login_BOController implements Initializable {
 //        if(Logged_in_Admin!=null)
 //        {
        // MySoulMate.setLogged_in_Admin(Logged_in_Admin);
-       Admin a = new Admin(0, "7ableu", "7ableu", "chfamma", "*****");
-        MySoulMate.setLogged_in_Admin(a);
+    //    a = new Admin(0, "7ableu", "7ableu", "chfamma", "*****");
+   //     MySoulMate.setLogged_in_Admin(a);
         Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/ui_MainFrame_BO.fxml"));
         Scene scene = new Scene(root);
         MySoulMate.getMainStage().setScene(scene);

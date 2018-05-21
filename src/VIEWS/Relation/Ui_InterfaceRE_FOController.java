@@ -43,7 +43,7 @@ import mysoulmate.MySoulMate;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 import Entites.Relation.Conseil;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import Services.Relation.GestionnaireConseil;
 import java.io.IOException;
 import java.net.URL;
@@ -113,8 +113,8 @@ Ui_MainFrame_FOController mf;
     @FXML
     private TableColumn<Conseil, String> c2;
     @FXML
-    private TableColumn<Conseil, Integer> c3;
-    //private TextField niv;
+    private TableColumn<Conseil, String> c3;
+    
     @FXML
     private Button annbtn;
     @FXML
@@ -131,7 +131,7 @@ Ui_MainFrame_FOController mf;
    private Alert WarningWindow;
    private Alert ConfirmWindow;
    
-   private static Client relation_owner;
+   private static Utilisateur relation_owner;
 
 
     @Override
@@ -154,55 +154,7 @@ Ui_MainFrame_FOController mf;
         WarningWindow.setContentText(Message_Warning);
         WarningWindow.setHeaderText("Gestion Moment");
         WarningWindow.setTitle("MySoulMate");
-        
-        
-        
-       /*  GestionnaireContenue_Moment gcm =new GestionnaireContenue_Moment();
-        List<Contenue_Moment>moments =new ArrayList<>();*/
-       /* try {
-            avises=(List<Avis>) gav.fetchAll();
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Ui_Plan_FOController.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-      /* nomP_label.setText(plan.getNom());
-       notet_label.setText(avises.stream().mapToDouble(e->e.getNote()).average().toString());
-       description_ta.setText(plan.getDescription());*/
-    
-      // List<Contenue_Moment> moments;
-      
-       /* try {
-             moments=  ((List<Contenue_Moment>)gcm.fetchAll());
-          Parent root;
-                 
-           FXMLLoader FXML;
-            
-                double i=0;
-                int j=0;
-        for (Contenue_Moment cm : moments) {
-             FXML=new FXMLLoader(getClass().getResource("Moment.fxml"));
-            root = FXML.load();
-            MomentController mc =FXML.<MomentController>getController();
-           
-            con.setAvis(avi);
-            con.setClient(Client);
-            con.put_values();
-            avis_pane.getChildren().add(root);
-            
-            System.out.println("i="+i);
-            cm_pane.getChildren().get(j).relocate(0, i);
-         
-           i+=160;
-             j++;
-        }
-        } catch (IOException | SQLException ex) {
-            Logger.getLogger(Ui_InterfaceRE_FOController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       */
-         
-        
-        
-        
+     
         fill_Nodes();
     try {
         fill_Infos();
@@ -228,12 +180,12 @@ Ui_MainFrame_FOController mf;
             }
         });
         
-        c2.setCellValueFactory((TableColumn.CellDataFeatures<Conseil,String>Conseil)->new SimpleStringProperty(Conseil.getValue().getContenue()));
-        c3.setCellValueFactory((TableColumn.CellDataFeatures<Conseil,Integer>Conseil)-> new SimpleIntegerProperty((Conseil.getValue().getNiveau())).asObject());
+        c2.setCellValueFactory((TableColumn.CellDataFeatures<Conseil,String>Conseil)->new SimpleStringProperty(Conseil.getValue().getTitre()));
+        c3.setCellValueFactory((TableColumn.CellDataFeatures<Conseil,String>Conseil)-> new SimpleStringProperty(Conseil.getValue().getContenue()));
         liste.setVisible(false);
          gc = new GestionnaireConseil();
     }
-      public static void setRelation_owner(Client relation_owner) {
+      public static void setRelation_owner(Utilisateur relation_owner) {
         Ui_InterfaceRE_FOController.relation_owner = relation_owner;
     }
     
@@ -251,7 +203,6 @@ Ui_MainFrame_FOController mf;
         pts.setText(gr.NbPoint());
         niv.setText(gr.Niveau());
     }
-    @FXML
     private void validate_form()
     {
        Message_Warning="Les champs suivants posent des problèmes \n";
@@ -262,6 +213,7 @@ Ui_MainFrame_FOController mf;
               WarningWindow.setContentText(Message_Warning);
     }
           
+@FXML
     public void AjouterMoment() throws IOException, SQLException
 {
      validate_form();
@@ -299,35 +251,6 @@ Ui_MainFrame_FOController mf;
     }
     
     
-    @FXML
-    public void Niveau1(ActionEvent a){
-        liste.setVisible(true);
-         try {
-            ObservableList<Conseil> Conseils = FXCollections.observableArrayList((ArrayList<Conseil>) gc.ParNiveau(1));
-                liste.setItems(Conseils);
-         }catch (SQLException ex) {
-            Logger.getLogger(Ui_ListeRelation_BOController.class.getName()).log(Level.SEVERE, null, ex);
-         }   
-    }
-    @FXML
-     public void Niveau2(ActionEvent a){
-        liste.setVisible(true);
-         try {
-            ObservableList<Conseil> Conseils = FXCollections.observableArrayList((ArrayList<Conseil>) gc.ParNiveau(2));
-                liste.setItems(Conseils);
-         }catch (SQLException ex) {
-            Logger.getLogger(Ui_ListeRelation_BOController.class.getName()).log(Level.SEVERE, null, ex);
-         } 
-     }
-    @FXML
-      public void Niveau3(ActionEvent a){
-        liste.setVisible(true);
-         try {
-            ObservableList<Conseil> Conseils = FXCollections.observableArrayList((ArrayList<Conseil>) gc.ParNiveau(3));
-                liste.setItems(Conseils);
-         }catch (SQLException ex) {
-            Logger.getLogger(Ui_ListeRelation_BOController.class.getName()).log(Level.SEVERE, null, ex);
-         }   
-      }
+
     
 }

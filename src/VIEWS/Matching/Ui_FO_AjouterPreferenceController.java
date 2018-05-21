@@ -153,7 +153,7 @@ public class Ui_FO_AjouterPreferenceController implements Initializable {
         choix_tabac = (RadioButton) tabas.getSelectedToggle();
         System.out.println(taille_min_sp.getValue().toString());
         System.out.println("taille:" + taille_min_sp.getValue().toString());
-        Caracteristique Caracteristique
+        Caracteristique caracteristique
                 = new Caracteristique(
                         silouhette_cb.getValue(),
                         pilosite_cb.getValue(),
@@ -169,10 +169,10 @@ public class Ui_FO_AjouterPreferenceController implements Initializable {
                         cuisine_cb.getValue()
                 );
         GestionnaireCaracteristique gc = new GestionnaireCaracteristique();
-        gc.create(Caracteristique);
-        Caracteristique.setID(((List<Caracteristique>) gc.fetchAll()).stream().mapToInt(x -> x.getID()).max().getAsInt());
+        gc.create(caracteristique);
+        caracteristique.setID(((List<Caracteristique>) gc.fetchAll()).stream().mapToInt(x -> x.getID()).max().getAsInt());
         GestionnaireProfil gp = new GestionnaireProfil();
-        MySoulMate.getLogged_in_Client().getProfil().setPreference(Caracteristique);
+        MySoulMate.getLogged_in_Client().getProfil().setPreference(caracteristique);
         gp.update(MySoulMate.getLogged_in_Client().getProfil());
     }
 

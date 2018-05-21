@@ -5,12 +5,11 @@
  */
 package VIEWS.User;
 
-import Entites.User.Client;
-import Services.User.GestionnaireClient;
+import Entites.User.Utilisateur;
+import Services.User.GestionnaireUser;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -34,9 +33,9 @@ public class Ui_Stat_Clients_BOController implements Initializable {
 
     @FXML
     private PieChart Age_PieChart;
-    private GestionnaireClient gc;
+    private GestionnaireUser gc;
     private ObservableList<PieChart.Data> ObArrL_Clients;
-    private List<Client> Clients;
+    private List<Utilisateur> Clients;
     /**
      * Initializes the controller class.
      */
@@ -60,7 +59,7 @@ public class Ui_Stat_Clients_BOController implements Initializable {
                                       calendar2.add(Calendar.YEAR,-25);// 93
                                       calendar.add(Calendar.YEAR, -18);//99
                                       return 
-                                              (client.getDate_naissance().before(new Date(calendar.getTime().getTime()))&&client.getDate_naissance().after(new Date(calendar2.getTime().getTime())));
+                                              (client.getDatanaissance().before(new Date(calendar.getTime().getTime()))&&client.getDatanaissance().after(new Date(calendar2.getTime().getTime())));
                                      }
                        ).count()),
                    new PieChart.Data(
@@ -72,7 +71,7 @@ public class Ui_Stat_Clients_BOController implements Initializable {
                                       calendar2.add(Calendar.YEAR,-35);
                                       calendar.add(Calendar.YEAR, -26);
                                       return 
-                                              (client.getDate_naissance().before(new Date(calendar.getTime().getTime()))&&client.getDate_naissance().after(new Date(calendar2.getTime().getTime())));
+                                              (client.getDatanaissance().before(new Date(calendar.getTime().getTime()))&&client.getDatanaissance().after(new Date(calendar2.getTime().getTime())));
                                      }
                        ).count()),
                   new PieChart.Data(
@@ -84,7 +83,7 @@ public class Ui_Stat_Clients_BOController implements Initializable {
                                       calendar2.add(Calendar.YEAR,-45);
                                       calendar.add(Calendar.YEAR, -36);
                                       return 
-                                              (client.getDate_naissance().before(new Date(calendar.getTime().getTime()))&&client.getDate_naissance().after(new Date(calendar2.getTime().getTime())));
+                                              (client.getDatanaissance().before(new Date(calendar.getTime().getTime()))&&client.getDatanaissance().after(new Date(calendar2.getTime().getTime())));
                                      }
                        ).count()),
                    new PieChart.Data(
@@ -96,7 +95,7 @@ public class Ui_Stat_Clients_BOController implements Initializable {
                                       calendar2.add(Calendar.YEAR,-55);
                                       calendar.add(Calendar.YEAR, -46);
                                       return 
-                                              (client.getDate_naissance().before(new Date(calendar.getTime().getTime()))&&client.getDate_naissance().after(new Date(calendar2.getTime().getTime())));
+                                              (client.getDatanaissance().before(new Date(calendar.getTime().getTime()))&&client.getDatanaissance().after(new Date(calendar2.getTime().getTime())));
                                      }
                        ).count()),
                     new PieChart.Data(
@@ -106,7 +105,7 @@ public class Ui_Stat_Clients_BOController implements Initializable {
                                       Calendar calendar= new GregorianCalendar();
                                       calendar.add(Calendar.YEAR,-56);
                                   
-                                    return client.getDate_naissance().before(new Date(calendar.getTime().getTime()));
+                                    return client.getDatanaissance().before(new Date(calendar.getTime().getTime()));
                                      }
                        ).count())
         );
@@ -123,8 +122,8 @@ public class Ui_Stat_Clients_BOController implements Initializable {
     }    
     void get_allClients() throws SQLException
     {
-        gc=new GestionnaireClient();
-        Clients =(List<Client>)gc.fetchAll();   
+         gc=new GestionnaireUser();
+         Clients =gc.fetchAll();   
     }
    
 }
