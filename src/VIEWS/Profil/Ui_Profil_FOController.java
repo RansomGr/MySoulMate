@@ -6,8 +6,8 @@
 package VIEWS.Profil;
 
 import Entites.Profil.Actualite;
+import Entites.User.Utilisateur;
 
-import Entites.User.Client;
 import Services.Profil.GestionnaireActualite;
 import Services.Profil.GestionnaireProfil;
 import java.io.IOException;
@@ -16,22 +16,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.ResourceBundle.Control;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import mysoulmate.MySoulMate;
@@ -80,7 +76,7 @@ public class Ui_Profil_FOController implements Initializable {
     @FXML
     private MenuButton actions;
     /* non fxml vars */
-    private Client profile_owner;
+    private Utilisateur profile_owner;
     private GestionnaireProfil Gp;
     private List<Actualite> actualites;
     private GestionnaireActualite gactu;
@@ -112,36 +108,36 @@ public class Ui_Profil_FOController implements Initializable {
     }
 
     private void init_caracteristiques() {
-        corpulence_lb.setText(profile_owner.getProfil().getCaracteristique().getCorpulence());
-        caractere_lb.setText(profile_owner.getProfil().getCaracteristique().getCaractere());
-        yeux_lb.setText(profile_owner.getProfil().getCaracteristique().getYeux());
-        cheveux_lb.setText(profile_owner.getProfil().getCaracteristique().getCheveux());
-        alcool_lb.setText(profile_owner.getProfil().getCaracteristique().getAlcool());
-        tabac_lb.setText(profile_owner.getProfil().getCaracteristique().getTabac());
-        taille_lb.setText(Float.toString(profile_owner.getProfil().getCaracteristique().getTaille()));
-        statut_lb.setText(profile_owner.getProfil().getCaracteristique().getStatut());
-        cuisine_lb.setText(profile_owner.getProfil().getCaracteristique().getCuisine());
-        profession_lb.setText(profile_owner.getProfil().getCaracteristique().getProfession());
-        origine_lb.setText(profile_owner.getProfil().getCaracteristique().getOrigine());
-        pilosite_lb.setText(profile_owner.getProfil().getCaracteristique().getPilosite());
+        corpulence_lb.setText(profile_owner.getProfil().getCaracteristique_id().getCorpulence());
+        caractere_lb.setText(profile_owner.getProfil().getCaracteristique_id().getCaractere());
+        yeux_lb.setText(profile_owner.getProfil().getCaracteristique_id().getYeux());
+        cheveux_lb.setText(profile_owner.getProfil().getCaracteristique_id().getCheveux());
+        alcool_lb.setText(profile_owner.getProfil().getCaracteristique_id().getAlcool());
+        tabac_lb.setText(profile_owner.getProfil().getCaracteristique_id().getTabac());
+        taille_lb.setText(profile_owner.getProfil().getCaracteristique_id().getTaille());
+        statut_lb.setText(profile_owner.getProfil().getCaracteristique_id().getStatut());
+        cuisine_lb.setText(profile_owner.getProfil().getCaracteristique_id().getCuisine());
+        profession_lb.setText(profile_owner.getProfil().getCaracteristique_id().getProfession());
+        origine_lb.setText(profile_owner.getProfil().getCaracteristique_id().getOrigine());
+        pilosite_lb.setText(profile_owner.getProfil().getCaracteristique_id().getPilosite());
     }
 
-    public Client getProfile_owner() {
+    public Utilisateur getProfile_owner() {
         return profile_owner;
     }
 
-    public void setProfile_owner(Client profile_owner) {
+    public void setProfile_owner( Utilisateur profile_owner) throws SQLException {
         try {
             this.profile_owner = profile_owner;
             photo.setImage(new Image("/images/" + profile_owner.getProfil().getPhoto()));
             owner_name.setText(this.profile_owner.getNom());
-            birthdate_dp.setValue(this.profile_owner.getDate_naissance().toLocalDate());
+            birthdate_dp.setValue(this.profile_owner.getDatanaissance().toLocalDate());
             gender_lab.setText(profile_owner.getGender());
             init_caracteristiques();
             ActualitesControllers = new ArrayList<>();
-            actualites = gactu.fetchAllById(this.profile_owner.getID());
+            actualites = gactu.fetchAllById(this.profile_owner.getId());
             init_actions();
-        } catch (SQLException | IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(Ui_Profil_FOController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
