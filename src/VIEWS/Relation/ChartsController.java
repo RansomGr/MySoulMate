@@ -6,9 +6,9 @@
 package VIEWS.Relation;
 
 import Entites.Relation.Relation;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import Services.Relation.GestionnaireRelation;
-import Services.User.GestionnaireClient;
+import Services.User.GestionnaireUser;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;

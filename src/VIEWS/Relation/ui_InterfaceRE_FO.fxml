@@ -118,18 +118,11 @@
                  <children>
       <TableView fx:id="liste" layoutX="149.0" layoutY="147.0" prefHeight="237.0" prefWidth="303.0">
         <columns>
-          <TableColumn fx:id="c2" prefWidth="258.0" text="Contenu" />
-            <TableColumn fx:id="c3" prefWidth="44.0" text="Niveau" />
+          <TableColumn fx:id="c2" prefWidth="78.0" text="Titre" />
+            <TableColumn fx:id="c3" prefWidth="224.0" text="Contenu" />
         </columns>
       </TableView>
-      <MenuButton layoutX="246.0" layoutY="83.0" mnemonicParsing="false" text="Niveau">
-        <items>
-          <MenuItem mnemonicParsing="false" onAction="#Niveau1" text="niveau 1" />
-          <MenuItem mnemonicParsing="false" onAction="#Niveau2" text="niveau 2" />
-            <MenuItem mnemonicParsing="false" onAction="#Niveau3" text="niveau 3" />
-        </items>
-      </MenuButton>
-                  <Label layoutX="58.0" layoutY="82.0" text="Consulter Conseils">
+                  <Label layoutX="58.0" layoutY="82.0" text="Nos Conseils">
                      <font>
                         <Font size="18.0" />
                      </font>

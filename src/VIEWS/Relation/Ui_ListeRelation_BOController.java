@@ -69,8 +69,8 @@ public class Ui_ListeRelation_BOController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         id.setCellValueFactory((CellDataFeatures<Relation, Integer> Relation) -> new  SimpleIntegerProperty((Relation.getValue().getID())).asObject());
-        c1.setCellValueFactory((CellDataFeatures<Relation, String> Relation) -> new SimpleStringProperty((Relation.getValue().getClient1().getPseudo())));
-        c2.setCellValueFactory((CellDataFeatures<Relation, String> Relation) -> new SimpleStringProperty((Relation.getValue().getClient2().getPseudo())));
+        c1.setCellValueFactory((CellDataFeatures<Relation, String> Relation) -> new SimpleStringProperty((Relation.getValue().getClient1().getPrenom())));
+        c2.setCellValueFactory((CellDataFeatures<Relation, String> Relation) -> new SimpleStringProperty((Relation.getValue().getClient2().getPrenom())));
         npr.setCellValueFactory((CellDataFeatures<Relation,Integer>Relation)->new SimpleIntegerProperty((Relation.getValue().getPoints_relation())).asObject());
         niv.setCellValueFactory((CellDataFeatures<Relation,String>Relation)->new SimpleStringProperty(Relation.getValue().getNiveau()));
         date1.setCellValueFactory((CellDataFeatures<Relation,String>Relation)-> new SimpleStringProperty(Relation.getValue().getDate_debut().toString()));
@@ -99,11 +99,7 @@ public class Ui_ListeRelation_BOController implements Initializable {
         table_view.setItems(Relations);
     }
 
-    public void recherche_dyn_textchanged(KeyEvent event) throws SQLException {
-        System.out.println(recherche_dyn_tf.getText());
-             ObservableList<Relation> Relations = FXCollections.observableArrayList((ArrayList<Relation>)gr.fetchAll(recherche_dyn_tf.getText(),-1,"DESC"));
-             table_view.setItems(Relations);
-    }
+    
 
    /* @FXML
     private void recherche_dyn_textchanged(SortEvent<C> event) {
