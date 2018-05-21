@@ -20,7 +20,7 @@ private String pilosite;
 private String profession ;
 private String alcool;
 private String tabac ;
-private float taille ;
+private String taille ;
 private String cheveux ;
 private String yeux ;
 private String caractere ;
@@ -41,7 +41,7 @@ private String cuisine ;
         hash = 83 * hash + Objects.hashCode(this.profession);
         hash = 83 * hash + Objects.hashCode(this.alcool);
         hash = 83 * hash + Objects.hashCode(this.tabac);
-        hash = 83 * hash + Float.floatToIntBits(this.taille);
+        hash = 83 * hash + Objects.hashCode(this.taille);
         hash = 83 * hash + Objects.hashCode(this.cheveux);
         hash = 83 * hash + Objects.hashCode(this.yeux);
         hash = 83 * hash + Objects.hashCode(this.caractere);
@@ -62,10 +62,7 @@ private String cuisine ;
             return false;
         }
         final Caracteristique other = (Caracteristique) obj;
-        if (Float.floatToIntBits(this.taille) != Float.floatToIntBits(other.taille)) {
-            return false;
-        }
-        if (!Objects.equals(this.ID, other.ID)) {
+        if (this.ID != other.ID) {
             return false;
         }
         if (!Objects.equals(this.corpulence, other.corpulence)) {
@@ -86,6 +83,9 @@ private String cuisine ;
         if (!Objects.equals(this.tabac, other.tabac)) {
             return false;
         }
+        if (!Objects.equals(this.taille, other.taille)) {
+            return false;
+        }
         if (!Objects.equals(this.cheveux, other.cheveux)) {
             return false;
         }
@@ -104,6 +104,7 @@ private String cuisine ;
         return true;
     }
 
+    
     @Override
     public String toString() {
         return "Caracteristique{" + "ID=" + ID + ", corpulence=" + corpulence + ", pilosite=" + pilosite + ", origine=" + origine + ", profession=" + profession + ", alcool=" + alcool + ", tabac=" + tabac + ", taille=" + taille + ", cheveux=" + cheveux + ", yeux=" + yeux + ", caractere=" + caractere + ", statut=" + statut + ", cuisine=" + cuisine + '}';
@@ -165,11 +166,11 @@ private String cuisine ;
         this.tabac = tabac;
     }
 
-    public float getTaille() {
+    public String  getTaille() {
         return taille;
     }
 
-    public void setTaille(float taille) {
+    public void setTaille(String taille) {
         this.taille = taille;
     }
 
@@ -213,7 +214,7 @@ private String cuisine ;
         this.cuisine = cuisine;
     }
 
-    public Caracteristique(int ID, String corpulence, String pilosite, String origine, String profession, String alcool, String tabac, float taille, String cheveux, String yeux, String caractere, String statut, String cuisine) {
+    public Caracteristique(int ID, String corpulence, String pilosite, String origine, String profession, String alcool, String tabac,String  taille, String cheveux, String yeux, String caractere, String statut, String cuisine) {
         this.ID = ID;
         this.corpulence = corpulence;
         this.pilosite = pilosite;
@@ -229,7 +230,7 @@ private String cuisine ;
         this.cuisine = cuisine;
     }
 
-    public Caracteristique(String corpulence, String pilosite, String origine, String profession, String alcool, String tabac, float taille, String cheveux, String yeux, String caractere, String statut, String cuisine) {
+    public Caracteristique(String corpulence, String pilosite, String origine, String profession, String alcool, String tabac, String taille, String cheveux, String yeux, String caractere, String statut, String cuisine) {
         this.corpulence = corpulence;
         this.pilosite = pilosite;
         this.origine = origine;
