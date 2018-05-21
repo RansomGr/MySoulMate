@@ -7,10 +7,10 @@ package VIEWS.Matching;
 
 import Entites.Matching.Packaging;
 import Entites.Profil.Caracteristique;
-import Entites.User.Client;
-import Entites.User.Logger;
+
+import Entites.User.Utilisateur;
 import Services.Matching.GestionnaireCaracteristique;
-import Services.User.GestionnaireClient;
+import Services.User.GestionnaireUser;
 import VIEWS.Profil.Ui_Profil_FOController;
 import java.io.IOException;
 import java.net.URL;
@@ -49,7 +49,7 @@ public class Ui_FO_show_one_MatchingController implements Initializable {
     @FXML
     private Text ville_text;
 
-    private Client the_matching;
+    private Utilisateur the_matching;
     
     private int compatibilite_totale;
 
@@ -61,11 +61,11 @@ public class Ui_FO_show_one_MatchingController implements Initializable {
         this.compatibilite_totale = compatibilite_totale;
     }
 
-    public Client getThe_matching() {
+    public Utilisateur getThe_matching() {
         return the_matching;
     }
 
-    public void setThe_matching(Client the_matching) {
+    public void setThe_matching(Utilisateur the_matching) {
         this.the_matching = the_matching;
     }
 
@@ -79,7 +79,7 @@ public class Ui_FO_show_one_MatchingController implements Initializable {
 
     public void charger_matchings() {
         Services.Profil.GestionnaireCaracteristique gc = new Services.Profil.GestionnaireCaracteristique();
-        GestionnaireClient gcl = new GestionnaireClient();
+        GestionnaireUser gcl = new GestionnaireUser();
         photo_img.setImage(new Image("images/"+the_matching.getProfil().getPhoto()) );
         //photo_img.setImage(new Image("/images/" + the_matching.getProfil().getPhoto()));
         prenom_text.setText(the_matching.getPrenom());

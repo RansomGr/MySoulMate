@@ -231,7 +231,6 @@ public class Ui_Login_FOController implements Initializable {
 
         // r1.setFill(Color.web("#F89406"));
         r1.setOpacity(0.5);
-
         KeyFrame keyFrame = new KeyFrame(Duration.millis(speedOfSqaure * 1000), moveXAxis, moveYAxis);
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
