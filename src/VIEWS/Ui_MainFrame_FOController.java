@@ -246,7 +246,7 @@ public class Ui_MainFrame_FOController implements Initializable {
     }
 
     @FXML
-    private void load_my_profil(ActionEvent event) throws IOException {
+    private void load_my_profil(ActionEvent event) throws IOException, SQLException {
         FXMLLoader fxml = new FXMLLoader(getClass().getResource("/VIEWS/Profil/ui_Profil_FO.fxml"));
         Node root = fxml.load();
         Ui_Profil_FOController controller = fxml.<Ui_Profil_FOController>getController();
@@ -713,7 +713,7 @@ public class Ui_MainFrame_FOController implements Initializable {
 
     }
 
-    public void open_profile(Utilisateur this_dude) throws IOException  {
+    public void open_profile(Utilisateur this_dude) throws IOException, SQLException  {
         FXMLLoader fxml = new FXMLLoader(getClass().getResource("/VIEWS/Profil/ui_Profil_FO.fxml"));
         Node root = fxml.load();
         Ui_Profil_FOController controller = fxml.<Ui_Profil_FOController>getController();

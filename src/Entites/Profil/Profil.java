@@ -19,7 +19,15 @@ public class Profil implements Serializable {
    private String photo;
    private String description;	
    private Caracteristique preference;
-private Utilisateur user_id;
+   private Utilisateur user_id;
+
+    public Profil(Caracteristique caracteristique, String text, String text0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Profil() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public int getId() {
         return id;
