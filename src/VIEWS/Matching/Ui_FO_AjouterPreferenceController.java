@@ -161,7 +161,7 @@ public class Ui_FO_AjouterPreferenceController implements Initializable {
                         profession_tf.getText(),
                         choix_alchool.getText(),
                         choix_tabac.getText(),
-                        taille_min_sp.getValue(),
+                        taille_min_sp.getValue().toString(),
                         cheveux_cb.getValue(),
                         yeux_cb.getValue(),
                         caractere_cb.getValue(),
@@ -169,8 +169,8 @@ public class Ui_FO_AjouterPreferenceController implements Initializable {
                         cuisine_cb.getValue()
                 );
         GestionnaireCaracteristique gc = new GestionnaireCaracteristique();
-        gc.create(caracteristique);
-        caracteristique.setID(((List<Caracteristique>) gc.fetchAll()).stream().mapToInt(x -> x.getID()).max().getAsInt());
+     //   gc.create(caracteristique);
+      //  caracteristique.setID(((List<Caracteristique>) gc.fetchAll()).stream().mapToInt(x -> x.getID()).max().getAsInt());
         GestionnaireProfil gp = new GestionnaireProfil();
         MySoulMate.getLogged_in_Client().getProfil().setPreference(caracteristique);
         gp.update(MySoulMate.getLogged_in_Client().getProfil());
