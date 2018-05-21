@@ -12,7 +12,7 @@ import Entites.User.Utilisateur;
 import Services.Events.GestionnaireEvent;
 import Services.Events.GestionnaireInviteEvent;
 import Services.Plan.GestionnairePlan;
-import Services.User.GestionnaireClient;
+import Services.User.GestionnaireUser;
 
 import java.net.URL;
 import java.sql.Date;
@@ -172,7 +172,7 @@ public class Ui_evenement_BOController implements Initializable {
     {
         invit_tbl.setCellValueFactory((CellDataFeatures<Utilisateur, String>Client)->new SimpleStringProperty((Client.getValue().getNom()+" "+ Client.getValue().getPrenom())));
         user_tbl.setCellValueFactory((CellDataFeatures<Utilisateur, String>Client)->new SimpleStringProperty((Client.getValue().getNom()+" "+ Client.getValue().getPrenom())));
-        GestionnaireClient gc = new GestionnaireClient();
+        GestionnaireUser gc = new GestionnaireUser();
         Clients = FXCollections.observableArrayList((ArrayList<Utilisateur>)gc.fetchAll());
         user_cl.setItems(Clients);
         
@@ -351,8 +351,8 @@ public class Ui_evenement_BOController implements Initializable {
 
     @FXML
     private void filter(KeyEvent event) throws SQLException {
-        GestionnaireClient gc =new GestionnaireClient();
-        Clients=FXCollections.observableArrayList((List<Utilisateur>)gc.fetchAll(rechIvt_txt.getText(), 20, " yyyy"));
+        GestionnaireUser gc =new GestionnaireUser();
+        Clients=FXCollections.observableArrayList((List<Utilisateur>)gc.fetchAll());//fetchAll(rechIvt_txt.getText(), 20, " yyyy"));
         user_cl.setItems(Clients);
         
     }
