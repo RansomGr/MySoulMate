@@ -13,6 +13,7 @@ import Services.Profil.GestionnaireProfil;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -131,7 +132,8 @@ public class Ui_Profil_FOController implements Initializable {
             this.profile_owner = profile_owner;
             photo.setImage(new Image("/images/" + profile_owner.getProfil().getPhoto()));
             owner_name.setText(this.profile_owner.getNom());
-            birthdate_dp.setValue(this.profile_owner.getDatanaissance().toLocalDate());
+            java.sql.Date d=new java.sql.Date(this.profile_owner.getDatanaissance().getTime());
+            birthdate_dp.setValue(d.toLocalDate()) ;
             gender_lab.setText(profile_owner.getGender());
             init_caracteristiques();
             ActualitesControllers = new ArrayList<>();

@@ -51,8 +51,9 @@ public class Ui_Profile_Single_FOController implements Initializable {
     }
 
     public void setOwner(Utilisateur owner) {
-        this.owner = owner;  
-        this.owner_age.setText(Period.between(owner.getDatanaissance().toLocalDate(), LocalDate.now()).getYears()+"");
+        this.owner = owner;
+        java.sql.Date d=new java.sql.Date(owner.getDatanaissance().getTime());
+        this.owner_age.setText(Period.between(d.toLocalDate(), LocalDate.now()).getYears()+"");
         this.owner_gender.setText(owner.getGender());
         this.owner_photo.setImage(new Image("images/"+owner.getProfil().getPhoto()));
     }
