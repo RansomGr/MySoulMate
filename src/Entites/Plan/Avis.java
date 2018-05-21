@@ -36,6 +36,10 @@ public class Avis {
         this.note = note;
     }
 
+    public Avis(Utilisateur Client, String text, float floatValue) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getId() {
         return Id;
     }
