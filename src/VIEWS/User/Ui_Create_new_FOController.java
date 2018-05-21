@@ -6,8 +6,8 @@
 package VIEWS.User;
 
 import APIS.User.MySoulMateMail;
-import Entites.User.Client;
-import Services.User.GestionnaireClient;
+import Entites.User.Utilisateur;
+import Services.User.GestionnaireUser;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -105,27 +105,27 @@ public class Ui_Create_new_FOController implements Initializable {
         validate_form();
         if (Message_Warning.equals("Les champs suivants posent des problèmes \n")) {
 
-            GestionnaireClient gc = new GestionnaireClient();
-            Client C = new Client(nom_tf.getText(), prenom_tf.getText(), password_tf.getText(), email_tf.getText(), Date.valueOf(date_naissance_dp.getValue()), pseudo_tf.getText(),genre_cmb.getValue());
+            GestionnaireUser gc = new GestionnaireUser();
+            Utilisateur C = new Utilisateur(nom_tf.getText(), prenom_tf.getText(), password_tf.getText(), email_tf.getText(), Date.valueOf(date_naissance_dp.getValue()), pseudo_tf.getText(),genre_cmb.getValue());
             if (gc.create(C) == 1) {
                 InformationWindow.show();
                 String Content;
-                BufferedReader br = new BufferedReader(new FileReader("src/Files/welcomeMail.txt"));
-                StringBuilder sb = new StringBuilder();
-                String line = br.readLine();
-                while (line != null) {
-                    sb.append(line);
-                    sb.append(System.lineSeparator());
-                    line = br.readLine();
-                }
-                Content = sb.toString();
-                C.setID(((List<Client>)gc.fetchAll()).stream().mapToInt(x->x.getID()).max().getAsInt());
+        //        BufferedReader br = new BufferedReader(new FileReader("src/Files/welcomeMail.txt"));
+           //     StringBuilder sb = new StringBuilder();
+    //            String line = br.readLine();
+       //         while (line != null) {
+          //          sb.append(line);
+             //       sb.append(System.lineSeparator());
+                //    line = br.readLine();
+              //  }
+          //      Content = sb.toString();
+       //         C.setID(((List<Client>)gc.fetchAll()).stream().mapToInt(x->x.getID()).max().getAsInt());
 
-                Content = Content.replace("[[Name]]", C.getNom() + " " + C.getPrenom());
-                Content =Content.replace("[[ID]]", C.getID()+"");
-                Content = Content.replace("[[ID2]]", C.getID()+"");
-                MySoulMateMail mail = new MySoulMateMail(email_tf.getText(), Content, "Test mail 01");
-                mail.sendMail();
+          //      Content = Content.replace("[[Name]]", C.getNom() + " " + C.getPrenom());
+            //    Content =Content.replace("[[ID]]", C.getID()+"");
+              //  Content = Content.replace("[[ID2]]", C.getID()+"");
+             //   MySoulMateMail mail = new MySoulMateMail(email_tf.getText(), Content, "Test mail 01");
+              ///  mail.sendMail();
                 clear_tf();
             } else {
                 ErrorWindow.show();

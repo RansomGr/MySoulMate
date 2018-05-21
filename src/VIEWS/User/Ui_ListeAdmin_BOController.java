@@ -5,8 +5,8 @@
  */
 package VIEWS.User;
 
-import Entites.User.Admin;
-import Services.User.GestionnaireAdmin;
+
+import Entites.User.Utilisateur;
 import VIEWS.Ui_MainFrame_BOController;
 import java.io.IOException;
 import java.net.URL;
@@ -70,17 +70,17 @@ public class Ui_ListeAdmin_BOController implements Initializable {
     @FXML
     private CheckBox operations_plus;
     @FXML
-    private TableView<Admin> table_view;
+    private TableView<Utilisateur> table_view;
     @FXML
-    private TableColumn<Admin, Integer> id_comlun;
+    private TableColumn<Utilisateur, Integer> id_comlun;
     @FXML
-    private TableColumn<Admin, String> nom_column;
+    private TableColumn<Utilisateur, String> nom_column;
     @FXML
-    private TableColumn<Admin, String> prenom_column;
+    private TableColumn<Utilisateur, String> prenom_column;
     @FXML
-    private TableColumn<Admin, String> mdp_column;
+    private TableColumn<Utilisateur, String> mdp_column;
     @FXML
-    private TableColumn<Admin, String> Login_column;
+    private TableColumn<Utilisateur, String> Login_column;
     @FXML
     private Button precedent_pb;
     @FXML
@@ -125,18 +125,18 @@ public class Ui_ListeAdmin_BOController implements Initializable {
     }
 
     private void init_tableView() {
-        id_comlun.setCellValueFactory((CellDataFeatures<Admin, Integer> Admin) -> new SimpleIntegerProperty((Admin.getValue().getID())).asObject());
-        nom_column.setCellValueFactory((CellDataFeatures<Admin, String> Admin) -> new SimpleStringProperty(Admin.getValue().getNom()));
-        prenom_column.setCellValueFactory((CellDataFeatures<Admin, String> Admin) -> new SimpleStringProperty(Admin.getValue().getPrenom()));
-        mdp_column.setCellValueFactory((CellDataFeatures<Admin, String> Admin) -> new SimpleStringProperty(Admin.getValue().getMotdepasse()));
-        Login_column.setCellValueFactory((CellDataFeatures<Admin, String> Admin) -> new SimpleStringProperty(Admin.getValue().getLogin()));
+        id_comlun.setCellValueFactory((CellDataFeatures<Utilisateur, Integer> Admin) -> new SimpleIntegerProperty((Admin.getValue().getId())).asObject());
+        nom_column.setCellValueFactory((CellDataFeatures<Utilisateur, String> Admin) -> new SimpleStringProperty(Admin.getValue().getNom()));
+        prenom_column.setCellValueFactory((CellDataFeatures<Utilisateur, String> Admin) -> new SimpleStringProperty(Admin.getValue().getPrenom()));
+        mdp_column.setCellValueFactory((CellDataFeatures<Utilisateur, String> Admin) -> new SimpleStringProperty(Admin.getValue().getPassword()));
+        Login_column.setCellValueFactory((CellDataFeatures<Utilisateur, String> Admin) -> new SimpleStringProperty(Admin.getValue().getUsername()));
         table_view.setRowFactory(tv -> {
-            TableRow<Admin> row = new TableRow<>();
+            TableRow<Utilisateur> row = new TableRow<>();
             row.setOnMouseClicked(e -> {
                 if (e.getClickCount() == 2 && (!row.isEmpty())) {
 
                     Ui_Create_new_Admin_BOController.setAdmin_to_be_modified(row.getItem());
-                    try {
+                
                     
                         if (!row.getItem().equals(MySoulMate.getLogged_in_Admin())) {
                             if(NextActionWindow.getButtonTypes().size()<3)
@@ -144,7 +144,11 @@ public class Ui_ListeAdmin_BOController implements Initializable {
                               NextActionWindow.setContentText("Que Voulez vous faire avec cet Administrateur ?");
                             Optional<ButtonType> result = NextActionWindow.showAndWait();
                             if (result.isPresent() && result.get() == Modifier) {
-                                this.take_me_to_Update_page();
+                                try {
+                                    this.take_me_to_Update_page();
+                                } catch (IOException ex) {
+                                    Logger.getLogger(Ui_ListeAdmin_BOController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                             } else if (result.isPresent() && result.get() == Supprimer) {
                                 Optional<ButtonType> result_del = ConfirmDelete.showAndWait();
                                 if (result_del.isPresent() && result_del.get() == Oui) {
@@ -157,13 +161,15 @@ public class Ui_ListeAdmin_BOController implements Initializable {
                             NextActionWindow.setContentText("Que Voulez vous faire avec Votre Compte "+MySoulMate.getLogged_in_Admin().getNom()+" ?");
                             Optional<ButtonType> result = NextActionWindow.showAndWait();
                             if (result.isPresent() && result.get() == Modifier) {
-                                this.take_me_to_Update_page();
+                                try {
+                                    this.take_me_to_Update_page();
+                                } catch (IOException ex) {
+                                    Logger.getLogger(Ui_ListeAdmin_BOController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                             } 
                         }
 
-                    } catch (IOException | SQLException ex) {
-                        Logger.getLogger(Ui_ListeAdmin_BOController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                 
                 }
             });
             return row;
@@ -172,7 +178,7 @@ public class Ui_ListeAdmin_BOController implements Initializable {
 
     private void reload_data() {
         int All_row_size;
-        try {
+        
             if (operations_plus.isSelected()) {
                 All_row_size = ga.fetchAll().size();
 
@@ -188,18 +194,16 @@ public class Ui_ListeAdmin_BOController implements Initializable {
                 }
                 current_page_te.setText(Integer.toString(current_page) + " / " + Integer.toString(pages));
                 if (selected_column.equals("All")) {
-                    Admins = FXCollections.observableArrayList((ArrayList<Admin>) ga.fetchAll(recherche_dyn_tf.getText(), (current_page - 1) * BreakPoint, BreakPoint));
+                    Admins = FXCollections.observableArrayList((ArrayList<Utilisateur>) ga.fetchAll(recherche_dyn_tf.getText(), (current_page - 1) * BreakPoint, BreakPoint));
                 } else {
-                    Admins = FXCollections.observableArrayList((ArrayList<Admin>) ga.fetchAll(recherche_dyn_tf.getText(), selected_column, (current_page - 1) * BreakPoint, BreakPoint));
+                    Admins = FXCollections.observableArrayList((ArrayList<Utilisateur>) ga.fetchAll(recherche_dyn_tf.getText(), selected_column, (current_page - 1) * BreakPoint, BreakPoint));
                 }
             } else {
-                Admins = FXCollections.observableArrayList((ArrayList<Admin>) ga.fetchAll(recherche_dyn_tf.getText(), -1, "DESC"));
+                Admins = FXCollections.observableArrayList((ArrayList<Utilisateur>) ga. );
 
             }
 
-        } catch (SQLException ex) {
-            Logger.getLogger(Ui_ListeAdmin_BOController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+     
 
         table_view.setItems(Admins);
     }

@@ -6,8 +6,8 @@
 package VIEWS.User;
 
 
-import Entites.User.Client;
-import Services.User.GestionnaireClient;
+import Entites.User.Utilisateur;
+import Services.User.GestionnaireUser;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ import javafx.scene.layout.RowConstraints;
  * @author Ransom
  */
 public class Ui_ListeClient_BOController implements Initializable {
-    private GestionnaireClient gc ;
+    private GestionnaireUser gc ;
     private ScaleTransition Hide;
     private  ScaleTransition Show;
     private int StartPoint;
@@ -62,25 +62,25 @@ public class Ui_ListeClient_BOController implements Initializable {
     private Alert ConfirmDelete;
     private Alert ConfirmBan;
     private String selected_column;
-    private  ObservableList<Client> Clients;
+    private  ObservableList<Utilisateur> Clients;
     @FXML
     private TextField recherche_dyn_tf;
     @FXML
     private CheckBox operations_plus;
     @FXML
-    private TableView<Client> table_view;
+    private TableView<Utilisateur> table_view;
     @FXML
-    private TableColumn<Client, Integer> id_comlun;
+    private TableColumn<Utilisateur, Integer> id_comlun;
     @FXML
-    private TableColumn<Client, String> nom_column;
+    private TableColumn<Utilisateur, String> nom_column;
     @FXML
-    private TableColumn<Client, String> prenom_column;
+    private TableColumn<Utilisateur, String> prenom_column;
     @FXML
-    private TableColumn<Client, String> pseudo_column;
+    private TableColumn<Utilisateur, String> pseudo_column;
     @FXML
-    private TableColumn<Client, String> email_column;
+    private TableColumn<Utilisateur, String> email_column;
     @FXML
-    private TableColumn<Client, String> date_naissance_column;
+    private TableColumn<Utilisateur, String> date_naissance_column;
     @FXML
     private Button precedent_pb;
     @FXML
@@ -127,14 +127,14 @@ public class Ui_ListeClient_BOController implements Initializable {
     }
     private void init_tableView()
     {
-            id_comlun.setCellValueFactory((CellDataFeatures<Client, Integer> Client) -> new  SimpleIntegerProperty((Client.getValue().getID())).asObject());
-            nom_column.setCellValueFactory((CellDataFeatures<Client, String> Client) -> new SimpleStringProperty(Client.getValue().getNom())   );
-            prenom_column.setCellValueFactory((CellDataFeatures<Client,String>Client)-> new SimpleStringProperty(Client.getValue().getPrenom()) );
-            pseudo_column.setCellValueFactory((CellDataFeatures<Client,String>Client)->new SimpleStringProperty(Client.getValue().getPseudo()));
-            email_column.setCellValueFactory((CellDataFeatures<Client,String>Client)->new SimpleStringProperty(Client.getValue().getEmail()));
-            date_naissance_column.setCellValueFactory((CellDataFeatures<Client,String>Client)-> new SimpleStringProperty(Client.getValue().getDate_naissance().toString()));
+            id_comlun.setCellValueFactory((CellDataFeatures<Utilisateur, Integer> Client) -> new  SimpleIntegerProperty((Client.getValue().getId())).asObject());
+            nom_column.setCellValueFactory((CellDataFeatures<Utilisateur, String> Client) -> new SimpleStringProperty(Client.getValue().getNom())   );
+            prenom_column.setCellValueFactory((CellDataFeatures<Utilisateur,String>Client)-> new SimpleStringProperty(Client.getValue().getPrenom()) );
+            pseudo_column.setCellValueFactory((CellDataFeatures<Utilisateur,String>Client)->new SimpleStringProperty(Client.getValue().getUsername()));
+            email_column.setCellValueFactory((CellDataFeatures<Utilisateur,String>Client)->new SimpleStringProperty(Client.getValue().getEmail()));
+            date_naissance_column.setCellValueFactory((CellDataFeatures<Utilisateur,String>Client)-> new SimpleStringProperty(Client.getValue().getDatanaissance().toString()));
             table_view.setRowFactory( tv -> {
-            TableRow<Client> row = new TableRow<>();
+            TableRow<Utilisateur> row = new TableRow<>();
                row.setOnMouseClicked(e ->
                {
              if (e.getClickCount() == 2 && (!row.isEmpty()) ) {
@@ -145,8 +145,8 @@ public class Ui_ListeClient_BOController implements Initializable {
                          Optional<ButtonType> result_ban=ConfirmBan.showAndWait();
                             if(result_ban.isPresent()&&result_ban.get()==Oui)
                             {
-                         Client c= row.getItem();
-                         c.setBan(1);
+                         Utilisateur c= row.getItem();
+                         c.setEnabled(1);
                           try {
                               gc.update(c);
                                  } catch (SQLException ex) {
@@ -187,7 +187,7 @@ public class Ui_ListeClient_BOController implements Initializable {
                pages=(All_row_size/BreakPoint);
             if((All_row_size%BreakPoint!=0))
                  pages+=1;
-           //   System.out.println(pages);
+         
       
            if(current_page>pages)
            {
@@ -196,16 +196,15 @@ public class Ui_ListeClient_BOController implements Initializable {
            }
           current_page_te.setText(Integer.toString(current_page)+" / " +Integer.toString(pages));
             if(selected_column.equals("All"))
-                 Clients= FXCollections.observableArrayList((ArrayList<Client>)gc.fetchAll(recherche_dyn_tf.getText(),(current_page-1)*BreakPoint,BreakPoint));
+                 Clients= FXCollections.observableArrayList((ArrayList<Utilisateur>)gc.fetchSomeBy(recherche_dyn_tf.getText(),(current_page-1)*BreakPoint,BreakPoint));
             else 
             {
-                 Clients= FXCollections.observableArrayList((ArrayList<Client>)gc.fetchAll(recherche_dyn_tf.getText(),selected_column,(current_page-1)*BreakPoint,BreakPoint));
+                 Clients= FXCollections.observableArrayList((ArrayList<Utilisateur>)gc.fetchSomeBy(recherche_dyn_tf.getText(),selected_column,(current_page-1)*BreakPoint,BreakPoint));
             }
     }
     else
     {
-             Clients= FXCollections.observableArrayList((ArrayList<Client>)gc.fetchAll(recherche_dyn_tf.getText(),-1,"DESC"));
-           
+             Clients= FXCollections.observableArrayList((ArrayList<Utilisateur>)gc.fetchSomeBy(recherche_dyn_tf.getText(),-1));
     }
       
          } catch (SQLException ex) {
@@ -280,7 +279,7 @@ public class Ui_ListeClient_BOController implements Initializable {
     {
             Hide= new ScaleTransition();
             Show= new ScaleTransition();
-            gc= new GestionnaireClient();
+            gc= new GestionnaireUser();
             Hide.setNode(operation_grid );
             Show.setNode(operation_grid );            
             Show.setFromY(0);

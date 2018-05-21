@@ -5,8 +5,9 @@
  */
 package VIEWS.User;
 
-import Entites.User.Admin;
-import Services.User.GestionnaireAdmin;
+
+import Entites.User.Utilisateur;
+import Services.User.GestionnaireUser;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -39,9 +40,9 @@ public class Ui_Create_new_Admin_BOController implements Initializable {
    private Alert WarningWindow;
    private Alert ConfirmWindow;
    Map<TextField,String>Fields;
-   private static Admin Admin_to_be_modified ;
+   private static Utilisateur Admin_to_be_modified ;
 
-    public static void setAdmin_to_be_modified(Admin Admin_to_be_modified) {
+    public static void setAdmin_to_be_modified(Utilisateur Admin_to_be_modified) {
         Ui_Create_new_Admin_BOController.Admin_to_be_modified = Admin_to_be_modified;
         
     }
@@ -107,15 +108,15 @@ public class Ui_Create_new_Admin_BOController implements Initializable {
         validate_form();
         if(Message_Warning.equals("Les champs suivants posent des problèmes \n"))
         {
-             GestionnaireAdmin ga= new GestionnaireAdmin();
+             GestionnaireUser ga= new GestionnaireUser();
         if(OperationMode.equals("Ajouter"))
         {
-       if( ga.create(new Admin(nom_tf.getText(),prenom_tf.getText(),login_tf.getText(),mdp_tf.getText()))==1)
+     //  if( ga.create(new Admin(nom_tf.getText(),prenom_tf.getText(),login_tf.getText(),mdp_tf.getText()))==1)
        {
            InformationWindow.show();
            clear_tf();
        }
-       else
+       //else
           ErrorWindow.show();
         }
         else
@@ -123,13 +124,13 @@ public class Ui_Create_new_Admin_BOController implements Initializable {
                Optional<ButtonType> result = ConfirmWindow.showAndWait();
                      if(result.isPresent()&&result.get()==Oui)
                      {   
-                       if(ga.update(new Admin(nom_tf.getText(),prenom_tf.getText(),login_tf.getText(),mdp_tf.getText()))==1)
+            //           if(ga.update(new Admin(nom_tf.getText(),prenom_tf.getText(),login_tf.getText(),mdp_tf.getText()))==1)
                        {
                            InformationWindow.setContentText("Administrateur modifié avec succée !");
                            InformationWindow.show();
                            OperationMode="Ajouter";
                        }
-                       else
+               //        else
                           ErrorWindow.show();   
                      }
         }
@@ -166,7 +167,7 @@ public class Ui_Create_new_Admin_BOController implements Initializable {
        {
            nom_tf.setText(Admin_to_be_modified.getNom());
            prenom_tf.setText(Admin_to_be_modified.getPrenom());
-           login_tf.setText(Admin_to_be_modified.getLogin());
+           login_tf.setText(Admin_to_be_modified.getUsername());
            OperationMode="Modifer";
            update_button();
        }
@@ -178,6 +179,4 @@ public class Ui_Create_new_Admin_BOController implements Initializable {
         add_new_pb.setText(OperationMode);
     }
 
-
-    
 }
