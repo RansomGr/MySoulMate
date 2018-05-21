@@ -139,9 +139,9 @@ public class Ui_ListePlan_BOController implements Initializable {
     }
     private void init_tableView()
     {
-            id_comlun.setCellValueFactory((TableColumn.CellDataFeatures<Plan,Integer> plan) -> new  SimpleIntegerProperty((plan.getValue().getID())).asObject());
+            id_comlun.setCellValueFactory((TableColumn.CellDataFeatures<Plan,Integer> plan) -> new  SimpleIntegerProperty((plan.getValue().getId())).asObject());
             nom_column.setCellValueFactory((TableColumn.CellDataFeatures<Plan, String> plan) -> new SimpleStringProperty(plan.getValue().getNom())   );
-            Type_column.setCellValueFactory((TableColumn.CellDataFeatures<Plan,String>plan)-> new SimpleStringProperty(Plan.Type.getAsString(plan.getValue().getType())) );
+            Type_column.setCellValueFactory((TableColumn.CellDataFeatures<Plan,String>plan)-> new SimpleStringProperty(plan.getValue().getType()));
             SiteWeb_column.setCellValueFactory((TableColumn.CellDataFeatures<Plan,String>plan)->new SimpleStringProperty(plan.getValue().getSiteweb()));
             Telephone_column.setCellValueFactory((TableColumn.CellDataFeatures<Plan,Integer>plan)->new SimpleIntegerProperty((plan.getValue().getTelephone())).asObject());
             Description_column.setCellValueFactory((TableColumn.CellDataFeatures<Plan,String>plan)-> new SimpleStringProperty(plan.getValue().getDescription()));
@@ -200,15 +200,15 @@ public class Ui_ListePlan_BOController implements Initializable {
            }
           current_page_te.setText(Integer.toString(current_page)+" / " +Integer.toString(pages));
             if(selected_column.equals("All"))
-                 Plans= FXCollections.observableArrayList((ArrayList<Plan>)Gp.fetchAll(recherche_dyn_tf.getText(),(current_page-1)*BreakPoint,BreakPoint));
+                 Plans= FXCollections.observableArrayList((ArrayList<Plan>)Gp.fetchAll());
             else 
             {
-                 Plans= FXCollections.observableArrayList((ArrayList<Plan>)Gp.fetchAll(recherche_dyn_tf.getText(),selected_column,(current_page-1)*BreakPoint,BreakPoint));
+                 Plans= FXCollections.observableArrayList((ArrayList<Plan>)Gp.fetchAll());
             }
     }
     else
     {
-             Plans= FXCollections.observableArrayList((ArrayList<Plan>)Gp.fetchAll(recherche_dyn_tf.getText(),-1,"DESC"));
+             Plans= FXCollections.observableArrayList((ArrayList<Plan>)Gp.fetchAll());
            
     }
       

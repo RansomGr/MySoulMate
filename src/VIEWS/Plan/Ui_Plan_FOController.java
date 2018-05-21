@@ -7,7 +7,7 @@ package VIEWS.Plan;
 
 import Entites.Plan.Avis;
 import Entites.Plan.Plan;
-import Entites.User.Client;
+import Entites.User.Utilisateur;
 import Services.Plan.GestionnaireAvis;
 import java.io.IOException;
 import java.net.URL;
@@ -56,13 +56,13 @@ public class Ui_Plan_FOController implements Initializable {
     private static Avis avis;
     @FXML
     private VBox avis_pane;
-    private static Client Client;
+    private static Utilisateur Client;
 
     public static void setAvis(Avis avis) {
         Ui_Plan_FOController.avis = avis;
     }
 
-    public static void setClient(Client Client) {
+    public static void setClient(Utilisateur Client) {
         Ui_Plan_FOController.Client = Client;
     }
 
