@@ -43,6 +43,14 @@ public class Plan {
         this.y = y;
     }
 
+    public Plan(int id, String text, String value, String text0, String text1, int parseInt, String text2, String text3) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Plan(String text, String string, String text0, String text1, int parseInt, String text2, String text3) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getId() {
         return Id;
     }

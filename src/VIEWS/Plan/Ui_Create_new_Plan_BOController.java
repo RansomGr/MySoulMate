@@ -217,7 +217,7 @@ photo_img.setText(img.getAbsolutePath());
        if(Plan_to_be_modified!=null)
        {
            nom_tf.setText(Plan_to_be_modified.getNom());
-           type_cb.getSelectionModel().(Plan_to_be_modified.getType());
+           type_cb.getSelectionModel().select(Plan_to_be_modified.getType());
            email_tf.setText(Plan_to_be_modified.getEmail());
            siteweb_tf.setText(Plan_to_be_modified.getSiteweb());
            telephone_tf.setText(""+Plan_to_be_modified.getTelephone());
