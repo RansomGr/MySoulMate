@@ -3,14 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Evenement/Ui_ListeEvents_FOController.java</file>
-            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Evenement/Ui_interfaceEvt_FOController.java</file>
-            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Evenement/Ui_evenement_FOController.java</file>
-            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/Controllers/User/Ui_Login_FOController.java</file>
-            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/Services/Events/GestionnaireEvent.java</file>
-            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Evenement/Ui_even_FOController.java</file>
-            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/mysoulmate/MySoulMate.java</file>
-            <file>file:/C:/Users/dellpro/Documents/GitHub/MySoulMate/src/VIEWS/Ui_MainFrame_FOController.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/Services/Matching/GestionnaireCaracteristique.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/Entites/Profil/Caracteristique.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/Services/User/GestionnaireUser.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/VIEWS/Matching/Ui_FO_RechercheMatchingsController.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/VIEWS/Matching/Ui_FO_show_one_MatchingController.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/Entites/User/Utilisateur.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/VIEWS/Profil/Ui_Profil_FOController.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/Services/User/GestionnaireClient.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/Services/Matching/GestionnaireAchat_packaging.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/VIEWS/ui_MainFrame_FO.fxml</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/Entites/Profil/Profil.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/Services/Profil/GestionnaireCaracteristique.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/Services/Events/GestionnaireEvent.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/VIEWS/Ui_MainFrame_FOController.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/Services/Plan/GestionnaireAvis.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/VIEWS/Matching/Ui_FO_show_one_PackagingController.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/VIEWS/Matching/Ui_FO_AjouterPreferenceController.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/Services/Matching/GestionnaireInvitation.java</file>
+            <file>file:/F:/xampp/htdocs/MySoulMate/src/Entites/Matching/Caracteristique.java</file>
         </group>
     </open-files>
 </project-private>
