@@ -12,10 +12,12 @@ import ChatClient.ChatBoxController;
 import ChatClient.VoicePlayback;
 import Entites.Events.Events;
 import Listner.Listener;
-import Entites.User.Client;
-import Services.Evenement.GestionnaireEvents;
+
+import Entites.User.Utilisateur;
+import Services.Events.GestionnaireEvent;
+
 import Services.Relation.GestionnaireRelation;
-import Services.User.GestionnaireClient;
+import Services.User.GestionnaireUser;
 import VIEWS.Evenement.Ui_even_FOController;
 import com.messages.Message;
 import com.messages.Status;
@@ -105,8 +107,8 @@ public class Ui_MainFrame_FOController implements Initializable {
     @FXML
     private ComboBox status_combobox;
     @FXML
-    private ListView<Client> connected_friends;
-    private Map<Client, ListView<HBox>> conversations;// who sent me a message , and the conversation tha took place between us 
+    private ListView<Utilisateur> connected_friends;
+    private Map<Utilisateur, ListView<HBox>> conversations;// who sent me a message , and the conversation tha took place between us 
     private Logger logger = LoggerFactory.getLogger(Ui_MainFrame_FOController.class);
     @FXML
     private HBox chat_windows;
@@ -154,16 +156,14 @@ public class Ui_MainFrame_FOController implements Initializable {
         messages.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                GestionnaireClient gc = new GestionnaireClient();
-                Client partner = null;
-                try {
-                    int id = Integer.parseInt(messages.getSelectionModel().getSelectedItem().getId());
-                    if (id != 0) {
-                        partner = gc.fetchOneById(id);
-                    }
-                } catch (SQLException ex) {
-                    java.util.logging.Logger.getLogger(Ui_MainFrame_FOController.class.getName()).log(Level.SEVERE, null, ex);
+                GestionnaireUser gc = new GestionnaireUser();
+                Utilisateur partner = null;
+
+                int id = Integer.parseInt(messages.getSelectionModel().getSelectedItem().getId());
+                if (id != 0) {
+                    partner = gc.fetchOneById(id);
                 }
+
                 boolean already_there = false;
                 for (int i = 0; i < static_chat_windows.size(); i++) {
                     if (static_chat_windows.get(i).getPartner().equals(partner)) {
@@ -205,7 +205,7 @@ public class Ui_MainFrame_FOController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 try {
-                    Client c = connected_friends.getSelectionModel().getSelectedItem();
+                    Utilisateur c = connected_friends.getSelectionModel().getSelectedItem();
                     boolean already_there = false;
                     for (int i = 0; i < static_chat_windows.size(); i++) {
                         if (static_chat_windows.get(i).getPartner().equals(c)) {
@@ -261,14 +261,14 @@ public class Ui_MainFrame_FOController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/User/ui_Login_FO.fxml"));
         Scene sene = new Scene(root);
         MySoulMate.getMainStage().setScene(sene);
-       Platform.runLater(()->{
+        Platform.runLater(() -> {
             try {
                 MySoulMate.getListener().stop();
             } catch (IOException ex) {
                 java.util.logging.Logger.getLogger(Ui_MainFrame_FOController.class.getName()).log(Level.SEVERE, null, ex);
             }
-                       });
-      
+        });
+
     }
 
     @FXML
@@ -392,7 +392,7 @@ public class Ui_MainFrame_FOController implements Initializable {
     public void setUserList(Message msg) {
         logger.info("setUserList() method Enter");
         Platform.runLater(() -> {
-            ObservableList<Client> users = FXCollections.observableList(msg.getUsers());
+            ObservableList<Utilisateur> users = FXCollections.observableList(msg.getUsers());
             users.remove(MySoulMate.getLogged_in_Client());
             connected_friends.setItems(users);
             connected_friends.setCellFactory(new CellRenderer());
@@ -404,35 +404,31 @@ public class Ui_MainFrame_FOController implements Initializable {
     public void newUserNotification(Message msg) {
         System.out.println("sending a notification to all users");
         System.out.println(msg.getSender());
-        if(msg.getID()!=MySoulMate.getLogged_in_Client().getID())
-        {
-            Client c= null ;
-          GestionnaireClient gc= new GestionnaireClient();
-    
-            try {
-               c= gc.fetchOneById(msg.getID());
-                     msg.setSender(c);
-            } catch (SQLException ex) {
-                java.util.logging.Logger.getLogger(Ui_MainFrame_FOController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        Platform.runLater(() -> {
-            Image profileImg = new Image(getClass().getClassLoader().getResource("images/" + msg.getSender().getProfil().getPhoto()).toString(), 50, 50, false, false);
-            TrayNotification tray = new TrayNotification();
-            tray.setTitle("Un Ami s'est connecter ");
-            tray.setMessage(msg.getSender().getNom() + " est maintenant connecter !");
-            tray.setRectangleFill(Paint.valueOf("#2C3E50"));
-            tray.setAnimationType(AnimationType.POPUP);
-            tray.setImage(profileImg);
-            tray.showAndDismiss(Duration.seconds(5));
-            try {
-                   Media hit = new Media(getClass().getClassLoader().getResource("sounds/notification.wav").toString());
-                  MediaPlayer mediaPlayer = new MediaPlayer(hit);
-                   mediaPlayer.play();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (msg.getID() != MySoulMate.getLogged_in_Client().getId()) {
+            Utilisateur c = null;
+            GestionnaireUser gc = new GestionnaireUser();
 
-        });
+            c = gc.fetchOneById(msg.getID());
+            msg.setSender(c);
+
+            Platform.runLater(() -> {
+                Image profileImg = new Image(getClass().getClassLoader().getResource("images/" + msg.getSender().getProfil().getPhoto()).toString(), 50, 50, false, false);
+                TrayNotification tray = new TrayNotification();
+                tray.setTitle("Un Ami s'est connecter ");
+                tray.setMessage(msg.getSender().getNom() + " est maintenant connecter !");
+                tray.setRectangleFill(Paint.valueOf("#2C3E50"));
+                tray.setAnimationType(AnimationType.POPUP);
+                tray.setImage(profileImg);
+                tray.showAndDismiss(Duration.seconds(5));
+                try {
+                    Media hit = new Media(getClass().getClassLoader().getResource("sounds/notification.wav").toString());
+                    MediaPlayer mediaPlayer = new MediaPlayer(hit);
+                    mediaPlayer.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            });
         }
     }
 
@@ -462,7 +458,7 @@ public class Ui_MainFrame_FOController implements Initializable {
                 x.getChildren().addAll(profileImage, bl6);
                 logger.debug("ONLINE USERS: " + Integer.toString(msg.getUserlist().size()));
                 //   setOnlineLabel(Integer.toString(msg.getOnlineCount()));
-                x.setId(msg.getSender().getID() + "");
+                x.setId(msg.getSender().getId() + "");
                 return x;
             }
         };
@@ -501,7 +497,7 @@ public class Ui_MainFrame_FOController implements Initializable {
             }
 
             messages.getItems().clear();
-            for (Client c : conversations.keySet()) {
+            for (Utilisateur c : conversations.keySet()) {
                 HBox b = conversations.get(c).getItems().get(conversations.get(c).getItems().size() - 1);
                 b.setAlignment(Pos.CENTER);
                 messages.getItems().add(b);
@@ -532,7 +528,7 @@ public class Ui_MainFrame_FOController implements Initializable {
                 x.setAlignment(Pos.TOP_RIGHT);
                 bl6.setBubbleSpec(BubbleSpec.FACE_RIGHT_CENTER);
                 x.getChildren().addAll(bl6, profileImage);
-                x.setId(msg.getReciver().getID() + "");
+                x.setId(msg.getReciver().getId() + "");
                 return x;
             }
         };
@@ -544,16 +540,16 @@ public class Ui_MainFrame_FOController implements Initializable {
                 conversations.get(msg.getReciver()).getItems().add(yourMessages.getValue());
             }
             messages.getItems().clear();
-            for (Client c : conversations.keySet()) {
+            for (Utilisateur c : conversations.keySet()) {
                 messages.getItems().add(conversations.get(c).getItems().get(conversations.get(c).getItems().size() - 1));
             }
         });
 
-        if (msg.getSender().getID() == MySoulMate.getLogged_in_Client().getID()) {
+        if (msg.getSender().getId() == MySoulMate.getLogged_in_Client().getId()) {
             Thread t2 = new Thread(yourMessages);
             t2.setDaemon(true);
             t2.start();
-        } else if (msg.getReciver().getID() == MySoulMate.getLogged_in_Client().getID()) {
+        } else if (msg.getReciver().getId() == MySoulMate.getLogged_in_Client().getId()) {
             Thread t = new Thread(othersMessages);
             t.setDaemon(true);
             t.start();
@@ -608,7 +604,6 @@ public class Ui_MainFrame_FOController implements Initializable {
     @FXML
     private void load_matching_page(ActionEvent event) throws IOException {
 
-
         Node root = FXMLLoader.load(getClass().getResource("/VIEWS/Matching/ui_FO_RechercheMatchings.fxml"));
         Content_pane.getChildren().clear();
         Content_pane.getChildren().add(root);
@@ -633,7 +628,7 @@ public class Ui_MainFrame_FOController implements Initializable {
             Content_pane.getChildren().add(root);
         } else {
             TrayNotification tray = new TrayNotification(
-                    MySoulMate.getLogged_in_Client().getPseudo() + ",",
+                    MySoulMate.getLogged_in_Client().getUsername() + ",",
                     "Vous n'etes pas encore en relation !!", NotificationType.WARNING);
             tray.showAndDismiss(javafx.util.Duration.seconds(1));
         }
@@ -641,14 +636,14 @@ public class Ui_MainFrame_FOController implements Initializable {
 
     //event
     public void load_ajout_sms(ActionEvent event) throws IOException {
-     
+
         Node root = FXMLLoader.load(Ui_MainFrame_FOController.class.getResource("/VIEWS/Evenement/ui_sms_evt_FO.fxml"));
         Content_pane.getChildren().clear();
         Content_pane.getChildren().add(root);
     }
 
     public void chercher_les_events() throws SQLException, IOException {
-        GestionnaireEvents ge = new GestionnaireEvents();
+        GestionnaireEvent ge = new GestionnaireEvent();
         List<Events> evts = ((List<Events>) ge.fetchAll()).stream().collect(Collectors.toList());
         event_vb.setSpacing(20);
         for (int i = 0; i < evts.size(); i++) {
@@ -718,11 +713,14 @@ public class Ui_MainFrame_FOController implements Initializable {
 
     }
 
-    public void open_profile(Client this_dude) throws IOException {
+    public void open_profile(Utilisateur this_dude) throws IOException  {
         FXMLLoader fxml = new FXMLLoader(getClass().getResource("/VIEWS/Profil/ui_Profil_FO.fxml"));
         Node root = fxml.load();
         Ui_Profil_FOController controller = fxml.<Ui_Profil_FOController>getController();
-        controller.setProfile_owner(this_dude);
+        
+            controller.setProfile_owner(this_dude);
+       
+       
         Content_pane.getChildren().clear();
         Content_pane.getChildren().add(root);
     }
