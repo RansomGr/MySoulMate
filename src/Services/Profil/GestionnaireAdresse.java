@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -80,7 +82,22 @@ Adresse a=(Adresse)o;
 
     @Override
     public Adresse fetchOneById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String query=" select * from adresse where id=? "    ; // preparation du requete sql
+            
+            PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+            pst.setInt(1, id);
+           
+            ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+            if(res.next())// parcour du result set
+            {
+               return new Adresse(res.getInt(1),res.getInt(2),res.getString(3),res.getInt(4),res.getString(5));
+            }
+      
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionnaireAdresse.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override

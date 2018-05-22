@@ -412,7 +412,7 @@ public class Ui_MainFrame_FOController implements Initializable {
             msg.setSender(c);
 
             Platform.runLater(() -> {
-                Image profileImg = new Image(getClass().getClassLoader().getResource("images/" + msg.getSender().getProfil().getPhoto()).toString(), 50, 50, false, false);
+                Image profileImg = new Image("http://localhost/MysoulMate-Symphony/web/images/" + msg.getSender().getProfil().getPhoto(), 50, 50, false, false);
                 TrayNotification tray = new TrayNotification();
                 tray.setTitle("Un Ami s'est connecter ");
                 tray.setMessage(msg.getSender().getNom() + " est maintenant connecter !");
@@ -439,7 +439,7 @@ public class Ui_MainFrame_FOController implements Initializable {
             @Override
             public HBox call() throws Exception {
 
-                Image image = new Image(getClass().getClassLoader().getResource("images/" + msg.getSender().getProfil().getPhoto()).toString());
+                Image image = new Image("http://localhost/MysoulMate-Symphony/web/images/" + msg.getSender().getProfil().getPhoto());
                 ImageView profileImage = new ImageView(image);
                 profileImage.setFitHeight(32);
                 profileImage.setFitWidth(32);
@@ -508,7 +508,8 @@ public class Ui_MainFrame_FOController implements Initializable {
         Task<HBox> yourMessages = new Task<HBox>() {
             @Override
             public HBox call() throws Exception {
-                Image image = new Image("images/" + MySoulMate.getLogged_in_Client().getProfil().getPhoto());
+                System.out.println("writing me message");
+                Image image = new Image("http://localhost/MysoulMate-Symphony/web/images/" + MySoulMate.getLogged_in_Client().getProfil().getPhoto());
                 ImageView profileImage = new ImageView(image);
                 profileImage.setFitHeight(32);
                 profileImage.setFitWidth(32);

@@ -8,6 +8,7 @@ package Entites.User;
 import Entites.Profil.Adresse;
 import Entites.Profil.Profil;
 import com.messages.Status;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ import java.util.Objects;
  *
  * @author Ransom
  */
-public class Utilisateur {
+public class Utilisateur implements Serializable {
     private int id;
     private Profil profil;
     private Adresse adresse;

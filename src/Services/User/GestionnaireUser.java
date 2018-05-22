@@ -31,6 +31,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mysoulmate.MySoulMate;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -68,12 +69,15 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
             PreparedStatement pst = this.DB.prepareStatement(req);
             pst.setInt(1, id);
             ResultSet res = pst.executeQuery();
+            if(res.next())
+            {
             return new Utilisateur(
-                    res.getInt(1), Sp.fetchOneById(res.getInt(2)), Sa.fetchOneById(res.getInt(3)),
-                    res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getInt(8),
-                    res.getString(9), res.getString(10), res.getDate(11), res.getString(12), res.getDate(13),
-                    res.getString(14), res.getString(15), res.getString(16), res.getString(17), res.getDate(18)
+                      res.getInt(1), Sp.fetchOneById(res.getInt(6)), Sa.fetchOneById(res.getInt(18)),
+                            res.getString(7), res.getString(8), res.getString(9), res.getString(10), res.getInt(11),
+                            res.getString(12), res.getString(13), res.getDate(14), res.getString(15), res.getDate(16),
+                            res.getString(17), res.getString(2), res.getString(3), res.getString(4), res.getDate(5)
             );
+            }
         } catch (SQLException ex) {
             Logger.getLogger(GestionnaireUser.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -130,30 +134,33 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
     }
 
     public Utilisateur fetchOneBycredentials(String login, String pass) {
-        
-        
-        
-        
-       GestionnaireProfil Sp = new GestionnaireProfil();
+
+        GestionnaireProfil Sp = new GestionnaireProfil();
         GestionnaireAdresse Sa = new GestionnaireAdresse();
 
         try {
-            String req = "Select * from utilisateur where username=? and password=? ";
-        
-            
+            String req = "Select * from utilisateur where username=?";
+
             PreparedStatement pst = this.DB.prepareStatement(req);
             pst.setString(1, login);
-            pst.setString(1,pass);
             ResultSet res = pst.executeQuery();
-            return new Utilisateur(
-                    res.getInt(1), Sp.fetchOneById(res.getInt(2)), Sa.fetchOneById(res.getInt(3)),
-                    res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getInt(8),
-                    res.getString(9), res.getString(10), res.getDate(11), res.getString(12), res.getDate(13),
-                    res.getString(14), res.getString(15), res.getString(16), res.getString(17), res.getDate(18)
-            );
+            if (res.next()) {
+                String crypted_pass = res.getString(13);
+                String crypted_pass2 = crypted_pass.replaceFirst("y", "a");
+                System.out.println(crypted_pass2);
+                if (BCrypt.checkpw(pass, crypted_pass2)) {
+                    return new Utilisateur(
+                            res.getInt(1), Sp.fetchOneById(res.getInt(6)), Sa.fetchOneById(res.getInt(18)),
+                            res.getString(7), res.getString(8), res.getString(9), res.getString(10), res.getInt(11),
+                            res.getString(12), res.getString(13), res.getDate(14), res.getString(15), res.getDate(16),
+                            res.getString(17), res.getString(2), res.getString(3), res.getString(4), res.getDate(5)
+                    );
+                }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(GestionnaireUser.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return null;
     }
 

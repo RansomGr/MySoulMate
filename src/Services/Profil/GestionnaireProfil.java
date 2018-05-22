@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mysoulmate.MySoulMate;
 
 /**
@@ -93,7 +95,7 @@ public class GestionnaireProfil implements Gestionnaire <Profil > {
                 pref = ((List<Caracteristique>) G.fetchAll()).stream().filter(x -> x.getID() == id_pref).findFirst().get();
             }
 
-            Profils.add(new Profil(res.getInt(1), carac, res.getString(3), res.getString(4), pref,gc.fetchOneById(res.getInt("createur"))));
+            Profils.add(new Profil(res.getInt(1), carac, res.getString(3), res.getString(4), pref));
         }
         return Profils;
     }
@@ -125,14 +127,46 @@ public class GestionnaireProfil implements Gestionnaire <Profil > {
             }
             System.out.println("bref = " + id + pref);
 
-            Profil = new Profil(res.getInt(1), carac, res.getString(3), res.getString(4), pref,gc.fetchOneById(res.getInt("createur")));
+            Profil = new Profil(res.getInt(1), carac, res.getString(3), res.getString(4), pref);
         }
         return Profil;
     }
 
     @Override
     public Profil fetchOneById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         Profil Profil = null;
+        try {
+            String query = " select id,caracteristique,photo,description,preference from profil  where id=?"; // preparation du requete sql
+            PreparedStatement pst = DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+            pst.setInt(1, id);
+           
+            GestionnaireUser gc;
+            gc = new GestionnaireUser();
+            
+            ResultSet res = pst.executeQuery();
+            GestionnaireCaracteristique G = new GestionnaireCaracteristique();
+            System.out.println("looking");
+            if (res.next()) {
+                      System.out.println("i am inn bitch");
+                Caracteristique carac = null;
+                Caracteristique pref = null;
+                int id_char = res.getInt(2);
+                int id_pref = res.getInt(5);
+                if (id_char != 0) {
+                    carac = G.fetchOneById(id_char);
+                }
+                if (id_pref != 0) {
+                    pref = G.fetchOneById(id_pref);
+                }
+                System.out.println("bref = " + id + pref);
+                
+                Profil = new Profil(res.getInt(1), carac, res.getString(3), res.getString(4), pref);
+            }
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionnaireProfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return  Profil;
     }
 
     @Override

@@ -59,8 +59,6 @@ public class Ui_Ajoute_new_Profil_FOController implements Initializable {
  
     }    
 
-
-
     @FXML
     private void add_new_Profile(ActionEvent event) throws SQLException, IOException {
         Profil p = new Profil(new Caracteristique(),photo_tf.getText(),description_tf.getText());

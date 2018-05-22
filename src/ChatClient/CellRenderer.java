@@ -35,7 +35,7 @@ public class CellRenderer implements Callback<ListView<Utilisateur>,ListCell<Uti
 
                     ImageView pictureImageView = new ImageView();
                     System.out.println(user.getProfil().getPhoto());
-                    Image image = new Image(getClass().getClassLoader().getResource("images/"+user.getProfil().getPhoto()).toString(),50,50,true,true);
+                    Image image = new Image("http://localhost/MysoulMate-Symphony/web/images/"+user.getProfil().getPhoto(),50,50,true,true);
                     pictureImageView.setImage(image);
 
                     hBox.getChildren().addAll(statusImageView, pictureImageView, name);

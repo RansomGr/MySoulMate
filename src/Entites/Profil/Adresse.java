@@ -5,13 +5,14 @@
  */
 package Entites.Profil;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author Sofiene
  */
-public class Adresse {
+public class Adresse implements Serializable {
 private int ID;
 private int numero;
 private String gouvernorat ;

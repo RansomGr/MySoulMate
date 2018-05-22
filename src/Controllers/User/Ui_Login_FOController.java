@@ -5,7 +5,6 @@
  */
 package Controllers.User;
 
-
 import Entites.User.Utilisateur;
 import Listner.Listener;
 import Services.User.GestionnaireUser;
@@ -63,7 +62,6 @@ public class Ui_Login_FOController implements Initializable {
     private Alert ErrorWindow;
     private Alert WarningWindow;
 
-
     /**
      * Initializes the controller class.
      */
@@ -100,13 +98,13 @@ public class Ui_Login_FOController implements Initializable {
         while (numberOfSquares > 0) {
             generateAnimation();
             numberOfSquares--;
-        } 
+        }
         InformationWindow = new Alert(Alert.AlertType.INFORMATION);
         WarningWindow = new Alert(Alert.AlertType.WARNING);
         ErrorWindow = new Alert(Alert.AlertType.ERROR);
         ErrorWindow.setContentText("Ce compte n'existe pas \n Verifier vos parametres");
         ErrorWindow.setHeaderText("Page Login");
-        ErrorWindow.setTitle("MySoulMate"); 
+        ErrorWindow.setTitle("MySoulMate");
         WarningWindow.setContentText(" Votre compte n'est pas encore activé!");
         WarningWindow.setHeaderText("Gestion Compte");
         WarningWindow.setTitle("MySoulMate");
@@ -118,36 +116,33 @@ public class Ui_Login_FOController implements Initializable {
     private void log_me_in(ActionEvent event) throws IOException, SQLException {
 
         GestionnaireUser gc = new GestionnaireUser();
-      
-        
-    
-        //Utilisateur Logged_in_Client = 
-        gc.fetchOneBycredentials( login_te.getText(),password_te.getText());
-        if (MySoulMate.getLogged_in_Client() != null) {
-            GestionnaireUser p = new GestionnaireUser();
-            if(MySoulMate.getLogged_in_Client().getEnabled()==0)
-            {
-                WarningWindow.show();
-            }
-           else if (MySoulMate.getLogged_in_Client().getProfil() == null) {// no porfile send to sof to take care of 
-                //MySoulMate.setLogged_in_Client(Logged_in_Client);
-                Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_reglement.fxml"));
-                Scene scene = new Scene(root);
-                MySoulMate.getMainStage().setScene(scene);
-            } else {// account set up and ready to go login is succsssful
-                MySoulMate.getLogged_in_Client().setStatus(Status.ONLINE);
-       //         MySoulMate.setLogged_in_Client(Logged_in_Client);
-                InformationWindow.setContentText("Binevenu  "+MySoulMate.getLogged_in_Client().getNom()+" !");
-                InformationWindow.show();
-                FXMLLoader fmxlLoader = new FXMLLoader(getClass().getResource("/VIEWS/ui_MainFrame_FO.fxml"));
-                Parent root = fmxlLoader.load();
-                Ui_MainFrame_FOController Controller = fmxlLoader.<Ui_MainFrame_FOController>getController();
-                MySoulMate.setMainController(Controller);
-                Scene scene = new Scene(root);
-                Ui_MainFrame_FOController con = fmxlLoader.<Ui_MainFrame_FOController>getController();
-                Listener listener = new Listener("localhost", 9001, MySoulMate.getLogged_in_Client(), con);
-                MySoulMate.setListener(listener);
-                MySoulMate.getMainStage().setScene(scene);
+        Utilisateur Logged_in_Client = gc.fetchOneBycredentials(login_te.getText(), password_te.getText());
+        if (Logged_in_Client.getRoles().equals("a:0:{}")) {
+            if (Logged_in_Client != null) {
+                GestionnaireUser p = new GestionnaireUser();
+
+                if (Logged_in_Client.getEnabled() == 0) {
+                    WarningWindow.show();
+                } else if (Logged_in_Client.getProfil() == null) {// no porfile send to sof to take care of 
+                    MySoulMate.setLogged_in_Client(Logged_in_Client);
+                    Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_reglement.fxml"));
+                    Scene scene = new Scene(root);
+                    MySoulMate.getMainStage().setScene(scene);
+                } else {// account set up and ready to go login is succsssful
+                    Logged_in_Client.setStatus(Status.ONLINE);
+                    MySoulMate.setLogged_in_Client(Logged_in_Client);
+                    InformationWindow.setContentText("Binevenu  " + MySoulMate.getLogged_in_Client().getNom() + " !");
+                    InformationWindow.show();
+                    FXMLLoader fmxlLoader = new FXMLLoader(getClass().getResource("/VIEWS/ui_MainFrame_FO.fxml"));
+                    Parent root = fmxlLoader.load();
+                    Ui_MainFrame_FOController Controller = fmxlLoader.<Ui_MainFrame_FOController>getController();
+                    MySoulMate.setMainController(Controller);
+                    Scene scene = new Scene(root);
+                    Ui_MainFrame_FOController con = fmxlLoader.<Ui_MainFrame_FOController>getController();
+                    Listener listener = new Listener("localhost", 9001, MySoulMate.getLogged_in_Client(), con);
+                    MySoulMate.setListener(listener);
+                    MySoulMate.getMainStage().setScene(scene);
+                }
             }
         } else {
             password_te.clear();

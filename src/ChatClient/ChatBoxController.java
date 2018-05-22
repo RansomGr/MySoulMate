@@ -99,7 +99,7 @@ public class ChatBoxController implements Initializable {
     public void setPartner(Utilisateur partner) {
         this.partner = partner;
         this.user_name.setText(partner.getNom());
-        this.partner_image.setImage(new Image("images/" + partner.getProfil().getPhoto()));
+        this.partner_image.setImage(new Image("http://localhost/MysoulMate-Symphony/web/images/" + partner.getProfil().getPhoto()));
     }
 
     /**
@@ -153,7 +153,7 @@ public class ChatBoxController implements Initializable {
             @Override
             public HBox call() throws Exception {
                 System.out.println("sending voice inside add toChat");
-                Image image = new Image(getClass().getClassLoader().getResource("images/" + msg.getSender().getProfil().getPhoto()).toString());
+                Image image = new Image("http://localhost/MysoulMate-Symphony/web/images/" + msg.getSender().getProfil().getPhoto());
                 ImageView profileImage = new ImageView(image);
                 profileImage.setFitHeight(32);
                 profileImage.setFitWidth(32);
@@ -185,11 +185,10 @@ public class ChatBoxController implements Initializable {
         Task<HBox> yourMessages = new Task<HBox>() {
             @Override
             public HBox call() throws Exception {
-                Image image = new Image("images/" + user.getProfil().getPhoto());
+                Image image = new Image("http://localhost/MysoulMate-Symphony/web/images/" + user.getProfil().getPhoto());
                 ImageView profileImage = new ImageView(image);
                 profileImage.setFitHeight(32);
                 profileImage.setFitWidth(32);
-
                 BubbledLabel bl6 = new BubbledLabel();
                 System.out.println("type"+msg.getType());
                 if (msg.getType() == MessageType.VOICE) {
@@ -227,6 +226,7 @@ public class ChatBoxController implements Initializable {
 
     /*---------------------------------------------------------------------*/
     public synchronized void addAsServer(Message msg) {
+        System.out.println("server writing to users ");
         Task<HBox> task = new Task<HBox>() {
             @Override
             public HBox call() throws Exception {

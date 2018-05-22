@@ -5,7 +5,8 @@
  */
 package VIEWS.User;
 
-
+import Entites.User.Utilisateur;
+import Services.User.GestionnaireUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -43,9 +44,9 @@ public class Ui_Login_BOController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      login_tf.setText("Donec.tincidunt@interdum.ca");
-      password_tf.setText("XGD83YVQ5HD");
-    }    
+        login_tf.setText("Donec.tincidunt@interdum.ca");
+        password_tf.setText("XGD83YVQ5HD");
+    }
 
     @FXML
     private void take_me_back_to_FO(ActionEvent event) throws IOException {// missing animations
@@ -56,22 +57,19 @@ public class Ui_Login_BOController implements Initializable {
 
     @FXML
     private void login_admin(ActionEvent event) throws SQLException, IOException {// missing animations
-//        GestionnaireAdmin ga = new GestionnaireAdmin();
-//        Admin Logged_in_Admin= ((List<Admin>)ga.fetchAll()).stream().filter(Admin->Admin.getLogin().equals(login_tf.getText())&&Admin.getMotdepasse().equals(password_tf.getText())).findFirst().get();
-//        if(Logged_in_Admin!=null)
-//        {
-       // MySoulMate.setLogged_in_Admin(Logged_in_Admin);
-    //    a = new Admin(0, "7ableu", "7ableu", "chfamma", "*****");
-   //     MySoulMate.setLogged_in_Admin(a);
-        Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/ui_MainFrame_BO.fxml"));
-        Scene scene = new Scene(root);
-        MySoulMate.getMainStage().setScene(scene);
-//        }
-//        else
-//        {
-//            password_tf.clear();
-//            login_tf.clear();
-//        }
+        GestionnaireUser ga = new GestionnaireUser();
+        Utilisateur Logged_in_Admin = ga.fetchOneBycredentials(login_tf.getText(), password_tf.getText());
+        if (Logged_in_Admin != null) {
+            if (!Logged_in_Admin.getRoles().equals("a:0:{}")) {
+                MySoulMate.setLogged_in_Admin(Logged_in_Admin);
+                Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/ui_MainFrame_BO.fxml"));
+                Scene scene = new Scene(root);
+                MySoulMate.getMainStage().setScene(scene);
+            } else {
+                password_tf.clear();
+                login_tf.clear();
+            }
+        }
+
     }
-    
 }

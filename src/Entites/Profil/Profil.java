@@ -77,13 +77,13 @@ public class Profil implements Serializable {
         this.user_id = user_id;
     }
 
-    public Profil(int id, Caracteristique Caracteristique_id, String photo, String description, Caracteristique preference, Utilisateur user_id) {
+    public Profil(int id, Caracteristique Caracteristique_id, String photo, String description, Caracteristique preference){
         this.id = id;
         this.Caracteristique_id = Caracteristique_id;
         this.photo = photo;
         this.description = description;
         this.preference = preference;
-        this.user_id = user_id;
+     //   this.user_id = user_id;
     }
 
     @Override
