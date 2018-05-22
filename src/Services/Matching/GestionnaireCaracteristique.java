@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Services.Matching;
-import Entites.Matching.Caracteristique;
+import Entites.Profil.Caracteristique;
 import Services.Gestionnaire;
 
 import java.sql.PreparedStatement;
@@ -31,7 +31,7 @@ public class GestionnaireCaracteristique implements Gestionnaire<Caracteristique
          pst.setString(4,c.getProfession());
          pst.setString(5,c.getAlcool());//Binding du deuxieme valeur mentionner dans le query "?" 
          pst.setString(6,c.getTabac());//Binding du deuxieme valeur mentionner dans le query "?" 
-         pst.setString(7,c.getTaille());//Binding du deuxieme valeur mentionner dans le query "?" 
+         pst.setString(7, c.getTaille());//Binding du deuxieme valeur mentionner dans le query "?" 
          pst.setString(8,c.getCheveux());//Binding du deuxieme valeur mentionner dans le query "?" 
          pst.setString(9,c.getYeux());//Binding du deuxieme valeur mentionner dans le query "?" 
          pst.setString(10,c.getCaractere());//Binding du deuxieme valeur mentionner dans le query "?" 

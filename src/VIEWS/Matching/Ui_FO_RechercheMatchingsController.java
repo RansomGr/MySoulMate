@@ -78,6 +78,8 @@ public class Ui_FO_RechercheMatchingsController implements Initializable {
        clients.remove(MySoulMate.getLogged_in_Client());
        for (int i=0 ; i<clients.size(); )
     {
+        ///////////////////////////////////
+        
         HBox matchings_hb = new HBox();
         matchings_hb.setMinSize(170,240);
          
@@ -92,6 +94,8 @@ public class Ui_FO_RechercheMatchingsController implements Initializable {
             matchings_hb.getChildren().add(root);
         }
         liste_matchings_vb.getChildren().add(matchings_hb);
+        
+        ///////////////////////////
     }
     
     
