@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane fx:id="BorderPane" maxHeight="720.0" maxWidth="1024.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.User.Ui_Login_FOController">
+<BorderPane fx:id="BorderPane" maxHeight="720.0" maxWidth="1024.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.User.Ui_Login_FOController">
    <top>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane style="-fx-background-color: FAEBD7;" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -34,9 +34,11 @@
       </GridPane>
    </top>
    <center>
-      <GridPane prefHeight="484.0" prefWidth="652.0" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="484.0" prefWidth="652.0" style="-fx-background-color: FAEBD7;" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="ALWAYS" maxWidth="18000.0" minWidth="10.0" prefWidth="269.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="18000.0" minWidth="10.0" prefWidth="232.00000871930803" />
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="18000.0" minWidth="10.0" prefWidth="693.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="18000.0" minWidth="10.0" prefWidth="229.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="500.0" minHeight="10.0" prefHeight="270.0" valignment="CENTER" vgrow="ALWAYS" />
@@ -45,7 +47,7 @@
             <RowConstraints maxHeight="214.0" minHeight="10.0" prefHeight="188.0" valignment="CENTER" vgrow="NEVER" />
         </rowConstraints>
          <children>
-            <GridPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+            <GridPane GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="ALWAYS" maxWidth="56000.0" minWidth="10.0" prefWidth="172.0" />
                 <ColumnConstraints hgrow="NEVER" maxWidth="999999.0" minWidth="10.0" prefWidth="280.0" />
@@ -68,12 +70,12 @@
                   <TextField fx:id="password_te" maxHeight="25.0" maxWidth="230.0" text="sofien" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Button fx:id="login_pb" alignment="CENTER" mnemonicParsing="false" onAction="#log_me_in" prefHeight="25.0" prefWidth="169.0" text="Se Connecter" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+            <Button fx:id="login_pb" alignment="CENTER" mnemonicParsing="false" onAction="#log_me_in" prefHeight="25.0" prefWidth="227.0" style="-fx-background-color: ff3e5b; -fx-text-fill: white;" text="Se Connecter" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </Button>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
@@ -81,7 +83,7 @@
                   <Image url="@../../images/default.png" />
                </image>
             </ImageView>
-            <Hyperlink fx:id="forgot_hl" onAction="#Forgot_page" text="Mot de passe oublier ?" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <Hyperlink fx:id="forgot_hl" onAction="#Forgot_page" text="Mot de passe oublié ?" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
          </children>
       </GridPane>
    </center>
@@ -103,30 +105,4 @@
          </children>
       </GridPane>
    </bottom>
-   <right>
-      <GridPane BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-        </rowConstraints>
-      </GridPane>
-   </right>
-   <left>
-      <GridPane BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-        </rowConstraints>
-      </GridPane>
-   </left>
 </BorderPane>

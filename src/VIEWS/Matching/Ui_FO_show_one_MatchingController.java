@@ -11,7 +11,6 @@ import Entites.User.Utilisateur;
 import Services.User.GestionnaireUser;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -79,13 +78,12 @@ public class Ui_FO_show_one_MatchingController implements Initializable {
     
     }
 
-    @FXML
-    private void inviter_ami(ActionEvent event) {
-      //  try {
-     //       MySoulMate.getMainController().open_profile(the_matching);
-     //   } catch (IOException ex) {
-   //         java.util.logging.Logger.getLogger(Ui_FO_show_one_MatchingController.class.getName()).log(Level.SEVERE, null, ex);
-      ///  }
-    }
-    
+  //  @FXML
+  //  private void inviter_ami(ActionEvent event) throws SQLException {
+    /*    try {
+            MySoulMate.getMainController().open_profile(the_matching);
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Ui_FO_show_one_MatchingController.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+    //}
 }
