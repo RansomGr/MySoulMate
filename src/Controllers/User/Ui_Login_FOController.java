@@ -118,24 +118,25 @@ public class Ui_Login_FOController implements Initializable {
     private void log_me_in(ActionEvent event) throws IOException, SQLException {
 
         GestionnaireUser gc = new GestionnaireUser();
-        Map<String,String> Criterias = new HashMap<>();
+      
         
-        Criterias.put(login_te.getText(), password_te.getText());
-        Utilisateur Logged_in_Client = gc.fetchOnByCriteria(Criterias);
-        if (Logged_in_Client != null) {
+    
+        //Utilisateur Logged_in_Client = 
+        gc.fetchOneBycredentials( login_te.getText(),password_te.getText());
+        if (MySoulMate.getLogged_in_Client() != null) {
             GestionnaireUser p = new GestionnaireUser();
-            if(Logged_in_Client.getEnabled()==0)
+            if(MySoulMate.getLogged_in_Client().getEnabled()==0)
             {
                 WarningWindow.show();
             }
-           else if (Logged_in_Client.getProfil() == null) {// no porfile send to sof to take care of 
-                MySoulMate.setLogged_in_Client(Logged_in_Client);
+           else if (MySoulMate.getLogged_in_Client().getProfil() == null) {// no porfile send to sof to take care of 
+                //MySoulMate.setLogged_in_Client(Logged_in_Client);
                 Parent root = FXMLLoader.load(getClass().getResource("/VIEWS/Profil/ui_reglement.fxml"));
                 Scene scene = new Scene(root);
                 MySoulMate.getMainStage().setScene(scene);
             } else {// account set up and ready to go login is succsssful
-                Logged_in_Client.setStatus(Status.ONLINE);
-                MySoulMate.setLogged_in_Client(Logged_in_Client);
+                MySoulMate.getLogged_in_Client().setStatus(Status.ONLINE);
+       //         MySoulMate.setLogged_in_Client(Logged_in_Client);
                 InformationWindow.setContentText("Binevenu  "+MySoulMate.getLogged_in_Client().getNom()+" !");
                 InformationWindow.show();
                 FXMLLoader fmxlLoader = new FXMLLoader(getClass().getResource("/VIEWS/ui_MainFrame_FO.fxml"));
@@ -144,7 +145,7 @@ public class Ui_Login_FOController implements Initializable {
                 MySoulMate.setMainController(Controller);
                 Scene scene = new Scene(root);
                 Ui_MainFrame_FOController con = fmxlLoader.<Ui_MainFrame_FOController>getController();
-                Listener listener = new Listener("localhost", 9001, Logged_in_Client, con);
+                Listener listener = new Listener("localhost", 9001, MySoulMate.getLogged_in_Client(), con);
                 MySoulMate.setListener(listener);
                 MySoulMate.getMainStage().setScene(scene);
             }

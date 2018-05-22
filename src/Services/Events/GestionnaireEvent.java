@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package Services.Events;
-
-import Entites.AbstractEntite;
 import Entites.Events.Events;
 import Entites.Plan.Plan;
 import Entites.User.Utilisateur;
@@ -140,13 +138,12 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
                      res.getString("description_evt"),
                      p,
                      res.getInt("nb_max")
-             )
-             );
+             ));
            }
          return Evenements;
     }
 
-    public List<? extends Object> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
+    public List<Events> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
         String query=" select events.*,id.nom from events inner join id on "
                 + "id.id=events.entite "
                 + " where ( nom_evt like ? or date_evt like ? or heure like ? or type_evt like ? or plan_evt like ? ) "    ; // preparation du requete sql
@@ -191,7 +188,7 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
           return evenent;
     }
     
-    public List<? extends Object> fetchAll(String aux,int StartPoint,int BreakPoint) throws SQLException {
+    public List<Events> fetchAll(String aux,int StartPoint,int BreakPoint) throws SQLException {
         
         GestionnaireUser gclt = new GestionnaireUser();
           List<Utilisateur>clients= (List<Utilisateur>) gclt.fetchAll();
@@ -239,7 +236,7 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
           return Evenent;
     }
   
-    public List<? extends Object> fetchAll(String aux, String target_column ,int StartPoint,int BreakPoint) throws SQLException {
+    public List<Events> fetchAll(String aux, String target_column ,int StartPoint,int BreakPoint) throws SQLException {
           String query=" select * from (select events.*,id.nom from events inner join id on id.id=events.entite limit  "+StartPoint+","+BreakPoint+" ) event_l "
                   + " where ( "+target_column+" like ?  )  " ;
                  // preparation du requete sql

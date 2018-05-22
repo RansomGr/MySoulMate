@@ -61,7 +61,7 @@ public class GestionnaireInviteEvent implements Gestionnaire{
 
     @Override
     public List<? extends Object> fetchAll() throws SQLException {
-        String query=" select * from invite_evenement  "    ; // preparation du requete sql
+          String query=" select * from invite_evenement  "    ; // preparation du requete sql
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<InviteEvents>InviteEvent = new ArrayList<>();//  Creation du List Reclamation
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set

@@ -12,12 +12,16 @@ import Entites.User.Utilisateur;
 import Services.Gestionnaire;
 import Services.Profil.GestionnaireAdresse;
 import Services.Profil.GestionnaireProfil;
-import com.codename1.io.ConnectionRequest;
+
 import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import java.io.CharArrayReader;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,6 +37,7 @@ import mysoulmate.MySoulMate;
  * @author Ransom
  */
 public class GestionnaireUser implements Gestionnaire<Utilisateur> {
+
     @Override
     public int create(Utilisateur o) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -52,23 +57,24 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
     public List<Utilisateur> fetchAll() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     @Override
     public Utilisateur fetchOneById(int id) {
-     GestionnaireProfil Sp = new GestionnaireProfil();
-     GestionnaireAdresse Sa= new GestionnaireAdresse();
-        
+        GestionnaireProfil Sp = new GestionnaireProfil();
+        GestionnaireAdresse Sa = new GestionnaireAdresse();
+
         try {
-            String req ="Select * from utilisateur where id=? ";
-                     PreparedStatement pst=this.DB.prepareStatement(req);
-                     pst.setInt(1, id);
-             ResultSet res =pst.executeQuery();
-           return new Utilisateur(
-                     res.getInt(1),Sp.fetchOneById(res.getInt(2)), Sa.fetchOneById(res.getInt(3)),
-                     res.getString(4),res.getString(5), res.getString(6), res.getString(7), res.getInt(8), 
-                     res.getString(9), res.getString(10), res.getDate(11), res.getString(12), res.getDate(13), 
-                     res.getString(14), res.getString(15), res.getString(16), res.getString(17), res.getDate(18)
-             );
-             } catch (SQLException ex) {
+            String req = "Select * from utilisateur where id=? ";
+            PreparedStatement pst = this.DB.prepareStatement(req);
+            pst.setInt(1, id);
+            ResultSet res = pst.executeQuery();
+            return new Utilisateur(
+                    res.getInt(1), Sp.fetchOneById(res.getInt(2)), Sa.fetchOneById(res.getInt(3)),
+                    res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getInt(8),
+                    res.getString(9), res.getString(10), res.getDate(11), res.getString(12), res.getDate(13),
+                    res.getString(14), res.getString(15), res.getString(16), res.getString(17), res.getDate(18)
+            );
+        } catch (SQLException ex) {
             Logger.getLogger(GestionnaireUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -76,39 +82,37 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
 
     @Override
     public Utilisateur fetchOnByCriteria(Map<String, String> Criteras) {
-   GestionnaireProfil Sp = new GestionnaireProfil();
-    GestionnaireAdresse Sa= new GestionnaireAdresse();
-        
+        GestionnaireProfil Sp = new GestionnaireProfil();
+        GestionnaireAdresse Sa = new GestionnaireAdresse();
+
         try {
-            String req ="Select * from utilisateur where ";
-            int i=0;
-            for(Map.Entry e:Criteras.entrySet())
-            {
+            String req = "Select * from utilisateur where ";
+            int i = 0;
+            for (Map.Entry e : Criteras.entrySet()) {
                 i++;
-                req+=e.getKey()+" =?";
-                if(i>0&&i<Criteras.size())
-                    req+=" and";
+                req += e.getKey() + " =?";
+                if (i > 0 && i < Criteras.size()) {
+                    req += " and";
+                }
             }
-            PreparedStatement pst=this.DB.prepareStatement(req);
-            i=0;
-             for(Map.Entry e:Criteras.entrySet())
-            {
+            PreparedStatement pst = this.DB.prepareStatement(req);
+            i = 0;
+            for (Map.Entry e : Criteras.entrySet()) {
                 i++;
-                pst.setString(i,e.getValue().toString());
+                pst.setString(i, e.getValue().toString());
             }
-             ResultSet res =pst.executeQuery();
-           return new Utilisateur(
-                     res.getInt(1),Sp.fetchOneById(res.getInt(2)), Sa.fetchOneById(res.getInt(3)),
-                     res.getString(4),res.getString(5), res.getString(6), res.getString(7), res.getInt(8), 
-                     res.getString(9), res.getString(10), res.getDate(11), res.getString(12), res.getDate(13), 
-                     res.getString(14), res.getString(15), res.getString(16), res.getString(17), res.getDate(18)
-             );
-             } catch (SQLException ex) {
+            ResultSet res = pst.executeQuery();
+            return new Utilisateur(
+                    res.getInt(1), Sp.fetchOneById(res.getInt(2)), Sa.fetchOneById(res.getInt(3)),
+                    res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getInt(8),
+                    res.getString(9), res.getString(10), res.getDate(11), res.getString(12), res.getDate(13),
+                    res.getString(14), res.getString(15), res.getString(16), res.getString(17), res.getDate(18)
+            );
+        } catch (SQLException ex) {
             Logger.getLogger(GestionnaireUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-          
 
     @Override
     public List<Utilisateur> fetchSomeBy(String aux, String target_column, int StartPoint, int BreakPoint) {
@@ -124,89 +128,35 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
     public List<Utilisateur> fetchSomeBy(String aux, int StartPoint, int BreakPoint) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    public Utilisateur fetchOneBycredentials(String login,String pass)
-    {
-        String url="http://localhost/MySoulMate-Symphony/web/app_dev/";
-       ConnectionRequest con = new ConnectionRequest();
-         Utilisateur u =new Utilisateur();
-        con.setUrl(url+"User?login="+login+"&password="+pass);
-        con.addResponseListener((NetworkEvent evt) -> {
-            try {
-                String str = new String(con.getResponseData());
-                JSONParser jsonp = new JSONParser();
-                
-                
-                Map<String, Object> Users = jsonp.parseJSON(new CharArrayReader(new String(con.getResponseData()).toCharArray()));
-                if((int)Float.parseFloat(Users.get("id").toString())!=-1){// getting the user if found -1 not found
-                    u.setId((int)Float.parseFloat(Users.get("id").toString()));
-                    u.setNom(Users.get("nom").toString());
-                    u.setPrenom(Users.get("prenom").toString());
-                    u.setGender(Users.get("gender").toString());
-                    u.setUsername(Users.get("username").toString());
-                    CustomEspritJSONParser cejp = new CustomEspritJSONParser(Users.get("datenaissance").toString());
-                    String x=cejp.getNestedItems().get("timestamp").toString();
-                    u.setDatanaissance(new java.util.Date((long)Float.parseFloat(x)*1000));
-                    cejp =new CustomEspritJSONParser(Users.get("profil").toString());
-                    Map<String,Object>Profil=cejp.getNestedItems();
-                    cejp = new CustomEspritJSONParser(Profil.get("caracteristique").toString());
-                    Map<String,Object>Caracteristique =cejp.getNestedItems();
-                    cejp= new   CustomEspritJSONParser(Profil.get("preference").toString());
-                    Map<String,Object>Preference = cejp.getNestedItems();
-                    Caracteristique C = new Caracteristique(
-                            (int)Float.parseFloat(Caracteristique.get("id").toString()),
-                            Caracteristique.get("corpulence").toString(),
-                            Caracteristique.get("pilosite").toString(),
-                            Caracteristique.get("origine").toString(),
-                            Caracteristique.get("profession").toString(),
-                            Caracteristique.get("alcool").toString(),
-                            Caracteristique.get("tabac").toString(),
-                            Caracteristique.get("taille").toString(),
-                            Caracteristique.get("cheveux").toString(),
-                            Caracteristique.get("yeux").toString(),
-                            Caracteristique.get("caractere").toString(),
-                            Caracteristique.get("statut").toString(),
-                            Caracteristique.get("cuisine").toString());
-                    
-                    Caracteristique pref =new Caracteristique(
-                            (int)Float.parseFloat(Preference.get("id").toString()),
-                            Preference.get("corpulence").toString(),
-                            Preference.get("pilosite").toString(),
-                            Preference.get("origine").toString(),
-                            Preference.get("profession").toString(),
-                            Preference.get("alcool").toString(),
-                            Preference.get("tabac").toString(),
-                            Preference.get("taille").toString(),
-                            Preference.get("cheveux").toString(),
-                            Preference.get("yeux").toString(),
-                            Preference.get("caractere").toString(),
-                            Preference.get("statut").toString(),
-                            Preference.get("cuisine").toString());
-                    Profil p= new Profil(
-                            (int)Float.parseFloat(Profil.get("id").toString()),
-                            C,Profil.get("photo").toString(),
-                            Profil.get("description").toString(),
-                            pref,null);
-                    u.setProfil(p);
-                    
-                    MySoulMate.setLogged_in_Client(u);
-                }
-                else
-                    MySoulMate.setLogged_in_Client(null);        
-            } catch (IOException ex) {
-                Logger.getLogger(GestionnaireUser.class.getName()).log(Level.SEVERE, null, ex);
-            }
-             
-                    });
-        NetworkManager.getInstance().addToQueueAndWait(con);   
-        return u;
+
+    public Utilisateur fetchOneBycredentials(String login, String pass) {
+        
+        
+        
+        
+       GestionnaireProfil Sp = new GestionnaireProfil();
+        GestionnaireAdresse Sa = new GestionnaireAdresse();
+
+        try {
+            String req = "Select * from utilisateur where username=? and password=? ";
+        
+            
+            PreparedStatement pst = this.DB.prepareStatement(req);
+            pst.setString(1, login);
+            pst.setString(1,pass);
+            ResultSet res = pst.executeQuery();
+            return new Utilisateur(
+                    res.getInt(1), Sp.fetchOneById(res.getInt(2)), Sa.fetchOneById(res.getInt(3)),
+                    res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getInt(8),
+                    res.getString(9), res.getString(10), res.getDate(11), res.getString(12), res.getDate(13),
+                    res.getString(14), res.getString(15), res.getString(16), res.getString(17), res.getDate(18)
+            );
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionnaireUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
-     
 
-
-    
-    
-    
-    
     //////////////////////PARTIE MATCHING //////////////////////////////
     public int matching_selon_horoscope(Utilisateur cl1, Utilisateur cl2) {
         int resultat_matching_horoscope = 0;
@@ -268,5 +218,4 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
     }
 
     //////////////////////PARTIE MATCHING //////////////////////////////
-    
 }
