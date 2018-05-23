@@ -694,10 +694,10 @@ public class Ui_MainFrame_FOController implements Initializable {
         Content_pane.getChildren().add(root);
     }
     //***event
-
-    private void load_plan() throws IOException, SQLException {
+    @FXML
+    private void load_plan(ActionEvent event) throws IOException, SQLException {
         //      Ui_Profil_FOController.setProfile_owner(MySoulMate.getLogged_in_Client());
-        FXMLLoader fxml = new FXMLLoader(getClass().getResource("/VIEWS/Plan/ui_FO_RecherchePlans.fxml"));
+        FXMLLoader fxml = new FXMLLoader(getClass().getResource("/VIEWS/Plan/ui_Plan_FO.fxml"));
         Node root = fxml.load();
         //     Ui_FO_RecherchePlansController con= fxml.<Ui_FO_RecherchePlansController>getController();
         //    con.chercher_les_Plans();
