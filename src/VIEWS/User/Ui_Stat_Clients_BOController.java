@@ -122,7 +122,7 @@ public class Ui_Stat_Clients_BOController implements Initializable {
     }    
     void get_allClients() throws SQLException
     {
-         gc=new GestionnaireUser();
+         gc=new GestionnaireUser("a:0:{}");
          Clients =gc.fetchAll();   
     }
    

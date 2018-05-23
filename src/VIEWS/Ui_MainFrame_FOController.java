@@ -156,7 +156,7 @@ public class Ui_MainFrame_FOController implements Initializable {
         messages.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                GestionnaireUser gc = new GestionnaireUser();
+                GestionnaireUser gc = new GestionnaireUser("a:0:{}");
                 Utilisateur partner = null;
 
                 int id = Integer.parseInt(messages.getSelectionModel().getSelectedItem().getId());
@@ -400,17 +400,14 @@ public class Ui_MainFrame_FOController implements Initializable {
         });
         logger.info("setUserList() method Exit");
     }
-
     public void newUserNotification(Message msg) {
         System.out.println("sending a notification to all users");
         System.out.println(msg.getSender());
         if (msg.getID() != MySoulMate.getLogged_in_Client().getId()) {
             Utilisateur c = null;
-            GestionnaireUser gc = new GestionnaireUser();
-
+            GestionnaireUser gc = new GestionnaireUser("a:0:{}");
             c = gc.fetchOneById(msg.getID());
             msg.setSender(c);
-
             Platform.runLater(() -> {
                 Image profileImg = new Image("http://localhost/MysoulMate-Symphony/web/images/" + msg.getSender().getProfil().getPhoto(), 50, 50, false, false);
                 TrayNotification tray = new TrayNotification();

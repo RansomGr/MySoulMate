@@ -26,6 +26,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -38,7 +39,15 @@ import org.mindrot.jbcrypt.BCrypt;
  * @author Ransom
  */
 public class GestionnaireUser implements Gestionnaire<Utilisateur> {
-
+    String role;
+    public GestionnaireUser(String role)
+    {
+        this.role=role;
+    }
+    public GestionnaireUser()
+    {
+        this.role="a:0:{}";
+    }
     @Override
     public int create(Utilisateur o) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -56,7 +65,26 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
 
     @Override
     public List<Utilisateur> fetchAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        GestionnaireProfil Sp = new GestionnaireProfil();
+        GestionnaireAdresse Sa = new GestionnaireAdresse();
+        List<Utilisateur> users = new ArrayList<>();
+
+        try {
+            String req = "Select * from utilisateur where   roles='a:0:{}' ";
+            PreparedStatement pst = this.DB.prepareStatement(req);
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                users.add(new Utilisateur(
+                        res.getInt(1), Sp.fetchOneById(res.getInt(6)), Sa.fetchOneById(res.getInt(18)),
+                        res.getString(7), res.getString(8), res.getString(9), res.getString(10), res.getInt(11),
+                        res.getString(12), res.getString(13), res.getDate(14), res.getString(15), res.getDate(16),
+                        res.getString(17), res.getString(2), res.getString(3), res.getString(4), res.getDate(5)
+                ));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionnaireUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return users;
     }
 
     @Override
@@ -69,14 +97,13 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
             PreparedStatement pst = this.DB.prepareStatement(req);
             pst.setInt(1, id);
             ResultSet res = pst.executeQuery();
-            if(res.next())
-            {
-            return new Utilisateur(
-                      res.getInt(1), Sp.fetchOneById(res.getInt(6)), Sa.fetchOneById(res.getInt(18)),
-                            res.getString(7), res.getString(8), res.getString(9), res.getString(10), res.getInt(11),
-                            res.getString(12), res.getString(13), res.getDate(14), res.getString(15), res.getDate(16),
-                            res.getString(17), res.getString(2), res.getString(3), res.getString(4), res.getDate(5)
-            );
+            if (res.next()) {
+                return new Utilisateur(
+                        res.getInt(1), Sp.fetchOneById(res.getInt(6)), Sa.fetchOneById(res.getInt(18)),
+                        res.getString(7), res.getString(8), res.getString(9), res.getString(10), res.getInt(11),
+                        res.getString(12), res.getString(13), res.getDate(14), res.getString(15), res.getDate(16),
+                        res.getString(17), res.getString(2), res.getString(3), res.getString(4), res.getDate(5)
+                );
             }
         } catch (SQLException ex) {
             Logger.getLogger(GestionnaireUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,10 +134,10 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
             }
             ResultSet res = pst.executeQuery();
             return new Utilisateur(
-                    res.getInt(1), Sp.fetchOneById(res.getInt(2)), Sa.fetchOneById(res.getInt(3)),
-                    res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getInt(8),
-                    res.getString(9), res.getString(10), res.getDate(11), res.getString(12), res.getDate(13),
-                    res.getString(14), res.getString(15), res.getString(16), res.getString(17), res.getDate(18)
+                    res.getInt(1), Sp.fetchOneById(res.getInt(6)), Sa.fetchOneById(res.getInt(18)),
+                        res.getString(7), res.getString(8), res.getString(9), res.getString(10), res.getInt(11),
+                        res.getString(12), res.getString(13), res.getDate(14), res.getString(15), res.getDate(16),
+                        res.getString(17), res.getString(2), res.getString(3), res.getString(4), res.getDate(5)
             );
         } catch (SQLException ex) {
             Logger.getLogger(GestionnaireUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -120,17 +147,95 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
 
     @Override
     public List<Utilisateur> fetchSomeBy(String aux, String target_column, int StartPoint, int BreakPoint) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Utilisateur> Admins = new ArrayList<>();//  Creation du List Reclamation
+        try {
+
+            GestionnaireProfil Sp = new GestionnaireProfil();
+            GestionnaireAdresse Sa = new GestionnaireAdresse();
+            String query = " select * from (select * from utilisateur limit  " + StartPoint + "," + BreakPoint + " ) Admin_l "
+                    + " where ( " + target_column + " like ?  ) and roles=?   ";
+            // preparation du requete sql
+            PreparedStatement pst = DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+            pst.setString(1, "%" + aux + "%");
+            pst.setString(2, role);
+            ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+            while (res.next())// parcour du result set
+            {
+                Admins.add(new Utilisateur(
+                       res.getInt(1), Sp.fetchOneById(res.getInt(6)), Sa.fetchOneById(res.getInt(18)),
+                        res.getString(7), res.getString(8), res.getString(9), res.getString(10), res.getInt(11),
+                        res.getString(12), res.getString(13), res.getDate(14), res.getString(15), res.getDate(16),
+                        res.getString(17), res.getString(2), res.getString(3), res.getString(4), res.getDate(5)
+                ));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionnaireUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Admins;
     }
 
     @Override
     public List<Utilisateur> fetchSomeBy(String aux, int target_column) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Utilisateur> Clients = new ArrayList<>();//  Creation du List Reclamation
+        try {
+            String query = "  select * from Utilisateur  "
+                    + "where ( nom like ? or prenom like ? or username like ?  or ID like ?  or email like ? ) and roles =?"; // preparation du requete sql
+            PreparedStatement pst = DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment 
+            pst.setString(1, "%" + aux + "%");
+            pst.setString(2, "%" + aux + "%");
+            pst.setString(3, "%" + aux + "%");
+            pst.setString(4, "%" + aux + "%");
+            pst.setString(5, "%" + aux + "%");
+            pst.setString(6, role);
+
+            ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+            GestionnaireProfil Sp = new GestionnaireProfil();
+            GestionnaireAdresse Sa = new GestionnaireAdresse();
+            while (res.next())// parcour du result set
+            {
+                Clients.add(new Utilisateur(res.getInt(1), Sp.fetchOneById(res.getInt(6)), Sa.fetchOneById(res.getInt(18)),
+                        res.getString(7), res.getString(8), res.getString(9), res.getString(10), res.getInt(11),
+                        res.getString(12), res.getString(13), res.getDate(14), res.getString(15), res.getDate(16),
+                        res.getString(17), res.getString(2), res.getString(3), res.getString(4), res.getDate(5)));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionnaireUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Clients;
     }
 
     @Override
     public List<Utilisateur> fetchSomeBy(String aux, int StartPoint, int BreakPoint) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         List<Utilisateur> Clients = new ArrayList<>();//  Creation du List Reclamation
+        try {
+            String query = "  select * from ( select * from Utilisateur  limit  " + StartPoint + "," + BreakPoint + "  ) Client_l "
+                    + " where ( nom like ? or prenom like ? or username like ?  or email like ?  ) and roles=?";
+            
+            PreparedStatement pst = DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
+             GestionnaireProfil Sp = new GestionnaireProfil();
+            GestionnaireAdresse Sa = new GestionnaireAdresse();
+            pst.setString(1, "%" + aux + "%");
+            pst.setString(2, "%" + aux + "%");
+            pst.setString(3, "%" + aux + "%");
+            pst.setString(4, "%" + aux + "%");
+            pst.setString(5, role);
+         
+            
+            ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+            while (res.next())// parcour du result set
+            {
+                Clients.add(new Utilisateur(res.getInt(1), Sp.fetchOneById(res.getInt(6)), Sa.fetchOneById(res.getInt(18)),
+                        res.getString(7), res.getString(8), res.getString(9), res.getString(10), res.getInt(11),
+                        res.getString(12), res.getString(13), res.getDate(14), res.getString(15), res.getDate(16),
+                        res.getString(17), res.getString(2), res.getString(3), res.getString(4), res.getDate(5)));
+            }
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionnaireUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          return Clients;
     }
 
     public Utilisateur fetchOneBycredentials(String login, String pass) {
@@ -139,10 +244,11 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
         GestionnaireAdresse Sa = new GestionnaireAdresse();
 
         try {
-            String req = "Select * from utilisateur where username=?";
+            String req = "Select * from utilisateur where username=? and roles =?";
 
             PreparedStatement pst = this.DB.prepareStatement(req);
             pst.setString(1, login);
+            pst.setString(2, role);
             ResultSet res = pst.executeQuery();
             if (res.next()) {
                 String crypted_pass = res.getString(13);

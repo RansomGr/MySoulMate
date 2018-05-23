@@ -43,8 +43,7 @@ public class Ui_Create_new_Admin_BOController implements Initializable {
    private static Utilisateur Admin_to_be_modified ;
 
     public static void setAdmin_to_be_modified(Utilisateur Admin_to_be_modified) {
-        Ui_Create_new_Admin_BOController.Admin_to_be_modified = Admin_to_be_modified;
-        
+        Ui_Create_new_Admin_BOController.Admin_to_be_modified = Admin_to_be_modified;       
     }
   
     @FXML
@@ -108,7 +107,7 @@ public class Ui_Create_new_Admin_BOController implements Initializable {
         validate_form();
         if(Message_Warning.equals("Les champs suivants posent des problèmes \n"))
         {
-             GestionnaireUser ga= new GestionnaireUser();
+             GestionnaireUser ga= new GestionnaireUser("a:0:{}");
         if(OperationMode.equals("Ajouter"))
         {
      //  if( ga.create(new Admin(nom_tf.getText(),prenom_tf.getText(),login_tf.getText(),mdp_tf.getText()))==1)

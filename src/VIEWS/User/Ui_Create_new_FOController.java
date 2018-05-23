@@ -105,7 +105,7 @@ public class Ui_Create_new_FOController implements Initializable {
         validate_form();
         if (Message_Warning.equals("Les champs suivants posent des problèmes \n")) {
 
-            GestionnaireUser gc = new GestionnaireUser();
+            GestionnaireUser gc = new GestionnaireUser("a:0:{}");
             Utilisateur C = new Utilisateur(nom_tf.getText(), prenom_tf.getText(), password_tf.getText(), email_tf.getText(), Date.valueOf(date_naissance_dp.getValue()), pseudo_tf.getText(),genre_cmb.getValue());
             if (gc.create(C) == 1) {
                 InformationWindow.show();
