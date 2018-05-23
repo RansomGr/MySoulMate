@@ -24,13 +24,15 @@ public class GestionnaireActualite implements Gestionnaire <Actualite> {
      @Override
     public int create(Actualite a ) throws SQLException {
         
-        String query = " insert into Actualite (createur,contenu,photo,add_date) values (?,?,?,?) "; // preparation du query
+        String query = " insert into Actualite (contenu,photo,createur) values (?,?,?) "; // preparation du query
 
         PreparedStatement pst = DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
 
-        pst.setInt(1, a.getCreateur().getId());
-        pst.setString(2, a.getContenu());
-        pst.setString(3, a.getPhoto());
+        pst.setString(1, a.getContenu());
+        pst.setString(2, a.getPhoto());
+        //pst.setString(3, a.getAdd_date().toString());
+
+        pst.setInt(3, a.getCreateur().getId());
 
         return pst.executeUpdate();
     }
