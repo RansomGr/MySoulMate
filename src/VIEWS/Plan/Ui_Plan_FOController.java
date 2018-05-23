@@ -66,27 +66,8 @@ public class Ui_Plan_FOController implements Initializable {
         Ui_Plan_FOController.Client = Client;
     }
 
-    public static void setPlan(Plan plan) {
-        Ui_Plan_FOController.plan = plan;
-    }
-    @FXML
-    private ImageView image_img;
-    @FXML
-    private Label nomC_l;
-    @FXML
-    private TextArea com_ta;
-    @FXML
-    private Button ajouter;
-    private int i;
-    @FXML
-    private Spinner<Integer> note_l;
-    
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-           GestionnaireAvis gav =new GestionnaireAvis();
+    public  void setPlan(Plan plan) throws IOException, SQLException {
+            GestionnaireAvis gav =new GestionnaireAvis();
         List<Avis>avises =new ArrayList<>();
         try {
             avises=(List<Avis>) gav.fetchAll();
@@ -94,13 +75,13 @@ public class Ui_Plan_FOController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(Ui_Plan_FOController.class.getName()).log(Level.SEVERE, null, ex);
         }
-       nomP_label.setText(plan.getNom());
-       notet_label.setText(avises.stream().mapToDouble(e->e.getNote()).average().toString());
+        Ui_Plan_FOController.plan = plan;
+        notet_label.setText(avises.stream().mapToDouble(e->e.getNote()).average().toString());
        description_ta.setText(plan.getDescription());
-    
+       nomP_label.setText(plan.getNom());
        List<Avis> avis;
       
-        try {
+        
              avis=  ((List<Avis>)gav.fetchAll());
           Parent root;
                  
@@ -123,10 +104,29 @@ public class Ui_Plan_FOController implements Initializable {
          
            i+=160;
              j++;
+        
         }
-        } catch (IOException | SQLException ex) {
-            Logger.getLogger(Ui_Plan_FOController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
+    }
+    @FXML
+    private ImageView image_img;
+    @FXML
+    private Label nomC_l;
+    @FXML
+    private TextArea com_ta;
+    @FXML
+    private Button ajouter;
+    private int i;
+    @FXML
+    private Spinner<Integer> note_l;
+    
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+       
+    
        
          }
 
