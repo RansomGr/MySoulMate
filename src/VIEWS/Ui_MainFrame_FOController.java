@@ -11,14 +11,18 @@ import ChatClient.CellRenderer;
 import ChatClient.ChatBoxController;
 import ChatClient.VoicePlayback;
 import Entites.Events.Events;
+import Entites.Plan.Plan;
 import Listner.Listener;
 
 import Entites.User.Utilisateur;
 import Services.Events.GestionnaireEvent;
+import Services.Plan.GestionnairePlan;
 
 import Services.Relation.GestionnaireRelation;
 import Services.User.GestionnaireUser;
 import VIEWS.Evenement.Ui_even_FOController;
+import VIEWS.Plan.Ui_Plan_FOController;
+import VIEWS.Plan.Ui_Single_planController;
 import com.messages.Message;
 import com.messages.Status;
 import VIEWS.Profil.Ui_Profil_FOController;
@@ -94,7 +98,7 @@ public class Ui_MainFrame_FOController implements Initializable {
     @FXML
     private StackPane Content_pane;
     @FXML
-    private AnchorPane bonplans_and_evennements;
+    private VBox bonplans_and_evennements;
     private boolean Shown;
     @FXML
     private StackPane menu_bar;
@@ -127,7 +131,7 @@ public class Ui_MainFrame_FOController implements Initializable {
     private int unread_msg_count;
     @FXML
     private TextField recherche_dyn;
-
+    private static StackPane Content_pane_s;
     public int getUnread_msg_count() {
         return unread_msg_count;
     }
@@ -145,13 +149,20 @@ public class Ui_MainFrame_FOController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         init_combobox();
+        Content_pane_s=Content_pane;
         conversations = new HashMap();
         Shown = true;
         messages_shown = false;
         msg_count.setText("0");
         AnimationDuration = 400;//ms
         static_chat_windows = new ArrayList<>();
-
+        try {
+            this.show_all_plan();
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(Ui_MainFrame_FOController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Ui_MainFrame_FOController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         unread_msg_count = 0;
         messages.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -721,5 +732,28 @@ public class Ui_MainFrame_FOController implements Initializable {
        
         Content_pane.getChildren().clear();
         Content_pane.getChildren().add(root);
+    }
+    private void show_all_plan() throws SQLException, IOException
+    {
+        GestionnairePlan p=new GestionnairePlan();
+        for( Plan one :(List<Plan>)p.fetchAll())
+        {
+        FXMLLoader fxml = new FXMLLoader(getClass().getResource("/VIEWS/Plan/ui_Single_plan.fxml"));
+        Node root = fxml.load();
+        Ui_Single_planController controller = fxml.<Ui_Single_planController>getController();
+        controller.setPlan(one);
+            bonplans_and_evennements.getChildren().add(root );
+        }
+        
+    }
+    public static void showplan(Plan p) throws IOException
+    {
+      Content_pane_s.getChildren().clear();
+      FXMLLoader fxml = new FXMLLoader(Ui_MainFrame_FOController.class.getResource("/VIEWS/Plan/ui_Plan_FO.fxml"));
+        Node root = fxml.load();
+       Ui_Plan_FOController controller = fxml.<Ui_Plan_FOController>getController();
+      Content_pane_s.getChildren().add(root);
+      controller.setPlan(p);
+      
     }
 }
