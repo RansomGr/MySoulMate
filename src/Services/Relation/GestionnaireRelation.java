@@ -135,7 +135,7 @@ String query=" select *  from  Relation "    ; // preparation du requete sql
                r.getClient2().equals(MySoulMate.getLogged_in_Client())).map(r->r.getNiveau()).findFirst().get()+"";
              
     }
-    public String Temps() throws SQLException
+    /*public String Temps() throws SQLException
     {   //ChronolicalDate d = new ChronolicalDate(); 
          List<Relation> Relations=(List<Relation>) fetchAll();
         // LocalDate n = new LocalDate();
@@ -145,7 +145,7 @@ String query=" select *  from  Relation "    ; // preparation du requete sql
                r.getClient2().equals(MySoulMate.getLogged_in_Client())).map(r->r.getDate_fin().getTime()-r.getDate_debut().getTime()).findFirst().get()+"";
              
     }
-
+*/
     @Override
     public List fetchSomeBy(String aux, String target_column, int StartPoint, int BreakPoint) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
