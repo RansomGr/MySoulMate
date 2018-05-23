@@ -99,11 +99,10 @@
          <children>
             <TableView fx:id="table_view" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                  <TableColumn fx:id="id_comlun" prefWidth="102.0" text="Identifiant" />
                 <TableColumn fx:id="nom_column" prefWidth="206.0" text="Nom " />
                 <TableColumn fx:id="prenom_column" prefWidth="222.0" text="Prenom" />
-                  <TableColumn fx:id="Login_column" prefWidth="137.0" text="Login" />
-                  <TableColumn fx:id="mdp_column" prefWidth="184.0" text="Mot de Passe" />
+                  <TableColumn fx:id="Login_column" prefWidth="209.0" text="pseudo" />
+                  <TableColumn fx:id="email_column" maxWidth="210.0" prefWidth="210.0" text="email" />
               </columns>
             </TableView>
          </children>

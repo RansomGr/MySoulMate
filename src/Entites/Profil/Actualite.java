@@ -30,9 +30,15 @@ public class Actualite {
        
     }
 
-    public Actualite(Utilisateur Parent, String text, String string, Utilisateur logged_in_Client) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Actualite(Utilisateur createur, String contenu, String photo, Utilisateur createur2) {
+       this.createur = createur;
+        this.contenu = contenu;
+        this.photo = photo;
+       this.createur = createur2;
     }
+    
+
+    
 
     public int getID() {
         return ID;

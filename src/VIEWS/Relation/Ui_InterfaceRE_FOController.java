@@ -156,11 +156,11 @@ Ui_MainFrame_FOController mf;
         WarningWindow.setTitle("MySoulMate");
      
         fill_Nodes();
-    try {
+  /*  try {
         fill_Infos();
     } catch (SQLException ex) {
         Logger.getLogger(Ui_InterfaceRE_FOController.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    }*/
        moments.setOnSelectionChanged(new EventHandler<Event>() {
             @Override
             public void handle(Event t) {
@@ -182,7 +182,7 @@ Ui_MainFrame_FOController mf;
         
         c2.setCellValueFactory((TableColumn.CellDataFeatures<Conseil,String>Conseil)->new SimpleStringProperty(Conseil.getValue().getTitre()));
         c3.setCellValueFactory((TableColumn.CellDataFeatures<Conseil,String>Conseil)-> new SimpleStringProperty(Conseil.getValue().getContenue()));
-        liste.setVisible(false);
+        liste.setVisible(true);
          gc = new GestionnaireConseil();
     }
       public static void setRelation_owner(Utilisateur relation_owner) {
@@ -199,7 +199,7 @@ Ui_MainFrame_FOController mf;
     private void fill_Infos() throws SQLException{
         GestionnaireRelation gr= new GestionnaireRelation();
 
-        temps.setText(gr.Temps());
+//        temps.setText(gr.Temps());
         pts.setText(gr.NbPoint());
         niv.setText(gr.Niveau());
     }

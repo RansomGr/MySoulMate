@@ -31,7 +31,7 @@ public class Conseil {
 
     public Conseil(String titre,String contenu) {
         this.titre=titre;
-        this.contenue=contenue;
+        this.contenue=contenu;
     }
    
 

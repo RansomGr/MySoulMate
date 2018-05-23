@@ -116,7 +116,7 @@ public class Ui_Commentaire_FOController implements Initializable {
             ConfirmDelete.getButtonTypes().addAll(oui, non);
             supprimer = new MenuItem("Supprimer");
             modifier = new MenuItem("Modifier");
-           owner_image.setImage(new Image("images/"+content.getOwner().getProfil().getPhoto()));
+           owner_image.setImage(new Image("http://localhost/MysoulMate-Symphony/web/images/"+content.getOwner().getProfil().getPhoto()));
            commentaire_tea.setText(content.getCommentaire());
             modifier.setOnAction(x -> {
                 commentaire_tea.setEditable(true);
@@ -140,7 +140,7 @@ public class Ui_Commentaire_FOController implements Initializable {
             actions.setVisible(false);
             commentaire_tea.setEditable(true);
             commentaire_tea.setOpacity(1);
-            owner_image.setImage(new Image("images/"+MySoulMate.getLogged_in_Client().getProfil().getPhoto()));
+            owner_image.setImage(new Image("http://localhost/MysoulMate-Symphony/web/images/"+MySoulMate.getLogged_in_Client().getProfil().getPhoto()));
         }
    }
     @FXML
