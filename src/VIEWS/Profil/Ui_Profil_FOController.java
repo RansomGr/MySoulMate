@@ -130,7 +130,7 @@ public class Ui_Profil_FOController implements Initializable {
     public void setProfile_owner( Utilisateur profile_owner) throws SQLException {
         try {
             this.profile_owner = profile_owner;
-            photo.setImage(new Image("/images/" + profile_owner.getProfil().getPhoto()));
+            photo.setImage(new Image("http://localhost/MysoulMate-Symphony/web/images/" + profile_owner.getProfil().getPhoto()));
             owner_name.setText(this.profile_owner.getNom());
             java.sql.Date d=new java.sql.Date(this.profile_owner.getDatanaissance().getTime());
             birthdate_dp.setValue(d.toLocalDate()) ;

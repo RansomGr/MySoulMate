@@ -105,7 +105,7 @@ public class Ui_Create_New_Actualite_FOController implements Initializable {
         ConfirmDelete.getButtonTypes().clear();
         ConfirmDelete.getButtonTypes().addAll(oui, non);
         if (content == null) {// en mode ajout
-            publication_owner.setImage(new Image("images/" + MySoulMate.getLogged_in_Client().getProfil().getPhoto()));
+            publication_owner.setImage(new Image("http://localhost/MysoulMate-Symphony/web/images/" + MySoulMate.getLogged_in_Client().getProfil().getPhoto()));
             publication_tea.setPromptText(publication_tea.getPromptText() + " " + MySoulMate.getLogged_in_Client().getNom() + "...");
             publier_pb.setVisible(true);
             actions.setVisible(false);
@@ -138,7 +138,7 @@ public class Ui_Create_New_Actualite_FOController implements Initializable {
     public void setContent(Actualite content) {
         System.out.println(" cvonetn is :" + content);
         this.content = content;
-        publication_owner.setImage(new Image("images/" + content.getCreateur().getProfil().getPhoto()));
+        publication_owner.setImage(new Image("http://localhost/MysoulMate-Symphony/web/images/" + content.getCreateur().getProfil().getPhoto()));
         this.Parent = content.getCreateur();
         publication_tea.setText(content.getContenu());
         publication_tea.setEditable(false);
