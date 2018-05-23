@@ -183,8 +183,7 @@ public class Ui_ListeEvents_FOController implements Initializable {
          try {
     if(operations_plus.isSelected())
     { 
-            All_row_size=ge.fetchAll().size();
-          
+            All_row_size=ge.fetchAll().size();          
                pages=(All_row_size/BreakPoint);
             if((All_row_size%BreakPoint!=0))
                  pages+=1;
@@ -286,12 +285,8 @@ public class Ui_ListeEvents_FOController implements Initializable {
                    plan_cl.setStyle("-fx-background-color:#B5C689 ");
                    ivt_cl.getStyleClass().clear();
             } 
-            break ;
-                
-                
+            break ;               
         }
-                
-                
     }
         private void init_node()
     {
