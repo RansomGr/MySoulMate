@@ -32,7 +32,7 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
          {
       query="INSERT INTO events (nom_evt,date_evt,heure,duree_evt,type_evt,description_evt,plan_evt,nb_max,organisateur_evt) VALUES (?,?,?,?,?,?,?,?,?)";
        pst= DB.prepareStatement(query);
-       pst.setInt(10,evt.getOrganisateur().getId());
+       pst.setInt(9,evt.getOrganisateur().getId());
          }
          else {
              query="INSERT INTO events (nom_evt,date_evt,heure,duree_evt,type_evt,description_evt,plan_evt,nb_max) VALUES (?,?,?,?,?,?,?,?)";
@@ -109,7 +109,7 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
 
     public List< Events> fetchAll() throws SQLException {
           
-        String query=" select id.nom as nom,Events.*  from  events inner join id on Events.id=id.ID "    ; // preparation du requete sql
+        String query=" select * from Events; "    ; // preparation du requete sql
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Events>Evenements = new ArrayList<>();//  Creation du List Reclamation
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
@@ -125,7 +125,7 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
               int Client_ID_in_question =res.getInt("organisateur_evt");
               if(Client_ID_in_question!=0)
               {
-               c= clients.stream().filter(c1->c1.getId()==Client_ID_in_question).findFirst().get();   
+               c= null;//clients.stream().filter(c1->c1.getId()==Client_ID_in_question).findFirst().get();   
               }
              Evenements.add(new Events(
                      res.getInt("id"),
@@ -144,34 +144,30 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
     }
 
     public List<Events> fetchAll(String aux, int target_column, String OrderBy) throws SQLException {
-        String query=" select events.*,id.nom from events inner join id on "
-                + "id.id=events.entite "
-                + " where ( nom_evt like ? or date_evt like ? or heure like ? or type_evt like ? or plan_evt like ? ) "    ; // preparation du requete sql
-        GestionnaireUser gclt = new GestionnaireUser();
+        String query=" select * from events where ( nom_evt like ? or date_evt like ? or heure like ? or type_evt like ? or plan_evt like ? ) "    ; // preparation du requete sql
+        GestionnaireUser gclt = new GestionnaireUser("a:1:{i:0;s:10:\"ROLE_ADMIN\";}");
           List<Utilisateur>clients= (List<Utilisateur>) gclt.fetchAll();
-           GestionnairePlan gpl= new GestionnairePlan();  
+          GestionnairePlan gpl= new GestionnairePlan();  
         PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Events>evenent = new ArrayList<>();//  Creation du List Reclamation
            pst.setString(1, "%"+aux+"%");
            pst.setString(2, "%"+aux+"%");
            pst.setString(3, "%"+aux+"%");
            pst.setString(4, "%"+aux+"%");
-            pst.setString(5, "%"+aux+"%");
+           pst.setString(5, "%"+aux+"%");
      
           ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           List<Plan> Plans= (List<Plan>) gpl.fetchAll();
           while(res.next())// parcour du result set
           {
-              
-              
-          int Plan_ID_in_question = res.getInt("plan_evt");
+              int Plan_ID_in_question = res.getInt("plan_evt");
               Plan p= Plans.stream().filter(p1->p1.getId()==Plan_ID_in_question).findFirst().get();
               Utilisateur c=null;
-              int Client_ID_in_question =res.getInt("organisateur_evt");
-              if(Client_ID_in_question!=0)
-              {
-               c= clients.stream().filter(c1->c1.getId()==Client_ID_in_question).findFirst().get();   
-              }
+//              int Client_ID_in_question =res.getInt("organisateur_evt");
+//              if(Client_ID_in_question!=0)
+//              {
+//               c= clients.stream().filter(c1->c1.getId()==Client_ID_in_question).findFirst().get();   
+//              }
              evenent.add(new Events(
                      res.getInt("id"),
                      res.getString("nom_evt"), 
@@ -179,7 +175,7 @@ public class GestionnaireEvent implements Gestionnaire<Events>{
                      res.getString("heure"), 
                      res.getString("duree_evt"),
                      res.getString("type_evt"),
-                      c,
+                      null,
                      res.getString("description_evt"),
                      p,
                      res.getInt("nb_max")        
