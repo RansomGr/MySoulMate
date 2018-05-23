@@ -279,7 +279,7 @@ public class Ui_ListeClient_BOController implements Initializable {
     {
             Hide= new ScaleTransition();
             Show= new ScaleTransition();
-            gc= new GestionnaireUser();
+            gc= new GestionnaireUser("a:0:{}");
             Hide.setNode(operation_grid );
             Show.setNode(operation_grid );            
             Show.setFromY(0);

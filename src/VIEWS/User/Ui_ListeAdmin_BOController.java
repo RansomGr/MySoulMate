@@ -73,13 +73,9 @@ public class Ui_ListeAdmin_BOController implements Initializable {
     @FXML
     private TableView<Utilisateur> table_view;
     @FXML
-    private TableColumn<Utilisateur, Integer> id_comlun;
-    @FXML
     private TableColumn<Utilisateur, String> nom_column;
     @FXML
     private TableColumn<Utilisateur, String> prenom_column;
-    @FXML
-    private TableColumn<Utilisateur, String> mdp_column;
     @FXML
     private TableColumn<Utilisateur, String> Login_column;
     @FXML
@@ -98,6 +94,8 @@ public class Ui_ListeAdmin_BOController implements Initializable {
     private ComboBox<Integer> lignes_page_cb;
     @FXML
     private ColumnConstraints header_grid;
+    @FXML
+    private TableColumn<Utilisateur, String> email_column;
 
     /**
      * Initializes the controller class.
@@ -126,10 +124,10 @@ public class Ui_ListeAdmin_BOController implements Initializable {
     }
 
     private void init_tableView() {
-        id_comlun.setCellValueFactory((CellDataFeatures<Utilisateur, Integer> Admin) -> new SimpleIntegerProperty((Admin.getValue().getId())).asObject());
+      
         nom_column.setCellValueFactory((CellDataFeatures<Utilisateur, String> Admin) -> new SimpleStringProperty(Admin.getValue().getNom()));
         prenom_column.setCellValueFactory((CellDataFeatures<Utilisateur, String> Admin) -> new SimpleStringProperty(Admin.getValue().getPrenom()));
-        mdp_column.setCellValueFactory((CellDataFeatures<Utilisateur, String> Admin) -> new SimpleStringProperty(Admin.getValue().getPassword()));
+        email_column.setCellValueFactory((CellDataFeatures<Utilisateur, String> Admin) -> new SimpleStringProperty(Admin.getValue().getEmail()));
         Login_column.setCellValueFactory((CellDataFeatures<Utilisateur, String> Admin) -> new SimpleStringProperty(Admin.getValue().getUsername()));
         table_view.setRowFactory(tv -> {
             TableRow<Utilisateur> row = new TableRow<>();
@@ -220,55 +218,55 @@ public class Ui_ListeAdmin_BOController implements Initializable {
         System.out.println(target);
         switch (target) {
             case "id": {
-                id_comlun.setStyle("-fx-background-color:#B5C689 ");
+           //     id_comlun.setStyle("-fx-background-color:#B5C689 ");
                 nom_column.getStyleClass().clear();
                 prenom_column.getStyleClass().clear();
                 Login_column.getStyleClass().clear();
-                mdp_column.getStyleClass().clear();
+              //  mdp_column.getStyleClass().clear();
             }
             break;
             case "nom": {
-                id_comlun.getStyleClass().clear();
+        //        id_comlun.getStyleClass().clear();
                 nom_column.setStyle("-fx-background-color:#B5C689 ");
                 prenom_column.getStyleClass().clear();
                 Login_column.getStyleClass().clear();
-                mdp_column.getStyleClass().clear();
+           //     mdp_column.getStyleClass().clear();
             }
             break;
             case "prenom": {
-                id_comlun.getStyleClass().clear();
+           //     id_comlun.getStyleClass().clear();
                 nom_column.getStyleClass().clear();
                 prenom_column.setStyle("-fx-background-color:#B5C689 ");
                 Login_column.getStyleClass().clear();
-                mdp_column.getStyleClass().clear();
+          //      mdp_column.getStyleClass().clear();
 
             }
             break;
             case "login": {
-                id_comlun.getStyleClass().clear();
+               // id_comlun.getStyleClass().clear();
                 nom_column.getStyleClass().clear();
                 prenom_column.getStyleClass().clear();
                 Login_column.setStyle("-fx-background-color:#B5C689 ");
-                mdp_column.getStyleClass().clear();
+           //     mdp_column.getStyleClass().clear();
 
             }
             break;
             case "motdepasse": {
-                id_comlun.getStyleClass().clear();
+             //   id_comlun.getStyleClass().clear();
                 nom_column.getStyleClass().clear();
                 prenom_column.getStyleClass().clear();
                 Login_column.getStyleClass().clear();
-                mdp_column.setStyle("-fx-background-color:#B5C689 ");
+          //      mdp_column.setStyle("-fx-background-color:#B5C689 ");
 
             }
             break;
             case "All": {
-                id_comlun.getStyleClass().clear();
+                //id_comlun.getStyleClass().clear();
                 nom_column.getStyleClass().clear();
                 prenom_column.getStyleClass().clear();
                 Login_column.getStyleClass().clear();
-                mdp_column.getStyleClass().clear();
-                mdp_column.getStyleClass().addAll("table-column");
+             //   mdp_column.getStyleClass().clear();
+          //      mdp_column.getStyleClass().addAll("table-column");
             }
             break;
 
@@ -279,7 +277,7 @@ public class Ui_ListeAdmin_BOController implements Initializable {
     private void init_node() {
         Hide = new ScaleTransition();
         Show = new ScaleTransition();
-        ga = new GestionnaireUser();
+        ga = new GestionnaireUser("a:1:{i:0;s:10:\"ROLE_ADMIN\";}");
         Hide.setNode(operation_grid);
         Show.setNode(operation_grid);
         Show.setFromY(0);
@@ -288,7 +286,7 @@ public class Ui_ListeAdmin_BOController implements Initializable {
         Hide.setToY(0);
         Hide.play();
 
-        target_column.getItems().addAll("All", "id", "nom", "prenom", "login", "motdepasse");
+        target_column.getItems().addAll("All",  "nom", "prenom", "username", "email");
         target_column.getSelectionModel().select(0);
 
         lignes_page_cb.getItems().addAll(5, 10, 20, 50, 100);

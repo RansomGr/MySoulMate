@@ -61,7 +61,6 @@ public class Ui_Login_FOController implements Initializable {
     private Alert InformationWindow;
     private Alert ErrorWindow;
     private Alert WarningWindow;
-
     /**
      * Initializes the controller class.
      */
@@ -115,11 +114,11 @@ public class Ui_Login_FOController implements Initializable {
     @FXML
     private void log_me_in(ActionEvent event) throws IOException, SQLException {
 
-        GestionnaireUser gc = new GestionnaireUser();
+        GestionnaireUser gc = new GestionnaireUser("a:0:{}");
         Utilisateur Logged_in_Client = gc.fetchOneBycredentials(login_te.getText(), password_te.getText());
         if (Logged_in_Client.getRoles().equals("a:0:{}")) {
             if (Logged_in_Client != null) {
-                GestionnaireUser p = new GestionnaireUser();
+                GestionnaireUser p = new GestionnaireUser("a:0:{}");
 
                 if (Logged_in_Client.getEnabled() == 0) {
                     WarningWindow.show();
