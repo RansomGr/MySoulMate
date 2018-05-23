@@ -50,7 +50,19 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
     }
     @Override
     public int create(Utilisateur o) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         String query = "insert into Utilisateur (nom,prenom,password,email,date_naissane,username,gender) values(?,?,?,?,?,?,?,?)";
+        PreparedStatement pst = DB.prepareStatement(query);
+     
+        pst.setString(1, o.getNom());
+        pst.setString(2, o.getPrenom());
+        pst.setString(3,BCrypt.hashpw(o.getPassword(),BCrypt.gensalt(12)).replaceFirst("a", "y"));
+        pst.setString(4, o.getEmail());
+        pst.setDate(5, new java.sql.Date(o.getDatanaissance().getTime()));
+        pst.setString(6, o.getUsername());
+        pst.setString(7, o.getGender());
+    //    pst.set
+
+        return pst.executeUpdate();
     }
 
     @Override
@@ -70,8 +82,10 @@ public class GestionnaireUser implements Gestionnaire<Utilisateur> {
         List<Utilisateur> users = new ArrayList<>();
 
         try {
-            String req = "Select * from utilisateur where   roles='a:0:{}' ";
+            String req = "Select * from utilisateur where roles=? ";
+            
             PreparedStatement pst = this.DB.prepareStatement(req);
+            pst.setString(1, role);
             ResultSet res = pst.executeQuery();
             while (res.next()) {
                 users.add(new Utilisateur(
