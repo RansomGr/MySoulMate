@@ -27,22 +27,24 @@ import java.util.Map;
     @Override
     public int create(Object o) throws SQLException {
       Plan p=(Plan)o;
-          String query="insert into Plan(nom,type,email,siteweb,photo,telephone,description,photo1,photo2,x,y) values(?,?,?,?,?,?,?)"; // preparation du query
+          String query="insert into Plan(type,email,siteweb,photo,description,telephone,nom) values(?,?,?,?,?,?,?)"; // preparation du query
 
          PreparedStatement pst=DB.prepareStatement(query);// Recuperation de l'objet PreparedStatment
          
-          pst.setString(1, p.getNom());
-      pst.setString(2,(p.getType()));
+      pst.setString(1,(p.getType()));
 
-      pst.setString(3,p.getEmail());
-      pst.setString(4,p.getSiteweb());
-       pst.setString(5,p.getPhoto());
+      pst.setString(2,p.getEmail());
+      pst.setString(3,p.getSiteweb());
+       pst.setString(4,p.getPhoto());
+         pst.setString(5,p.getDescription());
       pst.setInt(6,p.getTelephone());
-      pst.setString(7,p.getDescription());
-      pst.setString(8,p.getPhoto1());
-      pst.setString(9,p.getPhoto2());
-          pst.setFloat(10,p.getX());
-          pst.setFloat(11,p.getY());
+    
+                pst.setString(7, p.getNom());
+
+//      pst.setString(8,p.getPhoto1());
+//      pst.setString(9,p.getPhoto2());
+//          pst.setFloat(10,p.getX());
+//          pst.setFloat(11,p.getY());
 
 
        
@@ -75,23 +77,24 @@ import java.util.Map;
     public int update(Object o) throws SQLException {
         
       Plan p=(Plan)o;
-      String query ="update Plan" + " nom=?,type=?,email=?,siteweb=?,photo=?,telephone=?,description=?,photo1=?,photo2=?,x=?,y=?  where id=?";
+      String query ="update Plan" + " type=?,email=?,siteweb=?,photo=?,description=?,telephone=?,nom=?  where id=?";
       
       PreparedStatement pst=DB.prepareStatement(query);
       
-       pst.setString(1, p.getNom());
-      pst.setString(2,(p.getType()));
+         pst.setString(1,(p.getType()));
 
-      pst.setString(3,p.getEmail());
-      pst.setString(4,p.getSiteweb());
-       pst.setString(5,p.getPhoto());
+      pst.setString(2,p.getEmail());
+      pst.setString(3,p.getSiteweb());
+       pst.setString(4,p.getPhoto());
+        pst.setString(5,p.getDescription());
       pst.setInt(6,p.getTelephone());
-      pst.setString(7,p.getDescription());
-      pst.setString(8,p.getPhoto1());
-      pst.setString(9,p.getPhoto2());
-          pst.setFloat(10,p.getX());
-          pst.setFloat(11,p.getY());
-      
+     
+                pst.setString(7, p.getNom());
+//      pst.setString(8,p.getPhoto1());
+//      pst.setString(9,p.getPhoto2());
+//          pst.setFloat(10,p.getX());
+//          pst.setFloat(11,p.getY());
+//      
       return pst.executeUpdate();
     }
 
@@ -110,14 +113,28 @@ import java.util.Map;
     }
 
     @Override
-    public List<? extends Object> fetchAll() throws SQLException {
+    public List<? extends Object> fetchAll() throws SQLException 
+        
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+    {
            String query=" select *  from  Plan where Id=? "    ; // preparation du requete sql
           PreparedStatement pst=DB.prepareStatement(query);// Preparation du requete et  recuperation de l'objet Prepared statment
           List<Plan>Plans = new ArrayList<>();//  Creation du List Reclamation
-          ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
+
+       
+        ResultSet res = pst.executeQuery();// execution du query et recuperation du result set
           while(res.next())// parcour du result set
           {
-              Plans.add(new Plan(res.getInt("id"),res.getString("nom"),res.getString("type"),res.getString("email"),res.getString("siteweb"),res.getString("photo"),res.getInt("telephone"),res.getString("description"),res.getString("photo1"),res.getString("photo2"),res.getFloat("x"),res.getFloat("y")));
+              Plans.add(new Plan(res.getInt("id"),res.getString("type"),res.getString("email"),res.getString("siteweb"),res.getString("photo"),res.getString("description"),res.getInt("telephone"),res.getString("nom")));
              //Type type, String email, String siteweb, int telephone, String description, String photo, int ID, String nom
            }
           return Plans;
